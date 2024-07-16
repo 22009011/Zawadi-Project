@@ -1,7 +1,7 @@
-// controllers/announcementControllers.js
+// controllers/announcementController.js
 import Announcement from '../models/announcementModel.js';
+import School from '../models/schoolModel.js';
 
-// Create Announcement
 export const createAnnouncement = async (req, res) => {
   const { announcement, section } = req.body;
 
@@ -10,6 +10,11 @@ export const createAnnouncement = async (req, res) => {
   }
 
   try {
+    const school = await School.findByPk(req.school_id);
+    if (!school) {
+      return res.status(404).json({ error: 'School not found' });
+    }
+
     const newAnnouncement = await Announcement.create({
       announcement,
       section,
@@ -17,75 +22,76 @@ export const createAnnouncement = async (req, res) => {
     });
     res.status(201).json(newAnnouncement);
   } catch (error) {
-    res.status(500).json({ error: 'Failed to create announcement', details: error.message });
+    res.status(500).json({ error: error.message });
   }
 };
 
-// Get All Announcements
 export const getAllAnnouncements = async (req, res) => {
   try {
     const announcements = await Announcement.findAll({
       where: { school_id: req.school_id },
     });
-    res.json(announcements);
+    res.status(200).json(announcements);
   } catch (error) {
-    res.status(500).json({ error: 'Failed to retrieve announcements' });
+    res.status(500).json({ error: error.message });
   }
 };
 
-// Get Announcement by ID
 export const getAnnouncementById = async (req, res) => {
-  const { id } = req.params;
-
   try {
     const announcement = await Announcement.findOne({
-      where: { id, school_id: req.school_id },
+      where: {
+        id: req.params.id,
+        school_id: req.school_id,
+      },
     });
-    if (announcement) {
-      res.json(announcement);
-    } else {
-      res.status(404).json({ error: 'Announcement not found' });
+    if (!announcement) {
+      return res.status(404).json({ error: 'Announcement not found' });
     }
+    res.status(200).json(announcement);
   } catch (error) {
-    res.status(500).json({ error: 'Failed to retrieve announcement' });
+    res.status(500).json({ error: error.message });
   }
 };
 
-// Update Announcement
 export const updateAnnouncement = async (req, res) => {
-  const { id } = req.params;
   const { announcement, section } = req.body;
 
   try {
     const existingAnnouncement = await Announcement.findOne({
-      where: { id, school_id: req.school_id },
+      where: {
+        id: req.params.id,
+        school_id: req.school_id,
+      },
     });
-    if (existingAnnouncement) {
-      await existingAnnouncement.update({ announcement, section });
-      res.json({ message: 'Announcement updated successfully' });
-    } else {
-      res.status(404).json({ error: 'Announcement not found' });
+    if (!existingAnnouncement) {
+      return res.status(404).json({ error: 'Announcement not found' });
     }
+
+    existingAnnouncement.announcement = announcement || existingAnnouncement.announcement;
+    existingAnnouncement.section = section || existingAnnouncement.section;
+    await existingAnnouncement.save();
+
+    res.status(200).json(existingAnnouncement);
   } catch (error) {
-    res.status(500).json({ error: 'Failed to update announcement', details: error.message });
+    res.status(500).json({ error: error.message });
   }
 };
 
-// Delete Announcement
 export const deleteAnnouncement = async (req, res) => {
-  const { id } = req.params;
-
   try {
     const announcement = await Announcement.findOne({
-      where: { id, school_id: req.school_id },
+      where: {
+        id: req.params.id,
+        school_id: req.school_id,
+      },
     });
-    if (announcement) {
-      await announcement.destroy();
-      res.status(204).end();
-    } else {
-      res.status(404).json({ error: 'Announcement not found' });
+    if (!announcement) {
+      return res.status(404).json({ error: 'Announcement not found' });
     }
+    await announcement.destroy();
+    res.status(204).json({ message: 'Announcement deleted successfully' });
   } catch (error) {
-    res.status (500).json({ error: 'Failed to delete announcement' });
+    res.status(500).json({ error: error.message });
   }
 };

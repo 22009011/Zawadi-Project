@@ -1,3 +1,4 @@
+// controllers/userController.js
 import bcrypt from 'bcryptjs';
 import jwt from 'jsonwebtoken';
 import config from '../config.js';
@@ -49,7 +50,7 @@ export const login = async (req, res) => {
       return res.status(401).json({ error: 'Invalid password' });
     }
 
-    const token = jwt.sign({ userId: user.id, role: user.role }, jwtSecret, { expiresIn: '1h' });
+    const token = jwt.sign({ userId: user.id, role: user.role, school_id: user.school_id }, jwtSecret, { expiresIn: '1h' });
 
     res.status(200).json({ message: 'Login successful', token, role: user.role });
   } catch (error) {

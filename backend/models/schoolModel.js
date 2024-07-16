@@ -1,3 +1,4 @@
+// models/schoolModel.js
 import { DataTypes } from 'sequelize';
 import config from '../config.js';
 
@@ -35,7 +36,7 @@ const School = sequelize.define('School', {
   },
 }, {
   timestamps: true,
-  tableName: 'Schools'
+  tableName: 'Schools',
 });
 
 export default School;

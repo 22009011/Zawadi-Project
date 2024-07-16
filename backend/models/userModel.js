@@ -1,3 +1,4 @@
+// models/userModel.js
 import { Sequelize, DataTypes } from 'sequelize';
 import config from '../config.js';
 import School from './schoolModel.js';
@@ -5,6 +6,11 @@ import School from './schoolModel.js';
 const sequelize = config.sequelize;
 
 const User = sequelize.define('User', {
+  id: {
+    type: DataTypes.INTEGER,
+    autoIncrement: true,
+    primaryKey: true,
+  },
   username: {
     type: DataTypes.STRING,
     allowNull: false,
@@ -36,5 +42,7 @@ const User = sequelize.define('User', {
   createdAt: 'timestamp',
   updatedAt: 'timestamp',
 });
+
+User.belongsTo(School, { foreignKey: 'school_id' });
 
 export default User;
