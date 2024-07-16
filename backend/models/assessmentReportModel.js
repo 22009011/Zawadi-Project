@@ -1,5 +1,7 @@
+// models/assessmentReportModel.js
 import { DataTypes } from 'sequelize';
 import config from '../config.js';
+import School from './schoolModel.js';
 
 const { sequelize } = config;
 
@@ -20,9 +22,19 @@ const AssessmentReport = sequelize.define('AssessmentReport', {
   score: {
     type: DataTypes.INTEGER,
     allowNull: false,
-  }
+  },
+  school_id: {
+    type: DataTypes.INTEGER,
+    allowNull: false,
+    references: {
+      model: School,
+      key: 'id',
+    },
+  },
 }, {
   timestamps: true, // Enable Sequelize's automatic timestamps
 });
+
+AssessmentReport.belongsTo(School, { foreignKey: 'school_id' });
 
 export default AssessmentReport;

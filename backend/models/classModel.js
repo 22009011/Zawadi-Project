@@ -1,5 +1,7 @@
+// models/classModel.js
 import { DataTypes } from 'sequelize';
 import config from '../config.js';
+import School from './schoolModel.js';
 
 const { sequelize } = config;
 
@@ -16,9 +18,19 @@ const Class = sequelize.define('Class', {
   category: {
     type: DataTypes.ENUM('Early Years', 'Middle School', 'Junior Secondary'),
     allowNull: false,
-  }
+  },
+  school_id: {
+    type: DataTypes.INTEGER,
+    allowNull: false,
+    references: {
+      model: School,
+      key: 'id',
+    },
+  },
 }, {
   timestamps: true, // Enable Sequelize's automatic timestamps
 });
+
+Class.belongsTo(School, { foreignKey: 'school_id' });
 
 export default Class;

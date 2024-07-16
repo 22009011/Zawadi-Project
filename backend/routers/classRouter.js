@@ -1,3 +1,4 @@
+// routes/classRoutes.js
 import express from 'express';
 import {
   createClass,
@@ -6,13 +7,14 @@ import {
   updateClass,
   deleteClass,
 } from '../controllers/classControllers.js';
+import auth from '../middleware/auth.js';
 
 const router = express.Router();
 
-router.post('/', createClass);
-router.get('/', getAllClasses);
-router.get('/:id', getClassById);
-router.put('/:id', updateClass);
-router.delete('/:id', deleteClass);
+router.post('/', auth, createClass);
+router.get('/', auth, getAllClasses);
+router.get('/:id', auth, getClassById);
+router.put('/:id', auth, updateClass);
+router.delete('/:id', auth, deleteClass);
 
 export default router;
