@@ -1,4 +1,6 @@
-import Attendance from '../models/announcementModel.js';
+// controllers/attendanceController.js
+import Attendance from '../models/attendanceModel.js';
+import Student from '../models/studentModel.js';
 
 // Create Attendance Record
 export const createAttendanceRecord = async (req, res) => {
@@ -9,6 +11,11 @@ export const createAttendanceRecord = async (req, res) => {
   }
 
   try {
+    const student = await Student.findByPk(student_id);
+    if (!student) {
+      return res.status(404).json({ error: 'Student not found' });
+    }
+
     const newAttendanceRecord = await Attendance.create({
       student_id,
       date,
@@ -26,7 +33,7 @@ export const getAllAttendanceRecords = async (req, res) => {
     const attendanceRecords = await Attendance.findAll();
     res.json(attendanceRecords);
   } catch (error) {
-    res.status(500).json({ error: 'Failed to retrieve attendance records' });
+    res.status(500).json({ error: 'Failed to retrieve attendance records', details: error.message });
   }
 };
 
@@ -42,7 +49,7 @@ export const getAttendanceRecordById = async (req, res) => {
       res.status(404).json({ error: 'Attendance record not found' });
     }
   } catch (error) {
-    res.status(500).json({ error: 'Failed to retrieve attendance record' });
+    res.status(500).json({ error: 'Failed to retrieve attendance record', details: error.message });
   }
 };
 
@@ -81,6 +88,6 @@ export const deleteAttendanceRecord = async (req, res) => {
       res.status(404).json({ error: 'Attendance record not found' });
     }
   } catch (error) {
-    res.status(500).json({ error: 'Failed to delete attendance record' });
+    res.status(500).json({ error: 'Failed to delete attendance record', details: error.message });
   }
 };

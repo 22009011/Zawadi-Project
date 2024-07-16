@@ -1,7 +1,8 @@
+// models/gradesModel.js
 import { DataTypes } from 'sequelize';
-// import sequelize from '../config.js';
-import Student from './studentModel.js'; // Assuming Student model is imported correctly
 import config from '../config.js';
+import Student from './studentModel.js';
+import School from './schoolModel.js';
 
 const { sequelize } = config;
 
@@ -29,6 +30,18 @@ const Grade = sequelize.define('Grade', {
   performance_level: {
     type: DataTypes.STRING(50),
   },
+  school_id: {
+    type: DataTypes.INTEGER,
+    allowNull: false,
+    references: {
+      model: School,
+      key: 'id',
+    },
+  },
+}, {
+  timestamps: true, // Enable Sequelize's automatic timestamps
 });
+
+Grade.belongsTo(School, { foreignKey: 'school_id' });
 
 export default Grade;

@@ -1,4 +1,6 @@
+// controllers/lessonPlansControllers.js
 import LessonPlan from '../models/lessonPlansModel.js';
+import School from '../models/schoolModel.js';
 
 // Create Lesson Plan
 export const createLessonPlan = async (req, res) => {
@@ -9,10 +11,16 @@ export const createLessonPlan = async (req, res) => {
   }
 
   try {
+    const school = await School.findByPk(req.school_id);
+    if (!school) {
+      return res.status(404).json({ error: 'School not found' });
+    }
+
     const newLessonPlan = await LessonPlan.create({
       title,
       content,
       class_id,
+      school_id: req.school_id,
     });
     res.status(201).json(newLessonPlan);
   } catch (error) {
@@ -23,10 +31,10 @@ export const createLessonPlan = async (req, res) => {
 // Get All Lesson Plans
 export const getAllLessonPlans = async (req, res) => {
   try {
-    const lessonPlans = await LessonPlan.findAll();
+    const lessonPlans = await LessonPlan.findAll({ where: { school_id: req.school_id } });
     res.json(lessonPlans);
   } catch (error) {
-    res.status(500).json({ error: 'Failed to retrieve lesson plans' });
+    res.status(500).json({ error: 'Failed to retrieve lesson plans', details: error.message });
   }
 };
 
@@ -35,14 +43,14 @@ export const getLessonPlanById = async (req, res) => {
   const { id } = req.params;
 
   try {
-    const lessonPlan = await LessonPlan.findByPk(id);
+    const lessonPlan = await LessonPlan.findOne({ where: { id, school_id: req.school_id } });
     if (lessonPlan) {
       res.json(lessonPlan);
     } else {
       res.status(404).json({ error: 'Lesson plan not found' });
     }
   } catch (error) {
-    res.status(500).json({ error: 'Failed to retrieve lesson plan' });
+    res.status(500).json({ error: 'Failed to retrieve lesson plan', details: error.message });
   }
 };
 
@@ -52,7 +60,7 @@ export const updateLessonPlan = async (req, res) => {
   const { title, content, class_id } = req.body;
 
   try {
-    const existingLessonPlan = await LessonPlan.findByPk(id);
+    const existingLessonPlan = await LessonPlan.findOne({ where: { id, school_id: req.school_id } });
     if (existingLessonPlan) {
       await existingLessonPlan.update({
         title,
@@ -73,7 +81,7 @@ export const deleteLessonPlan = async (req, res) => {
   const { id } = req.params;
 
   try {
-    const lessonPlan = await LessonPlan.findByPk(id);
+    const lessonPlan = await LessonPlan.findOne({ where: { id, school_id: req.school_id } });
     if (lessonPlan) {
       await lessonPlan.destroy();
       res.status(204).end();
@@ -81,6 +89,6 @@ export const deleteLessonPlan = async (req, res) => {
       res.status(404).json({ error: 'Lesson plan not found' });
     }
   } catch (error) {
-    res.status(500).json({ error: 'Failed to delete lesson plan' });
+    res.status(500).json({ error: 'Failed to delete lesson plan', details: error.message });
   }
 };

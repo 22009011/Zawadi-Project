@@ -1,6 +1,8 @@
+// models/lessonPlansModel.js
 import { DataTypes } from 'sequelize';
-import Class from './classModel.js'; // Assuming Class model is imported correctly
+import Class from './classModel.js';
 import config from '../config.js';
+import School from './schoolModel.js';
 
 const { sequelize } = config;
 
@@ -26,6 +28,19 @@ const LessonPlan = sequelize.define('LessonPlan', {
       key: 'id',
     },
   },
+  school_id: {
+    type: DataTypes.INTEGER,
+    allowNull: false,
+    references: {
+      model: School,
+      key: 'id',
+    },
+  },
+}, {
+  timestamps: true, // Enable Sequelize's automatic timestamps
 });
+
+LessonPlan.belongsTo(Class, { foreignKey: 'class_id' });
+LessonPlan.belongsTo(School, { foreignKey: 'school_id' });
 
 export default LessonPlan;

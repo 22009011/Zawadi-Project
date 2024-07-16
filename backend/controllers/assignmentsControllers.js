@@ -1,4 +1,6 @@
+// controllers/assignmentController.js
 import Assignment from '../models/assignmentsModel.js';
+import School from '../models/schoolModel.js';
 
 // Create Assignment
 export const createAssignment = async (req, res) => {
@@ -9,12 +11,18 @@ export const createAssignment = async (req, res) => {
   }
 
   try {
+    const school = await School.findByPk(req.school_id);
+    if (!school) {
+      return res.status(404).json({ error: 'School not found' });
+    }
+
     const newAssignment = await Assignment.create({
       title,
       description,
       grade,
       deadline,
       type,
+      school_id: req.school_id,
     });
     res.status(201).json(newAssignment);
   } catch (error) {
@@ -25,10 +33,10 @@ export const createAssignment = async (req, res) => {
 // Get All Assignments
 export const getAllAssignments = async (req, res) => {
   try {
-    const assignments = await Assignment.findAll();
+    const assignments = await Assignment.findAll({ where: { school_id: req.school_id } });
     res.json(assignments);
   } catch (error) {
-    res.status(500).json({ error: 'Failed to retrieve assignments' });
+    res.status(500).json({ error: 'Failed to retrieve assignments', details: error.message });
   }
 };
 
@@ -37,14 +45,14 @@ export const getAssignmentById = async (req, res) => {
   const { id } = req.params;
 
   try {
-    const assignment = await Assignment.findByPk(id);
+    const assignment = await Assignment.findOne({ where: { id, school_id: req.school_id } });
     if (assignment) {
       res.json(assignment);
     } else {
       res.status(404).json({ error: 'Assignment not found' });
     }
   } catch (error) {
-    res.status(500).json({ error: 'Failed to retrieve assignment' });
+    res.status(500).json({ error: 'Failed to retrieve assignment', details: error.message });
   }
 };
 
@@ -54,7 +62,7 @@ export const updateAssignment = async (req, res) => {
   const { title, description, grade, deadline, type } = req.body;
 
   try {
-    const existingAssignment = await Assignment.findByPk(id);
+    const existingAssignment = await Assignment.findOne({ where: { id, school_id: req.school_id } });
     if (existingAssignment) {
       await existingAssignment.update({
         title,
@@ -77,7 +85,7 @@ export const deleteAssignment = async (req, res) => {
   const { id } = req.params;
 
   try {
-    const assignment = await Assignment.findByPk(id);
+    const assignment = await Assignment.findOne({ where: { id, school_id: req.school_id } });
     if (assignment) {
       await assignment.destroy();
       res.status(204).end();
@@ -85,6 +93,6 @@ export const deleteAssignment = async (req, res) => {
       res.status(404).json({ error: 'Assignment not found' });
     }
   } catch (error) {
-    res.status(500).json({ error: 'Failed to delete assignment' });
+    res.status(500).json({ error: 'Failed to delete assignment', details: error.message });
   }
 };

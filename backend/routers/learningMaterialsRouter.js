@@ -1,3 +1,4 @@
+// routes/learningMaterialsRoutes.js
 import express from 'express';
 import {
   createLearningMaterial,
@@ -6,13 +7,14 @@ import {
   updateLearningMaterial,
   deleteLearningMaterial,
 } from '../controllers/learningMaterialsControllers.js';
+import auth from '../middleware/auth.js';
 
 const router = express.Router();
 
-router.post('/', createLearningMaterial);
-router.get('/', getAllLearningMaterials);
-router.get('/:id', getLearningMaterialById);
-router.put('/:id', updateLearningMaterial);
-router.delete('/:id', deleteLearningMaterial);
+router.post('/', auth, createLearningMaterial);
+router.get('/', auth, getAllLearningMaterials);
+router.get('/:id', auth, getLearningMaterialById);
+router.put('/:id', auth, updateLearningMaterial);
+router.delete('/:id', auth, deleteLearningMaterial);
 
 export default router;

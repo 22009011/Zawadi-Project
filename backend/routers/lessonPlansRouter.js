@@ -1,3 +1,4 @@
+// routes/lessonPlansRoutes.js
 import express from 'express';
 import {
   createLessonPlan,
@@ -6,13 +7,14 @@ import {
   updateLessonPlan,
   deleteLessonPlan,
 } from '../controllers/lessonPlansControllers.js';
+import auth from '../middleware/auth.js';
 
 const router = express.Router();
 
-router.post('/', createLessonPlan);
-router.get('/', getAllLessonPlans);
-router.get('/:id', getLessonPlanById);
-router.put('/:id', updateLessonPlan);
-router.delete('/:id', deleteLessonPlan);
+router.post('/', auth, createLessonPlan);
+router.get('/', auth, getAllLessonPlans);
+router.get('/:id', auth, getLessonPlanById);
+router.put('/:id', auth, updateLessonPlan);
+router.delete('/:id', auth, deleteLessonPlan);
 
 export default router;

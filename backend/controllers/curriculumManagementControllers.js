@@ -1,5 +1,6 @@
-// curriculumManagementController.js
+// controllers/curriculumManagementController.js
 import CurriculumEntry from '../models/curriculumManagementModel.js';
+import School from '../models/schoolModel.js';
 
 // Create Curriculum Entry
 export const createCurriculumEntry = async (req, res) => {
@@ -10,12 +11,18 @@ export const createCurriculumEntry = async (req, res) => {
   }
 
   try {
+    const school = await School.findByPk(req.school_id);
+    if (!school) {
+      return res.status(404).json({ error: 'School not found' });
+    }
+
     const newCurriculumEntry = await CurriculumEntry.create({
       section,
       grade,
       subject,
       lesson,
       timetable,
+      school_id: req.school_id,
     });
     res.status(201).json(newCurriculumEntry);
   } catch (error) {
@@ -26,10 +33,10 @@ export const createCurriculumEntry = async (req, res) => {
 // Get All Curriculum Entries
 export const getAllCurriculumEntries = async (req, res) => {
   try {
-    const curriculumEntries = await CurriculumEntry.findAll();
+    const curriculumEntries = await CurriculumEntry.findAll({ where: { school_id: req.school_id } });
     res.json(curriculumEntries);
   } catch (error) {
-    res.status(500).json({ error: 'Failed to retrieve curriculum entries' });
+    res.status(500).json({ error: 'Failed to retrieve curriculum entries', details: error.message });
   }
 };
 
@@ -38,14 +45,14 @@ export const getCurriculumEntryById = async (req, res) => {
   const { id } = req.params;
 
   try {
-    const curriculumEntry = await CurriculumEntry.findByPk(id);
+    const curriculumEntry = await CurriculumEntry.findOne({ where: { id, school_id: req.school_id } });
     if (curriculumEntry) {
       res.json(curriculumEntry);
     } else {
       res.status(404).json({ error: 'Curriculum entry not found' });
     }
   } catch (error) {
-    res.status(500).json({ error: 'Failed to retrieve curriculum entry' });
+    res.status(500).json({ error: 'Failed to retrieve curriculum entry', details: error.message });
   }
 };
 
@@ -55,7 +62,7 @@ export const updateCurriculumEntry = async (req, res) => {
   const { section, grade, subject, lesson, timetable } = req.body;
 
   try {
-    const existingCurriculumEntry = await CurriculumEntry.findByPk(id);
+    const existingCurriculumEntry = await CurriculumEntry.findOne({ where: { id, school_id: req.school_id } });
     if (existingCurriculumEntry) {
       await existingCurriculumEntry.update({
         section,
@@ -78,7 +85,7 @@ export const deleteCurriculumEntry = async (req, res) => {
   const { id } = req.params;
 
   try {
-    const curriculumEntry = await CurriculumEntry.findByPk(id);
+    const curriculumEntry = await CurriculumEntry.findOne({ where: { id, school_id: req.school_id } });
     if (curriculumEntry) {
       await curriculumEntry.destroy();
       res.status(204).end();
@@ -86,6 +93,6 @@ export const deleteCurriculumEntry = async (req, res) => {
       res.status(404).json({ error: 'Curriculum entry not found' });
     }
   } catch (error) {
-    res.status(500).json({ error: 'Failed to delete curriculum entry' });
+    res.status(500).json({ error: 'Failed to delete curriculum entry', details: error.message });
   }
 };

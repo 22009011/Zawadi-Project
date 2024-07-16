@@ -1,6 +1,7 @@
-// curriculumManagementModel.js
+// models/curriculumManagementModel.js
 import { DataTypes } from 'sequelize';
 import config from '../config.js';
+import School from './schoolModel.js';
 
 const { sequelize } = config;
 
@@ -28,8 +29,18 @@ const CurriculumEntry = sequelize.define('CurriculumEntry', {
   timetable: {
     type: DataTypes.TEXT,
   },
+  school_id: {
+    type: DataTypes.INTEGER,
+    allowNull: false,
+    references: {
+      model: School,
+      key: 'id',
+    },
+  },
 }, {
   timestamps: true, // Enable Sequelize's automatic timestamps
 });
+
+CurriculumEntry.belongsTo(School, { foreignKey: 'school_id' });
 
 export default CurriculumEntry;

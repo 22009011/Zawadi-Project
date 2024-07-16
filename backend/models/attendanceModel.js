@@ -1,7 +1,7 @@
+// models/attendanceModel.js
 import { DataTypes } from 'sequelize';
-// import sequelize from '../config.js';
-import Student from './studentModel.js'; // Ensure correct path to Student model
 import config from '../config.js';
+import Student from './studentModel.js';
 
 const { sequelize } = config;
 
@@ -27,6 +27,10 @@ const Attendance = sequelize.define('Attendance', {
     type: DataTypes.ENUM('Present', 'Absent'),
     allowNull: false,
   },
+}, {
+  timestamps: true, // Enable Sequelize's automatic timestamps
 });
+
+Attendance.belongsTo(Student, { foreignKey: 'student_id' });
 
 export default Attendance;

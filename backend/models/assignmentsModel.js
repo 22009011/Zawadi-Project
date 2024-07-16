@@ -1,5 +1,7 @@
+// models/assignmentModel.js
 import { DataTypes } from 'sequelize';
 import config from '../config.js';
+import School from './schoolModel.js';
 
 const { sequelize } = config;
 
@@ -27,6 +29,18 @@ const Assignment = sequelize.define('Assignment', {
     type: DataTypes.ENUM('Multiple Choice', 'Fill in the Blank'),
     allowNull: false,
   },
+  school_id: {
+    type: DataTypes.INTEGER,
+    allowNull: false,
+    references: {
+      model: School,
+      key: 'id',
+    },
+  },
+}, {
+  timestamps: true,
 });
+
+Assignment.belongsTo(School, { foreignKey: 'school_id' });
 
 export default Assignment;
