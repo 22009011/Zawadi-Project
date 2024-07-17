@@ -21,7 +21,10 @@ const AdminSignIn = () => {
     try {
       const response = await axios.post('http://localhost:5000/api/users/login', { email, password });
       if (response.status === 200) {
-        // Sign-in successful, redirect to admin dashboard
+        // Store the token and role in localStorage
+        localStorage.setItem('token', response.data.token);
+        localStorage.setItem('role', response.data.role);
+        // Redirect to admin dashboard
         navigate('/admin/dashboard');
         toast.success('Logged in successfully!');
       } else {

@@ -30,7 +30,12 @@ const Announcement = () => {
 
   const fetchAnnouncements = async () => {
     try {
-      const response = await axios.get('http://localhost:5000/api/announcements');
+      const token = localStorage.getItem('token'); // Retrieve token from localStorage
+      const response = await axios.get('http://localhost:5000/api/announcements', {
+        headers: {
+          Authorization: `Bearer ${token}`, // Pass token in the request headers
+        },
+      });
       setAnnouncements(response.data);
     } catch (error) {
       console.error('Error fetching announcements:', error);
@@ -40,9 +45,14 @@ const Announcement = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
+      const token = localStorage.getItem('token'); // Retrieve token from localStorage
       const response = await axios.post('http://localhost:5000/api/announcements', {
         announcement: announcement,
         section: selectedSection,
+      }, {
+        headers: {
+          Authorization: `Bearer ${token}`, // Pass token in the request headers
+        },
       });
       toast.success('Announcement sent successfully');
       setAnnouncement('');
@@ -55,7 +65,12 @@ const Announcement = () => {
 
   const handleDelete = async (id) => {
     try {
-      await axios.delete(`http://localhost:5000/api/announcements/${id}`);
+      const token = localStorage.getItem('token'); // Retrieve token from localStorage
+      await axios.delete(`http://localhost:5000/api/announcements/${id}`, {
+        headers: {
+          Authorization: `Bearer ${token}`, // Pass token in the request headers
+        },
+      });
       toast.success('Announcement deleted successfully');
       fetchAnnouncements();
     } catch (error) {
