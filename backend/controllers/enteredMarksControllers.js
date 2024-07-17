@@ -1,4 +1,7 @@
+// controllers/enteredMarkController.js
 import EnteredMark from '../models/enteredMarksModel.js';
+import School from '../models/schoolModel.js';
+import Class from '../models/classModel.js';
 
 // Create Entered Mark
 export const createEnteredMark = async (req, res) => {
@@ -9,12 +12,23 @@ export const createEnteredMark = async (req, res) => {
   }
 
   try {
+    const school = await School.findByPk(req.school_id);
+    if (!school) {
+      return res.status(404).json({ error: 'School not found' });
+    }
+
+    const selectedClass = await Class.findOne({ where: { id: class_level, school_id: req.school_id } });
+    if (!selectedClass) {
+      return res.status(404).json({ error: 'Class not found in the school' });
+    }
+
     const newEnteredMark = await EnteredMark.create({
       student_name,
-      class_level,
+      class_level: selectedClass.id,
       admission_number,
       subject,
       marks,
+      school_id: req.school_id,
     });
     res.status(201).json(newEnteredMark);
   } catch (error) {
@@ -25,10 +39,10 @@ export const createEnteredMark = async (req, res) => {
 // Get All Entered Marks
 export const getAllEnteredMarks = async (req, res) => {
   try {
-    const enteredMarks = await EnteredMark.findAll();
+    const enteredMarks = await EnteredMark.findAll({ where: { school_id: req.school_id } });
     res.json(enteredMarks);
   } catch (error) {
-    res.status(500).json({ error: 'Failed to retrieve entered marks' });
+    res.status(500).json({ error: 'Failed to retrieve entered marks', details: error.message });
   }
 };
 
@@ -37,14 +51,14 @@ export const getEnteredMarkById = async (req, res) => {
   const { id } = req.params;
 
   try {
-    const enteredMark = await EnteredMark.findByPk(id);
+    const enteredMark = await EnteredMark.findOne({ where: { id, school_id: req.school_id } });
     if (enteredMark) {
       res.json(enteredMark);
     } else {
       res.status(404).json({ error: 'Entered mark not found' });
     }
   } catch (error) {
-    res.status(500).json({ error: 'Failed to retrieve entered mark' });
+    res.status(500).json({ error: 'Failed to retrieve entered mark', details: error.message });
   }
 };
 
@@ -54,11 +68,16 @@ export const updateEnteredMark = async (req, res) => {
   const { student_name, class_level, admission_number, subject, marks } = req.body;
 
   try {
-    const existingEnteredMark = await EnteredMark.findByPk(id);
+    const existingEnteredMark = await EnteredMark.findOne({ where: { id, school_id: req.school_id } });
     if (existingEnteredMark) {
+      const selectedClass = await Class.findOne({ where: { id: class_level, school_id: req.school_id } });
+      if (!selectedClass) {
+        return res.status(404).json({ error: 'Class not found in the school' });
+      }
+
       await existingEnteredMark.update({
         student_name,
-        class_level,
+        class_level: selectedClass.id,
         admission_number,
         subject,
         marks,
@@ -77,7 +96,7 @@ export const deleteEnteredMark = async (req, res) => {
   const { id } = req.params;
 
   try {
-    const enteredMark = await EnteredMark.findByPk(id);
+    const enteredMark = await EnteredMark.findOne({ where: { id, school_id: req.school_id } });
     if (enteredMark) {
       await enteredMark.destroy();
       res.status(204).end();
@@ -85,6 +104,6 @@ export const deleteEnteredMark = async (req, res) => {
       res.status(404).json({ error: 'Entered mark not found' });
     }
   } catch (error) {
-    res.status(500).json({ error: 'Failed to delete entered mark' });
+    res.status(500).json({ error: 'Failed to delete entered mark', details: error.message });
   }
 };

@@ -1,5 +1,8 @@
+// models/attendanceRecordModel.js
 import { DataTypes } from 'sequelize';
 import config from '../config.js';
+import Student from './studentModel.js';
+import School from './schoolModel.js';
 
 const { sequelize } = config;
 
@@ -13,8 +16,8 @@ const AttendanceRecord = sequelize.define('AttendanceRecord', {
     type: DataTypes.INTEGER,
     allowNull: false,
     references: {
-      model: 'students', // Reference the students table
-      key: 'id',
+      model: Student,
+      key: 'student_id',
     },
   },
   student_name: {
@@ -33,7 +36,7 @@ const AttendanceRecord = sequelize.define('AttendanceRecord', {
     type: DataTypes.INTEGER,
     allowNull: false,
     references: {
-      model: 'schools', // Reference the schools table
+      model: School,
       key: 'id',
     },
   },
@@ -41,5 +44,7 @@ const AttendanceRecord = sequelize.define('AttendanceRecord', {
   timestamps: true,
   tableName: 'attendancerecords',
 });
+
+AttendanceRecord.belongsTo(School, { foreignKey: 'school_id' });
 
 export default AttendanceRecord;
