@@ -1,16 +1,24 @@
+// controllers/studentAssignmentsControllers.js
 import StudentAssignment from '../models/studentAssignmentsModel.js';
+import School from '../models/schoolModel.js';
 
 // Create Student Assignment
 export const createStudentAssignment = async (req, res) => {
   const { studentId, assignmentId, submissionDate, status, grade } = req.body;
 
   try {
+    const school = await School.findByPk(req.school_id);
+    if (!school) {
+      return res.status(404).json({ error: 'School not found' });
+    }
+
     const newStudentAssignment = await StudentAssignment.create({
       studentId,
       assignmentId,
       submissionDate,
       status,
       grade,
+      school_id: req.school_id,
     });
     res.status(201).json(newStudentAssignment);
   } catch (error) {
@@ -21,10 +29,10 @@ export const createStudentAssignment = async (req, res) => {
 // Get All Student Assignments
 export const getAllStudentAssignments = async (req, res) => {
   try {
-    const studentAssignments = await StudentAssignment.findAll();
+    const studentAssignments = await StudentAssignment.findAll({ where: { school_id: req.school_id } });
     res.json(studentAssignments);
   } catch (error) {
-    res.status(500).json({ error: 'Failed to retrieve student assignments' });
+    res.status(500).json({ error: 'Failed to retrieve student assignments', details: error.message });
   }
 };
 
@@ -34,7 +42,7 @@ export const getStudentAssignment = async (req, res) => {
 
   try {
     const studentAssignment = await StudentAssignment.findOne({
-      where: { studentId, assignmentId },
+      where: { studentId, assignmentId, school_id: req.school_id },
     });
     if (studentAssignment) {
       res.json(studentAssignment);
@@ -42,7 +50,7 @@ export const getStudentAssignment = async (req, res) => {
       res.status(404).json({ error: 'Student assignment not found' });
     }
   } catch (error) {
-    res.status(500).json({ error: 'Failed to retrieve student assignment' });
+    res.status(500).json({ error: 'Failed to retrieve student assignment', details: error.message });
   }
 };
 
@@ -53,7 +61,7 @@ export const updateStudentAssignment = async (req, res) => {
 
   try {
     const existingAssignment = await StudentAssignment.findOne({
-      where: { studentId, assignmentId },
+      where: { studentId, assignmentId, school_id: req.school_id },
     });
     if (existingAssignment) {
       await existingAssignment.update({ submissionDate, status, grade });
@@ -72,7 +80,7 @@ export const deleteStudentAssignment = async (req, res) => {
 
   try {
     const studentAssignment = await StudentAssignment.findOne({
-      where: { studentId, assignmentId },
+      where: { studentId, assignmentId, school_id: req.school_id },
     });
     if (studentAssignment) {
       await studentAssignment.destroy();
@@ -81,6 +89,6 @@ export const deleteStudentAssignment = async (req, res) => {
       res.status(404).json({ error: 'Student assignment not found' });
     }
   } catch (error) {
-    res.status(500).json({ error: 'Failed to delete student assignment' });
+    res.status(500).json({ error: 'Failed to delete student assignment', details: error.message });
   }
 };

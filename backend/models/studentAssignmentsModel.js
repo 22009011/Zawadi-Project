@@ -1,7 +1,9 @@
+// models/studentAssignmentsModel.js
 import { DataTypes } from 'sequelize';
 import config from '../config.js';
-import Student from './studentModel.js'; // Import Student model
-import Assignment from './assignmentsModel.js'; // Import Assignment model
+import Student from './studentModel.js';
+import Assignment from './assignmentsModel.js';
+import School from './schoolModel.js';
 
 const { sequelize } = config;
 
@@ -31,8 +33,19 @@ const StudentAssignment = sequelize.define('StudentAssignment', {
   grade: {
     type: DataTypes.DECIMAL(5, 2),
   },
+  school_id: {
+    type: DataTypes.INTEGER,
+    allowNull: false,
+    references: {
+      model: School,
+      key: 'id',
+    },
+  },
 }, {
   tableName: 'StudentAssignments', // Ensure the correct table name here
+  timestamps: true, // Enable Sequelize's automatic timestamps
 });
+
+StudentAssignment.belongsTo(School, { foreignKey: 'school_id' });
 
 export default StudentAssignment;

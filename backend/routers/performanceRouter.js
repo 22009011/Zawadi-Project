@@ -1,3 +1,4 @@
+// routes/performanceRoutes.js
 import express from 'express';
 import {
   createPerformance,
@@ -6,13 +7,14 @@ import {
   updatePerformance,
   deletePerformance,
 } from '../controllers/performanceControllers.js';
+import auth from '../middleware/auth.js';
 
 const router = express.Router();
 
-router.post('/', createPerformance);
-router.get('/', getAllPerformances);
-router.get('/:id', getPerformanceById);
-router.put('/:id', updatePerformance);
-router.delete('/:id', deletePerformance);
+router.post('/', auth, createPerformance);
+router.get('/', auth, getAllPerformances);
+router.get('/:id', auth, getPerformanceById);
+router.put('/:id', auth, updatePerformance);
+router.delete('/:id', auth, deletePerformance);
 
 export default router;

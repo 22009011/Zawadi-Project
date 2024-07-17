@@ -1,6 +1,8 @@
+// models/studentModel.js
 import { DataTypes } from 'sequelize';
 import config from '../config.js';
 import Class from './classModel.js';
+import School from './schoolModel.js';
 
 const { sequelize } = config;
 
@@ -42,6 +44,20 @@ const Student = sequelize.define('Student', {
       key: 'id',
     },
   },
+  school_id: {
+    type: DataTypes.INTEGER,
+    allowNull: false,
+    references: {
+      model: School,
+      key: 'id',
+    },
+  },
+}, {
+  tableName: 'Students',
+  timestamps: true,
 });
+
+Student.belongsTo(Class, { foreignKey: 'class_id' });
+Student.belongsTo(School, { foreignKey: 'school_id' });
 
 export default Student;

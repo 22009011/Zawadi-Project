@@ -1,6 +1,8 @@
+// models/timetableModel.js
 import { DataTypes } from 'sequelize';
 import config from '../config.js';
-import Class from './classModel.js'; // Assuming Class model is imported correctly
+import Class from './classModel.js';
+import School from './schoolModel.js';
 
 const { sequelize } = config;
 
@@ -30,6 +32,20 @@ const Timetable = sequelize.define('Timetable', {
     type: DataTypes.STRING(20),
     allowNull: false,
   },
+  school_id: {
+    type: DataTypes.INTEGER,
+    allowNull: false,
+    references: {
+      model: School,
+      key: 'id',
+    },
+  },
+}, {
+  tableName: 'Timetables',
+  timestamps: true,
 });
+
+Timetable.belongsTo(Class, { foreignKey: 'class_id' });
+Timetable.belongsTo(School, { foreignKey: 'school_id' });
 
 export default Timetable;

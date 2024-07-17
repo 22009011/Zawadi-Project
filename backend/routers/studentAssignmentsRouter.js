@@ -1,3 +1,4 @@
+// routes/studentAssignmentsRoutes.js
 import express from 'express';
 import {
   createStudentAssignment,
@@ -6,13 +7,14 @@ import {
   updateStudentAssignment,
   deleteStudentAssignment,
 } from '../controllers/studentAssignmentsControllers.js';
+import auth from '../middleware/auth.js';
 
 const router = express.Router();
 
-router.post('/', createStudentAssignment);
-router.get('/', getAllStudentAssignments);
-router.get('/:studentId/:assignmentId', getStudentAssignment);
-router.put('/:studentId/:assignmentId', updateStudentAssignment);
-router.delete('/:studentId/:assignmentId', deleteStudentAssignment);
+router.post('/', auth, createStudentAssignment);
+router.get('/', auth, getAllStudentAssignments);
+router.get('/:studentId/:assignmentId', auth, getStudentAssignment);
+router.put('/:studentId/:assignmentId', auth, updateStudentAssignment);
+router.delete('/:studentId/:assignmentId', auth, deleteStudentAssignment);
 
 export default router;

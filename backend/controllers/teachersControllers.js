@@ -1,4 +1,6 @@
+// controllers/teacherControllers.js
 import Teacher from '../models/teachersModel.js';
+import School from '../models/schoolModel.js';
 
 // Create Teacher
 export const createTeacher = async (req, res) => {
@@ -9,12 +11,18 @@ export const createTeacher = async (req, res) => {
   }
 
   try {
+    const school = await School.findByPk(req.school_id);
+    if (!school) {
+      return res.status(404).json({ error: 'School not found' });
+    }
+
     const newTeacher = await Teacher.create({
       name,
       email,
       phone,
       address,
       qualification,
+      school_id: req.school_id,
     });
     res.status(201).json(newTeacher);
   } catch (error) {
@@ -25,10 +33,10 @@ export const createTeacher = async (req, res) => {
 // Get All Teachers
 export const getAllTeachers = async (req, res) => {
   try {
-    const teachers = await Teacher.findAll();
+    const teachers = await Teacher.findAll({ where: { school_id: req.school_id } });
     res.json(teachers);
   } catch (error) {
-    res.status(500).json({ error: 'Failed to retrieve teachers' });
+    res.status(500).json({ error: 'Failed to retrieve teachers', details: error.message });
   }
 };
 
@@ -37,14 +45,16 @@ export const getTeacherById = async (req, res) => {
   const { id } = req.params;
 
   try {
-    const teacher = await Teacher.findByPk(id);
+    const teacher = await Teacher.findOne({
+      where: { id, school_id: req.school_id },
+    });
     if (teacher) {
       res.json(teacher);
     } else {
       res.status(404).json({ error: 'Teacher not found' });
     }
   } catch (error) {
-    res.status(500).json({ error: 'Failed to retrieve teacher data' });
+    res.status(500).json({ error: 'Failed to retrieve teacher data', details: error.message });
   }
 };
 
@@ -54,7 +64,9 @@ export const updateTeacher = async (req, res) => {
   const { name, email, phone, address, qualification } = req.body;
 
   try {
-    const existingTeacher = await Teacher.findByPk(id);
+    const existingTeacher = await Teacher.findOne({
+      where: { id, school_id: req.school_id },
+    });
     if (existingTeacher) {
       await existingTeacher.update({
         name,
@@ -77,7 +89,9 @@ export const deleteTeacher = async (req, res) => {
   const { id } = req.params;
 
   try {
-    const teacher = await Teacher.findByPk(id);
+    const teacher = await Teacher.findOne({
+      where: { id, school_id: req.school_id },
+    });
     if (teacher) {
       await teacher.destroy();
       res.status(204).end();
@@ -85,6 +99,6 @@ export const deleteTeacher = async (req, res) => {
       res.status(404).json({ error: 'Teacher not found' });
     }
   } catch (error) {
-    res.status(500).json({ error: 'Failed to delete teacher data', details: error.message });
+    res.status (500).json({ error: 'Failed to delete teacher data', details: error.message });
   }
 };

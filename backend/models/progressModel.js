@@ -1,7 +1,8 @@
+// models/progressModel.js
 import { DataTypes } from 'sequelize';
-// import sequelize from '../config.js';
-import Student from './studentModel.js'; // Assuming Student model is imported correctly
 import config from '../config.js';
+import Student from './studentModel.js';
+import School from './schoolModel.js';
 
 const { sequelize } = config;
 
@@ -26,6 +27,18 @@ const Progress = sequelize.define('Progress', {
   progress_data: {
     type: DataTypes.TEXT,
   },
+  school_id: {
+    type: DataTypes.INTEGER,
+    allowNull: false,
+    references: {
+      model: School,
+      key: 'id',
+    },
+  },
+}, {
+  timestamps: true, // Enable Sequelize's automatic timestamps
 });
+
+Progress.belongsTo(School, { foreignKey: 'school_id' });
 
 export default Progress;

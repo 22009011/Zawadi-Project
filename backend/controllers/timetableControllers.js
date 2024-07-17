@@ -1,4 +1,7 @@
+// controllers/timetableControllers.js
 import Timetable from '../models/timetableModel.js';
+import Class from '../models/classModel.js';
+import School from '../models/schoolModel.js';
 
 // Create Timetable
 export const createTimetable = async (req, res) => {
@@ -9,11 +12,20 @@ export const createTimetable = async (req, res) => {
   }
 
   try {
+    const classExists = await Class.findOne({
+      where: { id: class_id, school_id: req.school_id },
+    });
+
+    if (!classExists) {
+      return res.status(404).json({ error: 'Class not found' });
+    }
+
     const newTimetable = await Timetable.create({
-      class_id, 
+      class_id,
       day,
       subject,
       time,
+      school_id: req.school_id,
     });
     res.status(201).json(newTimetable);
   } catch (error) {
@@ -24,10 +36,16 @@ export const createTimetable = async (req, res) => {
 // Get All Timetables
 export const getAllTimetables = async (req, res) => {
   try {
-    const timetables = await Timetable.findAll();
+    const timetables = await Timetable.findAll({
+      where: { school_id: req.school_id },
+      include: [{
+        model: Class,
+        where: { school_id: req.school_id },
+      }],
+    });
     res.json(timetables);
   } catch (error) {
-    res.status(500).json({ error: 'Failed to retrieve timetables' });
+    res.status(500).json({ error: 'Failed to retrieve timetables', details: error.message });
   }
 };
 
@@ -36,14 +54,21 @@ export const getTimetableById = async (req, res) => {
   const { id } = req.params;
 
   try {
-    const timetable = await Timetable.findByPk(id);
+    const timetable = await Timetable.findOne({
+      where: { id, school_id: req.school_id },
+      include: [{
+        model: Class,
+        where: { school_id: req.school_id },
+      }],
+    });
+
     if (timetable) {
       res.json(timetable);
     } else {
       res.status(404).json({ error: 'Timetable not found' });
     }
   } catch (error) {
-    res.status(500).json({ error: 'Failed to retrieve timetable' });
+    res.status(500).json({ error: 'Failed to retrieve timetable', details: error.message });
   }
 };
 
@@ -53,7 +78,14 @@ export const updateTimetable = async (req, res) => {
   const { class_id, day, subject, time } = req.body;
 
   try {
-    const existingTimetable = await Timetable.findByPk(id);
+    const existingTimetable = await Timetable.findOne({
+      where: { id, school_id: req.school_id },
+      include: [{
+        model: Class,
+        where: { school_id: req.school_id },
+      }],
+    });
+
     if (existingTimetable) {
       await existingTimetable.update({
         class_id,
@@ -75,7 +107,14 @@ export const deleteTimetable = async (req, res) => {
   const { id } = req.params;
 
   try {
-    const timetable = await Timetable.findByPk(id);
+    const timetable = await Timetable.findOne({
+      where: { id, school_id: req.school_id },
+      include: [{
+        model: Class,
+        where: { school_id: req.school_id },
+      }],
+    });
+
     if (timetable) {
       await timetable.destroy();
       res.status(204).end();

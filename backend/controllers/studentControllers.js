@@ -1,4 +1,6 @@
+// controllers/studentControllers.js
 import Student from '../models/studentModel.js';
+import School from '../models/schoolModel.js';
 
 // Create Student
 export const createStudent = async (req, res) => {
@@ -9,6 +11,11 @@ export const createStudent = async (req, res) => {
   }
 
   try {
+    const school = await School.findByPk(req.school_id);
+    if (!school) {
+      return res.status(404).json({ error: 'School not found' });
+    }
+
     const newStudent = await Student.create({
       name,
       class_id,
@@ -17,6 +24,7 @@ export const createStudent = async (req, res) => {
       parentName,
       parentEmail,
       parentPhone,
+      school_id: req.school_id,
     });
     res.status(201).json(newStudent);
   } catch (error) {
@@ -27,10 +35,10 @@ export const createStudent = async (req, res) => {
 // Get All Students
 export const getAllStudents = async (req, res) => {
   try {
-    const students = await Student.findAll();
+    const students = await Student.findAll({ where: { school_id: req.school_id } });
     res.json(students);
   } catch (error) {
-    res.status(500).json({ error: 'Failed to retrieve students' });
+    res.status(500).json({ error: 'Failed to retrieve students', details: error.message });
   }
 };
 
@@ -39,14 +47,16 @@ export const getStudentById = async (req, res) => {
   const { id } = req.params;
 
   try {
-    const student = await Student.findByPk(id);
+    const student = await Student.findOne({
+      where: { id, school_id: req.school_id },
+    });
     if (student) {
       res.json(student);
     } else {
       res.status(404).json({ error: 'Student not found' });
     }
   } catch (error) {
-    res.status(500).json({ error: 'Failed to retrieve student' });
+    res.status(500).json({ error: 'Failed to retrieve student', details: error.message });
   }
 };
 
@@ -56,7 +66,9 @@ export const updateStudent = async (req, res) => {
   const { name, class_id, registrationNumber, grade, parentName, parentEmail, parentPhone } = req.body;
 
   try {
-    const existingStudent = await Student.findByPk(id);
+    const existingStudent = await Student.findOne({
+      where: { id, school_id: req.school_id },
+    });
     if (existingStudent) {
       await existingStudent.update({
         name,
@@ -72,7 +84,7 @@ export const updateStudent = async (req, res) => {
       res.status(404).json({ error: 'Student not found' });
     }
   } catch (error) {
-    // res.status 500).json({ error: 'Failed to update student', details: error.message });
+    res.status(500).json({ error: 'Failed to update student', details: error.message });
   }
 };
 
@@ -81,7 +93,9 @@ export const deleteStudent = async (req, res) => {
   const { id } = req.params;
 
   try {
-    const student = await Student.findByPk(id);
+    const student = await Student.findOne({
+      where: { id, school_id: req.school_id },
+    });
     if (student) {
       await student.destroy();
       res.status(204).end();

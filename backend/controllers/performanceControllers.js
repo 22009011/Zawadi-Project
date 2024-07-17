@@ -1,4 +1,6 @@
+// controllers/performanceController.js
 import Performance from '../models/performanceModel.js';
+import School from '../models/schoolModel.js';
 
 // Create Performance
 export const createPerformance = async (req, res) => {
@@ -9,11 +11,17 @@ export const createPerformance = async (req, res) => {
   }
 
   try {
+    const school = await School.findByPk(req.school_id);
+    if (!school) {
+      return res.status(404).json({ error: 'School not found' });
+    }
+
     const newPerformance = await Performance.create({
       student_id,
       class_id,
       subject,
       marks,
+      school_id: req.school_id,
     });
     res.status(201).json(newPerformance);
   } catch (error) {
@@ -24,10 +32,10 @@ export const createPerformance = async (req, res) => {
 // Get All Performances
 export const getAllPerformances = async (req, res) => {
   try {
-    const performances = await Performance.findAll();
+    const performances = await Performance.findAll({ where: { school_id: req.school_id } });
     res.json(performances);
   } catch (error) {
-    res.status(500).json({ error: 'Failed to retrieve performance records' });
+    res.status(500).json({ error: 'Failed to retrieve performance records', details: error.message });
   }
 };
 
@@ -36,14 +44,14 @@ export const getPerformanceById = async (req, res) => {
   const { id } = req.params;
 
   try {
-    const performance = await Performance.findByPk(id);
+    const performance = await Performance.findOne({ where: { id, school_id: req.school_id } });
     if (performance) {
       res.json(performance);
     } else {
       res.status(404).json({ error: 'Performance record not found' });
     }
   } catch (error) {
-    res.status(500).json({ error: 'Failed to retrieve performance record' });
+    res.status(500).json({ error: 'Failed to retrieve performance record', details: error.message });
   }
 };
 
@@ -53,7 +61,7 @@ export const updatePerformance = async (req, res) => {
   const { student_id, class_id, subject, marks } = req.body;
 
   try {
-    const existingPerformance = await Performance.findByPk(id);
+    const existingPerformance = await Performance.findOne({ where: { id, school_id: req.school_id } });
     if (existingPerformance) {
       await existingPerformance.update({
         student_id,
@@ -75,7 +83,7 @@ export const deletePerformance = async (req, res) => {
   const { id } = req.params;
 
   try {
-    const performance = await Performance.findByPk(id);
+    const performance = await Performance.findOne({ where: { id, school_id: req.school_id } });
     if (performance) {
       await performance.destroy();
       res.status(204).end();
@@ -83,6 +91,6 @@ export const deletePerformance = async (req, res) => {
       res.status(404).json({ error: 'Performance record not found' });
     }
   } catch (error) {
-    res.status(500).json({ error: 'Failed to delete performance record' });
+    res.status(500).json({ error: 'Failed to delete performance record', details: error.message });
   }
 };
