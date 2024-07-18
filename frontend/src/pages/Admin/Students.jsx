@@ -30,7 +30,7 @@ const Students = () => {
     parentName: '',
     parentEmail: '',
     parentPhone: '',
-    class_id: '', // Add class_id field
+    class_id: '',
   });
   const [students, setStudents] = useState([]);
   const [classes, setClasses] = useState([]);
@@ -73,7 +73,7 @@ const Students = () => {
       parentName.trim() !== '' &&
       parentEmail.trim() !== '' &&
       parentPhone.trim() !== '' &&
-      class_id.trim() !== '' // Ensure class_id is not empty
+      class_id !== '' 
     ) {
       try {
         const response = await axios.post('http://localhost:5000/api/students', newStudent, {
@@ -90,7 +90,7 @@ const Students = () => {
           parentName: '',
           parentEmail: '',
           parentPhone: '',
-          class_id: '', // Reset class_id field
+          class_id: '',
         });
         toast.success('Student added successfully', { autoClose: 2000 });
       } catch (error) {
@@ -142,23 +142,14 @@ const Students = () => {
               type="text"
               placeholder="Enter registration number"
               value={newStudent.registrationNumber}
-              onChange={(e) =>
-                setNewStudent({ ...newStudent, registrationNumber: e.target.value })
-              }
+              onChange={(e) => setNewStudent({ ...newStudent, registrationNumber: e.target.value })}
             />
-            <Select
+            <AddStudentInput
+              type="text"
+              placeholder="Enter grade"
               value={newStudent.grade}
               onChange={(e) => setNewStudent({ ...newStudent, grade: e.target.value })}
-            >
-              <option value="" disabled>
-                Select grade
-              </option>
-              {classes.map((classItem) => (
-                <option key={classItem.id} value={classItem.grade}>
-                  {classItem.grade}
-                </option>
-              ))}
-            </Select>
+            />
             <AddStudentInput
               type="text"
               placeholder="Enter parent/guardian name"
@@ -177,6 +168,19 @@ const Students = () => {
               value={newStudent.parentPhone}
               onChange={(e) => setNewStudent({ ...newStudent, parentPhone: e.target.value })}
             />
+            <Select
+              value={newStudent.class_id}
+              onChange={(e) => setNewStudent({ ...newStudent, class_id: e.target.value })}
+            >
+              <option value="" disabled>
+                Select class
+              </option>
+              {classes.map((classItem) => (
+                <option key={classItem.id} value={classItem.id}>
+                  {classItem.grade}
+                </option>
+              ))}
+            </Select>
             <AddStudentButton type="submit">Add Student</AddStudentButton>
           </AddStudentForm>
           <StudentList>
@@ -215,6 +219,6 @@ const Students = () => {
       </Content>
     </StudentsContainer>
   );
-}; 
+};
 
 export default Students;
