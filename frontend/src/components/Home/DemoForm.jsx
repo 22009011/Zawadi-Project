@@ -3,83 +3,83 @@ import styled from 'styled-components';
 
 const FormContainer = styled.div`
   max-width: 750px;
-  margin: 20px auto;
+  margin: 40px auto;
   padding: 20px;
-  background-color: #fff;
+  background-color: #f9f9f9;
   border-radius: 10px;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
   box-sizing: border-box;
+  text-align: center;
 `;
 
 const Title = styled.h2`
-  text-align: center;
   color: #333;
-  margin-bottom: 20px;
+  margin-bottom: 10px;
+`;
+
+const Subtitle = styled.p`
+  color: #666;
+  margin-bottom: 30px;
+  font-size: 16px;
 `;
 
 const Input = styled.input`
-  width: calc(100% - 32px);  /* Adjusting width to fit within padding */
-  padding: 15px;
-  margin-bottom: 15px;
-  border: 1px solid #ddd;
-  border-radius: 8px;
-  box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.1);
+  width: 100%;
+  padding: 10px;
+  margin-bottom: 20px;
+  border: none;
+  border-bottom: 1px solid #000;
   font-size: 16px;
-  color: #555;
+  color: #333;
   box-sizing: border-box;
 
   &:focus {
-    border-color: #007bff;
     outline: none;
-    box-shadow: 0 0 5px rgba(0, 123, 255, 0.5);
+    border-bottom: 1px solid #000;
   }
 `;
 
 const TextArea = styled.textarea`
-  width: calc(100% - 32px);  /* Adjusting width to fit within padding */
-  padding: 15px;
-  margin-bottom: 15px;
-  border: 1px solid #ddd;
-  border-radius: 8px;
-  box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.1);
+  width: 100%;
+  padding: 10px;
+  margin-bottom: 20px;
+  border: none;
+  border-bottom: 1px solid #000;
   font-size: 16px;
-  color: #555;
+  color: #333;
   box-sizing: border-box;
 
   &:focus {
-    border-color: #007bff;
     outline: none;
-    box-shadow: 0 0 5px rgba(0, 123, 255, 0.5);
+    border-bottom: 1px solid #000;
   }
 `;
 
 const Button = styled.button`
-  width: 100%;
-  background-color: #007bff;
+  background-color: #fdbb2d;
   color: white;
   border: none;
-  padding: 15px;
-  border-radius: 8px;
+  padding: 15px 30px;
+  border-radius: 5px;
   font-size: 16px;
   cursor: pointer;
   transition: background-color 0.3s ease;
-  box-sizing: border-box;
 
   &:hover {
-    background-color: #0056b3;
+    background-color: #ffa500;
   }
 `;
 
 const DemoForm = () => {
   return (
     <FormContainer>
-      <Title>Request For a Demo</Title>
+      <Title>Request a Demo</Title>
+      <Subtitle>Interested in seeing Zawadi in action? Request a demo now!</Subtitle>
       <Input type="text" placeholder="Name" />
       <Input type="email" placeholder="Email Address" />
       <Input type="tel" placeholder="Phone" />
       <Input type="text" placeholder="School Name" />
       <TextArea placeholder="Message" rows="4" />
-      <Button>Submit Request</Button>
+      <Button>SUBMIT REQUEST</Button>
     </FormContainer>
   );
 };

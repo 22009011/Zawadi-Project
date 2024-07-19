@@ -1,4 +1,5 @@
 import React from 'react';
+import StudentSidebar from './Sidebar.jsx';
 import {
   StudentDashboardContainer,
   Content,
@@ -13,6 +14,7 @@ import {
 const StudentDashboard = () => {
   return (
     <StudentDashboardContainer>
+      < StudentSidebar />
       <Content>
         <Section>
           <SectionTitle>Overview</SectionTitle>
@@ -23,7 +25,7 @@ const StudentDashboard = () => {
             </Card>
             <Card>
               <CardTitle>Performance</CardTitle>
-              <CardContent>500</CardContent>
+              <CardContent>500</CardContent> 
             </Card>
             <Card>
               <CardTitle>Term</CardTitle>

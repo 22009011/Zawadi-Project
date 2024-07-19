@@ -1,87 +1,129 @@
 import React from 'react';
 import styled from 'styled-components';
+import { FaPhone, FaEnvelope, FaGlobe } from 'react-icons/fa';
 
 const SectionContainer = styled.section`
   padding: 50px 20px;
-  background-color: #f9f9f9; /* Match background color of previous section */
-  border-radius: 10px;
-  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+  background-color: #fff;
   display: flex;
   justify-content: space-between;
   align-items: flex-start;
+  max-width: 1100px;
+  margin: 0 auto;
+`;
+
+const FormContainer = styled.form`
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  margin-right: 50px;
 `;
 
 const Title = styled.h2`
   font-size: 28px;
-  margin-bottom: 20px;
+  margin-bottom: 10px;
   color: #333;
+  text-align: center;
 `;
 
-const Content = styled.p`
-  font-size: 18px;
-  line-height: 1.6;
+const Subtitle = styled.p`
+  font-size: 16px;
   color: #666;
+  text-align: center;
+  margin-bottom: 30px;
 `;
 
-const FormContainer = styled.form`
-  max-width: 750px;
-  display: flex;
-  flex-wrap: wrap;
-`;
-
-const FormRow = styled.div`
-  width: 100%;
+const InputGroup = styled.div`
   display: flex;
   justify-content: space-between;
-  margin-bottom: 20px;
+  margin-bottom: 15px;
 `;
 
 const Input = styled.input`
-  flex: 1;
-  padding: 12px;
-  margin-right: 10px;
-  border: 1px solid #ccc;
-  border-radius: 5px;
+  width: 48%;
+  padding: 10px;
+  border: none;
+  border-bottom: 1px solid #000;
   font-size: 16px;
+  box-sizing: border-box;
+
+  &:focus {
+    outline: none;
+    border-bottom: 1px solid #000;
+  }
+`;
+
+const FullWidthInput = styled.input`
+  width: 100%;
+  padding: 10px;
+  margin-bottom: 15px;
+  border: none;
+  border-bottom: 1px solid #000;
+  font-size: 16px;
+  box-sizing: border-box;
+
+  &:focus {
+    outline: none;
+    border-bottom: 1px solid #000;
+  }
 `;
 
 const TextArea = styled.textarea`
-  flex: 1;
-  padding: 12px;
-  margin-right: 10px;
-  border: 1px solid #ccc;
-  border-radius: 5px;
+  width: 100%;
+  padding: 10px;
+  border: none;
+  border-bottom: 1px solid #000;
   font-size: 16px;
-  resize: vertical;
+  resize: none;
+  box-sizing: border-box;
+
+  &:focus {
+    outline: none;
+    border-bottom: 1px solid #000;
+  }
 `;
 
 const Button = styled.button`
-  background-color: orange;
+  background-color: #fdbb2d;
   color: white;
   border: none;
-  padding: 12px 20px;
+  padding: 15px 30px;
   border-radius: 5px;
+  font-size: 16px;
   cursor: pointer;
-  font-size: 18px;
+  align-self: flex-start;
   transition: background-color 0.3s ease;
 
   &:hover {
-    background-color: #f38630;
+    background-color: #ffa500;
   }
 `;
 
 const ContactInfo = styled.div`
-  max-width: 300px;
-  margin-left: 40px; /* Adjust margin to create space between form and contact info */
+  flex: 0.5;
+  padding-left: 40px;
 `;
 
 const ContactTitle = styled.h3`
   font-size: 24px;
-  margin-bottom: 10px;
+  margin-bottom: 20px;
+  color: #333;
 `;
 
 const ContactDetails = styled.div`
   font-size: 16px;
+  color: #666;
+  line-height: 2;
+
+  p {
+    margin: 0;
+    display: flex;
+    align-items: center;
+  }
+
+  svg {
+    margin-right: 10px;
+  }
 `;
 
 const GetInTouchSection = () => {
@@ -94,27 +136,22 @@ const GetInTouchSection = () => {
     <SectionContainer>
       <FormContainer onSubmit={handleSubmit}>
         <Title>Get In Touch</Title>
-        <Content>
-          Interested in learning more about our services? Feel free to contact us by filling out the form below.
-        </Content>
-        <FormRow>
-          <Input type="text" placeholder="Name" required />
-          <Input type="email" placeholder="Email Address" required />
-        </FormRow>
-        <FormRow>
-          <Input type="tel" placeholder="Phone" required />
-          <Input type="text" placeholder="School Name" required />
-        </FormRow>
-        <FormRow>
-          <TextArea placeholder="Message" rows="4" required />
-        </FormRow>
-        <Button type="submit">Submit Request</Button>
+        <Subtitle>We love to hear from you.</Subtitle>
+        <InputGroup>
+          <Input type="text" placeholder="First name" required />
+          <Input type="text" placeholder="Last name" required />
+        </InputGroup>
+        <FullWidthInput type="email" placeholder="Email address" required />
+        <TextArea placeholder="Message" rows="4" required />
+        <Button type="submit">SEND MESSAGE</Button>
       </FormContainer>
       <ContactInfo>
-        <ContactTitle>Contact Us</ContactTitle>
+        <ContactTitle>Contact Info</ContactTitle>
         <ContactDetails>
-          <p>Phone: +123456789</p>
-          <p>Email: example@example.com</p>
+          <p>5th Floor, SUS Center, Keri Rd, Madaraka</p>
+          <p><FaPhone /> 020 8000 208</p>
+          <p><FaEnvelope /> hello@kurasa.org</p>
+          <p><FaGlobe /> https://kurasa.org</p>
         </ContactDetails>
       </ContactInfo>
     </SectionContainer>

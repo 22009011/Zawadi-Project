@@ -123,7 +123,7 @@ const TeacherSidebar = () => {
         </SidebarNavItem>
         <SidebarNavItem>
           <SidebarIcon><BsChatDots /></SidebarIcon>
-          <StyledLink to="/teacher/communication">Announcement</StyledLink>
+          <StyledLink to="/teacher/announcement">Announcement</StyledLink>
         </SidebarNavItem>
         <SidebarNavItem>
           <SidebarIcon><BsGear /></SidebarIcon>
@@ -138,4 +138,4 @@ const TeacherSidebar = () => {
   );
 };
 
-export default TeacherSidebar;
+export default TeacherSidebar; 

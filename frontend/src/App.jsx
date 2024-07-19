@@ -3,7 +3,7 @@ import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-d
 import Home from '../src/components/Home/Home.jsx';
 import ChooseUser from '../src/components/ChooseUser';
 import ProtectedRoute from './auth/ProtectedRoute.jsx';
-import Register from './auth/SuperAdmin/SuperAdminRegister.jsx'
+import Register from './auth/SuperAdmin/SuperAdminRegister.jsx';
 import Login from './auth/SuperAdmin/SuperAdminSigin.jsx';
 import AdminSignIn from '../src/auth/Admin/AdminSignIn.jsx';
 import ParentSignIn from './auth/Parent/ParentSignIn.jsx';
@@ -60,11 +60,15 @@ const App = () => {
         <Route path="/admin-signin" element={<AdminSignIn />} />
         <Route path="/parent-signin" element={<ParentSignIn />} />
         <Route path="/teacher-signin" element={<TeacherSignIn />} />
+
+        
         <Route path="/admin/*" element={<ProtectedRoute roles={['admin', 'super-admin']}><AdminDashboard /></ProtectedRoute>} />
         <Route path="/teacher/*" element={<ProtectedRoute roles={['teacher', 'super-admin']}><TeacherDashboard /></ProtectedRoute>} />
         <Route path="/student/*" element={<ProtectedRoute roles={['student', 'parent']}><StudentDashboard /></ProtectedRoute>} />
         <Route path="/parent/*" element={<ProtectedRoute roles={['parent']}><ParentDashboard /></ProtectedRoute>} />
         <Route path="/super-admin/*" element={<ProtectedRoute roles={['super-admin']}><SuperAdminDashboard /></ProtectedRoute>} />
+       
+       
         <Route path="/admin/classes" element={<Layout><Classes /></Layout>} />
         <Route path="/admin/teachers" element={<Layout><Teachers /></Layout>} />
         <Route path="/admin/students" element={<Layout><Students /></Layout>} />
@@ -74,13 +78,17 @@ const App = () => {
         <Route path="/admin/reports" element={<Layout><Reports /></Layout>} />
         <Route path="/admin/settings" element={<Layout><SettingsProfile /></Layout>} />
         <Route path="/admin/all-curriculums" element={<Layout><AllCurriculums /></Layout>} />
+       
+       
         <Route path="/student/assignments" element={<Layout><StudentAssignments /></Layout>} />
         <Route path="/student/settings" element={<Layout><ProfileSection /></Layout>} />
         <Route path="/student/feedback" element={<Layout><Feedback /></Layout>} />
         <Route path="/student/grades" element={<Layout><Grades /></Layout>} />
         <Route path="/student/learning-materials" element={<Layout><LearningMaterials /></Layout>} />
         <Route path="/student/attendance" element={<Layout><Attendance /></Layout>} />
-        <Route path="/parent/communication" element={<Layout><Communication /></Layout>} />
+        <Route path="/student/communication" element={<Layout><Communication /></Layout>} />
+        
+        
         <Route path="/teacher/assignments" element={<Layout><AssignmentSection /></Layout>} />
         <Route path="/teacher/announcement" element={<Layout><CheckAnnouncementSection /></Layout>} />
         <Route path="/teacher/settings" element={<Layout><TeacherProfileSection /></Layout>} />
@@ -89,6 +97,8 @@ const App = () => {
         <Route path="/teacher/student-progress" element={<Layout><StudentProgress /></Layout>} />
         <Route path="/teacher/assessments" element={<Layout><Assessments /></Layout>} />
         <Route path="/teacher/performance" element={<Layout><Performance /></Layout>} />
+       
+       
         <Route path="/super-admin/advanced-analytics" element={<Layout><AdvancedAnalytics /></Layout>} />
         <Route path="/super-admin/integration-options" element={<Layout><IntergrationOptions /></Layout>} />
         <Route path="/super-admin/system-settings" element={<Layout><SystemSettings /></Layout>} />
