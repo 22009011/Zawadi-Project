@@ -1,4 +1,3 @@
-// models/attendanceRecordModel.js
 import { DataTypes } from 'sequelize';
 import config from '../config.js';
 import Student from './studentModel.js';
@@ -17,7 +16,7 @@ const AttendanceRecord = sequelize.define('AttendanceRecord', {
     allowNull: false,
     references: {
       model: Student,
-      key: 'student_id',
+      key: 'id',
     },
   },
   student_name: {

@@ -1,4 +1,3 @@
-// models/gradesModel.js
 import { DataTypes } from 'sequelize';
 import config from '../config.js';
 import Student from './studentModel.js';
@@ -39,7 +38,7 @@ const Grade = sequelize.define('Grade', {
     },
   },
 }, {
-  timestamps: true, // Enable Sequelize's automatic timestamps
+  timestamps: true,
 });
 
 Grade.belongsTo(School, { foreignKey: 'school_id' });

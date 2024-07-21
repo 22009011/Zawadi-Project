@@ -1,6 +1,6 @@
 // controllers/gradesController.js
 import Grade from '../models/gradesModel.js';
-import School from '../models/schoolModel.js';
+import Student from '../models/studentModel.js';
 
 // Create Grade
 export const createGrade = async (req, res) => {
@@ -11,11 +11,6 @@ export const createGrade = async (req, res) => {
   }
 
   try {
-    const school = await School.findByPk(req.school_id);
-    if (!school) {
-      return res.status(404).json({ error: 'School not found' });
-    }
-
     const newGrade = await Grade.create({
       student_id,
       subject,
@@ -32,7 +27,12 @@ export const createGrade = async (req, res) => {
 // Get All Grades
 export const getAllGrades = async (req, res) => {
   try {
-    const grades = await Grade.findAll({ where: { school_id: req.school_id } });
+    const studentId = req.query.student_id; // Extracting student_id from query parameters
+    if (!studentId) {
+      return res.status(400).json({ error: 'Student ID is required' });
+    }
+
+    const grades = await Grade.findAll({ where: { student_id: studentId, school_id: req.school_id } });
     res.json(grades);
   } catch (error) {
     res.status(500).json({ error: 'Failed to retrieve grades', details: error.message });
@@ -51,7 +51,7 @@ export const getGradeById = async (req, res) => {
       res.status(404).json({ error: 'Grade not found' });
     }
   } catch (error) {
-    res.status(500).json({ error: 'Failed to retrieve grade', details: error.message });
+    res.status500().json({ error: 'Failed to retrieve grade', details: error.message });
   }
 };
 
