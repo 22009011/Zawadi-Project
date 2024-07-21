@@ -1,6 +1,7 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import styled from 'styled-components';
 import Sidebar from './Sidebar';
+import axios from 'axios';
 
 // Styled components
 const FeedbackContainer = styled.div`
@@ -23,22 +24,40 @@ const FeedbackItem = styled.div`
 `;
 
 const Feedback = () => {
+  const [feedbacks, setFeedbacks] = useState([]);
+  const token = localStorage.getItem('token'); // Assuming token is stored in localStorage
+  const studentId = localStorage.getItem('student_id'); // Assuming student ID is stored in localStorage
+
+  useEffect(() => {
+    const fetchFeedbacks = async () => {
+      try {
+        const response = await axios.get('http://localhost:5000/api/feedbacks', {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+          params: {
+            student_id: studentId,
+          },
+        });
+        setFeedbacks(response.data);
+      } catch (error) {
+        console.error('Failed to fetch feedbacks', error);
+      }
+    };
+
+    fetchFeedbacks();
+  }, [token, studentId]);
+
   return (
     <FeedbackContainer>
       <Sidebar />
       <h2>Feedback</h2>
-      <FeedbackItem>
-        <h3>Feedback Item 1</h3>
-        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed eget elit nec lacus feugiat finibus ac sed risus.</p>
-      </FeedbackItem>
-      <FeedbackItem>
-        <h3>Feedback Item 2</h3>
-        <p>Integer feugiat erat ut risus malesuada, sit amet consequat velit interdum. Sed at magna vel elit fermentum iaculis.</p>
-      </FeedbackItem>
-      <FeedbackItem>
-        <h3>Feedback Item 3</h3>
-        <p>Nulla at ipsum sit amet ex consectetur fringilla. Phasellus a turpis ut justo convallis tempus.</p>
-      </FeedbackItem>
+      {feedbacks.map((feedback) => (
+        <FeedbackItem key={feedback.feedback_id}>
+          <h3>{feedback.title}</h3>
+          <p>{feedback.content}</p>
+        </FeedbackItem>
+      ))}
     </FeedbackContainer>
   );
 }

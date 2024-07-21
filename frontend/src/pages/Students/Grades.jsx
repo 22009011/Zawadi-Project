@@ -29,13 +29,15 @@ const Grades = () => {
   const [grades, setGrades] = useState([]); // Initialize as an empty array
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
+  const token = localStorage.getItem('token'); // Assuming token is stored in localStorage
+  const studentId = localStorage.getItem('student_id'); // Assuming student_id is stored in localStorage
 
   useEffect(() => {
     const fetchGrades = async () => {
       try {
-        const response = await axios.get('http://localhost:5000/api/grades', {
+        const response = await axios.get(`http://localhost:5000/api/grades?student_id=${studentId}`, {
           headers: {
-            'Authorization': `Bearer ${localStorage.getItem('token')}`
+            'Authorization': `Bearer ${token}`
           }
         });
         console.log('Grades data:', response.data); // Log the response data
@@ -53,7 +55,7 @@ const Grades = () => {
     };
 
     fetchGrades();
-  }, []);
+  }, [studentId, token]);
 
   return (
     <GradesContainer>

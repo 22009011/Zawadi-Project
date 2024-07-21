@@ -1,15 +1,26 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
+import axios from 'axios';
 
 const Attendance = () => {
-  // Hardcoded attendance data
-  const attendanceData = [
-    { date: '2024-05-01', status: 'Present' },
-    { date: '2024-05-02', status: 'Absent' },
-    { date: '2024-05-03', status: 'Present' },
-    { date: '2024-05-04', status: 'Present' },
-    { date: '2024-05-05', status: 'Absent' },
-    // Add more attendance entries as needed
-  ];
+  const [attendanceData, setAttendanceData] = useState([]);
+  const token = localStorage.getItem('token'); // Assuming token is stored in localStorage
+
+  useEffect(() => {
+    const fetchAttendanceData = async () => {
+      try {
+        const response = await axios.get('http://localhost:5000/api/attendance', {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        });
+        setAttendanceData(response.data);
+      } catch (error) {
+        console.error('Failed to fetch attendance data', error);
+      }
+    };
+
+    fetchAttendanceData();
+  }, [token]);
 
   return (
     <div>
@@ -17,14 +28,16 @@ const Attendance = () => {
       <table>
         <thead>
           <tr>
+            <th>Student Name</th>
             <th>Date</th>
             <th>Status</th>
           </tr>
         </thead>
         <tbody>
-          {attendanceData.map((entry, index) => (
-            <tr key={index}>
-              <td>{entry.date}</td>
+          {attendanceData.map((entry) => (
+            <tr key={entry.id}>
+              <td>{entry.student_name}</td>
+              <td>{entry.attendance_date}</td>
               <td>{entry.status}</td>
             </tr>
           ))}
