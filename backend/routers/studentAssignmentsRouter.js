@@ -1,4 +1,3 @@
-// routes/studentAssignmentsRoutes.js
 import express from 'express';
 import {
   createStudentAssignment,

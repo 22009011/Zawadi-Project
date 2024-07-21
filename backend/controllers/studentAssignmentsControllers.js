@@ -1,4 +1,3 @@
-// controllers/studentAssignmentsControllers.js
 import StudentAssignment from '../models/studentAssignmentsModel.js';
 import School from '../models/schoolModel.js';
 
@@ -50,7 +49,7 @@ export const getStudentAssignment = async (req, res) => {
       res.status(404).json({ error: 'Student assignment not found' });
     }
   } catch (error) {
-    res.status(500).json({ error: 'Failed to retrieve student assignment', details: error.message });
+    res.status (500).json({ error: 'Failed to retrieve student assignment', details: error.message });
   }
 };
 

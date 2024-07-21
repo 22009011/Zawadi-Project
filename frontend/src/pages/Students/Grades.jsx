@@ -1,5 +1,6 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import styled from 'styled-components';
+import axios from 'axios';
 import Sidebar from './Sidebar';
 
 // Styled components
@@ -25,31 +26,54 @@ const PerformanceLevel = styled.span`
 `;
 
 const Grades = () => {
+  const [grades, setGrades] = useState([]); // Initialize as an empty array
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(null);
+
+  useEffect(() => {
+    const fetchGrades = async () => {
+      try {
+        const response = await axios.get('http://localhost:5000/api/grades', {
+          headers: {
+            'Authorization': `Bearer ${localStorage.getItem('token')}`
+          }
+        });
+        console.log('Grades data:', response.data); // Log the response data
+        if (Array.isArray(response.data)) {
+          setGrades(response.data);
+        } else {
+          console.error('Unexpected response format:', response.data);
+          setError('Unexpected response format.');
+        }
+      } catch (err) {
+        setError(err.message);
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    fetchGrades();
+  }, []);
+
   return (
     <GradesContainer>
-        <Sidebar />
+      <Sidebar />
       <h2>Grades</h2>
-      <SubjectGrade>
-        <SubjectName>Mathematics</SubjectName>
-        <p><GradeLabel>Grade:</GradeLabel> 85</p>
-        <p><PerformanceLevel>Exceeds Expectations</PerformanceLevel></p>
-      </SubjectGrade>
-      <SubjectGrade>
-        <SubjectName>English</SubjectName>
-        <p><GradeLabel>Grade:</GradeLabel> 78</p>
-        <p><PerformanceLevel>Meets Expectations</PerformanceLevel></p>
-      </SubjectGrade>
-      <SubjectGrade>
-        <SubjectName>Science</SubjectName>
-        <p><GradeLabel>Grade:</GradeLabel> 65</p>
-        <p><PerformanceLevel>Average</PerformanceLevel></p>
-      </SubjectGrade>
-      <SubjectGrade>
-        <SubjectName>History</SubjectName>
-        <p><GradeLabel>Grade:</GradeLabel> 55</p>
-        <p><PerformanceLevel>Below Average</PerformanceLevel></p>
-      </SubjectGrade>
-      {/* Add more subjects with grades and performance levels as needed */}
+      {loading ? (
+        <p>Loading grades...</p>
+      ) : error ? (
+        <p>Error loading grades: {error}</p>
+      ) : grades.length > 0 ? (
+        grades.map(grade => (
+          <SubjectGrade key={grade.grade_id}>
+            <SubjectName>{grade.subject}</SubjectName>
+            <p><GradeLabel>Grade:</GradeLabel> {grade.grade}</p>
+            <p><PerformanceLevel>{grade.performance_level}</PerformanceLevel></p>
+          </SubjectGrade>
+        ))
+      ) : (
+        <p>No grades available.</p>
+      )}
     </GradesContainer>
   );
 }

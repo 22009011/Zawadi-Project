@@ -1,4 +1,3 @@
-// models/studentAssignmentsModel.js
 import { DataTypes } from 'sequelize';
 import config from '../config.js';
 import Student from './studentModel.js';
@@ -42,8 +41,8 @@ const StudentAssignment = sequelize.define('StudentAssignment', {
     },
   },
 }, {
-  tableName: 'StudentAssignments', // Ensure the correct table name here
-  timestamps: true, // Enable Sequelize's automatic timestamps
+  tableName: 'StudentAssignments',
+  timestamps: true,
 });
 
 StudentAssignment.belongsTo(School, { foreignKey: 'school_id' });

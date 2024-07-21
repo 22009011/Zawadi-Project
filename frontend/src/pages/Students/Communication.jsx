@@ -1,5 +1,8 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
+import axios from 'axios';
 import styled from 'styled-components';
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 // Styled components
 const CommunicationContainer = styled.div`
@@ -21,29 +24,27 @@ const CommunicationContent = styled.p`
   color: #666;
 `;
 
-const Communication = () => {
-  // Sample communication data
-  const [communications, setCommunications] = useState([
-    {
-      id: 1,
-      title: 'Important Notice: School Closure',
-      content: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla eget metus sed nisi sollicitudin rhoncus.',
-    },
-    {
-      id: 2,
-      title: 'Parent-Teacher Meeting Reminder',
-      content: 'Etiam id felis nec nulla consequat mollis eget nec est. Cras vulputate dolor eget quam lacinia, ut lobortis nisl tincidunt.',
-    },
-    {
-      id: 3,
-      title: 'PTA Fundraiser Event',
-      content: 'Praesent vitae odio ut odio tincidunt tincidunt nec a elit. Ut quis libero nec quam interdum gravida.',
-    },
-  ]);
+const Communication = ({ schoolId }) => {
+  const [communications, setCommunications] = useState([]);
+
+  useEffect(() => {
+    fetchCommunications();
+  }, []);
+
+  const fetchCommunications = async () => {
+    try {
+      const response = await axios.get(`http://localhost:5000/api/announcements?school_id=${schoolId}`);
+      setCommunications(response.data);
+    } catch (error) {
+      console.error('Error fetching communications:', error);
+      toast.error('Failed to fetch communications');
+    }
+  };
 
   return (
     <CommunicationContainer>
-      <h2>Communication</h2>
+      <ToastContainer />
+      <h2>Communications</h2>
       {communications.map((communication) => (
         <CommunicationItem key={communication.id}>
           <CommunicationTitle>{communication.title}</CommunicationTitle>

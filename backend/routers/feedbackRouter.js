@@ -6,13 +6,14 @@ import {
   updateFeedback,
   deleteFeedback,
 } from '../controllers/feedbackControllers.js';
+import auth from '../middleware/auth.js';
 
 const router = express.Router();
 
-router.post('/', createFeedback);
-router.get('/', getAllFeedbacks);
-router.get('/:id', getFeedbackById);
-router.put('/:id', updateFeedback);
-router.delete('/:id', deleteFeedback);
+router.post('/', auth, createFeedback);
+router.get('/', auth, getAllFeedbacks);
+router.get('/:id', auth, getFeedbackById);
+router.put('/:id', auth, updateFeedback);
+router.delete('/:id', auth, deleteFeedback);
 
 export default router;

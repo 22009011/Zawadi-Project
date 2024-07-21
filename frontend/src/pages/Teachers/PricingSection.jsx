@@ -1,20 +1,5 @@
 import React from 'react';
 import styled from 'styled-components';
-import {
-  SectionContainer,
-  Header,
-  Title,
-  Subtitle,
-  PlansContainer,
-  PlanCard,
-  PlanTitle,
-  PlanPrice,
-  PlanFeatures,
-  Footer,
-  SupportContact,
-  Website
-} 
-from '../../styles/PricingSectionStyles'
 
 const PricingSection = () => {
   return (
