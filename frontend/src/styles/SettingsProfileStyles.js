@@ -1,12 +1,13 @@
-// SettingsProfileStyles.js
 import styled from 'styled-components';
 
 export const ProfileContainer = styled.div`
   display: flex;
+  background-color: #f8f9fa;
+  min-height: 100vh;
 `;
 
 export const SidebarContainer = styled.div`
-  flex: 0 0 250px; 
+  flex: 0 0 250px;
 `;
 
 export const Content = styled.div`
@@ -51,3 +52,14 @@ export const Label = styled.span`
 export const Value = styled.span`
   margin-left: 10px;
 `;
+
+export const LogoutButton = styled.button`
+  padding: 10px 20px;
+  background-color: #dc3545;
+  color: #fff;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  margin-top: 20px;
+`;
+

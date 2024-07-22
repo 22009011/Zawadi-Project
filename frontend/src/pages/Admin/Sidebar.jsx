@@ -62,7 +62,7 @@ const SidebarIcon = styled.div`
 `;
 
 const Logo = styled.img`
-  width: 50px;
+  width: 200px;
   height: auto;
 `;
 

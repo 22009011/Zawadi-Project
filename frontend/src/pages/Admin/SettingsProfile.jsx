@@ -1,6 +1,7 @@
-// SettingsProfile.js
-import React from 'react';
+import React, { useEffect, useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import Sidebar from './Sidebar';
+import { FaSignOutAlt } from 'react-icons/fa'; // Importing the logout icon
 import {
   ProfileContainer,
   SidebarContainer,
@@ -10,15 +11,35 @@ import {
   ProfileLabel,
   ProfileInfo,
   EditButton,
+  LogoutButton,
 } from '../../styles/SettingsProfileStyles'; // Import styled components from SettingsProfileStyles.js
 
 const SettingsProfile = () => {
-  const teacherInfo = {
-    name: 'John Doe',
-    email: 'johndoe@example.com',
-    phone: '123-456-7890',
-    address: '123 Main St, City, Country',
-    qualification: 'Master of Education',
+  const [adminInfo, setAdminInfo] = useState({});
+  const [error, setError] = useState('');
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    const token = localStorage.getItem('token');
+    
+    if (!token) {
+      navigate('/admin/signin'); // Redirect if no token is found
+    }
+
+    fetch('http://localhost:5000/api/users/admin/profile', {
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    })
+    .then(response => response.json())
+    .then(data => setAdminInfo(data))
+    .catch(error => setError('Failed to fetch profile details'));
+  }, [navigate]);
+
+  const handleLogout = () => {
+    localStorage.removeItem('token'); // Clear token from localStorage
+    localStorage.removeItem('role'); // Clear role from localStorage
+    navigate('/admin/signin'); // Redirect to sign-in page
   };
 
   return (
@@ -28,19 +49,21 @@ const SettingsProfile = () => {
       </SidebarContainer>
       <Content>
         <ProfileHeader>Profile Details</ProfileHeader>
+        {error && <div style={{ color: 'red' }}>{error}</div>}
         <ProfileDetails>
           <ProfileLabel>Name:</ProfileLabel>
-          <ProfileInfo>{teacherInfo.name}</ProfileInfo>
+          <ProfileInfo>{adminInfo.username}</ProfileInfo>
           <ProfileLabel>Email:</ProfileLabel>
-          <ProfileInfo>{teacherInfo.email}</ProfileInfo>
-          <ProfileLabel>Phone:</ProfileLabel>
-          <ProfileInfo>{teacherInfo.phone}</ProfileInfo>
-          <ProfileLabel>Address:</ProfileLabel>
-          <ProfileInfo>{teacherInfo.address}</ProfileInfo>
-          <ProfileLabel>Qualification:</ProfileLabel>
-          <ProfileInfo>{teacherInfo.qualification}</ProfileInfo>
+          <ProfileInfo>{adminInfo.email}</ProfileInfo>
+          <ProfileLabel>Role:</ProfileLabel>
+          <ProfileInfo>{adminInfo.role}</ProfileInfo>
+          <ProfileLabel>School Name:</ProfileLabel>
+          <ProfileInfo>{adminInfo.schoolName}</ProfileInfo>
         </ProfileDetails>
         <EditButton>Edit Profile</EditButton>
+        <LogoutButton onClick={handleLogout}>
+          <FaSignOutAlt /> Logout
+        </LogoutButton>
       </Content>
     </ProfileContainer>
   );
