@@ -2,8 +2,17 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import TeacherSidebar from './Sidebar';
-import { AttendanceContainer, Content, AttendanceContent, AttendanceHeader, AttendanceList, AttendanceItem, StudentName, 
-  CheckboxLabel, Divider, SubmitButton } from '../../styles/AttendanceStyles'; 
+import { 
+  AttendanceContainer, 
+  Content, 
+  AttendanceContent, 
+  AttendanceHeader, 
+  AttendanceList, 
+  AttendanceItem, 
+  StudentName, 
+  StatusButton, 
+  SubmitButton 
+} from '../../styles/AttendanceStyles'; 
 
 const CheckAttendanceSection = () => {
   const [students, setStudents] = useState([]);
@@ -44,7 +53,6 @@ const CheckAttendanceSection = () => {
 
   const handleSubmit = async () => {
     try {
-      // Send attendance data to the database
       const formattedData = attendanceData.map(({ id, name, status }) => ({ studentId: id, name, status }));
       const response = await axios.post('http://localhost:5000/api/attendance', { attendanceData: formattedData });
       console.log('Attendance data submitted:', response.data);
@@ -61,36 +69,29 @@ const CheckAttendanceSection = () => {
           <AttendanceHeader>Attendance</AttendanceHeader>
           <AttendanceList>
             {students.map((student, index) => (
-              <React.Fragment key={student.id}>
-                <AttendanceItem>
-                  <StudentName>{student.name}</StudentName>
-                  <CheckboxLabel>
-                    <input
-                      type="checkbox"
-                      checked={attendanceData[index]?.status === 'Present'}
-                      onChange={() => handleStatusChange(student.id, 'Present')}
-                    />
+              <AttendanceItem key={student.id}>
+                <StudentName>{student.name}</StudentName>
+                <div>
+                  <StatusButton 
+                    selected={attendanceData[index]?.status === 'Present'} 
+                    onClick={() => handleStatusChange(student.id, 'Present')}
+                  >
                     Present
-                  </CheckboxLabel>
-                  <CheckboxLabel>
-                    <input
-                      type="checkbox"
-                      checked={attendanceData[index]?.status === 'Absent'}
-                      onChange={() => handleStatusChange(student.id, 'Absent')}
-                    />
+                  </StatusButton>
+                  <StatusButton 
+                    selected={attendanceData[index]?.status === 'Absent'} 
+                    onClick={() => handleStatusChange(student.id, 'Absent')}
+                  >
                     Absent
-                  </CheckboxLabel>
-                  <CheckboxLabel>
-                    <input
-                      type="checkbox"
-                      checked={attendanceData[index]?.status === 'Absent with apology'}
-                      onChange={() => handleStatusChange(student.id, 'Absent with apology')}
-                    />
+                  </StatusButton>
+                  <StatusButton 
+                    selected={attendanceData[index]?.status === 'Absent with apology'} 
+                    onClick={() => handleStatusChange(student.id, 'Absent with apology')}
+                  >
                     Absent with apology
-                  </CheckboxLabel>
-                </AttendanceItem>
-                {index !== students.length - 1 && <Divider />}
-              </React.Fragment>
+                  </StatusButton>
+                </div>
+              </AttendanceItem>
             ))}
           </AttendanceList>
           <SubmitButton onClick={handleSubmit}>Submit</SubmitButton>

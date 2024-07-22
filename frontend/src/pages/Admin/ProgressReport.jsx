@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import styled from 'styled-components';
 
 const Table = styled.table`
@@ -19,18 +19,37 @@ const Td = styled.td`
     padding: 8px;
 `;
 
-const ProgressReport = () => {
-    const progressData = [
-        { studentId: 1, name: 'John Doe', grade: 'A', completion: '80%', remarks: 'Excellent progress' },
-        { studentId: 2, name: 'Jane Smith', grade: 'B', completion: '65%', remarks: 'Good progress' },
-        { studentId: 3, name: 'Alice Johnson', grade: 'C', completion: '50%', remarks: 'Average progress' },
-        { studentId: 4, name: 'Bob Brown', grade: 'B', completion: '75%', remarks: 'Good progress' },
-        { studentId: 5, name: 'Emily Davis', grade: 'A', completion: '90%', remarks: 'Excellent progress' },
-    ];
+const Error = styled.div`
+    color: red;
+    margin-bottom: 20px;
+`;
+
+const ProgressReport = ({ section, token }) => {
+    const [progressReports, setProgressReports] = useState([]);
+    const [error, setError] = useState('');
+
+    useEffect(() => {
+        fetch(`http://localhost:5000/api/progress?section=${section}`, {
+            headers: {
+                Authorization: `Bearer ${token}`,
+            },
+        })
+        .then(response => response.json())
+        .then(data => {
+            console.log('Fetched data:', data); // Log data to check format
+            if (Array.isArray(data)) {
+                setProgressReports(data);
+            } else {
+                setError('Unexpected data format');
+            }
+        })
+        .catch(() => setError('Failed to fetch progress reports'));
+    }, [section, token]);
 
     return (
         <div>
             <h2>Progress Report</h2>
+            {error && <Error>{error}</Error>}
             <Table>
                 <thead>
                     <tr>
@@ -42,15 +61,21 @@ const ProgressReport = () => {
                     </tr>
                 </thead>
                 <tbody>
-                    {progressData.map((data, index) => (
-                        <tr key={index}>
-                            <Td>{data.studentId}</Td>
-                            <Td>{data.name}</Td>
-                            <Td>{data.grade}</Td>
-                            <Td>{data.completion}</Td>
-                            <Td>{data.remarks}</Td>
+                    {progressReports.length > 0 ? (
+                        progressReports.map((report, index) => (
+                            <tr key={index}>
+                                <Td>{report.studentId}</Td>
+                                <Td>{report.name}</Td>
+                                <Td>{report.grade}</Td>
+                                <Td>{report.completion}</Td>
+                                <Td>{report.remarks}</Td>
+                            </tr>
+                        ))
+                    ) : (
+                        <tr>
+                            <Td colSpan="5">No progress reports available</Td>
                         </tr>
-                    ))}
+                    )}
                 </tbody>
             </Table>
         </div>

@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import styled from 'styled-components';
 
 const Table = styled.table`
@@ -19,18 +19,40 @@ const Td = styled.td`
     padding: 8px;
 `;
 
-const StudentPerformanceReport = () => {
-    const studentReports = [
-        { studentId: 1, name: 'John Doe', grade: 'A', attendance: 'Present', averageScore: 85 },
-        { studentId: 2, name: 'Jane Smith', grade: 'B', attendance: 'Absent', averageScore: 75 },
-        { studentId: 3, name: 'Alice Johnson', grade: 'C', attendance: 'Present', averageScore: 70 },
-        { studentId: 4, name: 'Bob Brown', grade: 'B', attendance: 'Present', averageScore: 78 },
-        { studentId: 5, name: 'Emily Davis', grade: 'A', attendance: 'Absent', averageScore: 92 },
-    ];
+const Error = styled.div`
+    color: red;
+    margin-bottom: 20px;
+`;
+
+const StudentPerformanceReport = ({ section, token }) => {
+    const [studentReports, setStudentReports] = useState([]);
+    const [error, setError] = useState('');
+
+    useEffect(() => {
+        const fetchStudentReports = async () => {
+            try {
+                const response = await fetch(`http://localhost:5000/api/performances?section=${section}`, {
+                    headers: {
+                        Authorization: `Bearer ${token}`,
+                    },
+                });
+                if (!response.ok) {
+                    throw new Error('Network response was not ok');
+                }
+                const data = await response.json();
+                setStudentReports(data);
+            } catch (error) {
+                setError('Failed to fetch student performance reports');
+            }
+        };
+
+        fetchStudentReports();
+    }, [section, token]);
 
     return (
         <div>
             <h2>Student Performance Report</h2>
+            {error && <Error>{error}</Error>}
             <Table>
                 <thead>
                     <tr>
@@ -42,15 +64,21 @@ const StudentPerformanceReport = () => {
                     </tr>
                 </thead>
                 <tbody>
-                    {studentReports.map((report, index) => (
-                        <tr key={index}>
-                            <Td>{report.studentId}</Td>
-                            <Td>{report.name}</Td>
-                            <Td>{report.grade}</Td>
-                            <Td>{report.attendance}</Td>
-                            <Td>{report.averageScore}</Td>
+                    {studentReports.length > 0 ? (
+                        studentReports.map((report) => (
+                            <tr key={report.studentId}>
+                                <Td>{report.studentId}</Td>
+                                <Td>{report.name}</Td>
+                                <Td>{report.grade}</Td>
+                                <Td>{report.attendance}</Td>
+                                <Td>{report.averageScore}</Td>
+                            </tr>
+                        ))
+                    ) : (
+                        <tr>
+                            <Td colSpan="5">No student performance reports available</Td>
                         </tr>
-                    ))}
+                    )}
                 </tbody>
             </Table>
         </div>

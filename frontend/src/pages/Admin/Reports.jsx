@@ -6,7 +6,6 @@ import AssessmentReport from './AssessmentReport';
 import ProgressReport from './ProgressReport';
 import Sidebar from './Sidebar';
 
-// Styled components
 const Container = styled.div`
     display: flex;
 `;
@@ -37,7 +36,6 @@ const Button = styled.button`
     }
 `;
 
-// Styled components for individual reports
 const ReportContainer = styled.div`
     margin-bottom: 20px;
     border: 1px solid #ccc;

@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import styled from 'styled-components';
 
 const Table = styled.table`
@@ -19,19 +19,42 @@ const Td = styled.td`
     padding: 8px;
 `;
 
-const AttendanceReport = () => {
-    const attendanceRecords = [
-        { studentId: 1, name: 'John Doe', date: '2024-05-10', status: 'Present' },
-        { studentId: 2, name: 'Jane Smith', date: '2024-05-10', status: 'Absent' },
-        { studentId: 3, name: 'Alice Johnson', date: '2024-05-10', status: 'Present' },
-        { studentId: 1, name: 'John Doe', date: '2024-05-15', status: 'Present' },
-        { studentId: 2, name: 'Jane Smith', date: '2024-05-15', status: 'Present' },
-        { studentId: 3, name: 'Alice Johnson', date: '2024-05-15', status: 'Absent' },
-    ];
+const Error = styled.div`
+    color: red;
+    margin-bottom: 20px;
+`;
+
+const AttendanceReport = ({ section, token }) => {
+    const [attendanceRecords, setAttendanceRecords] = useState([]);
+    const [error, setError] = useState('');
+
+    useEffect(() => {
+        fetch(`http://localhost:5000/api/attendance-records?section=${section}`, {
+            headers: {
+                Authorization: `Bearer ${token}`,
+            },
+        })
+        .then(response => {
+            if (!response.ok) {
+                throw new Error('Failed to fetch attendance records');
+            }
+            return response.json();
+        })
+        .then(data => {
+            // Ensure data is an array
+            if (Array.isArray(data)) {
+                setAttendanceRecords(data);
+            } else {
+                throw new Error('Invalid data format');
+            }
+        })
+        .catch(error => setError(error.message));
+    }, [section, token]);
 
     return (
         <div>
             <h2>Attendance Report</h2>
+            {error && <Error>{error}</Error>}
             <Table>
                 <thead>
                     <tr>
@@ -42,14 +65,20 @@ const AttendanceReport = () => {
                     </tr>
                 </thead>
                 <tbody>
-                    {attendanceRecords.map((record, index) => (
-                        <tr key={index}>
-                            <Td>{record.studentId}</Td>
-                            <Td>{record.name}</Td>
-                            <Td>{record.date}</Td>
-                            <Td>{record.status}</Td>
+                    {attendanceRecords.length > 0 ? (
+                        attendanceRecords.map((record, index) => (
+                            <tr key={index}>
+                                <Td>{record.studentId}</Td>
+                                <Td>{record.name}</Td>
+                                <Td>{record.date}</Td>
+                                <Td>{record.status}</Td>
+                            </tr>
+                        )) 
+                    ) : (
+                        <tr>
+                            <Td colSpan="4">No records found</Td>
                         </tr>
-                    ))}
+                    )}
                 </tbody>
             </Table>
         </div>

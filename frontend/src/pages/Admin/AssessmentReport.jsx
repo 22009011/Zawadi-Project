@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import styled from 'styled-components';
 
 const Table = styled.table`
@@ -19,16 +19,40 @@ const Td = styled.td`
     padding: 8px;
 `;
 
-const AssessmentReport = () => {
-    const assessmentReports = [
-        { assessmentId: 1, name: 'Midterm Exam', date: '2024-05-10', score: 85 },
-        { assessmentId: 2, name: 'Quiz 1', date: '2024-05-15', score: 70 },
-        { assessmentId: 3, name: 'Final Project', date: '2024-05-25', score: 92 },
-    ];
+const Error = styled.div`
+    color: red;
+    margin-bottom: 20px;
+`;
+
+const AssessmentReport = ({ section, token }) => {
+    const [assessmentReports, setAssessmentReports] = useState([]);
+    const [error, setError] = useState('');
+
+    useEffect(() => {
+        const fetchAssessmentReports = async () => {
+            try {
+                const response = await fetch(`http://localhost:5000/api/assessment-reports?section=${section}`, {
+                    headers: {
+                        Authorization: `Bearer ${token}`,
+                    },
+                });
+                if (!response.ok) {
+                    throw new Error('Network response was not ok');
+                }
+                const data = await response.json();
+                setAssessmentReports(data);
+            } catch (error) {
+                setError('Failed to fetch assessment reports');
+            }
+        };
+
+        fetchAssessmentReports();
+    }, [section, token]);
 
     return (
         <div>
             <h2>Assessment Report</h2>
+            {error && <Error>{error}</Error>}
             <Table>
                 <thead>
                     <tr>
@@ -39,14 +63,20 @@ const AssessmentReport = () => {
                     </tr>
                 </thead>
                 <tbody>
-                    {assessmentReports.map((report, index) => (
-                        <tr key={index}>
-                            <Td>{report.assessmentId}</Td>
-                            <Td>{report.name}</Td>
-                            <Td>{report.date}</Td>
-                            <Td>{report.score}</Td>
+                    {assessmentReports.length > 0 ? (
+                        assessmentReports.map((report) => (
+                            <tr key={report.assessmentId}>
+                                <Td>{report.assessmentId}</Td>
+                                <Td>{report.name}</Td>
+                                <Td>{report.date}</Td>
+                                <Td>{report.score}</Td>
+                            </tr>
+                        ))
+                    ) : (
+                        <tr>
+                            <Td colSpan="4">No assessment reports available</Td>
                         </tr>
-                    ))}
+                    )}
                 </tbody>
             </Table>
         </div>
