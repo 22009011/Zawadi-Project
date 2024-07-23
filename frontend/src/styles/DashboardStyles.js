@@ -1,50 +1,5 @@
+// styles/DashboardStyles.js
 import styled from 'styled-components';
-
-export const AdminDashboardContainer = styled.div`
-  display: flex;
-  flex-direction: column;
-  background-color: #f5f5f5; /* Light gray background */
-  padding: 20px;
-  min-height: 100vh;
-  margin-left: 250px; /* Adjust based on sidebar width */
-`;
-
-export const Content = styled.div`
-  flex: 1;
-`;
-
-export const Section = styled.section`
-  margin-bottom: 30px;
-`;
-
-export const SectionTitle = styled.h2`
-  font-size: 24px;
-  margin-bottom: 10px;
-`;
-
-export const CardContainer = styled.div`
-  display: flex;
-  flex-wrap: wrap;
-  gap: 20px;
-`;
-
-export const Card = styled.div`
-  flex: 1;
-  min-width: 200px;
-  background-color: #ffffff; /* White background */
-  padding: 20px;
-  border-radius: 8px;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-`;
-
-export const CardTitle = styled.h3`
-  font-size: 20px;
-  margin-bottom: 10px;
-`;
-
-export const CardContent = styled.div`
-  font-size: 18px;
-`;
 
 export const DashboardContainer = styled.div`
   display: flex;
@@ -53,8 +8,8 @@ export const DashboardContainer = styled.div`
 
 export const Sidebar = styled.div`
   width: 250px;
-  background-color: #ffffff; /* Updated color */
-  border-right: 1px solid #e0e0e0; /* Light gray border */
+  background-color: #ffffff;
+  border-right: 1px solid #e0e0e0;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -64,7 +19,7 @@ export const Sidebar = styled.div`
 export const Logo = styled.div`
   margin-bottom: 20px;
   img {
-    width: 150px; /* Increased size */
+    width: 150px;
   }
 `;
 
@@ -77,8 +32,8 @@ export const NavLink = styled.div`
   width: 100%;
   padding: 15px;
   text-align: left;
-  color: ${(props) => (props.active ? '#1d72b8' : '#000000')}; /* Updated active color */
-  background-color: ${(props) => (props.active ? '#e6f4ff' : '#ffffff')}; /* Updated active background color */
+  color: ${(props) => (props.active ? '#1d72b8' : '#000000')};
+  background-color: ${(props) => (props.active ? '#e6f4ff' : '#ffffff')};
   border-radius: 8px;
   margin-bottom: 10px;
   cursor: pointer;
@@ -93,9 +48,9 @@ export const TopBar = styled.div`
   justify-content: space-between;
   align-items: center;
   padding: 20px;
-  background-color: #ffffff; /* White background */
+  background-color: #ffffff;
   border-bottom: 1px solid #e0e0e0;
-  width: calc(100% - 250px); /* Adjust width according to sidebar */
+  width: calc(100% - 250px);
   position: fixed;
   top: 0;
   left: 250px;
@@ -122,17 +77,155 @@ export const Icons = styled.div`
 export const DashboardContent = styled.div`
   background-color: #f7f8fc;
   padding: 20px;
-  margin-left: 250px; /* Adjust according to sidebar */
-  padding-top: 80px; /* Adjust according to top bar */
+  margin-left: 250px;
+  padding-top: 80px;
   min-height: 100vh;
 `;
 
 export const StudentDashboardContainer = styled.div`
   display: flex;
   flex-direction: column;
+  background-color: #f5f5f5;
+  padding: 20px;
+  min-height: 100vh;
+  margin-left: 250px;
 `;
 
 export const TeacherDashboardContainer = styled.div`
   display: flex;
   flex-direction: column;
+  background-color: #f5f5f5;
+  padding: 20px;
+  min-height: 100vh;
+  margin-left: 250px;
+`;
+
+export const AdminDashboardContainer = styled.div`
+  display: flex;
+  flex-direction: column;
+  padding: 20px;
+  background-color: #f8f9fa;
+`;
+
+export const Content = styled.div`
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+`;
+
+export const OverviewSection = styled.div`
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+`;
+
+export const HorizontalContainer = styled.div`
+  display: flex;
+  gap: 20px;
+`;
+
+export const Section = styled.div`
+  background: white;
+  padding: 20px;
+  border-radius: 10px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+`;
+
+export const HalfWidthSection = styled(Section)`
+  flex: 1;
+`;
+
+export const SectionTitle = styled.h2`
+  margin-bottom: 20px;
+`;
+
+export const CardContainer = styled.div`
+  display: flex;
+  gap: 20px;
+`;
+
+export const Card = styled.div`
+  flex: 1;
+  background: #fff;
+  padding: 20px;
+  border-radius: 10px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  text-align: center;
+`;
+
+export const CardTitle = styled.h3`
+  margin-bottom: 10px;
+`;
+
+export const CardContent = styled.div`
+  font-size: 24px;
+  font-weight: bold;
+`;
+
+export const CalendarSection = styled.div`
+  background: #fff;
+  padding: 20px;
+  border-radius: 10px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  text-align: center;
+`;
+
+export const CalendarTitle = styled.h3`
+  margin-bottom: 20px;
+`;
+
+export const Calendar = styled.div`
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  gap: 5px;
+`;
+
+export const CalendarDay = styled.div`
+  padding: 10px;
+  background: #007bff;
+  color: white;
+  border-radius: 5px;
+  text-align: center;
+  &:hover {
+    background-color: #0056b3;
+  }
+`;
+
+export const TeacherDetails = styled.div`
+  margin-top: 20px;
+  background: #fff;
+  padding: 20px;
+  border-radius: 10px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  width: 100%;
+`;
+
+export const TeacherTable = styled.table`
+  width: 100%;
+  border-collapse: collapse;
+`;
+
+export const TeacherTh = styled.th`
+  background-color: #f2f2f2;
+  border: 1px solid #ddd;
+  padding: 8px;
+  text-align: left;
+`;
+
+export const TeacherTd = styled.td`
+  border: 1px solid #ddd;
+  padding: 8px;
+`;
+
+export const PerformanceSection = styled.div`
+  margin-top: 20px;
+  background: #fff;
+  padding: 20px;
+  border-radius: 10px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+`;
+
+export const ChartContainer = styled.div`
+  position: relative;
+  height: 300px;
 `;
