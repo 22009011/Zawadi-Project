@@ -1,10 +1,10 @@
-// controllers/teacherControllers.js
+// controllers/teachersControllers.js
 import Teacher from '../models/teachersModel.js';
 import School from '../models/schoolModel.js';
 
 // Create Teacher
 export const createTeacher = async (req, res) => {
-  const { name, email, phone, address, qualification } = req.body;
+  const { name, email, phone, address, qualification, subject, experience, performance } = req.body;
 
   if (!name || !email) {
     return res.status(400).json({ error: 'Name and email are required fields' });
@@ -22,6 +22,9 @@ export const createTeacher = async (req, res) => {
       phone,
       address,
       qualification,
+      subject,
+      experience,
+      performance,
       school_id: req.school_id,
     });
     res.status(201).json(newTeacher);
@@ -61,7 +64,7 @@ export const getTeacherById = async (req, res) => {
 // Update Teacher
 export const updateTeacher = async (req, res) => {
   const { id } = req.params;
-  const { name, email, phone, address, qualification } = req.body;
+  const { name, email, phone, address, qualification, subject, experience, performance } = req.body;
 
   try {
     const existingTeacher = await Teacher.findOne({
@@ -74,6 +77,9 @@ export const updateTeacher = async (req, res) => {
         phone,
         address,
         qualification,
+        subject,
+        experience,
+        performance,
       });
       res.json({ message: 'Teacher updated successfully' });
     } else {
@@ -99,6 +105,6 @@ export const deleteTeacher = async (req, res) => {
       res.status(404).json({ error: 'Teacher not found' });
     }
   } catch (error) {
-    res.status (500).json({ error: 'Failed to delete teacher data', details: error.message });
+    res.status(500).json({ error: 'Failed to delete teacher data', details: error.message });
   }
 };

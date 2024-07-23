@@ -4,7 +4,6 @@ import AttendanceReport from './AttendanceReport';
 import StudentPerformanceReport from './StudentPerformanceReport';
 import AssessmentReport from './AssessmentReport';
 import ProgressReport from './ProgressReport';
-import Sidebar from './Sidebar';
 
 const Container = styled.div`
     display: flex;
@@ -64,7 +63,6 @@ const Reports = () => {
 
     return (
         <Container>
-            <Sidebar />
             <Content>
                 <Title>Individual Reports</Title>
                 <ButtonGroup>

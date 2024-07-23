@@ -26,7 +26,7 @@ import {
 import Analytics from './Analytics';
 import Teachers from './Teachers'
 import { fetchTeacherData } from './teacherData';
-
+import AdminSidebar from './Sidebar.jsx';
 const AdminDashboard = () => {
   const [announcements, setAnnouncements] = useState([]);
   const [teachers, setTeachers] = useState([]);
@@ -47,6 +47,7 @@ const AdminDashboard = () => {
 
   return (
     <AdminDashboardContainer>
+      <AdminSidebar />
       <Content>
         <OverviewSection>
           <SectionTitle>Overview</SectionTitle>

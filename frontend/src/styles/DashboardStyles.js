@@ -229,3 +229,89 @@ export const ChartContainer = styled.div`
   position: relative;
   height: 300px;
 `;
+
+// Additional styles for the AddTeacherForm
+export const AddTeacherForm = styled.form`
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  margin-bottom: 20px;
+`;
+
+export const AddTeacherInput = styled.input`
+  padding: 10px;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+`;
+
+export const AddTeacherButton = styled.button`
+  padding: 10px;
+  border: none;
+  background-color: #007bff;
+  color: white;
+  border-radius: 5px;
+  cursor: pointer;
+  &:hover {
+    background-color: #0056b3;
+  }
+`;
+
+
+
+export const TeachersContainer = styled.div`
+  padding: 20px;
+  background-color: #f9f9f9;
+`;
+
+export const TeacherCard = styled.div`
+  background-color: #ffffff;
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  padding: 16px;
+  margin-bottom: 20px;
+  display: flex;
+  align-items: center;
+`;
+
+export const TeacherInfo = styled.div`
+  margin-left: 16px;
+`;
+
+export const TeacherName = styled.h3`
+  margin: 0;
+  font-size: 18px;
+`;
+
+export const TeacherSubject = styled.p`
+  margin: 0;
+  font-size: 14px;
+  color: #666;
+`;
+
+export const IconContainer = styled.div`
+  margin-left: auto;
+  display: flex;
+  gap: 10px;
+`;
+
+export const EditIcon = styled.div`
+  color: #3498db;
+  cursor: pointer;
+`;
+
+export const DeleteIcon = styled.div`
+  color: #e74c3c;
+  cursor: pointer;
+`;
+
+export const TeachersContent = styled.div`
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+`;
+
+export const TeachersHeader = styled.div`
+  font-size: 24px;
+  font-weight: bold;
+  margin-bottom: 20px;
+`;

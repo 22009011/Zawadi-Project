@@ -32,6 +32,15 @@ const Teacher = sequelize.define('Teacher', {
   qualification: {
     type: DataTypes.STRING(255),
   },
+  subject: {
+    type: DataTypes.STRING(255),
+  },
+  experience: {
+    type: DataTypes.STRING(255),
+  },
+  performance: {
+    type: DataTypes.STRING(255),
+  },
   school_id: {
     type: DataTypes.INTEGER,
     allowNull: false,
