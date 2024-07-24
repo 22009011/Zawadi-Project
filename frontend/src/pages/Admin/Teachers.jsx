@@ -1,6 +1,5 @@
 // Teachers.js
 import React, { useState, useEffect } from 'react';
-import Sidebar from './Sidebar';
 import axios from 'axios';
 import {
   TeachersContainer,
@@ -49,7 +48,7 @@ const Teachers = () => {
 
   return (
     <TeachersContainer>
-      <Sidebar />
+     
       <Content>
         <TeachersContent>
           <TeachersHeader>Teachers</TeachersHeader>

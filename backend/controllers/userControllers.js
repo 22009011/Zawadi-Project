@@ -162,4 +162,50 @@ export const getAdminProfile = async (req, res) => {
   }
 };
 
+// Add these functions
+export const getTeacherProfile = async (req, res) => {
+  const { userId } = req.user;
 
+  try {
+    const user = await User.findByPk(userId, {
+      include: [{ model: School, attributes: ['name'] }]
+    });
+
+    if (!user) {
+      return res.status(404).json({ error: 'User not found' });
+    }
+
+    res.status(200).json({
+      username: user.username,
+      email: user.email,
+      role: user.role,
+      schoolName: user.School ? user.School.name : 'No School Assigned'
+    });
+  } catch (error) {
+    res.status(500).json({ error: 'Failed to fetch profile details', details: error.message });
+  }
+};
+
+// Fetch Parent Profile
+export const getParentProfile = async (req, res) => {
+  const { userId } = req.user;
+
+  try {
+    const user = await User.findByPk(userId, {
+      include: [{ model: School, attributes: ['name'] }]
+    });
+
+    if (!user) {
+      return res.status(404).json({ error: 'User not found' });
+    }
+
+    res.status(200).json({
+      username: user.username,
+      email: user.email,
+      role: user.role,
+      schoolName: user.School ? user.School.name : 'No School Assigned'
+    });
+  } catch (error) {
+    res.status(500).json({ error: 'Failed to fetch profile details', details: error.message });
+  }
+};
