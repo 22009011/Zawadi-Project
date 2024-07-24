@@ -1,3 +1,4 @@
+// Sidebar.js
 import React, { useState } from 'react';
 import styled from 'styled-components';
 import { Link, useLocation } from 'react-router-dom';
@@ -101,12 +102,13 @@ const CloseButton = styled.div`
   }
 `;
 
-const SuperAdminSidebar = () => {
+const SuperAdminSidebar = ({ onToggle }) => {
   const [isOpen, setIsOpen] = useState(false);
   const location = useLocation();
 
   const toggleSidebar = () => {
     setIsOpen(!isOpen);
+    onToggle(!isOpen);
   };
 
   return (

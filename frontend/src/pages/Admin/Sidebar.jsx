@@ -8,25 +8,35 @@ const SidebarContainer = styled.div`
   position: fixed;
   top: 0;
   left: 0;
-  width: ${({ isOpen }) => (isOpen ? '250px' : '0')};
+  width: ${({ isOpen }) => (isOpen ? '250px' : '80px')};
   height: 100%;
-  background-color: #ffffff; /* Change to white background */
-  color: #000; /* Change to black text color */
+  background-color: #ffffff; /* White background */
+  color: #000; /* Black text color */
   overflow-y: auto;
   padding-top: 60px;
   transition: width 0.3s ease;
   z-index: 100;
   border-right: 1px solid #e0e0e0; /* Light gray border */
-  @media (min-width: 769px) {
-    width: ${({ isOpen }) => (isOpen ? '250px' : '80px')};
+  @media (max-width: 768px) {
+    width: ${({ isOpen }) => (isOpen ? '250px' : '0')};
   }
 `;
 
 const SidebarHeader = styled.div`
+  display: flex;
+  justify-content: center;
+  align-items: center;
   padding: 20px;
-  font-size: 24px;
-  font-weight: bold;
-  text-align: center;
+  transition: width 0.3s ease;
+  @media (max-width: 768px) {
+    display: ${({ isOpen }) => (isOpen ? 'flex' : 'none')};
+  }
+`;
+
+const Logo = styled.img`
+  width: ${({ isOpen }) => (isOpen ? '200px' : '50px')};
+  height: auto;
+  transition: width 0.3s ease;
 `;
 
 const SidebarNav = styled.ul`
@@ -51,19 +61,14 @@ const StyledLink = styled(Link)`
   color: ${({ selected }) => (selected ? '#3498db' : '#000')}; /* Light blue for selected, black for others */
   margin-left: 10px;
   display: ${({ isOpen }) => (isOpen ? 'block' : 'none')};
-  @media (min-width: 769px) {
-    display: ${({ isOpen }) => (isOpen ? 'inline' : 'none')};
+  @media (max-width: 768px) {
+    display: ${({ isOpen }) => (isOpen ? 'block' : 'none')};
   }
 `;
 
 const SidebarIcon = styled.div`
   margin-right: 10px;
   color: ${({ selected }) => (selected ? '#3498db' : '#000')}; /* Light blue for selected, black for others */
-`;
-
-const Logo = styled.img`
-  width: 200px;
-  height: auto;
 `;
 
 const ToggleButton = styled.div`
@@ -79,6 +84,7 @@ const ToggleButton = styled.div`
   align-items: center;
   justify-content: center;
   z-index: 101;
+  transition: left 0.3s ease;
   @media (max-width: 768px) {
     left: 10px;
   }
@@ -118,8 +124,8 @@ const AdminSidebar = () => {
         <ToggleIcon isOpen={isOpen}>▲</ToggleIcon>
       </ToggleButton>
       <SidebarContainer isOpen={isOpen}>
-        <SidebarHeader>
-          <Logo src={bg1} alt="Logo" />
+        <SidebarHeader isOpen={isOpen}>
+          <Logo src={bg1} alt="Logo" isOpen={isOpen} />
         </SidebarHeader>
         <CloseButton isOpen={isOpen} onClick={toggleSidebar}>
           ×

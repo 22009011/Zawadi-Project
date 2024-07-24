@@ -1,5 +1,5 @@
 // SuperAdminDashboard.js
-import React from 'react';
+import React, { useState } from 'react';
 import styled from 'styled-components';
 import AdvancedAnalytics from './AdvancedAnalytics';
 import IntegrationOptions from './IntergrationOptions';
@@ -7,13 +7,17 @@ import SystemSettings from './SystemSettings';
 import UserManagement from './UserManagement';
 import SuperAdminSidebar from './Sidebar';
 
-// Styled components
-const DashboardContainer = styled.div`
+const DashboardWrapper = styled.div`
   display: flex;
-  flex-direction: column;
+`;
+
+const DashboardContainer = styled.div`
+  flex-grow: 1;
   padding: 40px 60px;
   background-color: #f7f9fc; /* Light background color */
   min-height: 100vh;
+  transition: margin-left 0.3s ease;
+  margin-left: ${({ isOpen }) => (isOpen ? '250px' : '80px')};
 `;
 
 const Section = styled.section`
@@ -59,62 +63,55 @@ const CardContent = styled.p`
 `;
 
 const SuperAdminDashboard = () => {
+  const [isSidebarOpen, setIsSidebarOpen] = useState(false);
+
+  const handleToggleSidebar = (isOpen) => {
+    setIsSidebarOpen(isOpen);
+  };
+
   return (
-    
-    <DashboardContainer>
-      <SuperAdminSidebar />
-      <Section>
-        <SectionHeading>Advanced Analytics</SectionHeading>
-        <AdvancedAnalytics />
-      </Section>
+    <DashboardWrapper>
+      <SuperAdminSidebar onToggle={handleToggleSidebar} />
+      <DashboardContainer isOpen={isSidebarOpen}>
+        <Section>
+          <SectionHeading>Advanced Analytics</SectionHeading>
+          <AdvancedAnalytics />
+        </Section>
 
-      <Section>
-        <SectionHeading>Integration Options</SectionHeading>
-        <IntegrationOptions />
-      </Section>
+        <Section>
+          <SectionHeading>Integration Options</SectionHeading>
+          <IntegrationOptions />
+        </Section>
 
-      <Section>
-        <SectionHeading>System Settings</SectionHeading>
-        <SystemSettings />
-      </Section>
+        <Section>
+          <SectionHeading>System Settings</SectionHeading>
+          <SystemSettings />
+        </Section>
 
-      <Section>
-        <SectionHeading>User Management</SectionHeading>
-        <UserManagement />
-      </Section>
+        <Section>
+          <SectionHeading>User Management</SectionHeading>
+          <UserManagement />
+        </Section>
 
-      <Section>
-        <SectionHeading>Quick Overview</SectionHeading>
-        <CardContainer>
-          <Card>
-            <CardTitle>Total Users</CardTitle>
-            <CardContent>1,230</CardContent>
-          </Card>
-          <Card>
-            <CardTitle>Active Users</CardTitle>
-            <CardContent>980</CardContent>
-          </Card>
-          <Card>
-            <CardTitle>New Sign-ups</CardTitle>
-            <CardContent>150</CardContent>
-          </Card>
-        </CardContainer>
-      </Section>
-
-      <Section>
-        <SectionHeading>Recent Activity</SectionHeading>
-        <CardContainer>
-          <Card>
-            <CardTitle>Latest Updates</CardTitle>
-            <CardContent>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</CardContent>
-          </Card>
-          <Card>
-            <CardTitle>System Notifications</CardTitle>
-            <CardContent>Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</CardContent>
-          </Card>
-        </CardContainer>
-      </Section>
-    </DashboardContainer>
+        <Section>
+          <SectionHeading>Quick Overview</SectionHeading>
+          <CardContainer>
+            <Card>
+              <CardTitle>Number of Users</CardTitle>
+              <CardContent>1500</CardContent>
+            </Card>
+            <Card>
+              <CardTitle>Active Sessions</CardTitle>
+              <CardContent>120</CardContent>
+            </Card>
+            <Card>
+              <CardTitle>Pending Tasks</CardTitle>
+              <CardContent>10</CardContent>
+            </Card>
+          </CardContainer>
+        </Section>
+      </DashboardContainer>
+    </DashboardWrapper>
   );
 };
 

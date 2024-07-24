@@ -315,3 +315,16 @@ export const TeachersHeader = styled.div`
   font-weight: bold;
   margin-bottom: 20px;
 `;
+
+
+
+
+
+
+
+
+
+
+
+
+

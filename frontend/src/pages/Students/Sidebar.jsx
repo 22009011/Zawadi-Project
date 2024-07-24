@@ -8,7 +8,7 @@ const SidebarContainer = styled.div`
   position: fixed;
   top: 0;
   left: 0;
-  width: ${({ isOpen }) => (isOpen ? '250px' : '0')};
+  width: ${({ isOpen }) => (isOpen ? '250px' : '80px')};
   height: 100%;
   background-color: #ffffff; /* Change to white background */
   color: #000; /* Change to black text color */
@@ -17,16 +17,22 @@ const SidebarContainer = styled.div`
   transition: width 0.3s ease;
   z-index: 100;
   border-right: 1px solid #e0e0e0; /* Light gray border */
-  @media (min-width: 769px) {
+  @media (max-width: 768px) {
     width: ${({ isOpen }) => (isOpen ? '250px' : '80px')};
   }
 `;
 
 const SidebarHeader = styled.div`
   padding: 20px;
-  font-size: 24px;
-  font-weight: bold;
   text-align: center;
+  display: flex;
+  justify-content: center;
+`;
+
+const Logo = styled.img`
+  width: ${({ isOpen }) => (isOpen ? '200px' : '50px')};
+  height: auto;
+  transition: width 0.3s ease;
 `;
 
 const SidebarNav = styled.ul`
@@ -49,21 +55,16 @@ const SidebarNavItem = styled.li`
 const StyledLink = styled(Link)`
   text-decoration: none;
   color: ${({ selected }) => (selected ? '#3498db' : '#000')}; /* Light blue for selected, black for others */
-  margin-left: 10px;
-  display: ${({ isOpen }) => (isOpen ? 'block' : 'none')};
-  @media (min-width: 769px) {
+  margin-left: ${({ isOpen }) => (isOpen ? '10px' : '0')};
+  display: ${({ isOpen }) => (isOpen ? 'inline' : 'none')};
+  @media (max-width: 768px) {
     display: ${({ isOpen }) => (isOpen ? 'inline' : 'none')};
   }
 `;
 
 const SidebarIcon = styled.div`
-  margin-right: 10px;
+  margin-right: ${({ isOpen }) => (isOpen ? '10px' : '5px')};
   color: ${({ selected }) => (selected ? '#3498db' : '#000')}; /* Light blue for selected, black for others */
-`;
-
-const Logo = styled.img`
-  width: 200px;
-  height: auto;
 `;
 
 const ToggleButton = styled.div`
@@ -119,42 +120,42 @@ const StudentSidebar = () => {
       </ToggleButton>
       <SidebarContainer isOpen={isOpen}>
         <SidebarHeader>
-          <Logo src={bg1} alt="Logo" />
+          <Logo src={bg1} alt="Logo" isOpen={isOpen} />
         </SidebarHeader>
         <CloseButton isOpen={isOpen} onClick={toggleSidebar}>
           ×
         </CloseButton>
         <SidebarNav>
           <SidebarNavItem>
-            <SidebarIcon selected={location.pathname === '/student/dashboard'}><BsGraphUp /></SidebarIcon>
+            <SidebarIcon selected={location.pathname === '/student/dashboard'} isOpen={isOpen}><BsGraphUp /></SidebarIcon>
             <StyledLink to="/student/dashboard" isOpen={isOpen} selected={location.pathname === '/student/dashboard'}>Dashboard</StyledLink>
           </SidebarNavItem>
           <SidebarNavItem>
-            <SidebarIcon selected={location.pathname === '/student/assignments'}><BsFileText /></SidebarIcon>
+            <SidebarIcon selected={location.pathname === '/student/assignments'} isOpen={isOpen}><BsFileText /></SidebarIcon>
             <StyledLink to="/student/assignments" isOpen={isOpen} selected={location.pathname === '/student/assignments'}>Assignments</StyledLink>
           </SidebarNavItem>
           <SidebarNavItem>
-            <SidebarIcon selected={location.pathname === '/student/feedback'}><BsBook /></SidebarIcon>
+            <SidebarIcon selected={location.pathname === '/student/feedback'} isOpen={isOpen}><BsBook /></SidebarIcon>
             <StyledLink to="/student/feedback" isOpen={isOpen} selected={location.pathname === '/student/feedback'}>Feedback</StyledLink>
           </SidebarNavItem>
           <SidebarNavItem>
-            <SidebarIcon selected={location.pathname === '/student/grades'}><BsGraphDown /></SidebarIcon>
+            <SidebarIcon selected={location.pathname === '/student/grades'} isOpen={isOpen}><BsGraphDown /></SidebarIcon>
             <StyledLink to="/student/grades" isOpen={isOpen} selected={location.pathname === '/student/grades'}>Grades</StyledLink>
           </SidebarNavItem>
           <SidebarNavItem>
-            <SidebarIcon selected={location.pathname === '/student/learning-materials'}><BsCalendar /></SidebarIcon>
+            <SidebarIcon selected={location.pathname === '/student/learning-materials'} isOpen={isOpen}><BsCalendar /></SidebarIcon>
             <StyledLink to="/student/learning-materials" isOpen={isOpen} selected={location.pathname === '/student/learning-materials'}>Learning Materials</StyledLink>
           </SidebarNavItem>
           <SidebarNavItem>
-            <SidebarIcon selected={location.pathname === '/student/attendance'}><BsPeople /></SidebarIcon>
+            <SidebarIcon selected={location.pathname === '/student/attendance'} isOpen={isOpen}><BsPeople /></SidebarIcon>
             <StyledLink to="/student/attendance" isOpen={isOpen} selected={location.pathname === '/student/attendance'}>Attendance</StyledLink>
           </SidebarNavItem>
           <SidebarNavItem>
-            <SidebarIcon selected={location.pathname === '/student/communication'}><BsPerson /></SidebarIcon>
+            <SidebarIcon selected={location.pathname === '/student/communication'} isOpen={isOpen}><BsPerson /></SidebarIcon>
             <StyledLink to="/student/communication" isOpen={isOpen} selected={location.pathname === '/student/communication'}>Announcements</StyledLink>
           </SidebarNavItem>
           <SidebarNavItem>
-            <SidebarIcon selected={location.pathname === '/student/settings'}><BsGear /></SidebarIcon>
+            <SidebarIcon selected={location.pathname === '/student/settings'} isOpen={isOpen}><BsGear /></SidebarIcon>
             <StyledLink to="/student/settings" isOpen={isOpen} selected={location.pathname === '/student/settings'}>Profile</StyledLink>
           </SidebarNavItem>
         </SidebarNav>
