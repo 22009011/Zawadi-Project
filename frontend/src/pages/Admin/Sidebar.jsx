@@ -10,13 +10,13 @@ const SidebarContainer = styled.div`
   left: 0;
   width: ${({ isOpen }) => (isOpen ? '250px' : '80px')};
   height: 100%;
-  background-color: #ffffff; /* White background */
-  color: #000; /* Black text color */
+  background-color: #ffffff;
+  color: #000;
   overflow-y: auto;
   padding-top: 60px;
   transition: width 0.3s ease;
   z-index: 100;
-  border-right: 1px solid #e0e0e0; /* Light gray border */
+  border-right: 1px solid #e0e0e0;
   @media (max-width: 768px) {
     width: ${({ isOpen }) => (isOpen ? '250px' : '0')};
   }
@@ -49,16 +49,16 @@ const SidebarNavItem = styled.li`
   align-items: center;
   padding: 12px 20px;
   font-size: 18px;
-  border-bottom: 1px solid #f0f0f0; /* Very light gray border */
+  border-bottom: 1px solid #f0f0f0;
   transition: background-color 0.3s ease;
   &:hover {
-    background-color: #f5f5f5; /* Light gray hover */
+    background-color: #f5f5f5;
   }
 `;
 
 const StyledLink = styled(Link)`
   text-decoration: none;
-  color: ${({ selected }) => (selected ? '#3498db' : '#000')}; /* Light blue for selected, black for others */
+  color: ${({ selected }) => (selected ? '#3498db' : '#000')};
   margin-left: 10px;
   display: ${({ isOpen }) => (isOpen ? 'block' : 'none')};
   @media (max-width: 768px) {
@@ -68,7 +68,7 @@ const StyledLink = styled(Link)`
 
 const SidebarIcon = styled.div`
   margin-right: 10px;
-  color: ${({ selected }) => (selected ? '#3498db' : '#000')}; /* Light blue for selected, black for others */
+  color: ${({ selected }) => (selected ? '#3498db' : '#000')};
 `;
 
 const ToggleButton = styled.div`
@@ -77,7 +77,7 @@ const ToggleButton = styled.div`
   left: ${({ isOpen }) => (isOpen ? '250px' : '80px')};
   width: 30px;
   height: 30px;
-  background-color: #f5f5f5; /* Light gray background */
+  background-color: #f5f5f5;
   border-radius: 50%;
   cursor: pointer;
   display: flex;
@@ -91,7 +91,7 @@ const ToggleButton = styled.div`
 `;
 
 const ToggleIcon = styled.span`
-  color: #000; /* Black color */
+  color: #000;
   font-size: 20px;
   transform: ${({ isOpen }) => (isOpen ? 'rotate(180deg)' : 'rotate(0deg)')};
   transition: transform 0.3s ease;
@@ -102,7 +102,7 @@ const CloseButton = styled.div`
   top: 20px;
   right: 20px;
   cursor: pointer;
-  color: #000; /* Black color */
+  color: #000;
   font-size: 20px;
   display: ${({ isOpen }) => (isOpen ? 'block' : 'none')};
   @media (min-width: 769px) {
@@ -110,12 +110,13 @@ const CloseButton = styled.div`
   }
 `;
 
-const AdminSidebar = () => {
+const AdminSidebar = ({ onToggle }) => {
   const [isOpen, setIsOpen] = useState(false);
   const location = useLocation();
 
   const toggleSidebar = () => {
     setIsOpen(!isOpen);
+    onToggle(!isOpen);
   };
 
   return (

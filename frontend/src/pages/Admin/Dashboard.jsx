@@ -1,3 +1,4 @@
+// components/AdminDashboard.js
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import {
@@ -23,12 +24,21 @@ import {
   ChartContainer
 } from '../../styles/DashboardStyles.js';
 import Analytics from './Analytics';
+import Teachers from './Teachers'
 import { fetchTeacherData } from './teacherData';
 import AdminSidebar from './Sidebar.jsx';
+
 
 const AdminDashboard = () => {
   const [announcements, setAnnouncements] = useState([]);
   const [teachers, setTeachers] = useState([]);
+
+  const [isSidebarOpen, setIsSidebarOpen] = useState(true);
+
+  const handleSidebarToggle = (open) => {
+    setIsSidebarOpen(open);
+  };
+
 
   useEffect(() => {
     fetchAnnouncements();
@@ -45,8 +55,8 @@ const AdminDashboard = () => {
   };
 
   return (
-    <AdminDashboardContainer>
-      <AdminSidebar />
+    <AdminDashboardContainer isOpen={isSidebarOpen}>
+      <AdminSidebar onToggle={handleSidebarToggle} />
       <Content>
         <OverviewSection>
           <SectionTitle>Overview</SectionTitle>
@@ -65,73 +75,60 @@ const AdminDashboard = () => {
             </Card>
             <Card>
               <CardTitle>Total Foods</CardTitle>
-              <CardContent>32</CardContent>
+              <CardContent>32k</CardContent>
             </Card>
           </CardContainer>
         </OverviewSection>
+
         <HorizontalContainer>
           <HalfWidthSection>
-            <SectionTitle>Recent Announcements</SectionTitle>
-            <Section>
-              <TeacherTable>
-                <thead>
-                  <tr>
-                    <TeacherTh>Date</TeacherTh>
-                    <TeacherTh>Title</TeacherTh>
-                    <TeacherTh>Content</TeacherTh>
-                  </tr>
-                </thead>
-                <tbody>
-                  {announcements.map((announcement) => (
-                    <tr key={announcement.id}>
-                      <TeacherTd>{announcement.date}</TeacherTd>
-                      <TeacherTd>{announcement.title}</TeacherTd>
-                      <TeacherTd>{announcement.content}</TeacherTd>
-                    </tr>
-                  ))}
-                </tbody>
-              </TeacherTable>
-            </Section>
+            <SectionTitle>School Performance</SectionTitle>
+            <ChartContainer>
+              <Analytics />
+            </ChartContainer>
           </HalfWidthSection>
+
           <HalfWidthSection>
+            <SectionTitle>School Calendar</SectionTitle>
             <CalendarSection>
-              <CalendarTitle>Weekly Schedule</CalendarTitle>
+              <CalendarTitle>May 2023</CalendarTitle>
               <Calendar>
-                {['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'].map((day) => (
-                  <CalendarDay key={day}>{day}</CalendarDay>
+                {/* Render calendar days dynamically */}
+                {[...Array(31)].map((_, i) => (
+                  <CalendarDay key={i}>{i + 1}</CalendarDay>
                 ))}
               </Calendar>
             </CalendarSection>
           </HalfWidthSection>
         </HorizontalContainer>
-        <HorizontalContainer>
-          <HalfWidthSection>
-            <SectionTitle>Teachers Details</SectionTitle>
+
+        <Section>
+          <SectionTitle>Teacher Details</SectionTitle>
+          <TeacherDetails>
             <TeacherTable>
               <thead>
                 <tr>
                   <TeacherTh>Name</TeacherTh>
                   <TeacherTh>Subject</TeacherTh>
+                  <TeacherTh>Qualification</TeacherTh>
                   <TeacherTh>Experience</TeacherTh>
+                  <TeacherTh>Performance</TeacherTh>
                 </tr>
               </thead>
               <tbody>
-                {teachers.map((teacher) => (
-                  <tr key={teacher.id}>
+                {teachers.map((teacher, index) => (
+                  <tr key={index}>
                     <TeacherTd>{teacher.name}</TeacherTd>
                     <TeacherTd>{teacher.subject}</TeacherTd>
-                    <TeacherTd>{teacher.experience} years</TeacherTd>
+                    <TeacherTd>{teacher.qualification}</TeacherTd>
+                    <TeacherTd>{teacher.experience}</TeacherTd>
+                    <TeacherTd>{teacher.performance}</TeacherTd>
                   </tr>
                 ))}
               </tbody>
             </TeacherTable>
-          </HalfWidthSection>
-          <HalfWidthSection>
-            <ChartContainer>
-              <Analytics />
-            </ChartContainer>
-          </HalfWidthSection>
-        </HorizontalContainer>
+          </TeacherDetails>
+        </Section>
       </Content>
     </AdminDashboardContainer>
   );

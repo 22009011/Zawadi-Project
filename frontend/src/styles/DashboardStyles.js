@@ -100,18 +100,18 @@ export const TeacherDashboardContainer = styled.div`
   margin-left: 250px;
 `;
 
-export const AdminDashboardContainer = styled.div`
-  display: flex;
-  flex-direction: column;
-  padding: 20px;
-  background-color: #f8f9fa;
-`;
+// export const AdminDashboardContainer = styled.div`
+//   display: flex;
+//   flex-direction: column;
+//   padding: 20px;
+//   background-color: #f8f9fa;
+// `;
 
-export const Content = styled.div`
-  display: flex;
-  flex-direction: column;
-  gap: 20px;
-`;
+// export const Content = styled.div`
+//   display: flex;
+//   flex-direction: column;
+//   gap: 20px;
+// `;
 
 export const OverviewSection = styled.div`
   display: flex;
@@ -318,6 +318,24 @@ export const TeachersHeader = styled.div`
 
 
 
+/* DashboardStyles.js */
+export const AdminDashboardContainer = styled.div`
+  display: flex;
+  flex-direction: row;
+  height: 100vh;
+`;
+
+export const Content = styled.div`
+  margin-left: ${({ sidebarWidth }) => sidebarWidth};
+  transition: margin-left 0.3s ease;
+  flex: 1;
+  padding: 20px;
+`;
+
+// /* In your AdminDashboard component */
+// <Content sidebarWidth={isOpen ? '250px' : '80px'}>
+//   {/* Content here */}
+// </Content>
 
 
 
