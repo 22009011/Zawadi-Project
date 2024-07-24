@@ -16,15 +16,15 @@ import {
 import bg1 from '../../assets/bg1.png';
 
 const Register = () => {
-  const [fullName, setFullName] = useState('');
+  const [username, setUsername] = useState('');
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
 
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const response = await axios.post('http://localhost:5000/api/users/create-admin', {
-        fullName,
+      const response = await axios.post('http://localhost:5000/api/users/register-super-admin', {
+        username,
         email,
         password,
       });
@@ -47,8 +47,8 @@ const Register = () => {
             type="text"
             placeholder="Full name"
             required
-            value={fullName}
-            onChange={(e) => setFullName(e.target.value)}
+            value={username}
+            onChange={(e) => setUsername(e.target.value)}
           />
           <Input
             type="email"
@@ -66,7 +66,7 @@ const Register = () => {
           />
           <Button type="submit">Register</Button>
         </Form>
-        <StyledLink to="/">Already have an account? Login</StyledLink>
+        <StyledLink to="/login">Already have an account? Login</StyledLink>
       </RegisterBox>
     </Container>
   );

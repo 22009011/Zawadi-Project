@@ -26,34 +26,19 @@ const Login = () => {
     e.preventDefault();
     try {
       const response = await axios.post('http://localhost:5000/api/users/login', { email, password });
-      console.log(response.data); // Handle the response as needed
+      console.log(response.data);
 
       // Store the JWT token in local storage
       localStorage.setItem('token', response.data.token);
-
-      // Determine the role and redirect accordingly
-      switch (response.data.user.role) {
-        case 'super-admin':
-          navigate('/super-admin/dashboard');
-          break;
-        case 'admin':
-          navigate('/admin/dashboard');
-          break;
-        case 'teacher':
-          navigate('/teacher/dashboard');
-          break;
-        case 'parent':
-          navigate('/students/dashboard');
-          break;
-        default:
-          // Redirect to a default dashboard or handle other roles as needed
-          break;
-      }
+      localStorage.setItem('role', response.data.role);
 
       // Display success toast message
       toast.success('Logged in successfully!');
+
+      // Redirect to super-admin dashboard
+      navigate('/super-admin/dashboard');
     } catch (error) {
-      console.error(error.response.data);
+      console.error(error.response?.data || error.message);
       // Display error toast message
       toast.error('Failed to login. Please check your credentials.');
     }

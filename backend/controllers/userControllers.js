@@ -7,6 +7,7 @@ import School from '../models/schoolModel.js';
 
 const { jwtSecret } = config;
 
+
 // Register Super-admin
 export const registerSuperAdmin = async (req, res) => {
   const { username, email, password } = req.body;
@@ -29,7 +30,8 @@ export const registerSuperAdmin = async (req, res) => {
   }
 };
 
-// Login
+
+
 export const login = async (req, res) => {
   const { email, password } = req.body;
 

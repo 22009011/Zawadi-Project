@@ -5,6 +5,7 @@ import AdvancedAnalytics from './AdvancedAnalytics';
 import IntegrationOptions from './IntergrationOptions';
 import SystemSettings from './SystemSettings';
 import UserManagement from './UserManagement';
+import SuperAdminSidebar from './Sidebar';
 
 // Styled components
 const DashboardContainer = styled.div`
@@ -59,7 +60,9 @@ const CardContent = styled.p`
 
 const SuperAdminDashboard = () => {
   return (
+    
     <DashboardContainer>
+      <SuperAdminSidebar />
       <Section>
         <SectionHeading>Advanced Analytics</SectionHeading>
         <AdvancedAnalytics />
