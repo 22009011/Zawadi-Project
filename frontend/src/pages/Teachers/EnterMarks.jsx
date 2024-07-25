@@ -74,6 +74,24 @@ const DownloadButton = styled.button`
   }
 `;
 
+const Table = styled.table`
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 20px;
+`;
+
+const TableHeader = styled.th`
+  padding: 10px;
+  background-color: #f1f1f1;
+  border-bottom: 2px solid #ddd;
+`;
+
+const TableCell = styled.td`
+  padding: 10px;
+  border-bottom: 1px solid #ddd;
+  text-align: center;
+`;
+
 const EnterMarksSection = () => {
   const [studentName, setStudentName] = useState('');
   const [classLevel, setClassLevel] = useState('');
@@ -199,28 +217,28 @@ const EnterMarksSection = () => {
       {enteredMarks.length > 0 && (
         <div>
           <h3>Entered Marks</h3>
-          <table>
+          <Table>
             <thead>
               <tr>
-                <th>Student Name</th>
-                <th>Class</th>
-                <th>Admission Number</th>
-                <th>Subject</th>
-                <th>Marks</th>
+                <TableHeader>Student Name</TableHeader>
+                <TableHeader>Class</TableHeader>
+                <TableHeader>Admission Number</TableHeader>
+                <TableHeader>Subject</TableHeader>
+                <TableHeader>Marks</TableHeader>
               </tr>
             </thead>
             <tbody>
               {enteredMarks.map((mark, index) => (
                 <tr key={index}>
-                  <td>{mark.studentName}</td>
-                  <td>{mark.classLevel}</td>
-                  <td>{mark.admissionNumber}</td>
-                  <td>{mark.subject}</td>
-                  <td>{mark.marks}</td>
+                  <TableCell>{mark.studentName}</TableCell>
+                  <TableCell>{mark.classLevel}</TableCell>
+                  <TableCell>{mark.admissionNumber}</TableCell>
+                  <TableCell>{mark.subject}</TableCell>
+                  <TableCell>{mark.marks}</TableCell>
                 </tr>
               ))}
             </tbody>
-          </table>
+          </Table>
           <DownloadButton onClick={() => handleDownloadReport({ studentName, classLevel, admissionNumber, grades: enteredMarks })}>
             Download Report
           </DownloadButton>
