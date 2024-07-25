@@ -4,7 +4,7 @@ import { Link, useLocation } from 'react-router-dom';
 import bg1 from '../../assets/bg1.png';
 import {
   BsGraphUp, BsPeople, BsPerson, BsFileText,
-  BsGraphDown, BsCalendar, BsGear, BsChatDots,
+  BsGraphDown, BsCalendar, BsGear, BsChatDots, BsCaretDown, BsCaretUp
 } from 'react-icons/bs';
 
 const SidebarContainer = styled.div`
@@ -51,6 +51,18 @@ const SidebarNavItem = styled.li`
   align-items: center;
   padding: 12px 20px;
   font-size: 18px;
+  border-bottom: 1px solid #f0f0f0;
+  transition: background-color 0.3s ease;
+  &:hover {
+    background-color: #f5f5f5;
+  }
+`;
+
+const SubNavItem = styled.li`
+  display: flex;
+  align-items: center;
+  padding: 12px 20px 12px 40px;
+  font-size: 16px;
   border-bottom: 1px solid #f0f0f0;
   transition: background-color 0.3s ease;
   &:hover {
@@ -113,10 +125,15 @@ const CloseButton = styled.div`
 
 const TeacherSidebar = () => {
   const [isOpen, setIsOpen] = useState(false);
+  const [isAcademicRecordsOpen, setIsAcademicRecordsOpen] = useState(false);
   const location = useLocation();
 
   const toggleSidebar = () => {
     setIsOpen(!isOpen);
+  };
+
+  const toggleAcademicRecords = () => {
+    setIsAcademicRecordsOpen(!isAcademicRecordsOpen);
   };
 
   return (
@@ -152,10 +169,26 @@ const TeacherSidebar = () => {
             <SidebarIcon selected={location.pathname === '/teacher/assignments'}><BsFileText /></SidebarIcon>
             <StyledLink to="/teacher/assignments" isOpen={isOpen} selected={location.pathname === '/teacher/assignments'}>Assignments</StyledLink>
           </SidebarNavItem>
-          <SidebarNavItem>
-            <SidebarIcon selected={location.pathname === '/teacher/performance'}><BsGraphDown /></SidebarIcon>
-            <StyledLink to="/teacher/performance" isOpen={isOpen} selected={location.pathname === '/teacher/performance'}>Performance Data</StyledLink>
+          <SidebarNavItem onClick={toggleAcademicRecords}>
+            <SidebarIcon selected={isAcademicRecordsOpen}><BsGraphDown /></SidebarIcon>
+            <StyledLink to="#" isOpen={isOpen} selected={isAcademicRecordsOpen}>Academic Records {isAcademicRecordsOpen ? <BsCaretUp /> : <BsCaretDown />}</StyledLink>
           </SidebarNavItem>
+          {isAcademicRecordsOpen && (
+            <>
+              <SubNavItem>
+                <SidebarIcon selected={location.pathname === '/teacher/enter-marks'}><BsGraphDown /></SidebarIcon>
+                <StyledLink to="/teacher/enter-marks" isOpen={isOpen} selected={location.pathname === '/teacher/enter-marks'}>Enter Marks</StyledLink>
+              </SubNavItem>
+              <SubNavItem>
+                <SidebarIcon selected={location.pathname === '/teacher/performance'}><BsGraphDown /></SidebarIcon>
+                <StyledLink to="/teacher/performance" isOpen={isOpen} selected={location.pathname === '/teacher/performance'}>Student Performance Data</StyledLink>
+              </SubNavItem>
+              <SubNavItem>
+                <SidebarIcon selected={location.pathname === '/teacher/generate-reports'}><BsGraphDown /></SidebarIcon>
+                <StyledLink to="/teacher/generate-reports" isOpen={isOpen} selected={location.pathname === '/teacher/generate-reports'}>Generate Reports</StyledLink>
+              </SubNavItem>
+            </>
+          )}
           <SidebarNavItem>
             <SidebarIcon selected={location.pathname === '/teacher/attendance'}><BsCalendar /></SidebarIcon>
             <StyledLink to="/teacher/attendance" isOpen={isOpen} selected={location.pathname === '/teacher/attendance'}>Attendance</StyledLink>
