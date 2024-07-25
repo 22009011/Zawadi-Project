@@ -60,7 +60,7 @@ app.use('/api/communications', communicationRouter);
 app.use('/api/curriculum-entries', curriculumManagementRouter);
 app.use('/api/classes', classRouter);
 app.use('/api/attendance-records', attendanceRecordRouter);
-app.use('/api/assignments', assignmentsRouter);
+app.use('/api/assignments', assignmentsRouter); 
 app.use('/api/assessment-reports', assessmentReportRouter);
 app.use('/api/announcements', announcementRouter);
 

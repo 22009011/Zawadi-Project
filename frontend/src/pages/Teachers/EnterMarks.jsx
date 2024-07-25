@@ -1,7 +1,7 @@
-// EnterMarksSection.js
-
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import styled from 'styled-components';
+import axios from 'axios';
+import jsPDF from 'jspdf';
 
 const EnterMarksContainer = styled.div`
   max-width: 800px;
@@ -59,6 +59,21 @@ const SubmitButton = styled.button`
   }
 `;
 
+const DownloadButton = styled.button`
+  background-color: #4CAF50;
+  color: white;
+  border: none;
+  padding: 10px 20px;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+  margin-top: 20px;
+
+  &:hover {
+    background-color: #45A049;
+  }
+`;
+
 const EnterMarksSection = () => {
   const [studentName, setStudentName] = useState('');
   const [classLevel, setClassLevel] = useState('');
@@ -67,17 +82,85 @@ const EnterMarksSection = () => {
   const [marks, setMarks] = useState('');
   const [enteredMarks, setEnteredMarks] = useState([]);
 
-  const handleSubmitMarks = (e) => {
+  const handleSubmitMarks = async (e) => {
     e.preventDefault();
     const newMark = { studentName, classLevel, admissionNumber, subject, marks };
-    setEnteredMarks([...enteredMarks, newMark]);
-    // Clear form fields after submission
-    setStudentName('');
-    setClassLevel('');
-    setAdmissionNumber('');
-    setSubject('');
-    setMarks('');
+
+    try {
+      const response = await axios.post('http://localhost:5000/api/grades', {
+        student_id: admissionNumber, // Assuming admissionNumber is the student_id
+        subject,
+        grade: marks,
+        performance_level: getPerformanceLevel(marks), // Custom function to determine performance level
+      }, {
+        headers: {
+          Authorization: `Bearer ${localStorage.getItem('token')}`, // Assuming token is stored in localStorage
+        },
+      });
+
+      setEnteredMarks([...enteredMarks, newMark]);
+      setStudentName('');
+      setClassLevel('');
+      setAdmissionNumber('');
+      setSubject('');
+      setMarks('');
+    } catch (error) {
+      console.error('Error submitting marks:', error);
+    }
   };
+
+  const getPerformanceLevel = (marks) => {
+    if (marks >= 90) return 'Excellent';
+    if (marks >= 75) return 'Meets Expectation';
+    if (marks >= 50) return 'Average';
+    return 'Below Average';
+  };
+
+  const handleDownloadReport = (student) => {
+    const doc = new jsPDF();
+    doc.text('School Name: Your School Name', 10, 10);
+    doc.text(`Student Name: ${student.studentName}`, 10, 20);
+    doc.text(`Class: ${student.classLevel}`, 10, 30);
+    doc.text(`Admission Number: ${student.admissionNumber}`, 10, 40);
+    doc.text('Grades:', 10, 50);
+
+    const startY = 60;
+    let y = startY;
+
+    student.grades.forEach((grade, index) => {
+      doc.text(`${index + 1}. Subject: ${grade.subject}, Marks: ${grade.marks}, Performance: ${getPerformanceLevel(grade.marks)}`, 10, y);
+      y += 10;
+    });
+
+    doc.save(`${student.studentName}_Report.pdf`);
+  };
+
+  useEffect(() => {
+    const fetchGrades = async () => {
+      try {
+        const response = await axios.get('http://localhost:5000/api/grades', {
+          params: { student_id: admissionNumber }, // Fetch grades for specific student
+          headers: {
+            Authorization: `Bearer ${localStorage.getItem('token')}`,
+          },
+        });
+
+        // Assuming response contains an array of grades for the student
+        setEnteredMarks(response.data.map((grade) => ({
+          studentName: grade.student_id, // Modify this based on your actual data structure
+          classLevel: '', // Add the correct class level data if available
+          admissionNumber: grade.student_id,
+          subject: grade.subject,
+          marks: grade.grade,
+          performance_level: grade.performance_level,
+        })));
+      } catch (error) {
+        console.error('Error fetching grades:', error);
+      }
+    };
+
+    fetchGrades();
+  }, [admissionNumber]);
 
   return (
     <EnterMarksContainer>
@@ -138,6 +221,9 @@ const EnterMarksSection = () => {
               ))}
             </tbody>
           </table>
+          <DownloadButton onClick={() => handleDownloadReport({ studentName, classLevel, admissionNumber, grades: enteredMarks })}>
+            Download Report
+          </DownloadButton>
         </div>
       )}
     </EnterMarksContainer>
