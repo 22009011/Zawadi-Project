@@ -53,6 +53,7 @@ const SidebarNavItem = styled.li`
   font-size: 18px;
   border-bottom: 1px solid #f0f0f0;
   transition: background-color 0.3s ease;
+  cursor: pointer;
   &:hover {
     background-color: #f5f5f5;
   }
@@ -65,6 +66,7 @@ const SubNavItem = styled.li`
   font-size: 16px;
   border-bottom: 1px solid #f0f0f0;
   transition: background-color 0.3s ease;
+  cursor: pointer;
   &:hover {
     background-color: #f5f5f5;
   }
@@ -123,6 +125,10 @@ const CloseButton = styled.div`
   }
 `;
 
+const Spacer = styled.div`
+  flex-grow: 1;
+`;
+
 const TeacherSidebar = () => {
   const [isOpen, setIsOpen] = useState(false);
   const [isAcademicRecordsOpen, setIsAcademicRecordsOpen] = useState(false);
@@ -150,57 +156,128 @@ const TeacherSidebar = () => {
         </CloseButton>
         <SidebarNav>
           <SidebarNavItem>
-            <SidebarIcon selected={location.pathname === '/teacher/dashboard'}><BsGraphUp /></SidebarIcon>
-            <StyledLink to="/teacher/dashboard" isOpen={isOpen} selected={location.pathname === '/teacher/dashboard'}>Dashboard</StyledLink>
+            <Link to="/teacher/dashboard">
+              <SidebarIcon selected={location.pathname === '/teacher/dashboard'}>
+                <BsGraphUp />
+              </SidebarIcon>
+            </Link>
+            <StyledLink to="/teacher/dashboard" isOpen={isOpen} selected={location.pathname === '/teacher/dashboard'}>
+              Dashboard
+            </StyledLink>
           </SidebarNavItem>
           <SidebarNavItem>
-            <SidebarIcon selected={location.pathname === '/teacher/lesson-plans'}><BsPeople /></SidebarIcon>
-            <StyledLink to="/teacher/lesson-plans" isOpen={isOpen} selected={location.pathname === '/teacher/lesson-plans'}>Lesson Plans</StyledLink>
+            <Link to="/teacher/lesson-plans">
+              <SidebarIcon selected={location.pathname === '/teacher/lesson-plans'}>
+                <BsPeople />
+              </SidebarIcon>
+            </Link>
+            <StyledLink to="/teacher/lesson-plans" isOpen={isOpen} selected={location.pathname === '/teacher/lesson-plans'}>
+              Lesson Plans
+            </StyledLink>
           </SidebarNavItem>
           <SidebarNavItem>
-            <SidebarIcon selected={location.pathname === '/teacher/students-progress'}><BsPeople /></SidebarIcon>
-            <StyledLink to="/teacher/students-progress" isOpen={isOpen} selected={location.pathname === '/teacher/students-progress'}>Students Progress</StyledLink>
+            <Link to="/teacher/students-progress">
+              <SidebarIcon selected={location.pathname === '/teacher/students-progress'}>
+                <BsPeople />
+              </SidebarIcon>
+            </Link>
+            <StyledLink to="/teacher/students-progress" isOpen={isOpen} selected={location.pathname === '/teacher/students-progress'}>
+              Students Progress
+            </StyledLink>
           </SidebarNavItem>
           <SidebarNavItem>
-            <SidebarIcon selected={location.pathname === '/teacher/assessments'}><BsPeople /></SidebarIcon>
-            <StyledLink to="/teacher/assessments" isOpen={isOpen} selected={location.pathname === '/teacher/assessments'}>Assessments</StyledLink>
+            <Link to="/teacher/assessments">
+              <SidebarIcon selected={location.pathname === '/teacher/assessments'}>
+                <BsPeople />
+              </SidebarIcon>
+            </Link>
+            <StyledLink to="/teacher/assessments" isOpen={isOpen} selected={location.pathname === '/teacher/assessments'}>
+              Assessments
+            </StyledLink>
           </SidebarNavItem>
           <SidebarNavItem>
-            <SidebarIcon selected={location.pathname === '/teacher/assignments'}><BsFileText /></SidebarIcon>
-            <StyledLink to="/teacher/assignments" isOpen={isOpen} selected={location.pathname === '/teacher/assignments'}>Assignments</StyledLink>
+            <Link to="/teacher/assignments">
+              <SidebarIcon selected={location.pathname === '/teacher/assignments'}>
+                <BsFileText />
+              </SidebarIcon>
+            </Link>
+            <StyledLink to="/teacher/assignments" isOpen={isOpen} selected={location.pathname === '/teacher/assignments'}>
+              Assignments
+            </StyledLink>
           </SidebarNavItem>
           <SidebarNavItem onClick={toggleAcademicRecords}>
-            <SidebarIcon selected={isAcademicRecordsOpen}><BsGraphDown /></SidebarIcon>
-            <StyledLink to="#" isOpen={isOpen} selected={isAcademicRecordsOpen}>Academic Records {isAcademicRecordsOpen ? <BsCaretUp /> : <BsCaretDown />}</StyledLink>
+            <SidebarIcon selected={isAcademicRecordsOpen}>
+              <BsGraphDown />
+            </SidebarIcon>
+            <StyledLink to="#" isOpen={isOpen} selected={isAcademicRecordsOpen}>
+              Academic Records {isAcademicRecordsOpen ? <BsCaretUp /> : <BsCaretDown />}
+            </StyledLink>
           </SidebarNavItem>
           {isAcademicRecordsOpen && (
             <>
               <SubNavItem>
-                <SidebarIcon selected={location.pathname === '/teacher/enter-marks'}><BsGraphDown /></SidebarIcon>
-                <StyledLink to="/teacher/enter-marks" isOpen={isOpen} selected={location.pathname === '/teacher/enter-marks'}>Enter Marks</StyledLink>
+                <Link to="/teacher/enter-marks">
+                  <SidebarIcon selected={location.pathname === '/teacher/enter-marks'}>
+                    <BsGraphDown />
+                  </SidebarIcon>
+                </Link>
+                <StyledLink to="/teacher/enter-marks" isOpen={isOpen} selected={location.pathname === '/teacher/enter-marks'}>
+                  Enter Marks
+                </StyledLink>
               </SubNavItem>
               <SubNavItem>
-                <SidebarIcon selected={location.pathname === '/teacher/performance'}><BsGraphDown /></SidebarIcon>
-                <StyledLink to="/teacher/performance" isOpen={isOpen} selected={location.pathname === '/teacher/performance'}>Student Performance Data</StyledLink>
+                <Link to="/teacher/performance">
+                  <SidebarIcon selected={location.pathname === '/teacher/performance'}>
+                    <BsGraphDown />
+                  </SidebarIcon>
+                </Link>
+                <StyledLink to="/teacher/performance" isOpen={isOpen} selected={location.pathname === '/teacher/performance'}>
+                  Student Performance Data
+                </StyledLink>
               </SubNavItem>
               <SubNavItem>
-                <SidebarIcon selected={location.pathname === '/teacher/generate-reports'}><BsGraphDown /></SidebarIcon>
-                <StyledLink to="/teacher/generate-reports" isOpen={isOpen} selected={location.pathname === '/teacher/generate-reports'}>Generate Reports</StyledLink>
+                <Link to="/teacher/generate-reports">
+                  <SidebarIcon selected={location.pathname === '/teacher/generate-reports'}>
+                    <BsGraphDown />
+                  </SidebarIcon>
+                </Link>
+                <StyledLink to="/teacher/generate-reports" isOpen={isOpen} selected={location.pathname === '/teacher/generate-reports'}>
+                  Generate Reports
+                </StyledLink>
               </SubNavItem>
             </>
           )}
           <SidebarNavItem>
-            <SidebarIcon selected={location.pathname === '/teacher/attendance'}><BsCalendar /></SidebarIcon>
-            <StyledLink to="/teacher/attendance" isOpen={isOpen} selected={location.pathname === '/teacher/attendance'}>Attendance</StyledLink>
+            <Link to="/teacher/attendance">
+              <SidebarIcon selected={location.pathname === '/teacher/attendance'}>
+                <BsCalendar />
+              </SidebarIcon>
+            </Link>
+            <StyledLink to="/teacher/attendance" isOpen={isOpen} selected={location.pathname === '/teacher/attendance'}>
+              Attendance
+            </StyledLink>
           </SidebarNavItem>
           <SidebarNavItem>
-            <SidebarIcon selected={location.pathname === '/teacher/announcement'}><BsChatDots /></SidebarIcon>
-            <StyledLink to="/teacher/announcement" isOpen={isOpen} selected={location.pathname === '/teacher/announcement'}>Announcement</StyledLink>
+            <Link to="/teacher/settings">
+              <SidebarIcon selected={location.pathname === '/teacher/settings'}>
+                <BsGear />
+              </SidebarIcon>
+            </Link>
+            <StyledLink to="/teacher/settings" isOpen={isOpen} selected={location.pathname === '/teacher/settings'}>
+              Settings
+            </StyledLink>
           </SidebarNavItem>
           <SidebarNavItem>
-            <SidebarIcon selected={location.pathname === '/teacher/settings'}><BsGear /></SidebarIcon>
-            <StyledLink to="/teacher/settings" isOpen={isOpen} selected={location.pathname === '/teacher/settings'}>Settings</StyledLink>
+            <Link to="/teacher/feedback">
+              <SidebarIcon selected={location.pathname === '/teacher/feedback'}>
+                <BsChatDots />
+              </SidebarIcon>
+            </Link>
+            <StyledLink to="/teacher/feedback" isOpen={isOpen} selected={location.pathname === '/teacher/feedback'}>
+              Feedback
+            </StyledLink>
           </SidebarNavItem>
+          <Spacer />
         </SidebarNav>
       </SidebarContainer>
     </>

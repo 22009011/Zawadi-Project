@@ -110,6 +110,10 @@ const CloseButton = styled.div`
   }
 `;
 
+const Spacer = styled.div`
+  flex-grow: 1;
+`;
+
 const AdminSidebar = ({ onToggle }) => {
   const [isOpen, setIsOpen] = useState(false);
   const location = useLocation();
@@ -133,41 +137,96 @@ const AdminSidebar = ({ onToggle }) => {
         </CloseButton>
         <SidebarNav>
           <SidebarNavItem>
-            <SidebarIcon selected={location.pathname === '/admin/dashboard'}><BsGraphUp /></SidebarIcon>
-            <StyledLink to="/admin/dashboard" isOpen={isOpen} selected={location.pathname === '/admin/dashboard'}>Dashboard</StyledLink>
+            <Link to="/admin/dashboard">
+              <SidebarIcon selected={location.pathname === '/admin/dashboard'}>
+                <BsGraphUp />
+              </SidebarIcon>
+            </Link>
+            <StyledLink to="/admin/dashboard" isOpen={isOpen} selected={location.pathname === '/admin/dashboard'}>
+              Dashboard
+            </StyledLink>
           </SidebarNavItem>
           <SidebarNavItem>
-            <SidebarIcon selected={location.pathname === '/admin/classes'}><BsPeople /></SidebarIcon>
-            <StyledLink to="/admin/classes" isOpen={isOpen} selected={location.pathname === '/admin/classes'}>Classes</StyledLink>
+            <Link to="/admin/classes">
+              <SidebarIcon selected={location.pathname === '/admin/classes'}>
+                <BsPeople />
+              </SidebarIcon>
+            </Link>
+            <StyledLink to="/admin/classes" isOpen={isOpen} selected={location.pathname === '/admin/classes'}>
+              Classes
+            </StyledLink>
           </SidebarNavItem>
           <SidebarNavItem>
-            <SidebarIcon selected={location.pathname === '/admin/students'}><BsPeople /></SidebarIcon>
-            <StyledLink to="/admin/students" isOpen={isOpen} selected={location.pathname === '/admin/students'}>Students</StyledLink>
+            <Link to="/admin/students">
+              <SidebarIcon selected={location.pathname === '/admin/students'}>
+                <BsPeople />
+              </SidebarIcon>
+            </Link>
+            <StyledLink to="/admin/students" isOpen={isOpen} selected={location.pathname === '/admin/students'}>
+              Students
+            </StyledLink>
           </SidebarNavItem>
           <SidebarNavItem>
-            <SidebarIcon selected={location.pathname === '/admin/teachers'}><BsPerson /></SidebarIcon>
-            <StyledLink to="/admin/teachers" isOpen={isOpen} selected={location.pathname === '/admin/teachers'}>Teachers</StyledLink>
+            <Link to="/admin/teachers">
+              <SidebarIcon selected={location.pathname === '/admin/teachers'}>
+                <BsPerson />
+              </SidebarIcon>
+            </Link>
+            <StyledLink to="/admin/teachers" isOpen={isOpen} selected={location.pathname === '/admin/teachers'}>
+              Teachers
+            </StyledLink>
           </SidebarNavItem>
           <SidebarNavItem>
-            <SidebarIcon selected={location.pathname === '/admin/reports'}><BsFileText /></SidebarIcon>
-            <StyledLink to="/admin/reports" isOpen={isOpen} selected={location.pathname === '/admin/reports'}>Reports</StyledLink>
+            <Link to="/admin/reports">
+              <SidebarIcon selected={location.pathname === '/admin/reports'}>
+                <BsFileText />
+              </SidebarIcon>
+            </Link>
+            <StyledLink to="/admin/reports" isOpen={isOpen} selected={location.pathname === '/admin/reports'}>
+              Reports
+            </StyledLink>
           </SidebarNavItem>
           <SidebarNavItem>
-            <SidebarIcon selected={location.pathname === '/admin/curriculum-management'}><BsBook /></SidebarIcon>
-            <StyledLink to="/admin/curriculum-management" isOpen={isOpen} selected={location.pathname === '/admin/curriculum-management'}>Curriculum Management</StyledLink>
+            <Link to="/admin/curriculum-management">
+              <SidebarIcon selected={location.pathname === '/admin/curriculum-management'}>
+                <BsBook />
+              </SidebarIcon>
+            </Link>
+            <StyledLink to="/admin/curriculum-management" isOpen={isOpen} selected={location.pathname === '/admin/curriculum-management'}>
+              Curriculum Management
+            </StyledLink>
           </SidebarNavItem>
           <SidebarNavItem>
-            <SidebarIcon selected={location.pathname === '/admin/analytics'}><BsChatDots /></SidebarIcon>
-            <StyledLink to="/admin/analytics" isOpen={isOpen} selected={location.pathname === '/admin/analytics'}>Analytics</StyledLink>
+            <Link to="/admin/analytics">
+              <SidebarIcon selected={location.pathname === '/admin/analytics'}>
+                <BsChatDots />
+              </SidebarIcon>
+            </Link>
+            <StyledLink to="/admin/analytics" isOpen={isOpen} selected={location.pathname === '/admin/analytics'}>
+              Analytics
+            </StyledLink>
           </SidebarNavItem>
           <SidebarNavItem>
-            <SidebarIcon selected={location.pathname === '/admin/communication'}><BsChatDots /></SidebarIcon>
-            <StyledLink to="/admin/communication" isOpen={isOpen} selected={location.pathname === '/admin/communication'}>Announcement</StyledLink>
+            <Link to="/admin/communication">
+              <SidebarIcon selected={location.pathname === '/admin/communication'}>
+                <BsChatDots />
+              </SidebarIcon>
+            </Link>
+            <StyledLink to="/admin/communication" isOpen={isOpen} selected={location.pathname === '/admin/communication'}>
+              Announcement
+            </StyledLink>
           </SidebarNavItem>
           <SidebarNavItem>
-            <SidebarIcon selected={location.pathname === '/admin/settings'}><BsGear /></SidebarIcon>
-            <StyledLink to="/admin/settings" isOpen={isOpen} selected={location.pathname === '/admin/settings'}>Settings & Profile</StyledLink>
+            <Link to="/admin/settings">
+              <SidebarIcon selected={location.pathname === '/admin/settings'}>
+                <BsGear />
+              </SidebarIcon>
+            </Link>
+            <StyledLink to="/admin/settings" isOpen={isOpen} selected={location.pathname === '/admin/settings'}>
+              Settings & Profile
+            </StyledLink>
           </SidebarNavItem>
+          <Spacer />
         </SidebarNav>
       </SidebarContainer>
     </>

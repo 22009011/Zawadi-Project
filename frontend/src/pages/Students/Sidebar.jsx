@@ -127,35 +127,51 @@ const StudentSidebar = () => {
         </CloseButton>
         <SidebarNav>
           <SidebarNavItem>
-            <SidebarIcon selected={location.pathname === '/student/dashboard'} isOpen={isOpen}><BsGraphUp /></SidebarIcon>
+            <Link to="/student/dashboard">
+              <SidebarIcon selected={location.pathname === '/student/dashboard'} isOpen={isOpen}><BsGraphUp /></SidebarIcon>
+            </Link>
             <StyledLink to="/student/dashboard" isOpen={isOpen} selected={location.pathname === '/student/dashboard'}>Dashboard</StyledLink>
           </SidebarNavItem>
           <SidebarNavItem>
-            <SidebarIcon selected={location.pathname === '/student/assignments'} isOpen={isOpen}><BsFileText /></SidebarIcon>
+            <Link to="/student/assignments">
+              <SidebarIcon selected={location.pathname === '/student/assignments'} isOpen={isOpen}><BsFileText /></SidebarIcon>
+            </Link>
             <StyledLink to="/student/assignments" isOpen={isOpen} selected={location.pathname === '/student/assignments'}>Assignments</StyledLink>
           </SidebarNavItem>
           <SidebarNavItem>
-            <SidebarIcon selected={location.pathname === '/student/feedback'} isOpen={isOpen}><BsBook /></SidebarIcon>
+            <Link to="/student/feedback">
+              <SidebarIcon selected={location.pathname === '/student/feedback'} isOpen={isOpen}><BsBook /></SidebarIcon>
+            </Link>
             <StyledLink to="/student/feedback" isOpen={isOpen} selected={location.pathname === '/student/feedback'}>Feedback</StyledLink>
           </SidebarNavItem>
           <SidebarNavItem>
-            <SidebarIcon selected={location.pathname === '/student/grades'} isOpen={isOpen}><BsGraphDown /></SidebarIcon>
+            <Link to="/student/grades">
+              <SidebarIcon selected={location.pathname === '/student/grades'} isOpen={isOpen}><BsGraphDown /></SidebarIcon>
+            </Link>
             <StyledLink to="/student/grades" isOpen={isOpen} selected={location.pathname === '/student/grades'}>Grades</StyledLink>
           </SidebarNavItem>
           <SidebarNavItem>
-            <SidebarIcon selected={location.pathname === '/student/learning-materials'} isOpen={isOpen}><BsCalendar /></SidebarIcon>
+            <Link to="/student/learning-materials">
+              <SidebarIcon selected={location.pathname === '/student/learning-materials'} isOpen={isOpen}><BsCalendar /></SidebarIcon>
+            </Link>
             <StyledLink to="/student/learning-materials" isOpen={isOpen} selected={location.pathname === '/student/learning-materials'}>Learning Materials</StyledLink>
           </SidebarNavItem>
           <SidebarNavItem>
-            <SidebarIcon selected={location.pathname === '/student/attendance'} isOpen={isOpen}><BsPeople /></SidebarIcon>
+            <Link to="/student/attendance">
+              <SidebarIcon selected={location.pathname === '/student/attendance'} isOpen={isOpen}><BsPeople /></SidebarIcon>
+            </Link>
             <StyledLink to="/student/attendance" isOpen={isOpen} selected={location.pathname === '/student/attendance'}>Attendance</StyledLink>
           </SidebarNavItem>
           <SidebarNavItem>
-            <SidebarIcon selected={location.pathname === '/student/communication'} isOpen={isOpen}><BsPerson /></SidebarIcon>
+            <Link to="/student/communication">
+              <SidebarIcon selected={location.pathname === '/student/communication'} isOpen={isOpen}><BsPerson /></SidebarIcon>
+            </Link>
             <StyledLink to="/student/communication" isOpen={isOpen} selected={location.pathname === '/student/communication'}>Announcements</StyledLink>
           </SidebarNavItem>
           <SidebarNavItem>
-            <SidebarIcon selected={location.pathname === '/student/settings'} isOpen={isOpen}><BsGear /></SidebarIcon>
+            <Link to="/student/settings">
+              <SidebarIcon selected={location.pathname === '/student/settings'} isOpen={isOpen}><BsGear /></SidebarIcon>
+            </Link>
             <StyledLink to="/student/settings" isOpen={isOpen} selected={location.pathname === '/student/settings'}>Profile</StyledLink>
           </SidebarNavItem>
         </SidebarNav>
