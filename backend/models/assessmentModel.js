@@ -1,5 +1,6 @@
+// models/assessmentModel.js
 import { DataTypes } from 'sequelize';
-import config from '../config.js'
+import config from '../config.js';
 import School from './schoolModel.js';
 import Teacher from './teachersModel.js';
 import Class from './classModel.js';

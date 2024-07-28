@@ -1,4 +1,3 @@
-// models/teacherModel.js
 import { DataTypes } from 'sequelize';
 import config from '../config.js';
 import School from './schoolModel.js';

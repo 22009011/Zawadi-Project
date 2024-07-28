@@ -1,7 +1,7 @@
 import { DataTypes } from 'sequelize';
 import config from '../config.js';
 import School from './schoolModel.js';
-import Teacher from './teachersModel.js';
+import Teacher from './teachersModel.js'; // Ensure correct path
 
 const { sequelize } = config;
 
@@ -40,6 +40,6 @@ const Class = sequelize.define('Class', {
 });
 
 Class.belongsTo(School, { foreignKey: 'school_id' });
-Class.belongsTo(Teacher, { foreignKey: 'teacherId' }); // Add this line to create the association with Teacher
+Class.belongsTo(Teacher, { foreignKey: 'teacherId' }); // Ensure correct foreign key
 
 export default Class;
