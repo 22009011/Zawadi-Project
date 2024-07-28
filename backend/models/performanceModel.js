@@ -1,4 +1,3 @@
-// models/performanceModel.js
 import { DataTypes } from 'sequelize';
 import config from '../config.js';
 import Student from './studentModel.js';
@@ -46,9 +45,11 @@ const Performance = sequelize.define('Performance', {
     },
   },
 }, {
-  timestamps: true, // Enable Sequelize's automatic timestamps
+  timestamps: true,
 });
 
 Performance.belongsTo(School, { foreignKey: 'school_id' });
+Performance.belongsTo(Student, { foreignKey: 'student_id' });
+Performance.belongsTo(Class, { foreignKey: 'class_id' });
 
 export default Performance;

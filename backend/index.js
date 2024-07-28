@@ -22,6 +22,7 @@ import attendanceRecordRouter from './routers/attendanceRecordRouter.js';
 import assignmentsRouter from './routers/assignmentsRouter.js';
 import assessmentReportRouter from './routers/assessmentReportRouter.js';
 import announcementRouter from './routers/announcementRouter.js';
+import assessmentRouter from './routers/assessmentRouter.js'
 import config from './config.js';
 
 dotenv.config();
@@ -49,7 +50,7 @@ app.use('/api/students', studentRouter);
 app.use('/api/student-assignments', studentAssignmentsRouter);
 app.use('/api/schools', schoolRouter);
 app.use('/api/progress', progressRouter);
-app.use('/api/performances', performanceRouter); 
+app.use('/api/performances', performanceRouter);
 app.use('/api/lesson-plans', lessonPlansRouter);
 app.use('/api/learning-materials', learningMaterialsRouter);
 app.use('/api/grades', gradesRouter);
@@ -62,7 +63,8 @@ app.use('/api/classes', classRouter);
 app.use('/api/attendance-records', attendanceRecordRouter);
 app.use('/api/assignments', assignmentsRouter); 
 app.use('/api/assessment-reports', assessmentReportRouter);
-app.use('/api/announcements', announcementRouter);
+app.use('/api/announcements', announcementRouter); 
+app.use('/api/assessment', assessmentRouter);
 
 
 // Sync database 

@@ -1,5 +1,3 @@
-// Performance.js
-
 import React, { useState } from 'react';
 import styled from 'styled-components';
 import PerformanceSection from './PerformanceSection';
@@ -35,7 +33,7 @@ const Button = styled.button`
 `;
 
 const Performance = () => {
-  const [showPerformanceData, setShowPerformanceData] = useState(false);
+  const [showPerformanceData, setShowPerformanceData] = useState(true);
   const [showEnterMarks, setShowEnterMarks] = useState(false);
 
   const handleShowPerformanceData = () => {

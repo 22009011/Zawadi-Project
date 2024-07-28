@@ -1,5 +1,6 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import styled from 'styled-components';
+import axios from 'axios';
 
 const AssessmentsContainer = styled.div`
   max-width: 800px;
@@ -23,7 +24,7 @@ const ButtonGroup = styled.div`
 `;
 
 const Button = styled.button`
-  background-color: ${({ active }) => (active ? '#6BD4E7' : '#ccc')};
+  background-color: ${({ isActive }) => (isActive ? '#6BD4E7' : '#ccc')};
   color: white;
   border: none;
   padding: 10px 20px;
@@ -32,7 +33,7 @@ const Button = styled.button`
   transition: background-color 0.3s ease;
 
   &:hover {
-    background-color: ${({ active }) => (active ? '#4CAAB1' : '#bbb')};
+    background-color: ${({ isActive }) => (isActive ? '#4CAAB1' : '#bbb')};
   }
 `;
 
@@ -49,6 +50,13 @@ const Label = styled.label`
 `;
 
 const Input = styled.input`
+  width: 100%;
+  padding: 8px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+`;
+
+const Select = styled.select`
   width: 100%;
   padding: 8px;
   border: 1px solid #ccc;
@@ -81,8 +89,32 @@ const Assessments = () => {
   const [newAssessment, setNewAssessment] = useState({
     title: '',
     description: '',
-    type: '',
+    classId: '',
+    subject: '',
+    date: '',
+    duration: '',
+    totalMarks: '',
+    teacherId: '',
+    studentId: '',
   });
+  const [classes, setClasses] = useState([]);
+  const [teachers, setTeachers] = useState([]);
+  const [students, setStudents] = useState([]);
+
+  useEffect(() => {
+    // Fetch data for classes, teachers, and students from the backend
+    axios.get('http://localhost:5000/api/classes')
+      .then(response => setClasses(response.data))
+      .catch(error => console.error('Error fetching classes:', error));
+
+    axios.get('http://localhost:5000/api/teachers')
+      .then(response => setTeachers(response.data))
+      .catch(error => console.error('Error fetching teachers:', error));
+
+    axios.get('http://localhost:5000/api/students')
+      .then(response => setStudents(response.data))
+      .catch(error => console.error('Error fetching students:', error));
+  }, []);
 
   const handleTabChange = (tab) => {
     setActiveTab(tab);
@@ -95,37 +127,40 @@ const Assessments = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    // Here you would implement logic to send newAssessment to the backend or update state accordingly
-    console.log('New Assessment:', newAssessment);
-    // Clear form after submission
-    setNewAssessment({
-      title: '',
-      description: '',
-      type: '',
-    });
+    axios.post('http://localhost:5000/api/assessment', newAssessment)
+      .then(response => {
+        console.log('New Assessment created:', response.data);
+        // Clear form after submission
+        setNewAssessment({
+          title: '',
+          description: '',
+          classId: '',
+          subject: '',
+          date: '',
+          duration: '',
+          totalMarks: '',
+          teacherId: '',
+          studentId: '',
+        });
+      })
+      .catch(error => console.error('Error creating assessment:', error));
   };
 
   return (
     <AssessmentsContainer>
       <SectionTitle>Assessments</SectionTitle>
       <ButtonGroup>
-        <Button active={activeTab === 'summative'} onClick={() => handleTabChange('summative')}>
+        <Button isActive={activeTab === 'summative'} onClick={() => handleTabChange('summative')}>
           Summative Assessments
         </Button>
-        <Button active={activeTab === 'formative'} onClick={() => handleTabChange('formative')}>
+        <Button isActive={activeTab === 'formative'} onClick={() => handleTabChange('formative')}>
           Formative Assessments
         </Button>
       </ButtonGroup>
       {activeTab === 'summative' && (
         <div>
           <h3>Summative Assessments Content</h3>
-          <p>Here teachers can view and send Summative assessments.</p>
-        </div>
-      )}
-      {activeTab === 'formative' && (
-        <div>
-          <h3>Formative Assessments Content</h3>
-          <p>Here teachers can view and send Formative assessments.</p>
+          <p>Here teachers can create, view, assign, and submit results for Summative assessments.</p>
           <FormContainer>
             <form onSubmit={handleSubmit}>
               <FormGroup>
@@ -149,18 +184,101 @@ const Assessments = () => {
                 />
               </FormGroup>
               <FormGroup>
-                <Label>Type:</Label>
+                <Label>Class ID:</Label>
+                <Select
+                  name="classId"
+                  value={newAssessment.classId}
+                  onChange={handleChange}
+                  required
+                >
+                  <option value="">Select Class</option>
+                  {classes.map((classItem) => (
+                    <option key={classItem.id} value={classItem.id}>
+                      {classItem.name}
+                    </option>
+                  ))}
+                </Select>
+              </FormGroup>
+              <FormGroup>
+                <Label>Subject:</Label>
                 <Input
                   type="text"
-                  name="type"
-                  value={newAssessment.type}
+                  name="subject"
+                  value={newAssessment.subject}
                   onChange={handleChange}
                   required
                 />
               </FormGroup>
+              <FormGroup>
+                <Label>Date:</Label>
+                <Input
+                  type="date"
+                  name="date"
+                  value={newAssessment.date}
+                  onChange={handleChange}
+                  required
+                />
+              </FormGroup>
+              <FormGroup>
+                <Label>Duration:</Label>
+                <Input
+                  type="text"
+                  name="duration"
+                  value={newAssessment.duration}
+                  onChange={handleChange}
+                  required
+                />
+              </FormGroup>
+              <FormGroup>
+                <Label>Total Marks:</Label>
+                <Input
+                  type="number"
+                  name="totalMarks"
+                  value={newAssessment.totalMarks}
+                  onChange={handleChange}
+                  required
+                />
+              </FormGroup>
+              <FormGroup>
+                <Label>Teacher ID:</Label>
+                <Select
+                  name="teacherId"
+                  value={newAssessment.teacherId}
+                  onChange={handleChange}
+                  required
+                >
+                  <option value="">Select Teacher</option>
+                  {teachers.map((teacher) => (
+                    <option key={teacher.id} value={teacher.id}>
+                      {teacher.name}
+                    </option>
+                  ))}
+                </Select>
+              </FormGroup>
+              <FormGroup>
+                <Label>Student ID:</Label>
+                <Select
+                  name="studentId"
+                  value={newAssessment.studentId}
+                  onChange={handleChange}
+                >
+                  <option value="">Select Student (optional)</option>
+                  {students.map((student) => (
+                    <option key={student.id} value={student.id}>
+                      {student.name}
+                    </option>
+                  ))}
+                </Select>
+              </FormGroup>
               <SubmitButton type="submit">Create Assessment</SubmitButton>
             </form>
           </FormContainer>
+        </div>
+      )}
+      {activeTab === 'formative' && (
+        <div>
+          <h3>Formative Assessments Content</h3>
+          <p>Here teachers can view and send Formative assessments.</p>
         </div>
       )}
     </AssessmentsContainer>
@@ -168,3 +286,18 @@ const Assessments = () => {
 };
 
 export default Assessments;
+
+
+//Test it on my postman
+
+// {
+//   "title": "Math Assessment 1",
+//   "description": "Chapter 1: Algebra",
+//   "classId": 1,
+//   "subject": "Mathematics",
+//   "date": "2024-08-01",
+//   "duration": 60,
+//   "totalMarks": 100,
+//   "teacherId": 1,
+//   "studentId": 1
+// }

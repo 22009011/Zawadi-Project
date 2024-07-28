@@ -74,21 +74,50 @@ const DownloadButton = styled.button`
 const MyDocument = ({ schoolName, studentName, admissionNumber, grades }) => (
   <Document>
     <Page style={styles.page}>
-      <View style={styles.section}>
-        <Text>{schoolName}</Text>
-        <Text>{studentName}</Text>
-        <Text>Admission Number: {admissionNumber}</Text>
-        <View style={styles.table}>
-          <Text style={styles.tableHeader}>Subject</Text>
-          <Text style={styles.tableHeader}>Marks</Text>
-          {grades.map((grade, index) => (
-            <View key={index} style={styles.tableRow}>
-              <Text style={styles.tableCell}>{grade.subject}</Text>
-              <Text style={styles.tableCell}>{grade.grade}</Text>
-            </View>
-          ))}
+      <View style={styles.header}>
+        <Text style={styles.title}>REPORT CARD</Text>
+        <Text style={styles.schoolName}>{schoolName}</Text>
+      </View>
+      <View style={styles.studentInfo}>
+        <View style={styles.studentInfoRow}>
+          <Text style={styles.label}>Name:</Text>
+          <Text style={styles.value}>{studentName}</Text>
         </View>
-        <Text>Additional descriptive data here (e.g., Average, Below Average)</Text>
+        <View style={styles.studentInfoRow}>
+          <Text style={styles.label}>Admission Number:</Text>
+          <Text style={styles.value}>{admissionNumber}</Text>
+        </View>
+        <View style={styles.studentInfoRow}>
+          <Text style={styles.label}>Adviser:</Text>
+          <Text style={styles.value}>[Adviser Name]</Text>
+        </View>
+        <View style={styles.studentInfoRow}>
+          <Text style={styles.label}>Grading Period:</Text>
+          <Text style={styles.value}>[Grading Period]</Text>
+        </View>
+      </View>
+      <View style={styles.table}>
+        <View style={styles.tableRowHeader}>
+          <Text style={styles.tableHeader}>Subject</Text>
+          <Text style={styles.tableHeader}>Grade</Text>
+          <Text style={styles.tableHeader}>Feedback</Text>
+        </View>
+        {grades.map((grade, index) => (
+          <View key={index} style={styles.tableRow}>
+            <Text style={styles.tableCell}>{grade.subject}</Text>
+            <Text style={styles.tableCell}>{grade.grade}</Text>
+            <Text style={styles.tableCell}>{grade.feedback || '-'}</Text>
+          </View>
+        ))}
+      </View>
+      <View style={styles.footer}>
+        <Text style={styles.gradingScaleTitle}>Grading Scale:</Text>
+        <Text style={styles.gradingScale}>A+: 96-100, A: 91-95, A-: 86-90</Text>
+        <Text style={styles.gradingScale}>B+: 81-85, B: 76-80, C: 71-75</Text>
+        <Text style={styles.gradingScale}>D: 66-70, F: 65 and below</Text>
+        <Text style={styles.daysInfo}>Total Days of School: [Total Days]</Text>
+        <Text style={styles.daysInfo}>Days Attended: [Days Attended]</Text>
+        <Text style={styles.daysInfo}>Days Absent: [Days Absent]</Text>
       </View>
     </Page>
   </Document>
@@ -198,12 +227,34 @@ export default GenerateReport;
 // Styles for PDF Document
 const styles = StyleSheet.create({
   page: {
-    padding: 20,
+    padding: 30,
     backgroundColor: '#fff',
   },
-  section: {
-    margin: 10,
-    padding: 10,
+  header: {
+    textAlign: 'center',
+    marginBottom: 20,
+  },
+  title: {
+    fontSize: 24,
+    fontWeight: 'bold',
+  },
+  schoolName: {
+    fontSize: 18,
+    marginTop: 5,
+  },
+  studentInfo: {
+    marginBottom: 20,
+  },
+  studentInfoRow: {
+    flexDirection: 'row',
+    marginBottom: 5,
+  },
+  label: {
+    width: '30%',
+    fontWeight: 'bold',
+  },
+  value: {
+    width: '70%',
   },
   table: {
     display: 'table',
@@ -211,12 +262,14 @@ const styles = StyleSheet.create({
     borderCollapse: 'collapse',
     marginTop: 10,
   },
+  tableRowHeader: {
+    flexDirection: 'row',
+    backgroundColor: '#f2f2f2',
+  },
   tableHeader: {
-    borderBottomWidth: 1,
-    borderBottomColor: '#000',
-    borderBottomStyle: 'solid',
     margin: 'auto',
     marginTop: 5,
+    padding: 5,
     fontSize: 12,
     fontWeight: 'bold',
   },
@@ -226,6 +279,24 @@ const styles = StyleSheet.create({
   tableCell: {
     margin: 'auto',
     marginTop: 5,
+    padding: 5,
     fontSize: 10,
+    borderBottomWidth: 1,
+    borderBottomColor: '#ddd',
+    borderBottomStyle: 'solid',
+  },
+  footer: {
+    marginTop: 20,
+  },
+  gradingScaleTitle: {
+    fontWeight: 'bold',
+    marginBottom: 5,
+  },
+  gradingScale: {
+    fontSize: 12,
+  },
+  daysInfo: {
+    fontSize: 12,
+    marginTop: 5,
   },
 });
