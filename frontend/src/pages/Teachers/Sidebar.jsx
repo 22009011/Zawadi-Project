@@ -4,7 +4,7 @@ import { Link, useLocation } from 'react-router-dom';
 import bg1 from '../../assets/bg1.png';
 import {
   BsGraphUp, BsPeople, BsPerson, BsFileText,
-  BsGraphDown, BsCalendar, BsGear, BsChatDots, BsCaretDown, BsCaretUp
+  BsGraphDown, BsCalendar, BsGear, BsChatDots, BsCaretDown, BsCaretUp, BsBook
 } from 'react-icons/bs';
 
 const SidebarContainer = styled.div`
@@ -205,6 +205,16 @@ const TeacherSidebar = () => {
               Assignments
             </StyledLink>
           </SidebarNavItem>
+          <SidebarNavItem>
+            <Link to="/teacher/view-curriculum">
+              <SidebarIcon selected={location.pathname === '/teacher/view-curriculum'}>
+                <BsBook />
+              </SidebarIcon>
+            </Link>
+            <StyledLink to="/teacher/view-curriculum" isOpen={isOpen} selected={location.pathname === '/teacher/view-curriculum'}>
+              View Curriculum
+            </StyledLink>
+          </SidebarNavItem>
           <SidebarNavItem onClick={toggleAcademicRecords}>
             <SidebarIcon selected={isAcademicRecordsOpen}>
               <BsGraphDown />
@@ -242,7 +252,7 @@ const TeacherSidebar = () => {
                   </SidebarIcon>
                 </Link>
                 <StyledLink to="/teacher/generate-reports" isOpen={isOpen} selected={location.pathname === '/teacher/generate-reports'}>
-                  Generate Reports
+                  Generate Report Cards
                 </StyledLink>
               </SubNavItem>
             </>
@@ -277,8 +287,8 @@ const TeacherSidebar = () => {
               Feedback
             </StyledLink>
           </SidebarNavItem>
-          <Spacer />
         </SidebarNav>
+        <Spacer />
       </SidebarContainer>
     </>
   );

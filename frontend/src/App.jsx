@@ -46,6 +46,7 @@ import AddSchoolForm from './pages/SuperAdminDashboard/AddSchoolForm.jsx';
 import AllSchoolsList from './pages/SuperAdminDashboard/AllSchoolsList.jsx';
 import EnterMarksSection from './pages/Teachers/EnterMarks.jsx';
 import GenerateReport from './pages/Teachers/GenerateReport.jsx';
+import ViewCurriculum from './pages/Teachers/ViewCurriculum.jsx'
 import Layout from './Layout';
 
 // Axios interceptor setup
@@ -101,6 +102,9 @@ const App = () => {
         <Route path="/teacher/performance" element={<Layout><Performance /></Layout>} />
         <Route path="/teacher/enter-marks" element={<Layout><EnterMarksSection /></Layout>} />
         <Route path="/teacher/generate-reports" element={<Layout><GenerateReport /></Layout>} />
+        <Route path="/teacher/view-curriculum/:grade/:subject" element={<Layout><ViewCurriculum /></Layout>} />
+        <Route path="/teacher/view-curriculum" element={<Layout><ViewCurriculum /></Layout>}/>
+        
        
        
         <Route path="/super-admin/advanced-analytics" element={<Layout><AdvancedAnalytics /></Layout>} />
