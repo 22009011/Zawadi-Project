@@ -1,228 +1,304 @@
 import React, { useState, useEffect } from 'react';
-import styled from 'styled-components';
 import axios from 'axios';
-import { ToastContainer, toast } from 'react-toastify';
+import { toast, ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
-import { Link } from 'react-router-dom';
-
-
-const Container = styled.div`
-    padding: 20px;
-`;
-
-const SectionTitle = styled.h2`
-    margin-bottom: 10px;
-`;
-
-const ButtonGroup = styled.div`
-    margin-bottom: 20px;
-`;
-
-const Button = styled.button`
-    margin-right: 10px;
-    padding: 10px 20px;
-    cursor: pointer;
-    background-color: #007BFF;
-    color: white;
-    border: none;
-    border-radius: 5px;
-    &:hover {
-        background-color: #0056b3;
-    }
-`;
-
-const CurriculumSection = styled.div`
-    margin-bottom: 20px;
-`;
-
-const LessonPlan = styled.div`
-    margin-top: 10px;
-    padding: 10px;
-    border: 1px solid #ccc;
-    border-radius: 5px;
-`;
-
-const Schedule = styled.div`
-    margin-top: 20px;
-    padding: 10px;
-    border: 1px solid #ccc;
-    border-radius: 5px;
-`;
-
-const Form = styled.form`
-    display: flex;
-    flex-direction: column;
-    margin-bottom: 20px;
-`;
-
-const Input = styled.input`
-    margin-bottom: 10px;
-    padding: 8px;
-    border: 1px solid #ccc;
-    border-radius: 4px;
-`;
-
-const TextArea = styled.textarea`
-    margin-bottom: 10px;
-    padding: 8px;
-    border: 1px solid #ccc;
-    border-radius: 4px;
-`;
-
-const AllCurriculumsButton = styled(Link)`
-    display: block;
-    margin-top: 20px;
-    padding: 10px 20px;
-    cursor: pointer;
-    background-color: #007BFF;
-    color: white;
-    border: none;
-    border-radius: 5px;
-    text-align: center;
-    text-decoration: none;
-    &:hover {
-        background-color: #0056b3;
-    }
-    position: fixed;
-    bottom: 20px;
-    right: 20px;
-`;
+import Sidebar from './Sidebar';
+import {
+  CurriculumContainer,
+  Content,
+  CurriculumContent,
+  CurriculumHeader,
+  CurriculumList,
+  CurriculumItem,
+  CurriculumDetails,
+  Actions,
+  AddCurriculumForm,
+  AddCurriculumInput,
+  AddCurriculumButton,
+  Select,
+  DeleteButton,
+  UpdateButton,
+  IconWrapper,
+  SubTopicWrapper,
+  AddSubTopicButton,
+  OptionalText,
+} from '../../styles/CurriculumStyles';
+import { FaTrash, FaEdit, FaPlus } from 'react-icons/fa';
 
 const CurriculumManagement = () => {
-    const [selectedSection, setSelectedSection] = useState('Early Years');
-    const [curriculumEntries, setCurriculumEntries] = useState([]);
-    const [section, setSection] = useState('');
-    const [grade, setGrade] = useState('');
-    const [subject, setSubject] = useState('');
-    const [lesson, setLesson] = useState('');
-    const [timetable, setTimetable] = useState('');
+  const [newCurriculum, setNewCurriculum] = useState({
+    section: '',
+    grade: '',
+    subject: '',
+    lesson: '',
+    topic: '',
+    subTopics: [''], // Initialize with one empty subTopic
+    teacherId: '',
+    timetable: '',
+    class_id: '',
+  });
+  const [curriculums, setCurriculums] = useState([]);
+  const [subjects, setSubjects] = useState([]);
+  const [classes, setClasses] = useState([]);
+  const [teachers, setTeachers] = useState([]);
 
-    useEffect(() => {
-        fetchCurriculumEntries();
-    }, []);
+  useEffect(() => {
+    fetchCurriculums();
+    fetchSubjects();
+    fetchClasses();
+    fetchTeachers();
+  }, []);
 
-    const fetchCurriculumEntries = async () => {
-        try {
-            const response = await axios.get('http://localhost:5000/api/curriculum-entries');
-            setCurriculumEntries(response.data);
-            toast.success('Curriculum entries fetched successfully!');
-        } catch (error) {
-            toast.error('Error fetching curriculum entries.');
-            console.error('Error fetching curriculum entries:', error);
-        }
-    };
+  const fetchCurriculums = async () => {
+    try {
+      const response = await axios.get('http://localhost:5000/api/curriculums');
+      setCurriculums(response.data);
+    } catch (error) {
+      console.error('Error fetching curriculums:', error);
+    }
+  };
 
-    const addCurriculumEntry = async (e) => {
-        e.preventDefault();
-        try {
-            const response = await axios.post('http://localhost:5000/api/curriculum-entries', {
-                section,
-                grade,
-                subject,
-                lesson,
-                timetable,
-            });
-            setCurriculumEntries([...curriculumEntries, response.data]);
-            // Clear form inputs after successful addition
-            setSection('');
-            setGrade('');
-            setSubject('');
-            setLesson('');
-            setTimetable('');
-            toast.success('Curriculum entry added successfully!');
-        } catch (error) {
-            toast.error('Error adding curriculum entry.');
-            console.error('Error adding curriculum entry:', error);
-        }
-    };
+  const fetchSubjects = async () => {
+    // Example subjects
+    setSubjects([
+      { id: 1, name: 'Mathematics' },
+      { id: 2, name: 'Science' },
+      { id: 3, name: 'History' },
+      { id: 4, name: 'English' },
+      { id: 5, name: 'Geography' },
+    ]);
+  };
 
-    const deleteCurriculumEntry = async (id) => {
-        try {
-            await axios.delete(`http://localhost:5000/api/curriculum-entries/${id}`);
-            setCurriculumEntries(curriculumEntries.filter(entry => entry.id !== id));
-            toast.success('Curriculum entry deleted successfully!');
-        } catch (error) {
-            toast.error('Error deleting curriculum entry.');
-            console.error('Error deleting curriculum entry:', error);
-        }
-    };
+  const fetchClasses = async () => {
+    try {
+      const response = await axios.get('http://localhost:5000/api/classes');
+      setClasses(response.data);
+    } catch (error) {
+      console.error('Error fetching classes:', error);
+    }
+  };
 
-    const handleSectionChange = (section) => {
-        setSelectedSection(section);
-    };
+  const fetchTeachers = async () => {
+    try {
+      const response = await axios.get('http://localhost:5000/api/teachers');
+      setTeachers(response.data);
+    } catch (error) {
+      toast.error('Error fetching teachers.');
+      console.error('Error fetching teachers:', error);
+    }
+  };
 
-    return (
-        <Container>
-            
-            <ToastContainer />
-            <SectionTitle>Curriculum Management</SectionTitle>
-            <ButtonGroup>
-                <Button onClick={() => handleSectionChange('Early Years')}>Early Years</Button>
-                <Button onClick={() => handleSectionChange('Middle School')}>Middle School</Button>
-                <Button onClick={() => handleSectionChange('Junior Secondary')}>Junior Secondary</Button>
-            </ButtonGroup>
+  const handleAddCurriculum = async (e) => {
+    e.preventDefault();
+    const { section, grade, subject, lesson, topic, subTopics, teacherId, timetable, class_id } = newCurriculum;
 
-            <Form onSubmit={addCurriculumEntry}>
-                <h3>Add New Curriculum Entry</h3>
-                <Input
-                    type="text"
-                    placeholder="Section"
-                    value={section}
-                    onChange={(e) => setSection(e.target.value)}
-                    required
+    if (subject && topic && subTopics.length > 0 && teacherId && timetable && class_id) {
+      try {
+        const response = await axios.post('http://localhost:5000/api/curriculums', {
+          section,
+          grade,
+          subject,
+          lesson,
+          topic,
+          subTopics,
+          teacherId,
+          timetable,
+          class_id,
+        }, {
+          headers: {
+            'Content-Type': 'application/json',
+          },
+        });
+        setCurriculums([...curriculums, response.data]);
+        setNewCurriculum({
+          section: '',
+          grade: '',
+          subject: '',
+          lesson: '',
+          topic: '',
+          subTopics: [''], // Reset to one empty subTopic
+          teacherId: '',
+          timetable: '',
+          class_id: '',
+        });
+        toast.success('Curriculum added successfully', { autoClose: 2000 });
+      } catch (error) {
+        console.error('Error adding curriculum:', error.response?.data || error.message);
+        toast.error('Failed to add curriculum');
+      }
+    } else {
+      toast.error('Please fill in all required fields');
+    }
+  };
+
+  const handleDeleteCurriculum = async (id) => {
+    try {
+      await axios.delete(`http://localhost:5000/api/curriculums/${id}`);
+      setCurriculums(curriculums.filter((curriculum) => curriculum.id !== id));
+      toast.success('Curriculum deleted successfully', { autoClose: 2000 });
+    } catch (error) {
+      console.error('Error deleting curriculum:', error);
+      toast.error('Failed to delete curriculum');
+    }
+  };
+
+  const handleUpdateCurriculum = async (id, updatedCurriculum) => {
+    try {
+      const response = await axios.put(`http://localhost:5000/api/curriculums/${id}`, updatedCurriculum);
+      setCurriculums(curriculums.map((curriculum) => (curriculum.id === id ? response.data : curriculum)));
+      toast.success('Curriculum updated successfully', { autoClose: 2000 });
+    } catch (error) {
+      console.error('Error updating curriculum:', error);
+      toast.error('Failed to update curriculum');
+    }
+  };
+
+  const handleAddSubTopic = () => {
+    setNewCurriculum((prev) => ({
+      ...prev,
+      subTopics: [...prev.subTopics, ''],
+    }));
+  };
+
+  const handleSubTopicChange = (index, value) => {
+    const updatedSubTopics = [...newCurriculum.subTopics];
+    updatedSubTopics[index] = value;
+    setNewCurriculum((prev) => ({
+      ...prev,
+      subTopics: updatedSubTopics,
+    }));
+  };
+
+  return (
+    <CurriculumContainer>
+      <ToastContainer />
+      <Sidebar />
+      <Content>
+        <CurriculumContent>
+          <CurriculumHeader>Curriculum Management</CurriculumHeader>
+          <AddCurriculumForm onSubmit={handleAddCurriculum}>
+            <AddCurriculumInput
+              type="text"
+              placeholder="Enter section (optional)"
+              value={newCurriculum.section}
+              onChange={(e) => setNewCurriculum({ ...newCurriculum, section: e.target.value })}
+            />
+            <Select
+              value={newCurriculum.grade}
+              onChange={(e) => setNewCurriculum({ ...newCurriculum, grade: e.target.value })}
+              required
+            >
+              <option value="" disabled>Select class</option>
+              {classes.map((classItem) => (
+                <option key={classItem.id} value={classItem.id}>
+                  {classItem.grade}
+                </option>
+              ))}
+            </Select>
+            <Select
+              value={newCurriculum.subject}
+              onChange={(e) => setNewCurriculum({ ...newCurriculum, subject: e.target.value })}
+              required
+            >
+              <option value="" disabled>Select subject</option>
+              {subjects.map((subject) => (
+                <option key={subject.id} value={subject.name}>
+                  {subject.name}
+                </option>
+              ))}
+            </Select>
+            <AddCurriculumInput
+              type="text"
+              placeholder="Enter lesson (optional)"
+              value={newCurriculum.lesson}
+              onChange={(e) => setNewCurriculum({ ...newCurriculum, lesson: e.target.value })}
+            />
+            <AddCurriculumInput
+              type="text"
+              placeholder="Enter topic"
+              value={newCurriculum.topic}
+              onChange={(e) => setNewCurriculum({ ...newCurriculum, topic: e.target.value })}
+              required
+            />
+            <SubTopicWrapper>
+              {newCurriculum.subTopics.map((subTopic, index) => (
+                <AddCurriculumInput
+                  key={index}
+                  type="text"
+                  placeholder={`Enter sub-topic ${index + 1}`}
+                  value={subTopic}
+                  onChange={(e) => handleSubTopicChange(index, e.target.value)}
+                  required
                 />
-                <Input
-                    type="text"
-                    placeholder="Grade"
-                    value={grade}
-                    onChange={(e) => setGrade(e.target.value)}
-                    required
-                />
-                <Input
-                    type="text"
-                    placeholder="Subject"
-                    value={subject}
-                    onChange={(e) => setSubject(e.target.value)}
-                    required
-                />
-                <Input
-                    type="text"
-                    placeholder="Lesson"
-                    value={lesson}
-                    onChange={(e) => setLesson(e.target.value)}
-                />
-                <TextArea
-                    placeholder="Timetable"
-                    value={timetable}
-                    onChange={(e) => setTimetable(e.target.value)}
-                />
-                <Button type="submit">Add Entry</Button>
-            </Form>
-
-            {curriculumEntries
-                .filter(entry => entry.section === selectedSection)
-                .map((entry, index) => (
-                    <CurriculumSection key={index}>
-                        <h3>{entry.grade}</h3>
-                        <ul>
-                            <li>{entry.subject}</li>
-                        </ul>
-                        <LessonPlan>
-                            <h4>Lesson Plans</h4>
-                            <ul>
-                                <li>{entry.lesson}</li>
-                            </ul>
-                        </LessonPlan>
-                        <Schedule>
-                            <h4>Timetable</h4>
-                            <p>{entry.timetable}</p>
-                        </Schedule>
-                        <Button onClick={() => deleteCurriculumEntry(entry.id)}>Delete</Button>
-                    </CurriculumSection>
-                ))}
-            <AllCurriculumsButton to="/admin/all-curriculums">All Curriculums</AllCurriculumsButton>
-        </Container>
-    );
-}
+              ))}
+              <AddSubTopicButton type="button" onClick={handleAddSubTopic}>
+                Add Sub-Topic <FaPlus />
+              </AddSubTopicButton>
+            </SubTopicWrapper>
+            <Select
+              value={newCurriculum.teacherId}
+              onChange={(e) => setNewCurriculum({ ...newCurriculum, teacherId: e.target.value })}
+              required
+            >
+              <option value="">Select Teacher</option>
+              {teachers.map((teacher) => (
+                <option key={teacher.id} value={teacher.id}>
+                  {teacher.name}
+                </option>
+              ))}
+            </Select>
+            <AddCurriculumInput
+              type="text"
+              placeholder="Enter timetable"
+              value={newCurriculum.timetable}
+              onChange={(e) => setNewCurriculum({ ...newCurriculum, timetable: e.target.value })}
+              required
+            />
+            <Select
+              value={newCurriculum.class_id}
+              onChange={(e) => setNewCurriculum({ ...newCurriculum, class_id: e.target.value })}
+              required
+            >
+              <option value="" disabled>Select Class ID</option>
+              {classes.map((classItem) => (
+                <option key={classItem.id} value={classItem.id}>
+                  {classItem.grade}
+                </option>
+              ))}
+            </Select>
+            <OptionalText>Section and Lesson are optional.</OptionalText>
+            <AddCurriculumButton type="submit">Add Curriculum</AddCurriculumButton>
+          </AddCurriculumForm>
+          <CurriculumList>
+            {curriculums.map((curriculum) => (
+              <CurriculumItem key={curriculum.id}>
+                <CurriculumDetails>
+                  <h3>{curriculum.topic}</h3>
+                  <p>Subject: {curriculum.subject}</p>
+                  <p>Teacher: {curriculum.teacher.name}</p>
+                  <p>Timetable: {curriculum.timetable}</p>
+                </CurriculumDetails>
+                <Actions>
+                  <IconWrapper>
+                    <UpdateButton
+                      onClick={() => handleUpdateCurriculum(curriculum.id, curriculum)}
+                    >
+                      <FaEdit />
+                    </UpdateButton>
+                    <DeleteButton
+                      onClick={() => handleDeleteCurriculum(curriculum.id)}
+                    >
+                      <FaTrash />
+                    </DeleteButton>
+                  </IconWrapper>
+                </Actions>
+              </CurriculumItem>
+            ))}
+          </CurriculumList>
+        </CurriculumContent>
+      </Content>
+    </CurriculumContainer>
+  );
+};
 
 export default CurriculumManagement;
