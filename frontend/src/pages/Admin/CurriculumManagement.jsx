@@ -32,7 +32,7 @@ const CurriculumManagement = () => {
     subject: '',
     lesson: '',
     topic: '',
-    subTopics: [''], // Initialize with one empty subTopic
+    subTopics: [''], 
     teacherId: '',
     timetable: '',
     class_id: '',
@@ -94,7 +94,7 @@ const CurriculumManagement = () => {
 
     if (subject && topic && subTopics.length > 0 && teacherId && timetable && class_id) {
       try {
-        const response = await axios.post('http://localhost:5000/api/curriculums', {
+        const response = await axios.post('http://localhost:5000/api/curriculum-entries', {
           section,
           grade,
           subject,
@@ -302,3 +302,4 @@ const CurriculumManagement = () => {
 };
 
 export default CurriculumManagement;
+

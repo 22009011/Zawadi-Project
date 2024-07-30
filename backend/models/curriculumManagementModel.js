@@ -29,6 +29,10 @@ const CurriculumEntry = sequelize.define('CurriculumEntry', {
   timetable: {
     type: DataTypes.TEXT,
   },
+  subTopics: {
+    type: DataTypes.JSON, // Add subTopics as JSON
+    allowNull: true,
+  },
   school_id: {
     type: DataTypes.INTEGER,
     allowNull: false,
@@ -38,7 +42,7 @@ const CurriculumEntry = sequelize.define('CurriculumEntry', {
     },
   },
 }, {
-  timestamps: true, // Enable Sequelize's automatic timestamps
+  timestamps: true,
 });
 
 CurriculumEntry.belongsTo(School, { foreignKey: 'school_id' });

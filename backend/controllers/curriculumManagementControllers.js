@@ -4,7 +4,7 @@ import School from '../models/schoolModel.js';
 
 // Create Curriculum Entry
 export const createCurriculumEntry = async (req, res) => {
-  const { section, grade, subject, lesson, timetable } = req.body;
+  const { section, grade, subject, lesson, timetable, subTopics } = req.body;
 
   if (!section || !grade || !subject) {
     return res.status(400).json({ error: 'Section, grade, and subject are required' });
@@ -22,6 +22,7 @@ export const createCurriculumEntry = async (req, res) => {
       subject,
       lesson,
       timetable,
+      subTopics, // Handle subTopics
       school_id: req.school_id,
     });
     res.status(201).json(newCurriculumEntry);
@@ -59,7 +60,7 @@ export const getCurriculumEntryById = async (req, res) => {
 // Update Curriculum Entry
 export const updateCurriculumEntry = async (req, res) => {
   const { id } = req.params;
-  const { section, grade, subject, lesson, timetable } = req.body;
+  const { section, grade, subject, lesson, timetable, subTopics } = req.body;
 
   try {
     const existingCurriculumEntry = await CurriculumEntry.findOne({ where: { id, school_id: req.school_id } });
@@ -70,13 +71,14 @@ export const updateCurriculumEntry = async (req, res) => {
         subject,
         lesson,
         timetable,
+        subTopics, // Handle subTopics
       });
       res.json({ message: 'Curriculum entry updated successfully' });
     } else {
       res.status(404).json({ error: 'Curriculum entry not found' });
     }
   } catch (error) {
-    res.status(500).json({ error: 'Failed to update curriculum entry', details: error.message });
+    res.status500().json({ error: 'Failed to update curriculum entry', details: error.message });
   }
 };
 
@@ -88,7 +90,7 @@ export const deleteCurriculumEntry = async (req, res) => {
     const curriculumEntry = await CurriculumEntry.findOne({ where: { id, school_id: req.school_id } });
     if (curriculumEntry) {
       await curriculumEntry.destroy();
-      res.status(204).end();
+      res.status(204).end(); 
     } else {
       res.status(404).json({ error: 'Curriculum entry not found' });
     }
