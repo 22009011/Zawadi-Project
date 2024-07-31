@@ -106,3 +106,19 @@ export const deleteStudent = async (req, res) => {
     res.status(500).json({ error: 'Failed to delete student', details: error.message });
   }
 };
+
+// Get Students by Class ID (New Method)
+export const getStudentsByClass = async (req, res) => {
+  const { class_id } = req.query;
+
+  try {
+    if (!class_id) {
+      return res.status(400).json({ error: 'Class ID is required' });
+    }
+
+    const students = await Student.findAll({ where: { class_id, school_id: req.school_id } });
+    res.json(students);
+  } catch (error) {
+    res.status(500).json({ error: 'Failed to retrieve students', details: error.message });
+  }
+};

@@ -22,14 +22,15 @@ import attendanceRecordRouter from './routers/attendanceRecordRouter.js';
 import assignmentsRouter from './routers/assignmentsRouter.js';
 import assessmentReportRouter from './routers/assessmentReportRouter.js';
 import announcementRouter from './routers/announcementRouter.js';
-import assessmentRouter from './routers/assessmentRouter.js'
+import assessmentRouter from './routers/assessmentRouter.js';
 import config from './config.js';
+import Student from './models/studentModel.js';
 
 dotenv.config();
 
 const app = express();
 const PORT = config.port;
-const { sequelize } = config;
+const { sequelize } = config; 
 
 app.use(express.json());
 app.use(cors());
@@ -40,6 +41,30 @@ app.use((req, res, next) => {
   console.log("Request Headers:", req.headers);
   console.log("Request Body:", req.body);
   next();
+});
+
+// Define the new route for fetching students by class
+app.get('/api/students-by-class', async (req, res) => {
+  try {
+    const classId = req.query.class_id;
+
+    if (!classId) {
+      return res.status(400).json({ error: 'Class ID is required' });
+    }
+
+    // Fetch students by classId from your database
+    const students = await Student.findAll({ where: { class_id: classId } });
+
+    if (students.length === 0) {
+      return res.status(404).json({ message: 'No students found for the selected class' });
+    }
+
+    // Respond with the student data
+    res.json(students);
+  } catch (error) {
+    console.error('Error fetching students:', error);
+    res.status(500).json({ error: 'Internal Server Error' });
+  }
 });
 
 // Routers
@@ -61,13 +86,12 @@ app.use('/api/communications', communicationRouter);
 app.use('/api/curriculum-entries', curriculumManagementRouter);
 app.use('/api/classes', classRouter);
 app.use('/api/attendance-records', attendanceRecordRouter);
-app.use('/api/assignments', assignmentsRouter); 
+app.use('/api/assignments', assignmentsRouter);
 app.use('/api/assessment-reports', assessmentReportRouter);
-app.use('/api/announcements', announcementRouter); 
+app.use('/api/announcements', announcementRouter);
 app.use('/api/assessment', assessmentRouter);
 
-
-// Sync database 
+// Sync database
 sequelize.sync()
   .then(() => {
     app.listen(PORT, () => {
@@ -77,5 +101,3 @@ sequelize.sync()
   .catch(error => {
     console.error('Unable to connect to the database:', error);
   });
-
-
