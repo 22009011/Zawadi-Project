@@ -1,12 +1,11 @@
 import AttendanceRecord from '../models/attendanceRecordModel.js';
 import School from '../models/schoolModel.js';
 
-// Create Attendance Record
 export const createAttendanceRecord = async (req, res) => {
-  const { student_id, student_name, attendance_date, status } = req.body;
+  const attendanceData = req.body.attendanceData; // Expecting attendanceData in the request body
 
-  if (!student_id || !student_name || !attendance_date || !status) {
-    return res.status(400).json({ error: 'Student ID, name, attendance date, and status are required' });
+  if (!Array.isArray(attendanceData) || attendanceData.length === 0) {
+    return res.status(400).json({ error: 'Attendance data is required and must be an array' });
   }
 
   try {
@@ -15,29 +14,34 @@ export const createAttendanceRecord = async (req, res) => {
       return res.status(404).json({ error: 'School not found' });
     }
 
-    const newAttendanceRecord = await AttendanceRecord.create({
-      student_id,
-      student_name,
-      attendance_date,
-      status,
-      school_id: req.school_id,
-    });
-    res.status(201).json(newAttendanceRecord);
+    const records = await AttendanceRecord.bulkCreate(
+      attendanceData.map(({ student_id, student_name, attendance_date, status }) => ({
+        student_id,
+        student_name,
+        attendance_date,
+        status, 
+        school_id: req.school_id,
+      })),
+      { validate: true } // Validate data before creating
+    );
+
+    res.status(201).json(records);
   } catch (error) {
-    res.status(500).json({ error: 'Failed to create attendance record', details: error.message });
+    res.status(500).json({ error: 'Failed to create attendance records', details: error.message });
   }
 };
 
+
 // Get All Attendance Records for a Student or Parent
 export const getAllAttendanceRecords = async (req, res) => {
-  const { student_id } = req.query; // Filter by student_id if provided
+  const { student_id } = req.query;
 
   try {
     const whereClause = { school_id: req.school_id };
     if (student_id) {
       whereClause.student_id = student_id;
     }
-    
+
     const attendanceRecords = await AttendanceRecord.findAll({ where: whereClause });
     res.json(attendanceRecords);
   } catch (error) {
@@ -50,8 +54,8 @@ export const getAttendanceRecordById = async (req, res) => {
   const { id } = req.params;
 
   try {
-    const attendanceRecord = await AttendanceRecord.findOne({ 
-      where: { id, school_id: req.school_id } 
+    const attendanceRecord = await AttendanceRecord.findOne({
+      where: { id, school_id: req.school_id },
     });
     if (attendanceRecord) {
       res.json(attendanceRecord);
@@ -69,8 +73,8 @@ export const updateAttendanceRecord = async (req, res) => {
   const { student_id, student_name, attendance_date, status } = req.body;
 
   try {
-    const existingAttendanceRecord = await AttendanceRecord.findOne({ 
-      where: { id, school_id: req.school_id } 
+    const existingAttendanceRecord = await AttendanceRecord.findOne({
+      where: { id, school_id: req.school_id },
     });
     if (existingAttendanceRecord) {
       await existingAttendanceRecord.update({
@@ -93,8 +97,8 @@ export const deleteAttendanceRecord = async (req, res) => {
   const { id } = req.params;
 
   try {
-    const attendanceRecord = await AttendanceRecord.findOne({ 
-      where: { id, school_id: req.school_id } 
+    const attendanceRecord = await AttendanceRecord.findOne({
+      where: { id, school_id: req.school_id },
     });
     if (attendanceRecord) {
       await attendanceRecord.destroy();

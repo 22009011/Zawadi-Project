@@ -1,4 +1,3 @@
-// models/attendanceModel.js
 import { DataTypes } from 'sequelize';
 import config from '../config.js';
 import Student from './studentModel.js';
@@ -24,7 +23,7 @@ const Attendance = sequelize.define('Attendance', {
     allowNull: false,
   },
   status: {
-    type: DataTypes.ENUM('Present', 'Absent'),
+    type: DataTypes.ENUM('Present', 'Absent', 'Absent with apology'),
     allowNull: false,
   },
 }, {

@@ -1,4 +1,3 @@
-// CheckAttendanceSection.js
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import TeacherSidebar from './Sidebar';
@@ -12,13 +11,15 @@ import {
   StudentName,
   StatusButton,
   SubmitButton,
-  ClassSelector
+  ClassSelector,
+  DateSelector
 } from '../../styles/CheckAttendanceStyles';
 
 const CheckAttendanceSection = () => {
   const [classes, setClasses] = useState([]);
   const [students, setStudents] = useState([]);
   const [selectedClass, setSelectedClass] = useState('');
+  const [selectedDate, setSelectedDate] = useState('');
   const [attendanceData, setAttendanceData] = useState([]);
 
   useEffect(() => {
@@ -34,12 +35,7 @@ const CheckAttendanceSection = () => {
   const fetchClasses = async () => {
     try {
       const response = await axios.get('http://localhost:5000/api/classes');
-      console.log('Fetched classes:', response.data);
-      if (response.data && Array.isArray(response.data)) {
-        setClasses(response.data);
-      } else {
-        console.error('Invalid classes data:', response.data);
-      }
+      setClasses(response.data);
     } catch (error) {
       console.error('Error fetching classes:', error);
     }
@@ -50,23 +46,14 @@ const CheckAttendanceSection = () => {
       const response = await axios.get('http://localhost:5000/api/students-by-class', {
         params: { class_id: classId },
       });
-      console.log('Fetched students:', response.data);
-      if (response.data && Array.isArray(response.data)) {
-        setStudents(response.data);
-        initializeAttendanceData(response.data);
-      } else {
-        console.error('Invalid students data:', response.data);
-      }
+      setStudents(response.data);
+      initializeAttendanceData(response.data);
     } catch (error) {
       console.error('Error fetching students:', error);
     }
   };
 
   const initializeAttendanceData = (students) => {
-    if (!Array.isArray(students)) {
-      console.error('Invalid students data:', students);
-      return;
-    }
     const initialAttendanceData = students.map((student) => ({
       id: student.id,
       name: student.name,
@@ -86,14 +73,19 @@ const CheckAttendanceSection = () => {
   };
 
   const handleSubmit = async () => {
+    if (!selectedDate) {
+      alert('Please select a date for attendance.');
+      return;
+    }
+
     try {
       const formattedData = attendanceData.map(({ id, name, status }) => ({
         studentId: id,
-        name,
+        date: selectedDate,
         status,
       }));
-      const response = await axios.post('http://localhost:5000/api/attendance', { attendanceData: formattedData });
-      console.log('Attendance data submitted:', response.data);
+      await axios.post('http://localhost:5000/api/attendance', { attendanceData: formattedData });
+      alert('Attendance data submitted successfully.');
     } catch (error) {
       console.error('Error submitting attendance data:', error);
     }
@@ -116,6 +108,14 @@ const CheckAttendanceSection = () => {
               ))}
             </select>
           </ClassSelector>
+          <DateSelector>
+            <label>Select Date: </label>
+            <input
+              type="date"
+              onChange={(e) => setSelectedDate(e.target.value)}
+              value={selectedDate}
+            />
+          </DateSelector>
           {students.length > 0 ? (
             <AttendanceList>
               {students.map((student) => (

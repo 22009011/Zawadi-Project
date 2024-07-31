@@ -28,7 +28,7 @@ const AttendanceRecord = sequelize.define('AttendanceRecord', {
     allowNull: false,
   },
   status: {
-    type: DataTypes.ENUM('Present', 'Absent'),
+    type: DataTypes.ENUM('Present', 'Absent', 'Absent with apology'),
     allowNull: false,
   },
   school_id: {

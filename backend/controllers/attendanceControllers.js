@@ -1,29 +1,33 @@
-// controllers/attendanceController.js
 import Attendance from '../models/attendanceModel.js';
 import Student from '../models/studentModel.js';
 
 // Create Attendance Record
 export const createAttendanceRecord = async (req, res) => {
-  const { student_id, date, status } = req.body;
-
-  if (!student_id || !date || !status) {
-    return res.status(400).json({ error: 'Student ID, date, and status are required fields' });
-  }
+  const { attendanceData } = req.body;
 
   try {
-    const student = await Student.findByPk(student_id);
-    if (!student) {
-      return res.status(404).json({ error: 'Student not found' });
-    }
+    const attendanceRecords = await Promise.all(
+      attendanceData.map(async (record) => {
+        const { studentId, date, status } = record;
 
-    const newAttendanceRecord = await Attendance.create({
-      student_id,
-      date,
-      status,
-    });
-    res.status(201).json(newAttendanceRecord);
+        // Check if student exists
+        const student = await Student.findByPk(studentId);
+        if (!student) {
+          throw new Error(`Student with ID ${studentId} not found`);
+        }
+
+        // Create attendance record
+        return await Attendance.create({
+          student_id: studentId,
+          date,
+          status,
+        });
+      })
+    );
+
+    res.status(201).json(attendanceRecords);
   } catch (error) {
-    res.status(500).json({ error: 'Failed to create attendance record', details: error.message });
+    res.status(500).json({ error: 'Failed to create attendance records', details: error.message });
   }
 };
 

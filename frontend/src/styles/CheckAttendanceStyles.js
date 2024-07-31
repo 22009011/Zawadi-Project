@@ -1,4 +1,3 @@
-// AttendanceStyles.js
 import styled from 'styled-components';
 
 export const AttendanceContainer = styled.div`
@@ -128,5 +127,26 @@ export const ClassSelector = styled.div`
     option {
       color: #333;
     }
+  }
+`;
+
+export const DateSelector = styled.div`
+  margin-bottom: 1em;
+
+  label {
+    font-size: 1em;
+    color: #333;
+    margin-right: 0.5em;
+  }
+
+  input {
+    padding: 0.5em;
+    font-size: 1em;
+    margin-left: 0.5em;
+    background-color: #ffffff;
+    color: #333;
+    border: 1px solid #e1e5e8;
+    border-radius: 5px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
   }
 `;
