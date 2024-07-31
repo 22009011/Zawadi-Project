@@ -4,7 +4,7 @@ import { Link, useLocation } from 'react-router-dom';
 import bg1 from '../../assets/bg1.png';
 import {
   BsGraphUp, BsPeople, BsPerson, BsFileText,
-  BsGraphDown, BsCalendar, BsGear, BsChatDots, BsCaretDown, BsCaretUp, BsBook
+  BsGraphDown, BsCalendar, BsGear, BsChatDots, BsCaretDown, BsCaretUp, BsBook, BsFileEarmarkText, BsCardChecklist
 } from 'react-icons/bs';
 
 const SidebarContainer = styled.div`
@@ -132,6 +132,7 @@ const Spacer = styled.div`
 const TeacherSidebar = () => {
   const [isOpen, setIsOpen] = useState(false);
   const [isAcademicRecordsOpen, setIsAcademicRecordsOpen] = useState(false);
+  const [isReportOpen, setIsReportOpen] = useState(false);
   const location = useLocation();
 
   const toggleSidebar = () => {
@@ -140,6 +141,10 @@ const TeacherSidebar = () => {
 
   const toggleAcademicRecords = () => {
     setIsAcademicRecordsOpen(!isAcademicRecordsOpen);
+  };
+
+  const toggleReport = () => {
+    setIsReportOpen(!isReportOpen);
   };
 
   return (
@@ -242,29 +247,61 @@ const TeacherSidebar = () => {
                   </SidebarIcon>
                 </Link>
                 <StyledLink to="/teacher/performance" isOpen={isOpen} selected={location.pathname === '/teacher/performance'}>
-                  Student Performance Data
-                </StyledLink>
-              </SubNavItem>
-              <SubNavItem>
-                <Link to="/teacher/generate-reports">
-                  <SidebarIcon selected={location.pathname === '/teacher/generate-reports'}>
-                    <BsGraphDown />
-                  </SidebarIcon>
-                </Link>
-                <StyledLink to="/teacher/generate-reports" isOpen={isOpen} selected={location.pathname === '/teacher/generate-reports'}>
-                  Generate Report Cards
+                  Performance
                 </StyledLink>
               </SubNavItem>
             </>
           )}
+          <SidebarNavItem onClick={toggleReport}>
+            <SidebarIcon selected={isReportOpen}>
+              <BsFileEarmarkText />
+            </SidebarIcon>
+            <StyledLink to="#" isOpen={isOpen} selected={isReportOpen}>
+              Report {isReportOpen ? <BsCaretUp /> : <BsCaretDown />}
+            </StyledLink>
+          </SidebarNavItem>
+          {isReportOpen && (
+            <>
+              <SubNavItem>
+                <Link to="/teacher/report-form">
+                  <SidebarIcon selected={location.pathname === '/teacher/report-form'}>
+                    <BsFileEarmarkText />
+                  </SidebarIcon>
+                </Link>
+                <StyledLink to="/teacher/report-form" isOpen={isOpen} selected={location.pathname === '/teacher/report-form'}>
+                  Report Form
+                </StyledLink>
+              </SubNavItem>
+              <SubNavItem>
+                <Link to="/teacher/student-report">
+                  <SidebarIcon selected={location.pathname === '/teacher/student-report'}>
+                    <BsCardChecklist />
+                  </SidebarIcon>
+                </Link>
+                <StyledLink to="/teacher/student-report" isOpen={isOpen} selected={location.pathname === '/teacher/student-report'}>
+                  Student Report
+                </StyledLink>
+              </SubNavItem>  
+            </>
+          )}
           <SidebarNavItem>
-            <Link to="/teacher/attendance">
-              <SidebarIcon selected={location.pathname === '/teacher/attendance'}>
+            <Link to="/teacher/schedule">
+              <SidebarIcon selected={location.pathname === '/teacher/schedule'}>
                 <BsCalendar />
               </SidebarIcon>
             </Link>
-            <StyledLink to="/teacher/attendance" isOpen={isOpen} selected={location.pathname === '/teacher/attendance'}>
-              Attendance
+            <StyledLink to="/teacher/schedule" isOpen={isOpen} selected={location.pathname === '/teacher/schedule'}>
+              Schedule
+            </StyledLink>
+          </SidebarNavItem>
+          <SidebarNavItem>
+            <Link to="/teacher/profile">
+              <SidebarIcon selected={location.pathname === '/teacher/profile'}>
+                <BsPerson />
+              </SidebarIcon>
+            </Link>
+            <StyledLink to="/teacher/profile" isOpen={isOpen} selected={location.pathname === '/teacher/profile'}>
+              Profile
             </StyledLink>
           </SidebarNavItem>
           <SidebarNavItem>
@@ -278,13 +315,13 @@ const TeacherSidebar = () => {
             </StyledLink>
           </SidebarNavItem>
           <SidebarNavItem>
-            <Link to="/teacher/feedback">
-              <SidebarIcon selected={location.pathname === '/teacher/feedback'}>
+            <Link to="/teacher/messages">
+              <SidebarIcon selected={location.pathname === '/teacher/messages'}>
                 <BsChatDots />
               </SidebarIcon>
             </Link>
-            <StyledLink to="/teacher/feedback" isOpen={isOpen} selected={location.pathname === '/teacher/feedback'}>
-              Feedback
+            <StyledLink to="/teacher/messages" isOpen={isOpen} selected={location.pathname === '/teacher/messages'}>
+              Messages
             </StyledLink>
           </SidebarNavItem>
         </SidebarNav>

@@ -77,19 +77,21 @@ const CheckAttendanceSection = () => {
       alert('Please select a date for attendance.');
       return;
     }
-
+  
     try {
       const formattedData = attendanceData.map(({ id, name, status }) => ({
-        studentId: id,
-        date: selectedDate,
+        student_id: id,
+        student_name: name,
+        attendance_date: selectedDate,
         status,
       }));
-      await axios.post('http://localhost:5000/api/attendance', { attendanceData: formattedData });
+      await axios.post('http://localhost:5000/api/attendance-records', { attendanceData: formattedData });
       alert('Attendance data submitted successfully.');
     } catch (error) {
       console.error('Error submitting attendance data:', error);
     }
   };
+  
 
   return (
     <AttendanceContainer>
