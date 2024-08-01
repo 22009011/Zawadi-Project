@@ -1,5 +1,6 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { FormContainer, Input, Button, Select, FormTitle } from '../../styles/ReportStyles.js';
+import axios from 'axios';
 
 const performanceLevels = [
   'Emerging',
@@ -10,11 +11,36 @@ const performanceLevels = [
 ];
 
 const StudentForm = ({ onSubmit }) => {
-  const [studentName, setStudentName] = useState('');
-  const [gradeLevel, setGradeLevel] = useState('');
+  const [students, setStudents] = useState([]);
+  const [grades, setGrades] = useState([]);
+  const [selectedStudentId, setSelectedStudentId] = useState('');
+  const [selectedGradeId, setSelectedGradeId] = useState('');
   const [subjects, setSubjects] = useState([
     { subject: '', performanceLevel: '', feedback: '' }
   ]);
+
+  useEffect(() => {
+    const fetchStudents = async () => {
+      try {
+        const response = await axios.get('http://localhost:5000/api/students');
+        setStudents(response.data);
+      } catch (error) {
+        console.error('Error fetching students:', error);
+      }
+    };
+
+    const fetchGrades = async () => {
+      try {
+        const response = await axios.get('http://localhost:5000/api/classes');
+        setGrades(response.data);
+      } catch (error) {
+        console.error('Error fetching grades:', error);
+      }
+    };
+
+    fetchStudents();
+    fetchGrades();
+  }, []);
 
   const handleAddSubject = () => {
     setSubjects([...subjects, { subject: '', performanceLevel: '', feedback: '' }]);
@@ -29,12 +55,12 @@ const StudentForm = ({ onSubmit }) => {
   const handleSubmit = (e) => {
     e.preventDefault();
     onSubmit({
-      studentName,
-      gradeLevel,
+      studentId: selectedStudentId,
+      gradeId: selectedGradeId,
       subjects
     });
-    setStudentName('');
-    setGradeLevel('');
+    setSelectedStudentId('');
+    setSelectedGradeId('');
     setSubjects([{ subject: '', performanceLevel: '', feedback: '' }]);
   };
 
@@ -42,20 +68,26 @@ const StudentForm = ({ onSubmit }) => {
     <FormContainer>
       <FormTitle>Enter Student Details</FormTitle>
       <form onSubmit={handleSubmit}>
-        <Input
-          type="text"
-          value={studentName}
-          onChange={(e) => setStudentName(e.target.value)}
-          placeholder="Student Name"
+        <Select
+          value={selectedStudentId}
+          onChange={(e) => setSelectedStudentId(e.target.value)}
           required
-        />
-        <Input
-          type="text"
-          value={gradeLevel}
-          onChange={(e) => setGradeLevel(e.target.value)}
-          placeholder="Grade Level"
+        >
+          <option value="">Select Student Name</option>
+          {students.map(student => (
+            <option key={student.id} value={student.id}>{student.name}</option>
+          ))}
+        </Select>
+        <Select
+          value={selectedGradeId}
+          onChange={(e) => setSelectedGradeId(e.target.value)}
           required
-        />
+        >
+          <option value="">Select Grade Level</option>
+          {grades.map(grade => (
+            <option key={grade.id} value={grade.id}>{grade.name}</option>
+          ))}
+        </Select>
         {subjects.map((subject, index) => (
           <div key={index}>
             <Input
@@ -88,7 +120,7 @@ const StudentForm = ({ onSubmit }) => {
           </div>
         ))}
         <Button type="button" onClick={handleAddSubject}>Add Another Subject</Button>
-        <Button type="submit">Submit</Button>
+        <Button type="submit" onSubmit={handleFormSubmit}>Submit</Button>
       </form>
     </FormContainer>
   );
