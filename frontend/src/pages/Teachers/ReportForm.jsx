@@ -1,6 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import { FormContainer, Input, Button, Select, FormTitle } from '../../styles/ReportStyles.js';
 import axios from 'axios';
+import { toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 const performanceLevels = [
   'Emerging',
@@ -52,16 +54,27 @@ const StudentForm = ({ onSubmit }) => {
     setSubjects(newSubjects);
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    onSubmit({
-      studentId: selectedStudentId,
-      gradeId: selectedGradeId,
-      subjects
-    });
-    setSelectedStudentId('');
-    setSelectedGradeId('');
-    setSubjects([{ subject: '', performanceLevel: '', feedback: '' }]);
+    try {
+      await axios.post('http://localhost:5000/api/student-performance', {
+        studentId: selectedStudentId,
+        gradeId: selectedGradeId,
+        subjects
+      });
+      toast.success('Report submitted successfully!');
+      onSubmit({
+        studentId: selectedStudentId,
+        gradeId: selectedGradeId,
+        subjects
+      });
+      setSelectedStudentId('');
+      setSelectedGradeId('');
+      setSubjects([{ subject: '', performanceLevel: '', feedback: '' }]);
+    } catch (error) {
+      toast.error('Error submitting report!');
+      console.error('Error submitting report:', error);
+    }
   };
 
   return (
@@ -120,7 +133,7 @@ const StudentForm = ({ onSubmit }) => {
           </div>
         ))}
         <Button type="button" onClick={handleAddSubject}>Add Another Subject</Button>
-        <Button type="submit" onSubmit={handleFormSubmit}>Submit</Button>
+        <Button type="submit">Submit</Button>
       </form>
     </FormContainer>
   );

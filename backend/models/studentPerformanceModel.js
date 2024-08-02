@@ -4,6 +4,7 @@ import Student from './studentModel.js';
 import Class from './classModel.js';
 import Subject from './subjectModel.js';
 import PerformanceLevel from './performanceLevelModel.js';
+import School from './schoolModel.js';
 
 const { sequelize } = config;
 
@@ -45,6 +46,14 @@ const StudentPerformance = sequelize.define('StudentPerformance', {
     type: DataTypes.TEXT,
     allowNull: false,
   },
+  school_id: {
+    type: DataTypes.INTEGER,
+    allowNull: false,
+    references: {
+      model: School,
+      key: 'id',
+    },
+  },
 }, {
   tableName: 'StudentPerformance',
   timestamps: true,
@@ -54,5 +63,6 @@ StudentPerformance.belongsTo(Student, { foreignKey: 'student_id' });
 StudentPerformance.belongsTo(Class, { foreignKey: 'grade_id' });
 StudentPerformance.belongsTo(Subject, { foreignKey: 'subject_id' });
 StudentPerformance.belongsTo(PerformanceLevel, { foreignKey: 'performance_level_id' });
+StudentPerformance.belongsTo(School, { foreignKey: 'school_id' });
 
 export default StudentPerformance;

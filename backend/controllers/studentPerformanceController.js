@@ -3,12 +3,20 @@ import Student from '../models/studentModel.js';
 import Class from '../models/classModel.js';
 import Subject from '../models/subjectModel.js';
 import PerformanceLevel from '../models/performanceLevelModel.js';
+import School from '../models/schoolModel.js';
+
 
 // Create Student Performance
 export const createStudentPerformance = async (req, res) => {
   const { studentId, gradeId, subjects } = req.body;
 
   try {
+    const school = await School.findByPk(req.school_id);
+    if (!school) {
+      console.log('School not found for school_id:', req.school_id); // Debugging line
+      return res.status(404).json({ error: 'School not found' });
+    }
+
     const performances = await Promise.all(subjects.map(async (subject) => {
       return await StudentPerformance.create({
         student_id: studentId,
@@ -16,19 +24,23 @@ export const createStudentPerformance = async (req, res) => {
         subject_id: subject.subject,
         performance_level_id: subject.performanceLevel,
         feedback: subject.feedback,
+        school_id: req.school_id,
       });
     }));
+
     res.status(201).json(performances);
   } catch (error) {
+    console.error('Error creating student performance:', error); // Debugging line
     res.status(500).json({ error: 'Failed to create student performance', details: error.message });
   }
 };
+
 
 // Get All Student Performances
 export const getAllStudentPerformances = async (req, res) => {
   try {
     const performances = await StudentPerformance.findAll({
-      include: [Student, Class, Subject, PerformanceLevel],
+      include: [Student, Class, Subject, PerformanceLevel, School],
     });
     res.json(performances);
   } catch (error) {
@@ -43,7 +55,7 @@ export const getStudentPerformanceById = async (req, res) => {
   try {
     const performance = await StudentPerformance.findOne({
       where: { id },
-      include: [Student, Class, Subject, PerformanceLevel],
+      include: [Student, Class, Subject, PerformanceLevel, School],
     });
     if (performance) {
       res.json(performance);
@@ -58,12 +70,12 @@ export const getStudentPerformanceById = async (req, res) => {
 // Update Student Performance
 export const updateStudentPerformance = async (req, res) => {
   const { id } = req.params;
-  const { studentId, gradeId, subjects } = req.body;
+  const { studentId, gradeId, subjects, schoolId } = req.body;
 
   try {
     const performance = await StudentPerformance.findOne({ where: { id } });
     if (performance) {
-      await performance.update({ student_id: studentId, grade_id: gradeId, subjects });
+      await performance.update({ student_id: studentId, grade_id: gradeId, subjects, school_id: schoolId });
       res.json({ message: 'Student performance updated successfully' });
     } else {
       res.status(404).json({ error: 'Student performance not found' });
