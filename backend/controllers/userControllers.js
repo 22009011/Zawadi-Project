@@ -31,7 +31,6 @@ export const registerSuperAdmin = async (req, res) => {
 };
 
 
-
 export const login = async (req, res) => {
   const { email, password } = req.body;
 
@@ -51,6 +50,8 @@ export const login = async (req, res) => {
     if (!isPasswordValid) {
       return res.status(401).json({ error: 'Invalid password' });
     }
+
+    console.log('User details: ', user); // Log user details
 
     const token = jwt.sign({ userId: user.id, role: user.role, school_id: user.school_id }, jwtSecret, { expiresIn: '1h' });
 
@@ -211,3 +212,4 @@ export const getParentProfile = async (req, res) => {
     res.status(500).json({ error: 'Failed to fetch profile details', details: error.message });
   }
 };
+

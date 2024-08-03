@@ -5,36 +5,40 @@ import Subject from '../models/subjectModel.js';
 import PerformanceLevel from '../models/performanceLevelModel.js';
 import School from '../models/schoolModel.js';
 
-
-// Create Student Performance
+// Create a new student performance entry
 export const createStudentPerformance = async (req, res) => {
   const { studentId, gradeId, subjects } = req.body;
+  const { school_id } = req; // Extract school_id from request object
+
+  if (!school_id) {
+    return res.status(400).json({ error: 'school_id is required' });
+  }
 
   try {
-    const school = await School.findByPk(req.school_id);
+    const school = await School.findByPk(school_id);
     if (!school) {
-      console.log('School not found for school_id:', req.school_id); // Debugging line
-      return res.status(404).json({ error: 'School not found' });
+      return res.status(404).json({ error: `School not found for school_id: ${school_id}` });
     }
 
-    const performances = await Promise.all(subjects.map(async (subject) => {
-      return await StudentPerformance.create({
+    const createdEntries = [];
+    for (const subject of subjects) {
+      const { subject: subjectId, performanceLevel, feedback } = subject;
+      const entry = await StudentPerformance.create({
         student_id: studentId,
         grade_id: gradeId,
-        subject_id: subject.subject,
-        performance_level_id: subject.performanceLevel,
-        feedback: subject.feedback,
-        school_id: req.school_id,
+        subject_id: subjectId,
+        performance_level_id: performanceLevel,
+        feedback,
+        school_id, // Use the school_id from the token
       });
-    }));
+      createdEntries.push(entry);
+    }
 
-    res.status(201).json(performances);
+    res.status(201).json(createdEntries);
   } catch (error) {
-    console.error('Error creating student performance:', error); // Debugging line
     res.status(500).json({ error: 'Failed to create student performance', details: error.message });
   }
 };
-
 
 // Get All Student Performances
 export const getAllStudentPerformances = async (req, res) => {

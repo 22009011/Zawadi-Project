@@ -15,6 +15,7 @@ const auth = (req, res, next) => {
     const decoded = jwt.verify(token, jwtSecret);
     req.user = decoded;
     req.school_id = decoded.school_id;
+    console.log('Decoded token: ', decoded); // Log decoded token
     next();
   } catch (error) {
     res.status(401).json({ message: 'Token is not valid' });
