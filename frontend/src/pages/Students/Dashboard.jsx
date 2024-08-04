@@ -1,5 +1,5 @@
-import React from 'react';
-import StudentSidebar from './Sidebar.jsx';
+import React, { useState, useEffect } from 'react';
+import axios from 'axios';
 import {
   StudentDashboardContainer,
   Content,
@@ -9,12 +9,11 @@ import {
   Card,
   CardTitle,
   CardContent,
-} from '../../styles/DashboardStyles';
+} from '../../styles/StudentDashboardStyles.js'; 
 
 const StudentDashboard = () => {
   return (
     <StudentDashboardContainer>
-      < StudentSidebar />
       <Content>
         <Section>
           <SectionTitle>Overview</SectionTitle>

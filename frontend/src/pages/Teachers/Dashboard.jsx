@@ -1,5 +1,5 @@
-import React from 'react';
-import TeacherSidebar from './Sidebar';
+import React, { useState, useEffect } from 'react';
+import axios from 'axios';
 import {
   TeacherDashboardContainer,
   Content,
@@ -9,13 +9,13 @@ import {
   Card,
   CardTitle,
   CardContent,
-} from '../../styles/DashboardStyles';
+} from '../../styles/TeacherDashboardStyles.js'; 
 
 const TeacherDashboard = () => {
+
   return (
     <TeacherDashboardContainer>
-      <TeacherSidebar />
-      <Content>
+      <Content >  
         <Section>
           <SectionTitle>Overview</SectionTitle>
           <CardContainer>

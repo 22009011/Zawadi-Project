@@ -4,13 +4,18 @@ import { FaPlayCircle } from 'react-icons/fa';
 
 const SectionContainer = styled.div`
   display: flex;
-  justify-content: space-between;
-  align-items: flex-start;
-  padding: 40px;
-  background-color: #6BD4E7; /* Match background color of HomeContainer */
-  margin-bottom: 20px;
+  align-items: center;
+  padding: 60px 30px;
+  background: linear-gradient(135deg, #ADD8E6, #9370DB); /* Light Blue to Medium Purple */
   border-radius: 10px;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+  text-align: left;
+
+  @media screen and (max-width: 768px) {
+    flex-direction: column;
+    padding: 30px 20px;
+    text-align: center;
+  }
 `;
 
 const TextContainer = styled.div`
@@ -18,12 +23,21 @@ const TextContainer = styled.div`
   color: white;
   text-align: left;
   margin-right: 20px; /* Margin right for spacing between text and video */
+
+  @media screen and (max-width: 768px) {
+    margin-right: 0;
+    margin-bottom: 20px;
+  }
 `;
 
 const VideoContainer = styled.div`
   flex: 1;
   position: relative;
   margin-left: 20px; /* Margin left for spacing between text and video */
+
+  @media screen and (max-width: 768px) {
+    margin-left: 0;
+  }
 `;
 
 const Title = styled.h2`
@@ -31,6 +45,10 @@ const Title = styled.h2`
   font-size: 24px;
   margin-bottom: 10px;
   line-height: 1.5;
+
+  @media screen and (max-width: 768px) {
+    font-size: 20px;
+  }
 `;
 
 const Description = styled.p`
@@ -38,6 +56,10 @@ const Description = styled.p`
   color: white;
   line-height: 1.6;
   margin-bottom: 4px; /* Margin between paragraphs */
+
+  @media screen and (max-width: 768px) {
+    font-size: 14px;
+  }
 `;
 
 const Thumbnail = styled.img`
@@ -65,6 +87,10 @@ const PlayButton = styled.div`
 
   &:hover {
     color: rgba(255, 255, 255, 1);
+  }
+
+  @media screen and (max-width: 768px) {
+    font-size: 48px;
   }
 `;
 

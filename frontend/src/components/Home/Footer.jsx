@@ -3,7 +3,7 @@ import styled from 'styled-components';
 import { FaFacebook, FaTwitter, FaLinkedin, FaInstagram } from 'react-icons/fa';
 
 const FooterContainer = styled.footer`
-  background-color: #333;
+  background-color:  #9370DB;
   color: #fff;
   padding: 20px;
   text-align: center;
@@ -47,8 +47,10 @@ const FooterIcon = styled.a`
 const Footer = () => {
   return (
     <FooterContainer>
-      <FooterText>About Kurasa.</FooterText>
-      <FooterText>A Kenyan-based EdTech startup Building the world's number 1 assessment tool for K-12 learning.</FooterText>
+      <FooterText>About Zawadi.</FooterText>
+      <FooterText>
+        A Kenyan-based EdTech startup Building the world's number 1 assessment tool for K-12 learning.
+      </FooterText>
       
       <FooterLinks>
         <FooterLink href="#">Connect</FooterLink>
@@ -61,9 +63,9 @@ const Footer = () => {
         <FooterLink href="#">Contact</FooterLink>
       </FooterLinks>
 
-      <FooterText>5th Floor, SUS Center, Keri Rd, Madaraka</FooterText>
-      <FooterText>020 8000 208</FooterText>
-      <FooterText>hello@kurasa.org</FooterText>
+      <FooterText>Nairobi, Kenya</FooterText>
+      <FooterText>0794203261</FooterText>
+      <FooterText>hello@zawadi.org</FooterText>
 
       <FooterLinks>
         <FooterIcon href="#"><FaFacebook /></FooterIcon>
@@ -72,7 +74,7 @@ const Footer = () => {
         <FooterIcon href="#"><FaInstagram /></FooterIcon>
       </FooterLinks>
 
-      <FooterText>&copy; 2024 All rights reserved | Kurasa Inc</FooterText>
+      <FooterText>&copy; 2024 All rights reserved | Zawadi Inc</FooterText>
     </FooterContainer>
   );
 }

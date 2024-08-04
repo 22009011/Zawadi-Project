@@ -5,11 +5,20 @@ import { BsFillBookFill, BsFillClipboardCheckFill, BsFillFileEarmarkTextFill, Bs
 
 const Section = styled.div`
   display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
   align-items: center;
-  padding: 40px 20px;
-  background-color: #f9f9f9;
+  padding: 60px 30px;
+  background: linear-gradient(135deg, #ADD8E6, #9370DB); /* Light Blue to Medium Purple */
+  border-radius: 10px;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+  text-align: left;
+  width: 100vw; /* Full viewport width */
+  margin: 0; /* Remove margin */
+  box-sizing: border-box; /* Ensure padding is included in the width */
+
+  @media screen and (max-width: 768px) {
+    flex-direction: column;
+    padding: 30px 15px;
+  }
 `;
 
 const ImageContainer = styled.div`
@@ -17,10 +26,16 @@ const ImageContainer = styled.div`
   min-width: 300px;
   max-width: 500px;
   text-align: center;
+
+  @media screen and (max-width: 768px) {
+    min-width: 100%;
+    max-width: 100%;
+    margin-bottom: 20px;
+  }
 `;
 
 const Image = styled.img`
-  width: 80%;
+  width: 100%; /* Full width of the container */
   height: auto;
 `;
 
@@ -31,6 +46,12 @@ const TextContainer = styled.div`
   display: flex;
   flex-wrap: wrap;
   justify-content: space-around;
+  padding-between: 20px;
+
+  @media screen and (max-width: 768px) {
+    flex-direction: column;
+    padding: 0;
+  }
 `;
 
 const TextBlock = styled.div`
@@ -42,12 +63,23 @@ const TextBlock = styled.div`
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
   display: flex;
   align-items: center;
+
+  @media screen and (max-width: 768px) {
+    flex: 1 1 100%;
+    margin: 10px 0;
+    padding: 15px;
+    font-size: 14px;
+  }
 `;
 
 const Icon = styled.div`
   margin-right: 10px;
   font-size: 24px;
   color: #007bff;
+
+  @media screen and (max-width: 768px) {
+    font-size: 20px;
+  }
 `;
 
 const TextContent = styled.div`
@@ -58,11 +90,19 @@ const Title = styled.h3`
   font-size: 18px;
   margin-bottom: 10px;
   color: #333;
+
+  @media screen and (max-width: 768px) {
+    font-size: 16px;
+  }
 `;
 
 const Description = styled.p`
   font-size: 14px;
   color: #555;
+
+  @media screen and (max-width: 768px) {
+    font-size: 12px;
+  }
 `;
 
 const FeatureSection = () => {

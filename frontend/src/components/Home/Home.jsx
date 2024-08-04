@@ -1,21 +1,13 @@
 import React from 'react';
 import {
-  Navbar,
-  Logo,
-  NavigationLinks,
-  NavLink,
-  ButtonsContainer,
-  LoginButton,
   HomeContainer,
   SchoolInfo,
   SchoolImage,
   Title,
   LoremTextContainer,
-  AdminRegisterLink
+  OfferCardsContainer,
 } from '../../styles/styles';
 import bg from "../../assets/bg.png";
-import bg1 from "../../assets/bg1.png";
-import { useNavigate } from 'react-router-dom';
 
 // Importing components for each section
 import OfferCard from './OfferCard';
@@ -28,26 +20,12 @@ import { BsFillBookFill, BsFillClipboardCheckFill, BsFillFileEarmarkTextFill, Bs
 import FeatureSection from './FeatureSection';
 import EducationSection from './EducationSection'; // Import the new section here
 
+import NavbarComponent from './Navbar';
+
 const Home = () => {
-  const navigate = useNavigate();
-
-  const handleLoginClick = () => {
-    navigate('/choose-user');
-  };
-
   return (
     <>
-      <Navbar>
-        <Logo src={bg1} alt="Logo" />
-        <NavigationLinks>
-          <NavLink href="#">Features</NavLink>
-          <NavLink href="#">Pricing</NavLink>
-          <NavLink href="#">Request a Demo</NavLink>
-        </NavigationLinks>
-        <ButtonsContainer>
-          <LoginButton onClick={handleLoginClick}>Sign In</LoginButton>
-        </ButtonsContainer>
-      </Navbar>
+      <NavbarComponent />
       <HomeContainer>
         <SchoolInfo>
           <Title><strong>Simplify CBC Management</strong></Title>
@@ -64,7 +42,7 @@ const Home = () => {
         <FeatureSection />
 
         {/* Offer Cards */}
-        <div style={{ display: 'flex', flexWrap: 'wrap', justifyContent: 'center' }}>
+        <OfferCardsContainer>
           <OfferCard
             icon={<BsFillBookFill />}
             title="Create Digital Lesson Plans"
@@ -85,7 +63,7 @@ const Home = () => {
             title="Weekly & Monthly Reports to Guardians"
             description="Keep guardians informed of their children’s progress more regularly."
           />
-        </div>
+        </OfferCardsContainer>
 
         {/* Request a Demo Form */}
         <DemoForm />

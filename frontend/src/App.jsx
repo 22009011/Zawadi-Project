@@ -46,9 +46,12 @@ import AddSchoolForm from './pages/SuperAdminDashboard/AddSchoolForm.jsx';
 import AllSchoolsList from './pages/SuperAdminDashboard/AllSchoolsList.jsx';
 import EnterMarksSection from './pages/Teachers/EnterMarks.jsx';
 import GenerateReport from './pages/Teachers/GenerateReport.jsx';
-import ViewCurriculum from './pages/Teachers/ViewCurriculum.jsx'
+import ViewCurriculum from './pages/Teachers/ViewCurriculum.jsx';
 import StudentForm from './pages/Teachers/ReportForm.jsx';
 import StudentReport from './pages/Teachers/ReportData.jsx';
+import AdminLayout from './components/AdminLayout.jsx';
+import TeacherLayout from './components/TeacherLayout.jsx';
+import StudentLayout from './components/StudentLayout.jsx';
 import Layout from './Layout';
 
 // Axios interceptor setup
@@ -66,14 +69,12 @@ const App = () => {
         <Route path="/parent-signin" element={<ParentSignIn />} />
         <Route path="/teacher-signin" element={<TeacherSignIn />} />
 
-        
-        <Route path="/admin/*" element={<ProtectedRoute roles={['admin', 'super-admin']}><AdminDashboard /></ProtectedRoute>} />
-        <Route path="/teacher/*" element={<ProtectedRoute roles={['teacher', 'super-admin']}><TeacherDashboard /></ProtectedRoute>} />
-        <Route path="/student/*" element={<ProtectedRoute roles={['student', 'parent']}><StudentDashboard /></ProtectedRoute>} />
+        <Route path="/admin/*" element={<ProtectedRoute roles={['admin', 'super-admin']}><AdminLayout /></ProtectedRoute>} />
+        <Route path="/teacher/*" element={<ProtectedRoute roles={['teacher', 'super-admin']}><TeacherLayout /></ProtectedRoute>} />
+        <Route path="/student/*" element={<ProtectedRoute roles={['student', 'parent']}><StudentLayout  /></ProtectedRoute>} />
         <Route path="/parent/*" element={<ProtectedRoute roles={['parent']}><ParentDashboard /></ProtectedRoute>} />
         <Route path="/super-admin/*" element={<ProtectedRoute roles={['super-admin']}><SuperAdminDashboard /></ProtectedRoute>} />
-       
-       
+
         <Route path="/admin/classes" element={<Layout><Classes /></Layout>} />
         <Route path="/admin/teachers" element={<Layout><Teachers /></Layout>} />
         <Route path="/admin/students" element={<Layout><Students /></Layout>} />
@@ -83,8 +84,7 @@ const App = () => {
         <Route path="/admin/reports" element={<Layout><Reports /></Layout>} />
         <Route path="/admin/settings" element={<Layout><SettingsProfile /></Layout>} />
         <Route path="/admin/all-curriculums" element={<Layout><AllCurriculums /></Layout>} />
-       
-       
+
         <Route path="/student/assignments" element={<Layout><StudentAssignments /></Layout>} />
         <Route path="/student/settings" element={<Layout><ProfileSection /></Layout>} />
         <Route path="/student/feedback" element={<Layout><Feedback /></Layout>} />
@@ -92,8 +92,7 @@ const App = () => {
         <Route path="/student/learning-materials" element={<Layout><LearningMaterials /></Layout>} />
         <Route path="/student/attendance" element={<Layout><Attendance /></Layout>} />
         <Route path="/student/communication" element={<Layout><Communication /></Layout>} />
-        
-        
+
         <Route path="/teacher/assignments" element={<Layout><AssignmentSection /></Layout>} />
         <Route path="/teacher/announcement" element={<Layout><CheckAnnouncementSection /></Layout>} />
         <Route path="/teacher/settings" element={<Layout><TeacherProfileSection /></Layout>} />
@@ -105,12 +104,10 @@ const App = () => {
         <Route path="/teacher/enter-marks" element={<Layout><EnterMarksSection /></Layout>} />
         <Route path="/teacher/generate-reports" element={<Layout><GenerateReport /></Layout>} />
         <Route path="/teacher/view-curriculum/:grade/:subject" element={<Layout><ViewCurriculum /></Layout>} />
-        <Route path="/teacher/view-curriculum" element={<Layout><ViewCurriculum /></Layout>}/>
-        <Route path="/teacher/report-form" element={<Layout><StudentForm /></Layout>}/>
-        <Route path="/teacher/student-report" element={<Layout><StudentReport /></Layout>}/>
-        
-       
-       
+        <Route path="/teacher/view-curriculum" element={<Layout><ViewCurriculum /></Layout>} />
+        <Route path="/teacher/report-form" element={<Layout><StudentForm /></Layout>} />
+        <Route path="/teacher/student-report" element={<Layout><StudentReport /></Layout>} />
+
         <Route path="/super-admin/advanced-analytics" element={<Layout><AdvancedAnalytics /></Layout>} />
         <Route path="/super-admin/integration-options" element={<Layout><IntergrationOptions /></Layout>} />
         <Route path="/super-admin/system-settings" element={<Layout><SystemSettings /></Layout>} />
@@ -124,3 +121,4 @@ const App = () => {
 };
 
 export default App;
+                                                                           

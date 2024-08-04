@@ -1,9 +1,9 @@
 import styled from 'styled-components';
-import { Link } from 'react-router-dom';
+import { Link } from 'react-router-dom'; 
 
 export const SidebarContainer = styled.div`
   position: fixed;
-  top: 0;
+  top: 0; 
   left: 0;
   width: ${({ isOpen }) => (isOpen ? '250px' : '80px')}; /* Expandable width */
   height: 100%;
@@ -17,7 +17,7 @@ export const SidebarContainer = styled.div`
   @media (max-width: 768px) {
     width: ${({ isOpen }) => (isOpen ? '250px' : '80px')}; /* Expandable width */
   }
-`;
+`; 
 
 export const SidebarHeader = styled.div`
   display: flex;
@@ -52,31 +52,6 @@ export const SidebarNavItem = styled.li`
   }
 `;
 
-export const SubNavItem = styled.li`
-  display: flex;
-  align-items: center;
-  padding: 10px 40px;
-  cursor: pointer;
-  &:hover {
-    background-color: #636e72;
-  }
-`;
-
-export const StyledLink = styled(Link)`
-  text-decoration: none;
-  color: ${({ selected }) => (selected ? '#1A73E8' : '#000')}; /* Dark Blue for selected */
-  margin-left: 10px;
-  display: ${({ isOpen }) => (isOpen ? 'block' : 'none')};
-  @media (max-width: 768px) {
-    display: ${({ isOpen }) => (isOpen ? 'block' : 'none')};
-  }
-`;
-
-export const SidebarIcon = styled.div`
-  margin-right: 10px;
-  color: ${({ selected }) => (selected ? '#1A73E8' : '#000')}; /* Dark Blue for selected */
-`;
-
 export const ToggleButton = styled.button`
   position: absolute;
   top: 10px; /* Adjusted for spacing above the logo */
@@ -100,16 +75,32 @@ export const ToggleIcon = styled.span`
 `;
 
 export const CloseButton = styled.button`
-  position: absolute;
-  top: 10px;
-  right: 10px;
-  background-color: transparent;
+  background: none;
   border: none;
-  font-size: 1.5rem;
+  color: #fff;
+  font-size: 24px;
   cursor: pointer;
+`;
+
+export const SubNavItem = styled(SidebarNavItem)`
+  padding-left: 30px;
+`;
+
+export const StyledLink = styled(Link)`
+  text-decoration: none;
+  color: ${({ selected }) => (selected ? '#1A73E8' : '#000')}; /* Dark Blue for selected */
+  margin-left: 10px;
   display: ${({ isOpen }) => (isOpen ? 'block' : 'none')};
+  @media (max-width: 768px) {
+    display: ${({ isOpen }) => (isOpen ? 'block' : 'none')};
+  }
+`;
+
+export const SidebarIcon = styled.div`
+  margin-right: 10px;
+  color: ${({ selected }) => (selected ? '#1A73E8' : '#000')}; 
 `;
 
 export const Spacer = styled.div`
-  flex-grow: 1;
+  flex: 1;
 `;

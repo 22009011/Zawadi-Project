@@ -22,23 +22,13 @@ import {
   TeacherTh,
   TeacherTd,
   ChartContainer
-} from '../../styles/DashboardStyles.js';
+} from '../../styles/AdminDashboardStyles.js';
 import Analytics from './Analytics';
-import Teachers from './Teachers'
-import { fetchTeacherData } from './teacherData';
-import AdminSidebar from './Sidebar.jsx';
-
+import { fetchTeacherData } from '../../components/teacherData.js';
 
 const AdminDashboard = () => {
   const [announcements, setAnnouncements] = useState([]);
   const [teachers, setTeachers] = useState([]);
-
-  const [isSidebarOpen, setIsSidebarOpen] = useState(true);
-
-  const handleSidebarToggle = (open) => {
-    setIsSidebarOpen(open);
-  };
-
 
   useEffect(() => {
     fetchAnnouncements();
@@ -55,8 +45,7 @@ const AdminDashboard = () => {
   };
 
   return (
-    <AdminDashboardContainer isOpen={isSidebarOpen}>
-      <AdminSidebar onToggle={handleSidebarToggle} />
+    <AdminDashboardContainer>
       <Content>
         <OverviewSection>
           <SectionTitle>Overview</SectionTitle>
@@ -93,7 +82,6 @@ const AdminDashboard = () => {
             <CalendarSection>
               <CalendarTitle>May 2023</CalendarTitle>
               <Calendar>
-                {/* Render calendar days dynamically */}
                 {[...Array(31)].map((_, i) => (
                   <CalendarDay key={i}>{i + 1}</CalendarDay>
                 ))}
@@ -116,8 +104,8 @@ const AdminDashboard = () => {
                 </tr>
               </thead>
               <tbody>
-                {teachers.map((teacher, index) => (
-                  <tr key={index}>
+                {teachers.map((teacher) => (
+                  <tr key={teacher.id}>
                     <TeacherTd>{teacher.name}</TeacherTd>
                     <TeacherTd>{teacher.subject}</TeacherTd>
                     <TeacherTd>{teacher.qualification}</TeacherTd>
@@ -128,6 +116,17 @@ const AdminDashboard = () => {
               </tbody>
             </TeacherTable>
           </TeacherDetails>
+        </Section>
+
+        <Section>
+          <SectionTitle>Announcements</SectionTitle>
+          <ul>
+            {announcements.map((announcement) => (
+              <li key={announcement.id}>
+                <strong>{announcement.title}</strong> - {announcement.content}
+              </li>
+            ))}
+          </ul>
         </Section>
       </Content>
     </AdminDashboardContainer>
