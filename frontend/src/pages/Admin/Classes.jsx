@@ -108,7 +108,7 @@ const Classes = () => {
 
   return (
     <ClassesContainer>
-      <SidebarContainer>
+      <SidebarContainer >
         <Sidebar />
       </SidebarContainer>
       <Content>
