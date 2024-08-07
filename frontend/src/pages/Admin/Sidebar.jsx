@@ -12,13 +12,13 @@ import {
   ToggleButton,
   ToggleIcon,
   MobileToggleButton,
-  Spacer,
   Overlay
 } from '../../styles/AdminSidebarStyles.js';
 import bg1 from '../../assets/bg1.png';
 
 const AdminSidebar = ({ onToggle = () => {} }) => {
   const [isOpen, setIsOpen] = useState(false);
+  const [isMobileOpen, setIsMobileOpen] = useState(false);
   const location = useLocation();
   const sidebarRef = useRef(null);
 
@@ -30,10 +30,21 @@ const AdminSidebar = ({ onToggle = () => {} }) => {
     });
   };
 
+  const toggleMobileSidebar = () => {
+    setIsMobileOpen(prev => !prev);
+  };
+
   const handleClickOutside = (event) => {
     if (sidebarRef.current && !sidebarRef.current.contains(event.target)) {
       setIsOpen(false);
+      setIsMobileOpen(false);
       onToggle(false);
+    }
+  };
+
+  const handleNavItemClick = () => {
+    if (window.innerWidth <= 480) {
+      setIsMobileOpen(false);
     }
   };
 
@@ -44,105 +55,105 @@ const AdminSidebar = ({ onToggle = () => {} }) => {
 
   return (
     <>
-      <MobileToggleButton onClick={toggleSidebar}>
-        <ToggleIcon isOpen={isOpen}>≡</ToggleIcon>
+      <MobileToggleButton onClick={toggleMobileSidebar}>
+        <ToggleIcon isOpen={isMobileOpen}>≡</ToggleIcon>
       </MobileToggleButton>
-      {isOpen && <Overlay onClick={toggleSidebar} />}
-      <SidebarContainer ref={sidebarRef} isOpen={isOpen}>
+      {isMobileOpen && <Overlay onClick={toggleMobileSidebar} />}
+      <SidebarContainer ref={sidebarRef} isOpen={isOpen || isMobileOpen}>
         <SidebarHeader>
           <ToggleButton onClick={toggleSidebar}>
             <ToggleIcon isOpen={isOpen}>≡</ToggleIcon>
           </ToggleButton>
-          <Logo src={bg1} alt="Logo" isOpen={isOpen} />
+          <Logo src={bg1} alt="Logo" isOpen={isOpen || isMobileOpen} />
         </SidebarHeader>
         <SidebarNav>
-          <SidebarNavItem>
+          <SidebarNavItem onClick={handleNavItemClick}>
             <Link to="/admin/dashboard">
               <SidebarIcon selected={location.pathname === '/admin/dashboard'}>
                 <BsGraphUp />
               </SidebarIcon>
             </Link>
-            <StyledLink to="/admin/dashboard" isOpen={isOpen} selected={location.pathname === '/admin/dashboard'}>
+            <StyledLink to="/admin/dashboard" isOpen={isOpen || isMobileOpen} selected={location.pathname === '/admin/dashboard'}>
               Dashboard
             </StyledLink>
           </SidebarNavItem>
-          <SidebarNavItem>
+          <SidebarNavItem onClick={handleNavItemClick}>
             <Link to="/admin/classes">
               <SidebarIcon selected={location.pathname === '/admin/classes'}>
                 <BsPeople />
               </SidebarIcon>
             </Link>
-            <StyledLink to="/admin/classes" isOpen={isOpen} selected={location.pathname === '/admin/classes'}>
+            <StyledLink to="/admin/classes" isOpen={isOpen || isMobileOpen} selected={location.pathname === '/admin/classes'}>
               Classes
             </StyledLink>
           </SidebarNavItem>
-          <SidebarNavItem>
+          <SidebarNavItem onClick={handleNavItemClick}>
             <Link to="/admin/students">
               <SidebarIcon selected={location.pathname === '/admin/students'}>
                 <BsPeople />
               </SidebarIcon>
             </Link>
-            <StyledLink to="/admin/students" isOpen={isOpen} selected={location.pathname === '/admin/students'}>
+            <StyledLink to="/admin/students" isOpen={isOpen || isMobileOpen} selected={location.pathname === '/admin/students'}>
               Students
             </StyledLink>
           </SidebarNavItem>
-          <SidebarNavItem>
+          <SidebarNavItem onClick={handleNavItemClick}>
             <Link to="/admin/teachers">
               <SidebarIcon selected={location.pathname === '/admin/teachers'}>
                 <BsPerson />
               </SidebarIcon>
             </Link>
-            <StyledLink to="/admin/teachers" isOpen={isOpen} selected={location.pathname === '/admin/teachers'}>
+            <StyledLink to="/admin/teachers" isOpen={isOpen || isMobileOpen} selected={location.pathname === '/admin/teachers'}>
               Teachers
             </StyledLink>
           </SidebarNavItem>
-          <SidebarNavItem>
+          <SidebarNavItem onClick={handleNavItemClick}>
             <Link to="/admin/reports">
               <SidebarIcon selected={location.pathname === '/admin/reports'}>
                 <BsFileText />
               </SidebarIcon>
             </Link>
-            <StyledLink to="/admin/reports" isOpen={isOpen} selected={location.pathname === '/admin/reports'}>
+            <StyledLink to="/admin/reports" isOpen={isOpen || isMobileOpen} selected={location.pathname === '/admin/reports'}>
               Reports
             </StyledLink>
           </SidebarNavItem>
-          <SidebarNavItem>
+          <SidebarNavItem onClick={handleNavItemClick}>
             <Link to="/admin/curriculum-management">
               <SidebarIcon selected={location.pathname === '/admin/curriculum-management'}>
                 <BsBook />
               </SidebarIcon>
             </Link>
-            <StyledLink to="/admin/curriculum-management" isOpen={isOpen} selected={location.pathname === '/admin/curriculum-management'}>
+            <StyledLink to="/admin/curriculum-management" isOpen={isOpen || isMobileOpen} selected={location.pathname === '/admin/curriculum-management'}>
               Curriculum Management
             </StyledLink>
           </SidebarNavItem>
-          <SidebarNavItem>
+          <SidebarNavItem onClick={handleNavItemClick}>
             <Link to="/admin/analytics">
               <SidebarIcon selected={location.pathname === '/admin/analytics'}>
                 <BsGraphUp />
               </SidebarIcon>
             </Link>
-            <StyledLink to="/admin/analytics" isOpen={isOpen} selected={location.pathname === '/admin/analytics'}>
+            <StyledLink to="/admin/analytics" isOpen={isOpen || isMobileOpen} selected={location.pathname === '/admin/analytics'}>
               Analytics
             </StyledLink>
           </SidebarNavItem>
-          <SidebarNavItem>
+          <SidebarNavItem onClick={handleNavItemClick}>
             <Link to="/admin/messages">
               <SidebarIcon selected={location.pathname === '/admin/messages'}>
                 <BsChatDots />
               </SidebarIcon>
             </Link>
-            <StyledLink to="/admin/messages" isOpen={isOpen} selected={location.pathname === '/admin/messages'}>
+            <StyledLink to="/admin/messages" isOpen={isOpen || isMobileOpen} selected={location.pathname === '/admin/messages'}>
               Messages
             </StyledLink>
           </SidebarNavItem>
-          <SidebarNavItem>
+          <SidebarNavItem onClick={handleNavItemClick}>
             <Link to="/admin/settings">
               <SidebarIcon selected={location.pathname === '/admin/settings'}>
                 <BsGear />
               </SidebarIcon>
             </Link>
-            <StyledLink to="/admin/settings" isOpen={isOpen} selected={location.pathname === '/admin/settings'}>
+            <StyledLink to="/admin/settings" isOpen={isOpen || isMobileOpen} selected={location.pathname === '/admin/settings'}>
               Settings
             </StyledLink>
           </SidebarNavItem>
