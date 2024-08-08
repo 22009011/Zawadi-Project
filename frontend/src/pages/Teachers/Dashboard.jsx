@@ -1,5 +1,4 @@
-import React, { useState, useEffect } from 'react';
-import axios from 'axios';
+import React from 'react';
 import {
   TeacherDashboardContainer,
   Content,
@@ -12,10 +11,9 @@ import {
 } from '../../styles/TeacherDashboardStyles.js'; 
 
 const TeacherDashboard = () => {
-
   return (
     <TeacherDashboardContainer>
-      <Content >  
+      <Content>
         <Section>
           <SectionTitle>Overview</SectionTitle>
           <CardContainer>

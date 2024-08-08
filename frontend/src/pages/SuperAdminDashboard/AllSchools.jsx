@@ -9,11 +9,21 @@ const Container = styled.div`
   padding: 20px;
   background-color: #f5f5f5;
   min-height: 100vh;
+
+  @media (max-width: 768px) {
+    padding: 15px;
+  }
 `;
 
 const Title = styled.h1`
   text-align: center;
   margin-bottom: 20px;
+  font-size: 2em;
+  color: #333;
+
+  @media (max-width: 768px) {
+    font-size: 1.5em;
+  }
 `;
 
 const AllSchools = () => {

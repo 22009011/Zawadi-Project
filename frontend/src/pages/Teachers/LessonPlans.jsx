@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import {
   LessonPlansContainer, LessonPlan, LessonTitle, LessonContent,
   LessonForm, LessonInput, LessonTextarea, AddLessonButton,
-  Timetable, TimetableItem, LessonPlansContent, LessonPlansHeader,
+  LessonPlansContent, LessonPlansHeader,
   LessonPlansList, ClassSelect, Actions, DeleteButton, UpdateButton
 } from '../../styles/lessonplansstyles.js';
 
@@ -74,7 +74,6 @@ const LessonPlans = () => {
               <LessonContent>{plan.content}</LessonContent>
               <Actions>
                 <DeleteButton onClick={() => handleDelete(plan.id)}>Delete</DeleteButton>
-                {/* Add update functionality if needed */}
                 <UpdateButton>Update</UpdateButton>
               </Actions>
             </LessonPlan>

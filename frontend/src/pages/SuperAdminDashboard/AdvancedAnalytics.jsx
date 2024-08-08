@@ -8,27 +8,82 @@ import 'react-toastify/dist/ReactToastify.css';
 // Styled components
 const AnalyticsContainer = styled.div`
   padding: 20px;
+  background-color: #f9f9f9;
+  border-radius: 12px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  max-width: 1000px;
+  margin: 0 auto;
+
+  @media (max-width: 768px) {
+    padding: 15px;
+  }
 `;
 
 const AnalyticsTitle = styled.h2`
   margin-bottom: 20px;
+  font-size: 24px;
+  color: #333;
+
+  @media (max-width: 768px) {
+    font-size: 20px;
+  }
 `;
 
 const SchoolList = styled.ul`
   list-style-type: none;
   padding: 0;
+  margin: 0;
+
+  @media (max-width: 768px) {
+    margin-bottom: 20px;
+  }
 `;
 
 const SchoolItem = styled.li`
+  padding: 10px 15px;
   margin-bottom: 10px;
+  border-radius: 8px;
   cursor: pointer;
+  background-color: #fff;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+  transition: background-color 0.3s, transform 0.3s;
+
   &:hover {
-    color: #007bff;
+    background-color: #007bff;
+    color: #fff;
+    transform: scale(1.02);
+  }
+
+  @media (max-width: 768px) {
+    padding: 8px 10px;
+    font-size: 14px;
   }
 `;
 
 const AnalyticsChartContainer = styled.div`
   margin-top: 20px;
+
+  @media (max-width: 768px) {
+    margin-top: 15px;
+  }
+`;
+
+const ChartInfo = styled.div`
+  margin-bottom: 20px;
+  padding: 15px;
+  background-color: #fff;
+  border-radius: 8px;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+
+  p {
+    margin: 5px 0;
+    font-size: 16px;
+    color: #555;
+
+    @media (max-width: 768px) {
+      font-size: 14px;
+    }
+  }
 `;
 
 const AdvancedAnalytics = () => {
@@ -60,12 +115,14 @@ const AdvancedAnalytics = () => {
 
     return (
       <AnalyticsChartContainer>
-        <h3>{selectedSchool.name}</h3>
-        <p>Total Students: {selectedSchool.number_of_students}</p>
-        <p>Total Teachers: {selectedSchool.teachers}</p>
-        <p>Revenue: ${selectedSchool.revenue}</p>
-        <p>Expenses: ${selectedSchool.expenses}</p>
-        <p>Profit: ${selectedSchool.profit}</p>
+        <ChartInfo>
+          <h3>{selectedSchool.name}</h3>
+          <p>Total Students: {selectedSchool.number_of_students}</p>
+          <p>Total Teachers: {selectedSchool.teachers}</p>
+          <p>Revenue: ${selectedSchool.revenue}</p>
+          <p>Expenses: ${selectedSchool.expenses}</p>
+          <p>Profit: ${selectedSchool.profit}</p>
+        </ChartInfo>
         <Bar
           data={{
             labels: regionData.labels,
@@ -88,6 +145,8 @@ const AdvancedAnalytics = () => {
             ],
           }}
           options={{
+            responsive: true,
+            maintainAspectRatio: false,
             scales: {
               y: {
                 beginAtZero: true,

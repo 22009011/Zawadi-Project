@@ -4,10 +4,24 @@ import styled from 'styled-components';
 // Styled components
 const SchoolManagementContainer = styled.div`
   padding: 20px;
+  background-color: #f9f9f9; /* Light background color */
+  min-height: 100vh;
+
+  @media (max-width: 768px) {
+    padding: 15px;
+  }
 `;
 
 const Heading = styled.h2`
   margin-bottom: 20px;
+  font-size: 1.8em;
+  color: #333;
+  border-bottom: 2px solid #4caf50;
+  padding-bottom: 10px;
+
+  @media (max-width: 768px) {
+    font-size: 1.5em;
+  }
 `;
 
 const SchoolList = styled.ul`
@@ -17,29 +31,58 @@ const SchoolList = styled.ul`
 
 const SchoolItem = styled.li`
   margin-bottom: 20px;
+  display: flex;
+  flex-direction: column;
+  background-color: #ffffff;
+  border-radius: 10px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  padding: 15px;
 `;
 
 const SchoolInfo = styled.div`
-  background-color: #f0f0f0;
-  padding: 10px;
-  border-radius: 5px;
+  margin-bottom: 10px;
+  color: #555;
+
+  strong {
+    color: #333;
+  }
 `;
 
 const SchoolActions = styled.div`
-  margin-top: 10px;
+  display: flex;
+  gap: 10px;
 `;
 
 const Button = styled.button`
-  padding: 8px 16px;
+  padding: 10px 20px;
   background-color: #007bff;
   color: #fff;
   border: none;
   border-radius: 5px;
   cursor: pointer;
-  margin-right: 10px;
+  font-size: 14px;
+  transition: background-color 0.3s ease;
+
+  &:hover {
+    background-color: #0056b3;
+  }
 
   &:last-child {
     margin-right: 0;
+  }
+
+  @media (max-width: 768px) {
+    padding: 8px 16px;
+    font-size: 12px;
+  }
+`;
+
+const AddButton = styled(Button)`
+  margin-top: 20px;
+  background-color: #28a745;
+
+  &:hover {
+    background-color: #218838;
   }
 `;
 
@@ -68,7 +111,7 @@ const SchoolManagement = () => {
           </SchoolItem>
         ))}
       </SchoolList>
-      <Button>Add New School</Button>
+      <AddButton>Add New School</AddButton>
     </SchoolManagementContainer>
   );
 };

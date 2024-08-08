@@ -4,13 +4,18 @@ import axios from 'axios';
 import { toast, ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 
+// Styled components
 const Form = styled.form`
   background: #fff;
   padding: 20px;
-  border-radius: 8px;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  border-radius: 12px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
   max-width: 600px;
   margin: 0 auto 40px;
+  @media (max-width: 768px) {
+    padding: 15px;
+    margin: 0 10px;
+  }
 `;
 
 const FormGroup = styled.div`
@@ -20,38 +25,64 @@ const FormGroup = styled.div`
 const Label = styled.label`
   display: block;
   margin-bottom: 5px;
-  font-weight: bold;
+  font-weight: 600;
+  font-size: 16px;
+  color: #333;
 `;
 
 const Input = styled.input`
   width: 100%;
-  padding: 10px;
-  border-radius: 4px;
-  border: 1px solid #ccc;
+  padding: 12px;
+  border-radius: 8px;
+  border: 1px solid #ddd;
+  font-size: 16px;
+  box-sizing: border-box;
+  @media (max-width: 768px) {
+    font-size: 14px;
+    padding: 10px;
+  }
 `;
 
 const TextArea = styled.textarea`
   width: 100%;
-  padding: 10px;
-  border-radius: 4px;
-  border: 1px solid #ccc;
+  padding: 12px;
+  border-radius: 8px;
+  border: 1px solid #ddd;
+  font-size: 16px;
+  box-sizing: border-box;
+  @media (max-width: 768px) {
+    font-size: 14px;
+    padding: 10px;
+  }
 `;
 
 const Select = styled.select`
   width: 100%;
-  padding: 10px;
-  border-radius: 4px;
-  border: 1px solid #ccc;
+  padding: 12px;
+  border-radius: 8px;
+  border: 1px solid #ddd;
+  font-size: 16px;
+  box-sizing: border-box;
+  @media (max-width: 768px) {
+    font-size: 14px;
+    padding: 10px;
+  }
 `;
 
 const Button = styled.button`
   background-color: #4CAF50;
   color: white;
   border: none;
-  padding: 10px 20px;
-  border-radius: 4px;
+  padding: 12px 20px;
+  border-radius: 8px;
   cursor: pointer;
   font-size: 16px;
+  transition: background-color 0.3s;
+  width: 100%;
+  @media (max-width: 768px) {
+    padding: 10px 15px;
+    font-size: 14px;
+  }
 
   &:hover {
     background-color: #45a049;

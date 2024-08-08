@@ -4,20 +4,29 @@ import styled from 'styled-components';
 import { FaCheck, FaTimes, FaSpinner } from 'react-icons/fa';
 
 const Container = styled.div`
-  padding: 40px;
+  padding: 20px;
   background-color: #f4f4f4;
   min-height: 100vh;
   display: flex;
   flex-direction: column;
   align-items: center;
+
+  @media screen and (max-width: 768px) {
+    padding: 10px;
+  }
 `;
 
 const Header = styled.h2`
   text-align: center;
   color: #333;
-  margin-bottom: 30px;
+  margin-bottom: 20px;
   font-size: 2rem;
   font-weight: 700;
+
+  @media screen and (max-width: 768px) {
+    font-size: 1.5rem;
+    margin-bottom: 10px;
+  }
 `;
 
 const TableWrapper = styled.div`
@@ -26,12 +35,19 @@ const TableWrapper = styled.div`
   background: #fff;
   box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
   border-radius: 10px;
-  overflow: hidden;
+  overflow-x: auto;
+  margin-bottom: 20px;
+
+  @media screen and (max-width: 768px) {
+    box-shadow: none;
+    border-radius: 0;
+  }
 `;
 
 const Table = styled.table`
   width: 100%;
   border-collapse: collapse;
+  min-width: 600px;
 `;
 
 const Thead = styled.thead`
@@ -44,6 +60,11 @@ const Th = styled.th`
   text-align: left;
   font-size: 1.1rem;
   font-weight: 600;
+
+  @media screen and (max-width: 768px) {
+    padding: 10px;
+    font-size: 1rem;
+  }
 `;
 
 const Tbody = styled.tbody`
@@ -61,6 +82,11 @@ const Td = styled.td`
   text-align: left;
   vertical-align: middle;
   font-size: 1rem;
+
+  @media screen and (max-width: 768px) {
+    padding: 10px;
+    font-size: 0.9rem;
+  }
 `;
 
 const Loader = styled.div`

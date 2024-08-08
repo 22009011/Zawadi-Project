@@ -8,8 +8,9 @@ import {
   AssignmentCard,
   AssignmentTitle,
   AssignmentDescription,
+  AssignmentTextArea,
   AssignmentButton,
-} from '../../styles/AssignmentsStyles'; // Import styled components from AssignmentStyles.js
+} from '../../styles/AssignmentsStyles'; 
 
 const StudentAssignments = () => {
   const [assignments, setAssignments] = useState([]);
@@ -53,7 +54,7 @@ const StudentAssignments = () => {
           <AssignmentCard key={assignment.id}>
             <AssignmentTitle>{assignment.title}</AssignmentTitle>
             <AssignmentDescription>{assignment.description}</AssignmentDescription>
-            <textarea
+            <AssignmentTextArea
               placeholder="Enter your submission"
               value={submission}
               onChange={(e) => setSubmission(e.target.value)}

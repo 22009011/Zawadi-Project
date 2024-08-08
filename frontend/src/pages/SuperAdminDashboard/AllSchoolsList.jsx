@@ -6,12 +6,16 @@ import styled from 'styled-components';
 import 'react-toastify/dist/ReactToastify.css';
 
 const Container = styled.div`
-  max-width: 800px;
+  max-width: 1000px;
   margin: 0 auto;
   padding: 20px;
   background: #f9f9f9;
-  border-radius: 8px;
+  border-radius: 12px;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+
+  @media (max-width: 768px) {
+    padding: 15px;
+  }
 `;
 
 const SchoolCard = styled.div`
@@ -21,33 +25,53 @@ const SchoolCard = styled.div`
   margin-bottom: 15px;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
   display: flex;
-  justify-content: space-between;
-  align-items: center;
+  flex-direction: column;
+  gap: 10px;
+
+  @media (max-width: 768px) {
+    padding: 15px;
+  }
 `;
 
 const SchoolDetails = styled.div`
-  flex-grow: 1;
+  display: flex;
+  flex-direction: column;
 `;
 
 const SchoolName = styled.h3`
-  margin: 0 0 10px;
-  font-size: 1.5em;
+  margin: 0;
+  font-size: 1.6em;
+  color: #333;
 `;
 
 const SchoolInfo = styled.p`
   margin: 5px 0;
+  font-size: 16px;
+  color: #555;
+
+  @media (max-width: 768px) {
+    font-size: 14px;
+  }
 `;
 
 const IconContainer = styled.div`
   display: flex;
   gap: 10px;
+  margin-top: 10px;
 `;
 
 const Icon = styled.div`
   cursor: pointer;
   color: #007bff;
+  transition: color 0.3s, transform 0.2s;
+
   &:hover {
     color: #0056b3;
+    transform: scale(1.1);
+  }
+
+  @media (max-width: 768px) {
+    font-size: 18px;
   }
 `;
 
@@ -107,7 +131,6 @@ const AllSchoolsList = () => {
             </Icon>
           </IconContainer>
         </SchoolCard>
-
       ))}
     </Container>
   );
