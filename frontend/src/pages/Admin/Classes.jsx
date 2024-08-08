@@ -1,6 +1,5 @@
-// Classes.jsx
 import React, { useState, useEffect } from 'react';
-import Sidebar from './Sidebar';
+
 import axios from 'axios';
 import { toast, ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
@@ -29,7 +28,7 @@ import {
   DeleteIcon,
 } from '../../styles/ClassesStyles';
 
-const Classes = () => {
+const Classes = ({ isSidebarExpanded }) => {
   const [newClassName, setNewClassName] = useState('');
   const [newClassCategory, setNewClassCategory] = useState('Early Years');
   const [classes, setClasses] = useState([]);
@@ -107,11 +106,11 @@ const Classes = () => {
   };
 
   return (
-    <ClassesContainer>
-      <SidebarContainer >
-        <Sidebar />
+    <ClassesContainer isSidebarExpanded={isSidebarExpanded}>
+      <SidebarContainer>
+        {/* Sidebar content here */}
       </SidebarContainer>
-      <Content>
+      <Content isSidebarExpanded={isSidebarExpanded}>
         <ClassesContent>
           <ClassesHeader>Classes</ClassesHeader>
           <AddClassForm onSubmit={handleAddClass}>

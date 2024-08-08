@@ -47,8 +47,7 @@ const Teachers = () => {
   };
 
   return (
-    <TeachersContainer>
-     
+    <TeachersContainer>  
       <Content>
         <TeachersContent>
           <TeachersHeader>Teachers</TeachersHeader>

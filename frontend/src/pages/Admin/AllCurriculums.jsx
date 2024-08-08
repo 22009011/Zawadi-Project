@@ -90,7 +90,7 @@ const AllCurriculums = () => {
 
     return (
         <Container>
-            <Sidebar />
+      
             <ToastContainer />
             <h2>All Curriculums</h2>
             {curriculumEntries.map((entry, index) => (

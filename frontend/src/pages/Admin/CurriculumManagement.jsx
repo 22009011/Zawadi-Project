@@ -81,7 +81,6 @@ const CurriculumManagement = () => {
 
   return (
     <CurriculumContainer>
-      <Sidebar />
       <Content>
         <CurriculumHeader>
           <h2>Curriculum Management</h2>

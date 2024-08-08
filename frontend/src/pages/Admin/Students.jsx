@@ -126,8 +126,7 @@ const Students = () => {
 
   return (
     <StudentsContainer>
-      <ToastContainer />
-      <Sidebar />
+      <ToastContainer /> 
       <Content>
         <StudentsContent>
           <StudentsHeader>Students</StudentsHeader>
