@@ -2,11 +2,22 @@ import styled from 'styled-components';
 
 export const CurriculumContainer = styled.div`
   display: flex;
+  transition: margin-left 0.3s;
+  margin-left: ${({ sidebarOpen }) => (sidebarOpen ? '250px' : '60px')}; // Adjust based on sidebar state
+  width: 100%;
+  @media (max-width: 768px) {
+    margin-left: ${({ sidebarOpen }) => (sidebarOpen ? '200px' : '0')}; // Adjust for smaller screens
+  }
 `;
 
 export const Content = styled.div`
   flex: 1;
   padding: 20px;
+  transition: padding-left 0.3s;
+  padding-left: ${({ sidebarOpen }) => (sidebarOpen ? '20px' : '10px')}; // Adjust based on sidebar state
+  @media (max-width: 768px) {
+    padding-left: 10px; // Adjust for smaller screens
+  }
 `;
 
 export const CurriculumHeader = styled.div`
@@ -31,6 +42,9 @@ export const CurriculumButton = styled.button`
 export const CurriculumContent = styled.div`
   display: flex;
   flex-direction: column;
+  @media (max-width: 768px) {
+    padding: 0; // Adjust for smaller screens
+  }
 `;
 
 export const AddCurriculumForm = styled.form`

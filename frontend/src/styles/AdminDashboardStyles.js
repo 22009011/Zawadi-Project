@@ -22,6 +22,10 @@ export const Section = styled.div`
   border-radius: 10px;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
   margin-bottom: 20px;
+
+  @media (max-width: 768px) {
+    padding: 10px;
+  }
 `;
 
 // Margin for the overview section
@@ -45,6 +49,10 @@ export const CardContainer = styled.div`
   flex-wrap: wrap;
   gap: 10px;
   justify-content: space-between;
+
+  @media (max-width: 768px) {
+    flex-direction: column;
+  }
 `;
 
 // Card with responsive properties
@@ -60,6 +68,11 @@ export const Card = styled.div`
 
   &:hover {
     transform: scale(1.02);
+  }
+
+  @media (max-width: 768px) {
+    min-width: 100%;
+    margin-bottom: 10px;
   }
 `;
 
@@ -90,12 +103,20 @@ export const HorizontalContainer = styled.div`
   flex-wrap: wrap;
   gap: 20px;
   justify-content: space-between;
+
+  @media (max-width: 768px) {
+    flex-direction: column;
+  }
 `;
 
 // Half width section for responsive layout
 export const HalfWidthSection = styled.div`
   flex: 1;
   min-width: 45%;
+
+  @media (max-width: 768px) {
+    min-width: 100%;
+  }
 `;
 
 // Calendar section with background and padding
@@ -143,6 +164,10 @@ export const TeacherDetails = styled.div`
 export const TeacherTable = styled.table`
   width: 100%;
   border-collapse: collapse;
+
+  @media (max-width: 768px) {
+    font-size: 0.9rem;
+  }
 `;
 
 // Table header with styling

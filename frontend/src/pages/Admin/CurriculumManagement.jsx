@@ -2,7 +2,6 @@ import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import { toast, ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
-import Sidebar from './Sidebar';
 import CurriculumForm from './CurriculumForm';
 import CurriculumListDisplay from './CurriculumList';
 import {
@@ -19,6 +18,7 @@ const CurriculumManagement = () => {
   const [classes, setClasses] = useState([]);
   const [teachers, setTeachers] = useState([]);
   const [showAllCurriculums, setShowAllCurriculums] = useState(false);
+  const [sidebarOpen, setSidebarOpen] = useState(true); // Track sidebar state
 
   useEffect(() => {
     fetchCurriculums();
@@ -80,12 +80,15 @@ const CurriculumManagement = () => {
   };
 
   return (
-    <CurriculumContainer>
+    <CurriculumContainer sidebarOpen={sidebarOpen}>
       <Content>
         <CurriculumHeader>
           <h2>Curriculum Management</h2>
           <CurriculumButton onClick={() => setShowAllCurriculums(!showAllCurriculums)}>
             {showAllCurriculums ? 'Hide All Curriculums' : 'Show All Curriculums'}
+          </CurriculumButton>
+          <CurriculumButton onClick={() => setSidebarOpen(!sidebarOpen)}>
+            {sidebarOpen ? 'Collapse Sidebar' : 'Expand Sidebar'}
           </CurriculumButton>
         </CurriculumHeader>
         <CurriculumContent>

@@ -1,10 +1,15 @@
-// components/Analytics.js
 import React, { useEffect, useRef, useState } from 'react';
 import Chart from 'chart.js/auto';
 import styled from 'styled-components';
 
 const Container = styled.div`
   padding: 20px;
+  margin-left: ${({ sidebarExpanded }) => (sidebarExpanded ? '250px' : '60px')}; /* Adjust based on sidebar width */
+  transition: margin-left 0.3s ease;
+  
+  @media (max-width: 768px) {
+    margin-left: 0; /* No margin for small devices */
+  }
 `;
 
 const SectionTitle = styled.h2`
@@ -13,10 +18,13 @@ const SectionTitle = styled.h2`
 
 const ButtonGroup = styled.div`
   margin-bottom: 20px;
+  display: flex;
+  flex-wrap: wrap; /* Allows buttons to wrap on smaller screens */
 `;
 
 const Button = styled.button`
   margin-right: 10px;
+  margin-bottom: 10px;
   padding: 10px 20px;
   cursor: pointer;
   background-color: #007BFF;
@@ -28,8 +36,7 @@ const Button = styled.button`
   }
 `;
 
-
-const Analytics = () => {
+const Analytics = ({ sidebarExpanded }) => {
   const chartRef = useRef(null);
   const [selectedSection, setSelectedSection] = useState('Early Years');
   const [myChart, setMyChart] = useState(null);
@@ -102,7 +109,7 @@ const Analytics = () => {
   }, [selectedSection]);
 
   return (
-    <Container>
+    <Container sidebarExpanded={sidebarExpanded}>
       <SectionTitle>Analytics Dashboard</SectionTitle>
       <ButtonGroup>
         {['Early Years', 'Middle School', 'Junior Secondary'].map((section) => (

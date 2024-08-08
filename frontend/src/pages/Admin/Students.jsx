@@ -23,6 +23,7 @@ import {
 import { FaTrash, FaEdit } from 'react-icons/fa';
 
 const Students = () => {
+  const [sidebarOpen, setSidebarOpen] = useState(true); // State to manage sidebar toggle
   const [newStudent, setNewStudent] = useState({
     name: '',
     registrationNumber: '',
@@ -126,8 +127,9 @@ const Students = () => {
 
   return (
     <StudentsContainer>
-      <ToastContainer /> 
-      <Content>
+      <Sidebar isOpen={sidebarOpen} toggleSidebar={() => setSidebarOpen(!sidebarOpen)} />
+      <Content sidebarOpen={sidebarOpen}>
+        <ToastContainer /> 
         <StudentsContent>
           <StudentsHeader>Students</StudentsHeader>
           <AddStudentForm onSubmit={handleAddStudent}>

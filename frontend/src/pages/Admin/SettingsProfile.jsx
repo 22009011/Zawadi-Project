@@ -45,6 +45,7 @@ const SettingsProfile = () => {
   return (
     <ProfileContainer>
       <SidebarContainer>
+
       </SidebarContainer>
       <Content>
         <ProfileHeader>Profile Details</ProfileHeader>

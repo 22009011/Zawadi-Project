@@ -2,7 +2,7 @@
 import React, { useState } from 'react';
 import AdminSidebar from '../pages/Admin/Sidebar';
 import AdminDashboard from '../pages/Admin/Dashboard';
-import Classes from '../pages/Admin/Classes.jsx';
+
 import { LayoutContainer, ContentContainer } from '../styles/LayoutStyles.js';
 
 const AdminLayout = () => {
@@ -17,6 +17,7 @@ const AdminLayout = () => {
       <AdminSidebar onToggle={handleSidebarToggle} />
       <ContentContainer isOpen={isSidebarOpen}>
         <AdminDashboard />
+
      
       </ContentContainer>
     </LayoutContainer>

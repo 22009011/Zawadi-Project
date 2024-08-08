@@ -1,15 +1,21 @@
-// TeachersStyles.js
 import styled from 'styled-components';
 import { FaTrash, FaEdit } from 'react-icons/fa';
 
 export const TeachersContainer = styled.div`
   display: flex;
   height: 100%;
+  transition: margin-left 0.3s; /* Smooth transition for sidebar toggle */
+  margin-left: ${(props) => (props.sidebarOpen ? '250px' : '70px')}; /* Adjust this value based on your sidebar width */
+  
+  @media (max-width: 768px) {
+    margin-left: 0; /* Full-width on small screens */
+  }
 `;
 
 export const Content = styled.div`
   flex: 1;
   padding: 20px;
+  box-sizing: border-box;
 `;
 
 export const TeachersContent = styled.div`
@@ -94,6 +100,8 @@ export const EditIcon = styled(FaEdit)`
 
 export const AddTeacherForm = styled.form`
   margin-bottom: 20px;
+  display: flex;
+  flex-wrap: wrap;
 `;
 
 export const AddTeacherInput = styled.input`
@@ -101,6 +109,14 @@ export const AddTeacherInput = styled.input`
   margin-right: 10px;
   border: 1px solid #ccc;
   border-radius: 4px;
+  flex: 1;
+  min-width: 200px; /* Adjust based on design needs */
+  margin-bottom: 10px;
+
+  @media (max-width: 768px) {
+    margin-right: 0;
+    margin-bottom: 10px;
+  }
 `;
 
 export const Select = styled.select`
@@ -119,6 +135,7 @@ export const AddTeacherButton = styled.button`
   border: none;
   border-radius: 4px;
   cursor: pointer;
+  margin-top: 10px;
 `;
 
 export const NoTeachersMessage = styled.p`
@@ -126,4 +143,25 @@ export const NoTeachersMessage = styled.p`
   color: #666;
   text-align: center;
   margin-top: 20px;
+`;
+
+export const TeacherDetails = styled.div`
+  overflow-x: auto;
+`;
+
+export const TeacherTable = styled.table`
+  width: 100%;
+  border-collapse: collapse;
+`;
+
+export const TeacherTh = styled.th`
+  background-color: #007bff;
+  color: #fff;
+  padding: 10px;
+  text-align: left;
+`;
+
+export const TeacherTd = styled.td`
+  padding: 10px;
+  border-bottom: 1px solid #ddd;
 `;
