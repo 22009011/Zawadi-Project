@@ -2,6 +2,7 @@ import { DataTypes } from 'sequelize';
 import config from '../config.js';
 import Class from './classModel.js';
 import School from './schoolModel.js';
+import User from './userModel.js'; // Import User model
 
 const { sequelize } = config;
 
@@ -51,6 +52,14 @@ const Student = sequelize.define('Student', {
       key: 'id',
     },
   },
+  parentId: { // New field for linking students to their parents
+    type: DataTypes.INTEGER,
+    allowNull: true,
+    references: {
+      model: User,
+      key: 'id',
+    },
+  },
 }, {
   tableName: 'Students',
   timestamps: true,
@@ -58,5 +67,6 @@ const Student = sequelize.define('Student', {
 
 Student.belongsTo(Class, { foreignKey: 'class_id' });
 Student.belongsTo(School, { foreignKey: 'school_id' });
+Student.belongsTo(User, { foreignKey: 'parentId' }); // Define the relationship with User
 
 export default Student;

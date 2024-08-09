@@ -5,15 +5,16 @@ import {
   FormTitle,
   FieldContainer,
   Label,
-  Input,
   Select,
   Button,
+  Input,
   AddChildButton,
   ChildContainer,
-  ChildInput,
   RemoveChildButton,
   ResponsiveContainer,
 } from '../../styles/FormStyles.js';
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 const ParentForm = () => {
   const [formData, setFormData] = useState({
@@ -23,21 +24,44 @@ const ParentForm = () => {
     school_id: '',
   });
 
-  const [children, setChildren] = useState([{ name: '' }]);
+  const [children, setChildren] = useState([{ student_id: '' }]);
   const [message, setMessage] = useState('');
   const [schools, setSchools] = useState([]);
+  const [students, setStudents] = useState([]);
+
+  // Function to get the token from local storage
+  const getAuthToken = () => localStorage.getItem('token');
 
   useEffect(() => {
     const fetchSchools = async () => {
       try {
         const response = await axios.get('http://localhost:5000/api/schools');
         setSchools(response.data);
+        toast.success('Schools fetched successfully!');
       } catch (error) {
         console.error('Error fetching schools:', error);
+        toast.error('Failed to fetch schools.');
+      }
+    };
+
+    const fetchStudents = async () => {
+      try {
+        const token = getAuthToken(); // Get the token from local storage
+        const response = await axios.get('http://localhost:5000/api/students', {
+          headers: {
+            'Authorization': `Bearer ${token}` // Use the token here
+          }
+        });
+        setStudents(response.data);
+        toast.success('Students fetched successfully!');
+      } catch (error) {
+        console.error('Error fetching students:', error);
+        toast.error('Failed to fetch students.');
       }
     };
 
     fetchSchools();
+    fetchStudents();
   }, []);
 
   const handleChange = (e) => {
@@ -46,12 +70,12 @@ const ParentForm = () => {
 
   const handleChildChange = (index, e) => {
     const newChildren = [...children];
-    newChildren[index].name = e.target.value;
+    newChildren[index].student_id = e.target.value;
     setChildren(newChildren);
   };
 
   const handleAddChild = () => {
-    setChildren([...children, { name: '' }]);
+    setChildren([...children, { student_id: '' }]);
   };
 
   const handleRemoveChild = (index) => {
@@ -68,13 +92,16 @@ const ParentForm = () => {
         children,
       });
       setMessage(response.data.message);
+      toast.success('Parent created successfully!');
     } catch (error) {
       setMessage('Error: ' + (error.response?.data?.error || error.message));
+      toast.error('Parent creation failed.');
     }
   };
 
   return (
     <ResponsiveContainer>
+      <ToastContainer />
       <FormContainer>
         <FormTitle>Create Parent</FormTitle>
         <form onSubmit={handleSubmit}>
@@ -105,13 +132,19 @@ const ParentForm = () => {
             <Label>Children</Label>
             {children.map((child, index) => (
               <ChildContainer key={index}>
-                <ChildInput
-                  type="text"
+                <Select
+                  id={`child_${index}`}
                   name={`child_${index}`}
-                  value={child.name}
+                  value={child.student_id}
                   onChange={(e) => handleChildChange(index, e)}
-                  placeholder={`Child ${index + 1} Name`}
-                />
+                >
+                  <option value="">Select Child</option>
+                  {students.map((student) => (
+                    <option key={student.id} value={student.id}>
+                      {student.name}
+                    </option>
+                  ))}
+                </Select>
                 {children.length > 1 && (
                   <RemoveChildButton
                     type="button"

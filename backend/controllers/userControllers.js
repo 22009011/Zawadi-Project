@@ -4,6 +4,7 @@ import jwt from 'jsonwebtoken';
 import config from '../config.js';
 import User from '../models/userModel.js';
 import School from '../models/schoolModel.js';
+import Student from '../models/studentModel.js';
 
 const { jwtSecret } = config;
 
@@ -31,6 +32,7 @@ export const registerSuperAdmin = async (req, res) => {
 };
 
 
+
 export const login = async (req, res) => {
   const { email, password } = req.body;
 
@@ -51,15 +53,53 @@ export const login = async (req, res) => {
       return res.status(401).json({ error: 'Invalid password' });
     }
 
-    console.log('User details: ', user); // Log user details
-
     const token = jwt.sign({ userId: user.id, role: user.role, school_id: user.school_id }, jwtSecret, { expiresIn: '1h' });
+
+    if (user.role === 'parent') {
+      // Fetch linked students for the parent
+      const students = await Student.findAll({ where: { parentId: user.id } });
+      console.log('Linked students for parent:', students); // Log student details
+    } else {
+      console.log('User details:', user); // Log user details for other roles
+    }
 
     res.status(200).json({ message: 'Login successful', token, role: user.role });
   } catch (error) {
     res.status(500).json({ error: 'Login failed', details: error.message });
   }
 };
+
+
+
+// export const login = async (req, res) => {
+//   const { email, password } = req.body;
+
+//   if (!email || !password) {
+//     return res.status(400).json({ error: 'All fields are required' });
+//   }
+
+//   try {
+//     const user = await User.findOne({ where: { email } });
+
+//     if (!user) {
+//       return res.status(404).json({ error: 'User not found' });
+//     }
+
+//     const isPasswordValid = await bcrypt.compare(password, user.password);
+
+//     if (!isPasswordValid) {
+//       return res.status(401).json({ error: 'Invalid password' });
+//     }
+
+//     console.log('User details: ', user); // Log user details
+
+//     const token = jwt.sign({ userId: user.id, role: user.role, school_id: user.school_id }, jwtSecret, { expiresIn: '1h' });
+
+//     res.status(200).json({ message: 'Login successful', token, role: user.role });
+//   } catch (error) {
+//     res.status(500).json({ error: 'Login failed', details: error.message });
+//   }
+// };
 
 // Create Admin by Super-admin
 export const createAdmin = async (req, res) => {
@@ -116,16 +156,45 @@ export const createTeacher = async (req, res) => {
   }
 };
 
+
+
+//Parents Linked to students
+// Fetch Linked Students for a Parent
+export const getParentStudents = async (req, res) => {
+  const parentId = req.user.id; // Assuming the parent ID is available from the token
+
+  try {
+    const students = await Student.findAll({ where: { parentId } });
+    res.status(200).json(students);
+  } catch (error) {
+    console.error('Error Details:', error);
+    res.status(500).json({ error: 'Failed to retrieve students', details: error.message });
+  }
+};
+
+
 // Create Parent by Admin
 export const createParent = async (req, res) => {
-  const { username, email, password, school_id } = req.body;
+  const { username, email, password, school_id, children } = req.body;
 
-  if (!username || !email || !password || !school_id) {
-    return res.status(400).json({ error: 'All fields are required' });
+  if (!username || !email || !password || !school_id || !children || !Array.isArray(children) || children.length === 0) {
+    return res.status(400).json({ error: 'All fields are required, and children must be a non-empty array of student IDs' });
   }
 
   try {
+    // Check if all students exist
+    const studentIds = children.map(child => child.student_id);
+    const students = await Student.findAll({ where: { id: studentIds } });
+    const existingStudentIds = students.map(student => student.id);
+
+    if (studentIds.length !== existingStudentIds.length) {
+      return res.status(400).json({ error: 'One or more student IDs are invalid or do not exist' });
+    }
+
+    // Hash the password
     const hashedPassword = await bcrypt.hash(password, 10);
+
+    // Create the parent user
     const user = await User.create({
       username,
       email,
@@ -133,11 +202,21 @@ export const createParent = async (req, res) => {
       role: 'parent',
       school_id,
     });
+
+    // Link the students to the parent
+    await Promise.all(children.map(async (child) => {
+      if (child.student_id) {
+        await Student.update({ parentId: user.id }, { where: { id: child.student_id } });
+      }
+    }));
+
     res.status(201).json({ message: 'Parent created successfully', userId: user.id });
   } catch (error) {
+    console.error('Error Details:', error);
     res.status(500).json({ error: 'Parent creation failed', details: error.message });
   }
 };
+
 
 
 // controllers/userController.js
