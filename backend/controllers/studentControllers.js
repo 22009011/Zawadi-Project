@@ -35,12 +35,22 @@ export const createStudent = async (req, res) => {
 // Get All Students
 export const getAllStudents = async (req, res) => {
   try {
-    const students = await Student.findAll({ where: { school_id: req.school_id } });
+    let students;
+
+    if (req.user.role === 'super-admin') {
+      // If the user is a super-admin, get all students
+      students = await Student.findAll();
+    } else {
+      // If the user is tied to a specific school, get students for that school
+      students = await Student.findAll({ where: { school_id: req.school_id } });
+    }
+
     res.json(students);
   } catch (error) {
     res.status(500).json({ error: 'Failed to retrieve students', details: error.message });
   }
 };
+
 
 // Get Student by ID
 export const getStudentById = async (req, res) => {
