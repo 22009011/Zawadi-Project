@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import styled from 'styled-components';
 import AdvancedAnalytics from './AdvancedAnalytics';
-import IntegrationOptions from './IntegrationOptions';
+import IntegrationOptions from './IntergrationOptions';
 import SystemSettings from './SystemSettings';
 import UserManagement from './UserManagement';
 import SuperAdminSidebar from './Sidebar';

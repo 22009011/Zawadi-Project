@@ -158,7 +158,7 @@ export const ToggleIcon = styled.span`
   }
 `;
 
-export const MobileToggleButton = styled.div`
+export const MobileToggleButton = styled.button`
   position: fixed;
   top: 10px;
   left: 10px;
@@ -191,3 +191,4 @@ export const Overlay = styled.div`
   background: rgba(0, 0, 0, 0.5);
   z-index: 90;
 `;
+
