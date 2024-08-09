@@ -4,6 +4,8 @@ import styled from 'styled-components';
 import { Link, useLocation } from 'react-router-dom';
 import bg1 from '../../assets/bg1.png';
 import { BsGraphUp, BsPeople, BsPerson, BsGear } from 'react-icons/bs';
+//add this icons later in the sideber for add parent and add teacher
+import { FaUserPlus, FaUserTie } from 'react-icons/fa';
 
 const SidebarContainer = styled.div`
   position: fixed;
@@ -139,6 +141,14 @@ const SuperAdminSidebar = ({ onToggle }) => {
           <SidebarNavItem>
             <SidebarIcon selected={location.pathname === '/super-admin/schools'}><BsPerson /></SidebarIcon>
             <StyledLink to="/super-admin/schools" isOpen={isOpen} selected={location.pathname === '/super-admin/schools'}>Schools</StyledLink>
+          </SidebarNavItem>
+          <SidebarNavItem>
+            <SidebarIcon selected={location.pathname === '/super-admin/add-teachers'}><BsGear /></SidebarIcon>
+            <StyledLink to="/super-admin/add-teachers" isOpen={isOpen} selected={location.pathname === '/super-admin/add-teachers'}>Add Teachers</StyledLink>
+          </SidebarNavItem>
+            <SidebarNavItem>
+            <SidebarIcon selected={location.pathname === '/super-admin/add-parents'}><BsGear /></SidebarIcon>
+            <StyledLink to="/super-admin/add-parents" isOpen={isOpen} selected={location.pathname === '/super-admin/add-parents'}>Add Parents</StyledLink>
           </SidebarNavItem>
           <SidebarNavItem>
             <SidebarIcon selected={location.pathname === '/super-admin/system-settings'}><BsGear /></SidebarIcon>

@@ -1,13 +1,12 @@
+// src/Grades.jsx
 import React, { useState, useEffect } from 'react';
 import styled from 'styled-components';
 import axios from 'axios';
 import Sidebar from './Sidebar';
 
-// Styled components
 const GradesContainer = styled.div`
   display: flex;
   padding-left: 240px;
-
   @media screen and (max-width: 768px) {
     flex-direction: column;
     padding-left: 0;
@@ -17,7 +16,6 @@ const GradesContainer = styled.div`
 const Content = styled.div`
   flex: 1;
   padding: 20px;
-
   @media screen and (max-width: 768px) {
     padding: 10px;
   }
@@ -29,7 +27,6 @@ const SubjectGrade = styled.div`
   padding: 20px;
   margin-bottom: 20px;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-
   @media screen and (max-width: 768px) {
     padding: 15px;
   }
@@ -37,7 +34,6 @@ const SubjectGrade = styled.div`
 
 const SubjectName = styled.h3`
   margin-bottom: 10px;
-
   @media screen and (max-width: 768px) {
     font-size: 1.2em;
   }
@@ -54,7 +50,6 @@ const PerformanceLevel = styled.span`
 
 const SidebarContainer = styled.div`
   flex: 0 0 240px;
-
   @media screen and (max-width: 768px) {
     flex: 0 0 100%;
   }
@@ -70,11 +65,14 @@ const Grades = () => {
   useEffect(() => {
     const fetchGrades = async () => {
       try {
-        const response = await axios.get(`http://localhost:5000/api/grades?student_id=${studentId}`, {
-          headers: {
-            'Authorization': `Bearer ${token}`
+        const response = await axios.get(
+          `http://localhost:5000/api/grades?student_id=${studentId}`,
+          {
+            headers: {
+              Authorization: `Bearer ${token}`,
+            },
           }
-        });
+        );
         if (Array.isArray(response.data)) {
           setGrades(response.data);
         } else {
@@ -102,11 +100,15 @@ const Grades = () => {
         ) : error ? (
           <p>Error loading grades: {error}</p>
         ) : grades.length > 0 ? (
-          grades.map(grade => (
+          grades.map((grade) => (
             <SubjectGrade key={grade.grade_id}>
               <SubjectName>{grade.subject}</SubjectName>
-              <p><GradeLabel>Grade:</GradeLabel> {grade.grade}</p>
-              <p><PerformanceLevel>{grade.performance_level}</PerformanceLevel></p>
+              <p>
+                <GradeLabel>Grade:</GradeLabel> {grade.grade}
+              </p>
+              <p>
+                <PerformanceLevel>{grade.performance_level}</PerformanceLevel>
+              </p>
             </SubjectGrade>
           ))
         ) : (
@@ -115,6 +117,6 @@ const Grades = () => {
       </Content>
     </GradesContainer>
   );
-}
+};
 
 export default Grades;
