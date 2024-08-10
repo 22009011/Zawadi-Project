@@ -38,7 +38,7 @@ const ParentForm = () => {
         const response = await axios.get('http://localhost:5000/api/schools');
         setSchools(response.data);
         toast.success('Schools fetched successfully!');
-      } catch (error) {
+      } catch (error) {  
         console.error('Error fetching schools:', error);
         toast.error('Failed to fetch schools.');
       }

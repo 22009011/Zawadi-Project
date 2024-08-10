@@ -147,6 +147,18 @@ const AdminSidebar = ({ onToggle = () => {} }) => {
               Messages
             </StyledLink>
           </SidebarNavItem>
+
+          <SidebarNavItem onClick={handleNavItemClick}>
+            <Link to="/admin/teachers-performance">
+              <SidebarIcon selected={location.pathname === '/admin/teachers-performance'}>
+                <BsGear />
+              </SidebarIcon>
+            </Link>
+            <StyledLink to="/admin/teachers-performance" isOpen={isOpen || isMobileOpen} selected={location.pathname === '/admin/teachers-performance'}>
+              Teaacher's Performance
+            </StyledLink>
+          </SidebarNavItem>
+
           <SidebarNavItem onClick={handleNavItemClick}>
             <Link to="/admin/settings">
               <SidebarIcon selected={location.pathname === '/admin/settings'}>

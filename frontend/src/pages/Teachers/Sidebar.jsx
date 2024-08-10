@@ -97,6 +97,19 @@ const TeacherSidebar = ({ isOpen, toggleSidebar }) => {
             View Curriculum
           </StyledLink>
         </SidebarNavItem>
+
+        <SidebarNavItem>
+          <Link to="/teacher/current-view-curriculum">
+            <SidebarIcon selected={location.pathname === '/teacher/current-view-curriculum'}>
+              <FaBook />
+            </SidebarIcon>
+          </Link>
+          <StyledLink to="/teacher/current-view-curriculum" isOpen={isOpen} selected={location.pathname === '/teacher/current-view-curriculum'}>
+           Current View Curriculum
+          </StyledLink>
+        </SidebarNavItem>
+
+
         <SidebarNavItem onClick={() => setIsAcademicRecordsOpen(!isAcademicRecordsOpen)}>
           <SidebarIcon selected={isAcademicRecordsOpen}>
             <FaChartLine />
