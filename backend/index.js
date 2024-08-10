@@ -25,9 +25,11 @@ import announcementRouter from './routers/announcementRouter.js';
 import assessmentRouter from './routers/assessmentRouter.js';
 import config from './config.js';
 import Student from './models/studentModel.js';
-import studentPerformanceRouter from './routers/studentPerformanceRouter.js'
+import studentPerformanceRouter from './routers/studentPerformanceRouter.js';
+import contactRouter from './routers/contactRouter.js';
+import demoRouter from './routers/demoRouter.js';
 
-dotenv.config();
+dotenv.config(); 
 
 const app = express();
 const PORT = config.port;
@@ -92,6 +94,8 @@ app.use('/api/assessment-reports', assessmentReportRouter);
 app.use('/api/announcements', announcementRouter);
 app.use('/api/assessment', assessmentRouter);
 app.use('/api/student-performance', studentPerformanceRouter);
+app.use('/api/get-in-touch', contactRouter);
+app.use('/api/request-demo', demoRouter);
 
 // Sync database
 sequelize.sync()

@@ -1,6 +1,8 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import styled from 'styled-components';
-import bgImage from '../../assets/bg.png';
+import about from '../../assets/about.png';
+import about2 from '../../assets/about2.png';
+import about3 from '../../assets/about3.png';
 
 const SectionContainer = styled.section`
   display: flex;
@@ -30,22 +32,19 @@ const TextContainer = styled.div`
 const ImageContainer = styled.div`
   flex: 1;
   text-align: right; /* Align image container to the right */
+  margin-left: 20px; /* Add space between image and text */
 
   @media screen and (max-width: 768px) {
     text-align: center;
+    margin-left: 0;
   }
 `;
 
 const Image = styled.img`
-  max-width: 100%;
+  width: 100%; /* Ensure image covers full width of the container */
   height: auto;
   border-radius: 10px;
   box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
-  margin-right: 10px; /* Space between image and text */
-
-  @media screen and (max-width: 768px) {
-    margin-right: 0;
-  }
 `;
 
 const Title = styled.h2`
@@ -71,13 +70,24 @@ const Content = styled.p`
   }
 `;
 
-
 const AboutUsSection = () => {
+  const [currentImage, setCurrentImage] = useState(about);
+  const images = [about, about2, about3];
+
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setCurrentImage((prevImage) => {
+        const currentIndex = images.indexOf(prevImage);
+        const nextIndex = (currentIndex + 1) % images.length;
+        return images[nextIndex];
+      });
+    }, 3000); // Change image every 3 seconds
+
+    return () => clearInterval(interval); // Cleanup interval on component unmount
+  }, [images]);
+
   return (
     <SectionContainer>
-      <ImageContainer>
-        <Image src={bgImage} alt="About Us" />
-      </ImageContainer>
       <TextContainer>
         <Title>About Us</Title>
         <Content>
@@ -88,6 +98,9 @@ const AboutUsSection = () => {
           justo at egestas feugiat, risus leo viverra lorem, quis pretium est libero sed ipsum.
         </Content>
       </TextContainer>
+      <ImageContainer>
+        <Image src={currentImage} alt="About Us" />
+      </ImageContainer>
     </SectionContainer>
   );
 }
