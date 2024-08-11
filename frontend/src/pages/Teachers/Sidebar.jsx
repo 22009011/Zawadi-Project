@@ -58,12 +58,12 @@ const TeacherSidebar = ({ isOpen, toggleSidebar }) => {
           </StyledLink>
         </SidebarNavItem>
         <SidebarNavItem>
-          <Link to="/teacher/students-progress">
-            <SidebarIcon selected={location.pathname === '/teacher/students-progress'}>
+          <Link to="/teacher/student-progress">
+            <SidebarIcon selected={location.pathname === '/teacher/student-progress'}>
               <FaUserGraduate />
             </SidebarIcon>
           </Link>
-          <StyledLink to="/teacher/students-progress" isOpen={isOpen} selected={location.pathname === '/teacher/students-progress'}>
+          <StyledLink to="/teacher/student-progress" isOpen={isOpen} selected={location.pathname === '/teacher/student-progress'}>
             Students Progress
           </StyledLink>
         </SidebarNavItem>
@@ -163,13 +163,13 @@ const TeacherSidebar = ({ isOpen, toggleSidebar }) => {
             </StyledLink>
           </SidebarNavItem>
           <SidebarNavItem>
-            <Link to="/teacher/feedback">
-              <SidebarIcon selected={location.pathname === '/teacher/feedback'}>
+            <Link to="/teacher/announcement">
+              <SidebarIcon selected={location.pathname === '/teacher/announcement'}>
                 <FaComments />
               </SidebarIcon>
             </Link>
-            <StyledLink to="/teacher/feedback" isOpen={isOpen} selected={location.pathname === '/teacher/feedback'}>
-              Feedback
+            <StyledLink to="/teacher/announcement" isOpen={isOpen} selected={location.pathname === '/teacher/announcement'}>
+            Announcement
             </StyledLink>
           </SidebarNavItem>
         </SidebarNav>
