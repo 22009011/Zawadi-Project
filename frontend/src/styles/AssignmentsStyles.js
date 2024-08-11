@@ -42,6 +42,13 @@ export const AssignmentsHeader = styled.h1`
   }
 `;
 
+export const ButtonContainer = styled.div`
+  display: flex;
+  justify-content: flex-end;
+  gap: 10px;
+  margin-bottom: 20px;
+`;
+
 export const AssignmentList = styled.ul`
   padding: 0;
 `;
@@ -77,61 +84,77 @@ export const AddAssignmentForm = styled.form`
 
 export const AddAssignmentInput = styled.input`
   padding: 10px;
+  font-size: 1.1em;
+  border-radius: 5px;
   border: 1px solid #ccc;
-  border-radius: 4px;
 
   @media screen and (max-width: 768px) {
     padding: 8px;
+    font-size: 1em;
   }
 `;
 
 export const AddAssignmentTextArea = styled.textarea`
   padding: 10px;
+  font-size: 1.1em;
+  border-radius: 5px;
   border: 1px solid #ccc;
-  border-radius: 4px;
+  resize: none;
 
   @media screen and (max-width: 768px) {
     padding: 8px;
+    font-size: 1em;
   }
 `;
 
 export const AddAssignmentButton = styled.button`
-  padding: 10px 20px;
-  background-color: #4caf50;
+  padding: 12px 20px;
+  font-size: 1.1em;
+  background-color: #007bff;
   color: white;
   border: none;
-  border-radius: 4px;
+  border-radius: 5px;
   cursor: pointer;
 
-  &:hover {
-    background-color: #45a049;
+  @media screen and (max-width: 768px) {
+    padding: 10px 18px;
+    font-size: 1em;
   }
 
-  @media screen and (max-width: 768px) {
-    padding: 8px 16px;
+  &:hover {
+    background-color: #0056b3;
   }
 `;
 
 export const AssignmentTypeSelect = styled.select`
   padding: 10px;
+  font-size: 1.1em;
+  border-radius: 5px;
   border: 1px solid #ccc;
-  border-radius: 4px;
 
   @media screen and (max-width: 768px) {
     padding: 8px;
+    font-size: 1em;
   }
 `;
 
 export const AddChoiceButton = styled.button`
-  padding: 5px;
-  background-color: #2196f3;
+  padding: 10px;
+  font-size: 1em;
+  background-color: #28a745;
   color: white;
   border: none;
-  border-radius: 4px;
+  border-radius: 5px;
   cursor: pointer;
+  align-self: flex-start;
+
+  @media screen and (max-width: 768px) {
+    padding: 8px;
+    font-size: 0.9em;
+  }
 
   &:hover {
-    background-color: #0b79d0;
+    background-color: #218838;
   }
 `;
 
@@ -139,30 +162,63 @@ export const ChoiceInputContainer = styled.div`
   display: flex;
   align-items: center;
   gap: 10px;
-  margin-bottom: 10px;
 `;
 
 export const ChoiceInput = styled.input`
-  padding: 5px;
+  padding: 10px;
+  font-size: 1.1em;
+  border-radius: 5px;
   border: 1px solid #ccc;
-  border-radius: 4px;
+
+  @media screen and (max-width: 768px) {
+    padding: 8px;
+    font-size: 1em;
+  }
 `;
 
 export const SeeAssignmentsButton = styled.button`
-  padding: 10px;
+  padding: 10px 15px;
+  font-size: 1em;
+  background-color: #ffc107;
+  color: black;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+
+  &:hover {
+    background-color: #e0a800;
+  }
+`;
+
+export const StudentAssignmentsButton = styled.button`
+  padding: 10px 15px;
+  font-size: 1em;
+  background-color: #28a745;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+
+  &:hover {
+    background-color: #218838;
+  }
+`;
+
+
+export const GoBackButton = styled.button`
+  padding: 10px 20px;
   background-color: #ff9800;
   color: white;
   border: none;
   border-radius: 4px;
   cursor: pointer;
+  margin-top: 20px;
   align-self: flex-end;
 
   &:hover {
     background-color: #fb8c00;
   }
 `;
-
-
 
 
 

@@ -56,6 +56,7 @@ import TeacherForm from './pages/SuperAdminDashboard/TeacherForm.jsx';
 import ParentForm from './pages/SuperAdminDashboard/ParentForm.jsx';
 import TeachersPerformanceDashboard from './pages/Admin/TeachersPerformanceDashboard.jsx';
 import ViewCurriculumManagement from './pages/Teachers/ViewCurriculumManagement.jsx';
+import StudentAssignmentsPage from './pages/Teachers/StudentAssignmentsPage.jsx';
 import Layout from './Layout';
 
 // Axios interceptor setup
@@ -113,6 +114,8 @@ const App = () => {
         <Route path="/teacher/report-form" element={<Layout><StudentForm /></Layout>} />
         <Route path="/teacher/student-report" element={<Layout><StudentReport /></Layout>} />
         <Route path="/teacher/current-view-curriculum" element={<Layout><ViewCurriculumManagement /></Layout>} />
+        <Route path="/teacher/student-assignments-submitted" element={<Layout><StudentAssignmentsPage /></Layout>} />
+        
 
         <Route path="/super-admin/advanced-analytics" element={<Layout><AdvancedAnalytics /></Layout>} />
         <Route path="/super-admin/integration-options" element={<Layout><IntergrationOptions /></Layout>} />

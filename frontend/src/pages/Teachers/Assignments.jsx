@@ -20,7 +20,8 @@ import {
   ChoiceInputContainer,
   ChoiceInput,
   SeeAssignmentsButton,
-  AssignmentButton
+  StudentAssignmentsButton,
+  ButtonContainer,
 } from '../../styles/AssignmentsStyles';
 import { useNavigate } from 'react-router-dom';
 
@@ -97,12 +98,24 @@ const AssignmentSection = () => {
     }
   };
 
+  const handleNavigateToStudentAssignments = () => {
+    navigate('/teacher/student-assignments-submitted');
+  };
+
   return (
     <AssignmentsContainer>
       <TeacherSidebar />
       <Content>
         <AssignmentsContent>
           <AssignmentsHeader>Assignments</AssignmentsHeader>
+          <ButtonContainer>
+            <SeeAssignmentsButton onClick={handleToggleAssignments}>
+              {showAssignments ? 'Hide Assignments' : 'See Assignments'}
+            </SeeAssignmentsButton>
+            <StudentAssignmentsButton onClick={handleNavigateToStudentAssignments}>
+              Students Assignments Submitted
+            </StudentAssignmentsButton>
+          </ButtonContainer>
           <AddAssignmentForm onSubmit={handleAddAssignment}>
             <AddAssignmentInput
               type="text"
@@ -153,9 +166,6 @@ const AssignmentSection = () => {
             )}
             <AddAssignmentButton type="submit">Add Assignment</AddAssignmentButton>
           </AddAssignmentForm>
-          <SeeAssignmentsButton onClick={handleToggleAssignments}>
-            {showAssignments ? 'Hide Assignments' : 'See Assignments'}
-          </SeeAssignmentsButton>
           {showAssignments && (
             <AssignmentList>
               {assignments && assignments.length > 0 ? assignments.map((assignment) => (
