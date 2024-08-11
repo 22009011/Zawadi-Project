@@ -2,83 +2,91 @@ import styled from 'styled-components';
 
 export const LessonPlansContainer = styled.div`
   padding: 20px;
-  @media (max-width: 768px) {
-    padding: 10px;
-  }
+  background-color: #f9f9f9;
+  min-height: 100vh;
 `;
 
 export const LessonPlan = styled.div`
-  background-color: #f9f9f9;
-  border-radius: 5px;  
-  padding: 15px;
+  background-color: #ffffff;
+  border-radius: 10px;
+  padding: 20px;
   margin-bottom: 15px;
-  @media (max-width: 768px) {
-    padding: 10px;
-  }
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
 `;
 
 export const LessonTitle = styled.h3`
-  color: #333;
-  font-size: 1.2em;
-  @media (max-width: 768px) {
-    font-size: 1em;
-  }
+  color: #34495e;
+  font-size: 1.4em;
+  margin-bottom: 10px;
 `;
 
 export const LessonContent = styled.p`
-  color: #555;
-  font-size: 1em;
-  @media (max-width: 768px) {
-    font-size: 0.9em;
-  }
+  color: #7f8c8d;
+  font-size: 1.1em;
+  margin-bottom: 10px;
 `;
 
 export const LessonForm = styled.form`
-  margin-bottom: 20px;
+  margin-top: 30px;
+  background-color: #ffffff;
+  padding: 20px;
+  border-radius: 10px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
 `;
 
 export const LessonInput = styled.input`
-  margin-bottom: 10px;
-  padding: 8px;
+  margin-bottom: 15px;
+  padding: 12px;
   width: 100%;
-  box-sizing: border-box;
-  @media (max-width: 768px) {
-    padding: 6px;
-  }
+  border: 1px solid #bdc3c7;
+  border-radius: 5px;
+  font-size: 1.1em;
 `;
 
 export const LessonTextarea = styled.textarea`
-  margin-bottom: 10px;
-  padding: 8px;
+  margin-bottom: 15px;
+  padding: 12px;
   width: 100%;
-  box-sizing: border-box;
-  @media (max-width: 768px) {
-    padding: 6px;
-  }
+  border: 1px solid #bdc3c7;
+  border-radius: 5px;
+  font-size: 1.1em;
+  height: 150px;
+  resize: none;
 `;
 
 export const Select = styled.select`
-  margin-bottom: 10px;
-  padding: 8px;
+  margin-bottom: 15px;
+  padding: 12px;
   width: 100%;
-  box-sizing: border-box;
-  @media (max-width: 768px) {
-    padding: 6px;
-  }
+  border: 1px solid #bdc3c7;
+  border-radius: 5px;
+  font-size: 1.1em;
+  color: #34495e; /* Text color set to black */
 `;
 
 export const AddLessonButton = styled.button`
-  padding: 10px 20px;
-  background-color: #007bff;
+  padding: 12px 25px;
+  background-color: #2980b9;
   color: #fff;
   border: none;
   border-radius: 5px;
   cursor: pointer;
+  font-size: 1.1em;
   &:hover {
-    background-color: #0056b3;
+    background-color: #1f6391;
   }
-  @media (max-width: 768px) {
-    padding: 8px 16px;
+`;
+
+export const ViewLessonPlansButton = styled.button`
+  padding: 12px 25px;
+  background-color: #e74c3c;
+  color: #fff;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 1.1em;
+  &:hover {
+    background-color: #c0392b;
   }
 `;
 
@@ -90,20 +98,16 @@ export const LessonPlansContent = styled.div`
 `;
 
 export const LessonPlansHeader = styled.h2`
-  color: #007bff;
+  color: #2c3e50;
   margin-bottom: 20px;
-  font-size: 1.5em;
-  @media (max-width: 768px) {
-    font-size: 1.2em;
-  }
+  font-size: 2em;
+  /* Align header with the form */
+  margin-left: 20px; /* Adjust as needed */
 `;
 
 export const LessonPlansList = styled.div`
   width: 100%;
   max-width: 800px;
-  @media (max-width: 768px) {
-    max-width: 100%;
-  }
 `;
 
 export const ClassSelect = styled(Select)`
@@ -114,100 +118,30 @@ export const Actions = styled.div`
   display: flex;
   justify-content: space-between;
   margin-top: 10px;
-  @media (max-width: 768px) {
-    flex-direction: column;
-    align-items: flex-start;
-  }
 `;
 
 export const DeleteButton = styled.button`
-  background-color: #dc3545;
+  background-color: #e74c3c;
   color: white;
   border: none;
-  padding: 8px 16px;
+  padding: 10px 20px;
   border-radius: 5px;
   cursor: pointer;
+  font-size: 1.1em;
   &:hover {
-    background-color: #c82333;
-  }
-  @media (max-width: 768px) {
-    padding: 6px 12px;
+    background-color: #c0392b;
   }
 `;
 
 export const UpdateButton = styled.button`
-  background-color: #28a745;
+  background-color: #27ae60;
   color: white;
   border: none;
-  padding: 8px 16px;
-  border-radius: 5px;
-  cursor: pointer;
-  &:hover {
-    background-color: #218838;
-  }
-  @media (max-width: 768px) {
-    padding: 6px 12px;
-  }
-`;
-
-export const IconWrapper = styled.span`
-  margin-left: 5px;
-`;
-
-export const AddLessonPlanButton = styled.button`
   padding: 10px 20px;
-  background-color: #007bff;
-  color: #fff;
-  border: none;
   border-radius: 5px;
   cursor: pointer;
+  font-size: 1.1em;
   &:hover {
-    background-color: #0056b3;
+    background-color: #1e8449;
   }
-  @media (max-width: 768px) {
-    padding: 8px 16px;
-  }
-`;
-
-export const AddLessonPlanForm = styled.form`
-  margin-bottom: 20px;
-`;
-
-export const AddLessonPlanInput = styled.input`
-  margin-bottom: 10px;
-  padding: 8px;
-  width: 100%;
-  box-sizing: border-box;
-  @media (max-width: 768px) {
-    padding: 6px;
-  }
-`;
-
-export const Content = styled.div`
-  display: flex;
-  flex-direction: column;
-  gap: 10px;
-  width: 100%;
-`;
-
-export const LessonPlanDetails = styled.div`
-  background-color: #f1f1f1;
-  padding: 10px;
-  border-radius: 5px;
-  margin-bottom: 10px;
-`;
-
-export const LessonPlanItem = styled.div`
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  padding: 10px;
-  background-color: #fff;
-  border-radius: 5px;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-  margin-bottom: 10px;
-`;
-
-export const LessonPlanList = styled.div`
-  margin-bottom: 20px;
 `;
