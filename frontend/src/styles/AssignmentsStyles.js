@@ -12,18 +12,9 @@ export const AssignmentsContainer = styled.div`
 
 export const SidebarContainer = styled.div`
   width: 240px;
-  height: 100vh;
-  position: fixed;
-  top: 0;
-  left: 0;
-  background-color: #f4f4f4;
-  box-shadow: 2px 0 5px rgba(0, 0, 0, 0.1);
 
   @media screen and (max-width: 768px) {
     width: 100%;
-    height: auto;
-    position: relative;
-    box-shadow: none;
   }
 `;
 
@@ -59,73 +50,16 @@ export const AssignmentItem = styled.li`
   list-style: none;
   margin-bottom: 20px;
   font-size: 1.1em;
+  background-color: #f9f9f9;
+  padding: 10px;
+  border-radius: 5px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
 
   @media screen and (max-width: 768px) {
     margin-bottom: 15px;
     font-size: 1em;
-  }
-`;
-
-export const AssignmentCard = styled.div`
-  background-color: #fff;
-  border-radius: 8px;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-  padding: 20px;
-  margin-bottom: 20px;
-  width: 100%;
-  max-width: 600px;
-
-  @media screen and (max-width: 768px) {
-    padding: 15px;
-  }
-`;
-
-export const AssignmentTitle = styled.h3`
-  margin-bottom: 10px;
-
-  @media screen and (max-width: 768px) {
-    font-size: 1.2em;
-  }
-`;
-
-export const AssignmentDescription = styled.p`
-  color: #555;
-  margin-bottom: 15px;
-
-  @media screen and (max-width: 768px) {
-    font-size: 0.9em;
-  }
-`;
-
-export const AssignmentTextArea = styled.textarea`
-  padding: 10px;
-  border: 1px solid #ccc;
-  border-radius: 4px;
-  resize: vertical;
-  width: 100%;
-  font-size: 1em;
-
-  @media screen and (max-width: 768px) {
-    padding: 8px;
-    font-size: 0.9em;
-  }
-`;
-
-export const AssignmentButton = styled.button`
-  background-color: #007bff;
-  color: #fff;
-  border: none;
-  border-radius: 4px;
-  padding: 10px 16px;
-  cursor: pointer;
-  transition: background-color 0.3s ease;
-
-  &:hover {
-    background-color: #0056b3;
-  }
-
-  @media screen and (max-width: 768px) {
-    padding: 8px 12px;
   }
 `;
 
@@ -155,7 +89,6 @@ export const AddAssignmentTextArea = styled.textarea`
   padding: 10px;
   border: 1px solid #ccc;
   border-radius: 4px;
-  resize: vertical;
 
   @media screen and (max-width: 768px) {
     padding: 8px;
@@ -163,19 +96,136 @@ export const AddAssignmentTextArea = styled.textarea`
 `;
 
 export const AddAssignmentButton = styled.button`
-  background-color: #007bff;
-  color: #fff;
+  padding: 10px 20px;
+  background-color: #4caf50;
+  color: white;
   border: none;
   border-radius: 4px;
-  padding: 10px 16px;
   cursor: pointer;
-  transition: background-color 0.3s ease;
 
   &:hover {
-    background-color: #0056b3;
+    background-color: #45a049;
   }
 
   @media screen and (max-width: 768px) {
-    padding: 8px 12px;
+    padding: 8px 16px;
+  }
+`;
+
+export const AssignmentTypeSelect = styled.select`
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+
+  @media screen and (max-width: 768px) {
+    padding: 8px;
+  }
+`;
+
+export const AddChoiceButton = styled.button`
+  padding: 5px;
+  background-color: #2196f3;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+
+  &:hover {
+    background-color: #0b79d0;
+  }
+`;
+
+export const ChoiceInputContainer = styled.div`
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 10px;
+`;
+
+export const ChoiceInput = styled.input`
+  padding: 5px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+`;
+
+export const SeeAssignmentsButton = styled.button`
+  padding: 10px;
+  background-color: #ff9800;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  align-self: flex-end;
+
+  &:hover {
+    background-color: #fb8c00;
+  }
+`;
+
+
+
+
+
+
+
+
+// New styles for StudentAssignments component
+
+export const AssignmentCard = styled.div`
+  background-color: #f8f9fa;
+  padding: 20px;
+  border-radius: 8px;
+  margin-bottom: 20px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+
+  @media screen and (max-width: 768px) {
+    padding: 15px;
+    margin-bottom: 15px;
+  }
+`;
+
+export const AssignmentTitle = styled.h2`
+  font-size: 1.5em;
+  margin-bottom: 10px;
+
+  @media screen and (max-width: 768px) {
+    font-size: 1.3em;
+    margin-bottom: 8px;
+  }
+`;
+
+export const AssignmentDescription = styled.p`
+  font-size: 1em;
+  margin-bottom: 15px;
+
+  @media screen and (max-width: 768px) {
+    font-size: 0.9em;
+    margin-bottom: 12px;
+  }
+`;
+
+export const AssignmentTextArea = styled.textarea`
+  width: 100%;
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  resize: vertical;
+
+  @media screen and (max-width: 768px) {
+    padding: 8px;
+  }
+`;
+
+export const AssignmentButton = styled.button`
+  padding: 10px;
+  background-color: #28a745;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  margin-top: 10px;
+
+  @media screen and (max-width: 768px) {
+    padding: 8px;
   }
 `;

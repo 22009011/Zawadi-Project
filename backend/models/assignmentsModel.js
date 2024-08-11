@@ -26,8 +26,12 @@ const Assignment = sequelize.define('Assignment', {
     allowNull: false,
   },
   type: {
-    type: DataTypes.ENUM('Multiple Choice', 'Fill in the Blank'),
+    type: DataTypes.ENUM('Essay', 'Multiple Choice'),
     allowNull: false,
+  },
+  choices: {
+    type: DataTypes.JSON,
+    allowNull: true,
   },
   school_id: {
     type: DataTypes.INTEGER,

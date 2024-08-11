@@ -4,7 +4,7 @@ import School from '../models/schoolModel.js';
 
 // Create Assignment
 export const createAssignment = async (req, res) => {
-  const { title, description, grade, deadline, type } = req.body;
+  const { title, description, grade, deadline, type, choices } = req.body;
 
   if (!title || !deadline || !type) {
     return res.status(400).json({ error: 'Title, deadline, and type are required fields' });
@@ -22,11 +22,37 @@ export const createAssignment = async (req, res) => {
       grade,
       deadline,
       type,
+      choices, // Make sure choices are included here
       school_id: req.school_id,
     });
     res.status(201).json(newAssignment);
   } catch (error) {
     res.status(500).json({ error: 'Failed to create assignment', details: error.message });
+  }
+};
+
+// Update Assignment
+export const updateAssignment = async (req, res) => {
+  const { id } = req.params;
+  const { title, description, grade, deadline, type, choices } = req.body;
+
+  try {
+    const existingAssignment = await Assignment.findOne({ where: { id, school_id: req.school_id } });
+    if (existingAssignment) {
+      await existingAssignment.update({
+        title,
+        description,
+        grade,
+        deadline,
+        type,
+        choices, // Make sure choices are included here
+      });
+      res.json({ message: 'Assignment updated successfully' });
+    } else {
+      res.status(404).json({ error: 'Assignment not found' });
+    }
+  } catch (error) {
+    res.status(500).json({ error: 'Failed to update assignment', details: error.message });
   }
 };
 
@@ -56,29 +82,6 @@ export const getAssignmentById = async (req, res) => {
   }
 };
 
-// Update Assignment
-export const updateAssignment = async (req, res) => {
-  const { id } = req.params;
-  const { title, description, grade, deadline, type } = req.body;
-
-  try {
-    const existingAssignment = await Assignment.findOne({ where: { id, school_id: req.school_id } });
-    if (existingAssignment) {
-      await existingAssignment.update({
-        title,
-        description,
-        grade,
-        deadline,
-        type,
-      });
-      res.json({ message: 'Assignment updated successfully' });
-    } else {
-      res.status(404).json({ error: 'Assignment not found' });
-    }
-  } catch (error) {
-    res.status(500).json({ error: 'Failed to update assignment', details: error.message });
-  }
-};
 
 // Delete Assignment
 export const deleteAssignment = async (req, res) => {
