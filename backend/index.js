@@ -13,6 +13,7 @@ import lessonPlansRouter from './routers/lessonPlansRouter.js';
 import learningMaterialsRouter from './routers/learningMaterialsRouter.js';
 import gradesRouter from './routers/gradesRouter.js';
 import feedbackRouter from './routers/feedbackRouter.js';
+
 import enteredMarksRouter from './routers/enteredMarksRouter.js';
 import attendanceRouter from './routers/attendanceRouter.js';
 import communicationRouter from './routers/communicationRouter.js';
@@ -83,6 +84,8 @@ app.use('/api/lesson-plans', lessonPlansRouter);
 app.use('/api/learning-materials', learningMaterialsRouter);
 app.use('/api/grades', gradesRouter);
 app.use('/api/feedbacks', feedbackRouter);
+
+
 app.use('/api/entered-marks', enteredMarksRouter);
 app.use('/api/attendance', attendanceRouter);
 app.use('/api/communications', communicationRouter);

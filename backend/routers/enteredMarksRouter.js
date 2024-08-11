@@ -1,20 +1,20 @@
-// routes/enteredMarkRoutes.js
 import express from 'express';
 import {
-  createEnteredMark,
-  getAllEnteredMarks,
-  getEnteredMarkById,
-  updateEnteredMark,
-  deleteEnteredMark,
-} from '../controllers/enteredMarksControllers.js';
+  createFormativeAssessment,
+  createSummativeAssessment,
+  getAllFormativeAssessments,
+  getAllSummativeAssessments,
+} from '../controllers/enteredMarksControllers.js'
 import auth from '../middleware/auth.js';
 
 const router = express.Router();
 
-router.post('/', auth, createEnteredMark);
-router.get('/', auth, getAllEnteredMarks);
-router.get('/:id', auth, getEnteredMarkById);
-router.put('/:id', auth, updateEnteredMark);
-router.delete('/:id', auth, deleteEnteredMark);
+// Formative Assessments
+router.post('/formative', auth, createFormativeAssessment);
+router.get('/formative', auth, getAllFormativeAssessments);
 
-export default router;
+// Summative Assessments
+router.post('/summative', auth, createSummativeAssessment);
+router.get('/summative', auth, getAllSummativeAssessments);
+
+export default router

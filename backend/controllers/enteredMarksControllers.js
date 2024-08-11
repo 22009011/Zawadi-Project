@@ -1,13 +1,13 @@
-// controllers/enteredMarkController.js
-import EnteredMark from '../models/enteredMarksModel.js';
+import FormativeAssessment from '../models/formativeAssessmentModel.js';
+import SummativeAssessment from '../models/summativeAssessmentModel.js';
 import School from '../models/schoolModel.js';
 import Class from '../models/classModel.js';
 
-// Create Entered Mark
-export const createEnteredMark = async (req, res) => {
-  const { student_name, class_level, admission_number, subject, marks } = req.body;
+// Create Formative Assessment
+export const createFormativeAssessment = async (req, res) => {
+  const { student_id, class_level, admission_number, subject, topic, subtopic, correct_answers, total_answers } = req.body;
 
-  if (!student_name || !class_level || !admission_number || !subject || !marks) {
+  if (!student_id || !class_level || !admission_number || !subject || !topic || !subtopic || correct_answers === undefined || total_answers === undefined) {
     return res.status(400).json({ error: 'All fields are required' });
   }
 
@@ -22,88 +22,89 @@ export const createEnteredMark = async (req, res) => {
       return res.status(404).json({ error: 'Class not found in the school' });
     }
 
-    const newEnteredMark = await EnteredMark.create({
-      student_name,
+    const newFormativeAssessment = await FormativeAssessment.create({
+      student_id,
       class_level: selectedClass.id,
       admission_number,
       subject,
-      marks,
+      topic,
+      subtopic,
+      correct_answers,
+      total_answers,
       school_id: req.school_id,
+      performance_level: getPerformanceLevel(correct_answers, total_answers),
     });
-    res.status(201).json(newEnteredMark);
+    res.status(201).json(newFormativeAssessment);
   } catch (error) {
-    res.status(500).json({ error: 'Failed to create entered mark', details: error.message });
+    res.status(500).json({ error: 'Failed to create formative assessment', details: error.message });
   }
 };
 
-// Get All Entered Marks
-export const getAllEnteredMarks = async (req, res) => {
-  try {
-    const enteredMarks = await EnteredMark.findAll({ where: { school_id: req.school_id } });
-    res.json(enteredMarks);
-  } catch (error) {
-    res.status(500).json({ error: 'Failed to retrieve entered marks', details: error.message });
+// Create Summative Assessment
+export const createSummativeAssessment = async (req, res) => {
+  const { student_id, class_level, admission_number, subject, topic, subtopic, correct_answers, total_answers } = req.body;
+
+  if (!student_id || !class_level || !admission_number || !subject || !topic || !subtopic || correct_answers === undefined || total_answers === undefined) {
+    return res.status(400).json({ error: 'All fields are required' });
   }
-};
-
-// Get Entered Mark by ID
-export const getEnteredMarkById = async (req, res) => {
-  const { id } = req.params;
 
   try {
-    const enteredMark = await EnteredMark.findOne({ where: { id, school_id: req.school_id } });
-    if (enteredMark) {
-      res.json(enteredMark);
-    } else {
-      res.status(404).json({ error: 'Entered mark not found' });
+    const school = await School.findByPk(req.school_id);
+    if (!school) {
+      return res.status(404).json({ error: 'School not found' });
     }
-  } catch (error) {
-    res.status(500).json({ error: 'Failed to retrieve entered mark', details: error.message });
-  }
-};
 
-// Update Entered Mark
-export const updateEnteredMark = async (req, res) => {
-  const { id } = req.params;
-  const { student_name, class_level, admission_number, subject, marks } = req.body;
-
-  try {
-    const existingEnteredMark = await EnteredMark.findOne({ where: { id, school_id: req.school_id } });
-    if (existingEnteredMark) {
-      const selectedClass = await Class.findOne({ where: { id: class_level, school_id: req.school_id } });
-      if (!selectedClass) {
-        return res.status(404).json({ error: 'Class not found in the school' });
-      }
-
-      await existingEnteredMark.update({
-        student_name,
-        class_level: selectedClass.id,
-        admission_number,
-        subject,
-        marks,
-      });
-      res.json({ message: 'Entered mark updated successfully' });
-    } else {
-      res.status(404).json({ error: 'Entered mark not found' });
+    const selectedClass = await Class.findOne({ where: { id: class_level, school_id: req.school_id } });
+    if (!selectedClass) {
+      return res.status(404).json({ error: 'Class not found in the school' });
     }
+
+    const newSummativeAssessment = await SummativeAssessment.create({
+      student_id,
+      class_level: selectedClass.id,
+      admission_number,
+      subject,
+      topic,
+      subtopic,
+      correct_answers,
+      total_answers,
+      school_id: req.school_id,
+      performance_level: getPerformanceLevel(correct_answers, total_answers),
+    });
+    res.status(201).json(newSummativeAssessment);
   } catch (error) {
-    res.status(500).json({ error: 'Failed to update entered mark', details: error.message });
+    res.status(500).json({ error: 'Failed to create summative assessment', details: error.message });
   }
 };
 
-// Delete Entered Mark
-export const deleteEnteredMark = async (req, res) => {
-  const { id } = req.params;
-
+// Get All Formative Assessments
+export const getAllFormativeAssessments = async (req, res) => {
   try {
-    const enteredMark = await EnteredMark.findOne({ where: { id, school_id: req.school_id } });
-    if (enteredMark) {
-      await enteredMark.destroy();
-      res.status(204).end();
-    } else {
-      res.status(404).json({ error: 'Entered mark not found' });
-    }
+    const formativeAssessments = await FormativeAssessment.findAll({ where: { school_id: req.school_id } });
+    res.json(formativeAssessments);
   } catch (error) {
-    res.status(500).json({ error: 'Failed to delete entered mark', details: error.message });
+    res.status(500).json({ error: 'Failed to retrieve formative assessments', details: error.message });
   }
 };
+
+// Get All Summative Assessments
+export const getAllSummativeAssessments = async (req, res) => {
+  try {
+    const summativeAssessments = await SummativeAssessment.findAll({ where: { school_id: req.school_id } });
+    res.json(summativeAssessments);
+  } catch (error) {
+    res.status(500).json({ error: 'Failed to retrieve summative assessments', details: error.message });
+  }
+};
+
+// Utility function to determine performance level
+const getPerformanceLevel = (correct_answers, total_answers) => {
+  const percentage = (correct_answers / total_answers) * 100;
+  if (percentage >= 90) return 'Excellent';
+  if (percentage >= 75) return 'Meets Expectation';
+  if (percentage >= 50) return 'Average';
+  return 'Below Average';
+};
+
+// Other CRUD operations for specific assessments can be added similarly
+
