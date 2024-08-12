@@ -1,31 +1,31 @@
 import styled from 'styled-components';
 
-export const AssignmentsContainer = styled.div`
-  display: flex;
-  padding-left: 240px;
+// export const AssignmentsContainer = styled.div`
+//   display: flex;
+//   padding-left: 240px;
 
-  @media screen and (max-width: 768px) {
-    flex-direction: column;
-    padding-left: 0;
-  }
-`;
+//   @media screen and (max-width: 768px) {
+//     flex-direction: column;
+//     padding-left: 0;
+//   }
+// `;
 
-export const SidebarContainer = styled.div`
-  width: 240px;
+// export const SidebarContainer = styled.div`
+//   width: 240px;
 
-  @media screen and (max-width: 768px) {
-    width: 100%;
-  }
-`;
+//   @media screen and (max-width: 768px) {
+//     width: 100%;
+//   }
+// `;
 
-export const Content = styled.div`
-  flex: 1;
-  padding: 20px;
+// export const Content = styled.div`
+//   flex: 1;
+//   padding: 20px;
 
-  @media screen and (max-width: 768px) {
-    padding: 10px;
-  }
-`;
+//   @media screen and (max-width: 768px) {
+//     padding: 10px;
+//   }
+// `;
 
 export const AssignmentsContent = styled.div`
   display: flex;
@@ -227,37 +227,41 @@ export const GoBackButton = styled.button`
 
 // New styles for StudentAssignments component
 
+
+export const AssignmentsContainer = styled.div`
+  display: flex;
+  background-color: #f0f2f5;
+  height: 100vh;
+`;
+
+export const SidebarContainer = styled.div`
+  width: 250px;
+  background-color: #fff;
+  border-right: 1px solid #ddd;
+`;
+
+export const Content = styled.div`
+  flex: 1;
+  padding: 20px;
+`;
+
 export const AssignmentCard = styled.div`
-  background-color: #f8f9fa;
+  background-color: #fff;
   padding: 20px;
   border-radius: 8px;
   margin-bottom: 20px;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-
-  @media screen and (max-width: 768px) {
-    padding: 15px;
-    margin-bottom: 15px;
-  }
+  position: relative; /* For absolute positioning of the type label */
 `;
 
 export const AssignmentTitle = styled.h2`
   font-size: 1.5em;
   margin-bottom: 10px;
-
-  @media screen and (max-width: 768px) {
-    font-size: 1.3em;
-    margin-bottom: 8px;
-  }
 `;
 
 export const AssignmentDescription = styled.p`
   font-size: 1em;
   margin-bottom: 15px;
-
-  @media screen and (max-width: 768px) {
-    font-size: 0.9em;
-    margin-bottom: 12px;
-  }
 `;
 
 export const AssignmentTextArea = styled.textarea`
@@ -266,10 +270,6 @@ export const AssignmentTextArea = styled.textarea`
   border: 1px solid #ccc;
   border-radius: 4px;
   resize: vertical;
-
-  @media screen and (max-width: 768px) {
-    padding: 8px;
-  }
 `;
 
 export const AssignmentButton = styled.button`
@@ -280,8 +280,39 @@ export const AssignmentButton = styled.button`
   border-radius: 4px;
   cursor: pointer;
   margin-top: 10px;
+`;
 
-  @media screen and (max-width: 768px) {
-    padding: 8px;
-  }
+export const MultipleChoiceContainer = styled.div`
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 15px;
+`;
+
+export const MultipleChoiceOption = styled.div`
+  margin-bottom: 10px;
+  display: flex;
+  align-items: center;
+`;
+
+export const RadioInput = styled.input`
+  margin-right: 10px;
+`;
+
+export const RadioLabel = styled.label`
+  font-size: 1em;
+`;
+
+export const AssignmentTypeLabel = styled.div`
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  background-color: ${(props) => (props.type === 'Essay' ? '#007bff' : '#ffc107')};
+  color: white;
+  padding: 5px 10px;
+  border-radius: 4px;
+  font-size: 0.9em;
+`;
+
+export const TextAreaContainer = styled.div`
+  margin-top: 15px;
 `;

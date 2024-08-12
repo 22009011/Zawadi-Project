@@ -2,7 +2,6 @@
 import Assignment from '../models/assignmentsModel.js';
 import School from '../models/schoolModel.js';
 
-// Create Assignment
 export const createAssignment = async (req, res) => {
   const { title, description, grade, deadline, type, choices } = req.body;
 
@@ -22,14 +21,16 @@ export const createAssignment = async (req, res) => {
       grade,
       deadline,
       type,
-      choices, // Make sure choices are included here
+      choices, // Use choices directly as an object
       school_id: req.school_id,
     });
+
     res.status(201).json(newAssignment);
   } catch (error) {
     res.status(500).json({ error: 'Failed to create assignment', details: error.message });
   }
 };
+
 
 // Update Assignment
 export const updateAssignment = async (req, res) => {

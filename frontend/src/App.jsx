@@ -58,6 +58,7 @@ import TeachersPerformanceDashboard from './pages/Admin/TeachersPerformanceDashb
 import ViewCurriculumManagement from './pages/Teachers/ViewCurriculumManagement.jsx';
 import StudentAssignmentsPage from './pages/Teachers/StudentAssignmentsPage.jsx';
 import CalenderSection from './pages/Teachers/Calender.jsx';
+import ManualAssessments from './pages/Teachers/ManualAssessments.jsx';
 import Layout from './Layout';
 
 // Axios interceptor setup
@@ -117,6 +118,7 @@ const App = () => {
         <Route path="/teacher/current-view-curriculum" element={<Layout><ViewCurriculumManagement /></Layout>} />
         <Route path="/teacher/student-assignments-submitted" element={<Layout><StudentAssignmentsPage /></Layout>} />
         <Route path="/teacher/calendar" element={<Layout><CalenderSection /></Layout>} />
+        <Route path="/teacher/manual-assessments" element={<Layout><ManualAssessments /></Layout>} />
         
 
         <Route path="/super-admin/advanced-analytics" element={<Layout><AdvancedAnalytics /></Layout>} />

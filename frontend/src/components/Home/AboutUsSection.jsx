@@ -45,6 +45,9 @@ const Image = styled.img`
   height: auto;
   border-radius: 10px;
   box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+  max-width: 400px; /* Set maximum width to keep images consistent */
+  max-height: 300px; /* Set maximum height to maintain aspect ratio */
+  object-fit: cover; /* Ensure the image scales without distortion */
 `;
 
 const Title = styled.h2`

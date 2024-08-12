@@ -1,6 +1,7 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import styled from 'styled-components';
-import bg1 from "../../assets/bg1.png";
+import teacher1 from "../../assets/teacher1.png";
+import teacher2 from "../../assets/teacher2.png";
 import { BsFillBookFill, BsFillClipboardCheckFill, BsFillFileEarmarkTextFill, BsFillBarChartFill } from 'react-icons/bs';
 
 const Section = styled.div`
@@ -11,9 +12,9 @@ const Section = styled.div`
   border-radius: 10px;
   box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
   text-align: left;
-  width: 100vw; /* Full viewport width */
-  margin: 0; /* Remove margin */
-  box-sizing: border-box; /* Ensure padding is included in the width */
+  width: 100vw;
+  margin: 0;
+  box-sizing: border-box;
 
   @media screen and (max-width: 768px) {
     flex-direction: column;
@@ -26,17 +27,21 @@ const ImageContainer = styled.div`
   min-width: 300px;
   max-width: 500px;
   text-align: center;
+  margin-right: 30px;
 
   @media screen and (max-width: 768px) {
     min-width: 100%;
     max-width: 100%;
     margin-bottom: 20px;
+    margin-right: 0;
   }
 `;
 
 const Image = styled.img`
-  width: 100%; /* Full width of the container */
+  width: 100%;
   height: auto;
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 `;
 
 const TextContainer = styled.div`
@@ -46,7 +51,6 @@ const TextContainer = styled.div`
   display: flex;
   flex-wrap: wrap;
   justify-content: space-around;
-  padding-between: 20px;
 
   @media screen and (max-width: 768px) {
     flex-direction: column;
@@ -106,10 +110,23 @@ const Description = styled.p`
 `;
 
 const FeatureSection = () => {
+  const [currentImage, setCurrentImage] = useState(teacher1);
+  const images = [teacher1, teacher2];
+  let imageIndex = 0;
+
+  useEffect(() => {
+    const interval = setInterval(() => {
+      imageIndex = (imageIndex + 1) % images.length;
+      setCurrentImage(images[imageIndex]);
+    }, 3000); // Change image every 3 seconds
+
+    return () => clearInterval(interval); // Cleanup interval on component unmount
+  }, []);
+
   return (
     <Section>
       <ImageContainer>
-        <Image src={bg1} alt="Illustration" />
+        <Image src={currentImage} alt="Illustration" />
       </ImageContainer>
       <TextContainer>
         <TextBlock>
