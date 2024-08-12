@@ -59,6 +59,8 @@ import ViewCurriculumManagement from './pages/Teachers/ViewCurriculumManagement.
 import StudentAssignmentsPage from './pages/Teachers/StudentAssignmentsPage.jsx';
 import CalenderSection from './pages/Teachers/Calender.jsx';
 import ManualAssessments from './pages/Teachers/ManualAssessments.jsx';
+import AddSummativeAssessment from './pages/SuperAdminDashboard/AddSummativeAssessment.jsx';
+import AddFormativeAssessment from './pages/SuperAdminDashboard/AddFormativeAssessment.jsx';
 import Layout from './Layout';
 
 // Axios interceptor setup
@@ -130,6 +132,10 @@ const App = () => {
         <Route path="/super-admin/all-schools-list" element={<Layout><AllSchoolsList /></Layout>} />
         <Route path="/super-admin/add-teachers" element={<Layout><TeacherForm /></Layout>} />
         <Route path="/super-admin/add-parents" element={<Layout><ParentForm/></Layout>} />
+        <Route path="/super-admin/add-assessments/formative" element={<Layout><AddFormativeAssessment/></Layout>} />
+        <Route path="/super-admin/add-assessments/summative" element={<Layout><AddSummativeAssessment/></Layout>} />
+
+
       </Routes>
     </Router>
   );

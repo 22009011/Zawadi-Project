@@ -162,6 +162,18 @@ const TeacherSidebar = ({ isOpen, toggleSidebar }) => {
               Settings
             </StyledLink>
           </SidebarNavItem>
+
+          <SidebarNavItem>
+            <Link to="/teacher/attendance">
+              <SidebarIcon selected={location.pathname === '/teacher/attendance'}>
+                <FaCog />
+              </SidebarIcon>
+            </Link>
+            <StyledLink to="/teacher/attendance" isOpen={isOpen} selected={location.pathname === '/teacher/attendance'}>
+              Mark Attendnce
+            </StyledLink>
+          </SidebarNavItem>
+
           <SidebarNavItem>
             <Link to="/teacher/announcement">
               <SidebarIcon selected={location.pathname === '/teacher/announcement'}>

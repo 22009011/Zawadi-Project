@@ -1,10 +1,8 @@
-// Sidebar.js
 import React, { useState } from 'react';
 import styled from 'styled-components';
 import { Link, useLocation } from 'react-router-dom';
 import bg1 from '../../assets/bg1.png';
 import { BsGraphUp, BsPeople, BsPerson, BsGear } from 'react-icons/bs';
-//add this icons later in the sideber for add parent and add teacher
 import { FaUserPlus, FaUserTie } from 'react-icons/fa';
 
 const SidebarContainer = styled.div`
@@ -104,13 +102,35 @@ const CloseButton = styled.div`
   }
 `;
 
+const SubMenu = styled.ul`
+  list-style: none;
+  padding: 0;
+  padding-left: 20px;
+  display: ${({ isOpen }) => (isOpen ? 'block' : 'none')};
+`;
+
+const SubMenuItem = styled.li`
+  padding: 10px 20px;
+  font-size: 16px;
+  border-bottom: 1px solid #f0f0f0;
+  transition: background-color 0.3s ease;
+  &:hover {
+    background-color: #f5f5f5;
+  }
+`;
+
 const SuperAdminSidebar = ({ onToggle }) => {
   const [isOpen, setIsOpen] = useState(false);
+  const [isAssessmentsOpen, setIsAssessmentsOpen] = useState(false);
   const location = useLocation();
 
   const toggleSidebar = () => {
     setIsOpen(!isOpen);
     onToggle(!isOpen);
+  };
+
+  const toggleAssessments = () => {
+    setIsAssessmentsOpen(!isAssessmentsOpen);
   };
 
   return (
@@ -146,7 +166,7 @@ const SuperAdminSidebar = ({ onToggle }) => {
             <SidebarIcon selected={location.pathname === '/super-admin/add-teachers'}><BsGear /></SidebarIcon>
             <StyledLink to="/super-admin/add-teachers" isOpen={isOpen} selected={location.pathname === '/super-admin/add-teachers'}>Add Teachers</StyledLink>
           </SidebarNavItem>
-            <SidebarNavItem>
+          <SidebarNavItem>
             <SidebarIcon selected={location.pathname === '/super-admin/add-parents'}><BsGear /></SidebarIcon>
             <StyledLink to="/super-admin/add-parents" isOpen={isOpen} selected={location.pathname === '/super-admin/add-parents'}>Add Parents</StyledLink>
           </SidebarNavItem>
@@ -154,6 +174,20 @@ const SuperAdminSidebar = ({ onToggle }) => {
             <SidebarIcon selected={location.pathname === '/super-admin/system-settings'}><BsGear /></SidebarIcon>
             <StyledLink to="/super-admin/system-settings" isOpen={isOpen} selected={location.pathname === '/super-admin/system-settings'}>Settings</StyledLink>
           </SidebarNavItem>
+          <SidebarNavItem onClick={toggleAssessments}>
+            <SidebarIcon selected={location.pathname.startsWith('/super-admin/add-assessments')}><BsGear /></SidebarIcon>
+            <StyledLink to="#" isOpen={isOpen} selected={location.pathname.startsWith('/super-admin/add-assessments')}>Add Assessments</StyledLink>
+          </SidebarNavItem>
+          <SubMenu isOpen={isAssessmentsOpen}>
+            <SubMenuItem>
+              <SidebarIcon><BsGear /></SidebarIcon>
+              <StyledLink to="/super-admin/add-assessments/summative" isOpen={isOpen}>Add Summative Assessments</StyledLink>
+            </SubMenuItem>
+            <SubMenuItem>
+              <SidebarIcon><BsGear /></SidebarIcon>
+              <StyledLink to="/super-admin/add-assessments/formative" isOpen={isOpen}>Add Formative Assessments</StyledLink>
+            </SubMenuItem>
+          </SubMenu>
         </SidebarNav>
       </SidebarContainer>
     </>
