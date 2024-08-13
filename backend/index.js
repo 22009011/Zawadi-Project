@@ -29,6 +29,8 @@ import Student from './models/studentModel.js';
 import studentPerformanceRouter from './routers/studentPerformanceRouter.js';
 import contactRouter from './routers/contactRouter.js';
 import demoRouter from './routers/demoRouter.js';
+import assessments from './routers/assessments.js';
+
 
 dotenv.config(); 
 
@@ -99,6 +101,7 @@ app.use('/api/assessment', assessmentRouter);
 app.use('/api/student-performance', studentPerformanceRouter);
 app.use('/api/get-in-touch', contactRouter);
 app.use('/api/request-demo', demoRouter);
+app.use('/api/summative-assessments', assessments);
 
 // Sync database
 sequelize.sync()
