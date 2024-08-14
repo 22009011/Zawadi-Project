@@ -1,4 +1,3 @@
-// src/Grades.jsx
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import Sidebar from './Sidebar';
@@ -18,14 +17,12 @@ const Grades = () => {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
   const token = localStorage.getItem('token');
-  const studentId = localStorage.getItem('student_id');
 
   useEffect(() => {
     const fetchGrades = async () => {
       try {
-        console.log('Fetching grades for student_id:', studentId);
         const response = await axios.get(
-          `http://localhost:5000/api/grades?student_id=${studentId}`,
+          `http://localhost:5000/api/grades`,
           {
             headers: {
               Authorization: `Bearer ${token}`,
@@ -48,12 +45,12 @@ const Grades = () => {
       }
     };
 
-    if (studentId && token) {
+    if (token) {
       fetchGrades();
     } else {
-      setError('Missing student ID or token.');
+      setError('Missing token.');
     }
-  }, [studentId, token]);
+  }, [token]);
 
   return (
     <GradesContainer>

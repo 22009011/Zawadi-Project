@@ -11,7 +11,7 @@ import auth, { ensureParentAccessToStudent } from '../middleware/auth.js';
 const router = express.Router();
 
 router.post('/', auth, createGrade);
-router.get('/', auth, ensureParentAccessToStudent, getAllGrades);
+router.get('/', auth, getAllGrades);
 router.get('/:id', auth, ensureParentAccessToStudent, getGradeById);
 router.put('/:id', auth, updateGrade);
 router.delete('/:id', auth, deleteGrade);
