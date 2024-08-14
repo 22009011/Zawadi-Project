@@ -32,7 +32,7 @@ export const registerSuperAdmin = async (req, res) => {
 };
 
 
-
+//login
 export const login = async (req, res) => {
   const { email, password } = req.body;
 
@@ -53,21 +53,64 @@ export const login = async (req, res) => {
       return res.status(401).json({ error: 'Invalid password' });
     }
 
-    const token = jwt.sign({ userId: user.id, role: user.role, school_id: user.school_id }, jwtSecret, { expiresIn: '1h' });
-
+    let studentIds = [];
     if (user.role === 'parent') {
-      // Fetch linked students for the parent
       const students = await Student.findAll({ where: { parentId: user.id } });
-      console.log('Linked students for parent:', students); // Log student details
-    } else {
-      console.log('User details:', user); // Log user details for other roles
+      studentIds = students.map(student => student.id);
     }
+
+    const tokenPayload = { 
+      userId: user.id, 
+      role: user.role, 
+      school_id: user.school_id,
+      studentIds
+    };
+
+    const token = jwt.sign(tokenPayload, jwtSecret, { expiresIn: '1h' });
 
     res.status(200).json({ message: 'Login successful', token, role: user.role });
   } catch (error) {
     res.status(500).json({ error: 'Login failed', details: error.message });
   }
 };
+
+
+
+// export const login = async (req, res) => {
+//   const { email, password } = req.body;
+
+//   if (!email || !password) {
+//     return res.status(400).json({ error: 'All fields are required' });
+//   }
+
+//   try {
+//     const user = await User.findOne({ where: { email } });
+
+//     if (!user) {
+//       return res.status(404).json({ error: 'User not found' });
+//     }
+
+//     const isPasswordValid = await bcrypt.compare(password, user.password);
+
+//     if (!isPasswordValid) {
+//       return res.status(401).json({ error: 'Invalid password' });
+//     }
+
+//     const token = jwt.sign({ userId: user.id, role: user.role, school_id: user.school_id }, jwtSecret, { expiresIn: '1h' });
+
+//     if (user.role === 'parent') {
+//       // Fetch linked students for the parent
+//       const students = await Student.findAll({ where: { parentId: user.id } });
+//       console.log('Linked students for parent:', students); // Log student details
+//     } else {
+//       console.log('User details:', user); // Log user details for other roles
+//     }
+
+//     res.status(200).json({ message: 'Login successful', token, role: user.role });
+//   } catch (error) {
+//     res.status(500).json({ error: 'Login failed', details: error.message });
+//   }
+// };
 
 
 

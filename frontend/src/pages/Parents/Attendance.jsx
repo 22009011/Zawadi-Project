@@ -20,6 +20,15 @@ const Header = styled.h2`
   font-weight: 700;
 `;
 
+const StudentHeader = styled.h3`
+  text-align: center;
+  color: #555;
+  margin-top: 20px;
+  margin-bottom: 15px;
+  font-size: 1.5rem;
+  font-weight: 600;
+`;
+
 const TableWrapper = styled.div`
   width: 100%;
   max-width: 1200px;
@@ -27,6 +36,7 @@ const TableWrapper = styled.div`
   box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
   border-radius: 10px;
   overflow: hidden;
+  margin-bottom: 40px;
 `;
 
 const Table = styled.table`
@@ -102,6 +112,15 @@ const Attendance = () => {
     fetchAttendanceData();
   }, [token]);
 
+  const groupedData = attendanceData.reduce((acc, entry) => {
+    const { student_name } = entry;
+    if (!acc[student_name]) {
+      acc[student_name] = [];
+    }
+    acc[student_name].push(entry);
+    return acc;
+  }, {});
+
   return (
     <Container>
       <Header>Attendance</Header>
@@ -110,26 +129,27 @@ const Attendance = () => {
           <FaSpinner size={32} className="fa-spin" />
         </Loader>
       ) : (
-        <TableWrapper>
-          <Table>
-            <Thead>
-              <tr>
-                <Th>Student Name</Th>
-                <Th>Date</Th>
-                <Th>Status</Th>
-              </tr>
-            </Thead>
-            <Tbody>
-              {attendanceData.map((entry) => (
-                <Tr key={entry.id}>
-                  <Td>{entry.student_name}</Td>
-                  <Td>{entry.attendance_date}</Td>
-                  <Td><StatusIcon status={entry.status} /></Td>
-                </Tr>
-              ))}
-            </Tbody>
-          </Table>
-        </TableWrapper>
+        Object.keys(groupedData).map((studentName, index) => (
+          <TableWrapper key={index}>
+            <StudentHeader>{studentName}</StudentHeader>
+            <Table>
+              <Thead>
+                <tr>
+                  <Th>Date</Th>
+                  <Th>Status</Th>
+                </tr>
+              </Thead>
+              <Tbody>
+                {groupedData[studentName].map((entry) => (
+                  <Tr key={entry.id}>
+                    <Td>{entry.attendance_date}</Td>
+                    <Td><StatusIcon status={entry.status} /></Td>
+                  </Tr>
+                ))}
+              </Tbody>
+            </Table>
+          </TableWrapper>
+        ))
       )}
     </Container>
   );

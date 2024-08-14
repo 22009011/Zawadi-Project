@@ -17,4 +17,6 @@ router.get('/:id', auth, getStudentById);
 router.put('/:id', auth, updateStudent);
 router.delete('/:id', auth, deleteStudent);
 
+
+
 export default router;

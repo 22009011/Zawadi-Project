@@ -1,59 +1,17 @@
 // src/Grades.jsx
 import React, { useState, useEffect } from 'react';
-import styled from 'styled-components';
 import axios from 'axios';
 import Sidebar from './Sidebar';
-
-const GradesContainer = styled.div`
-  display: flex;
-  padding-left: 240px;
-  @media screen and (max-width: 768px) {
-    flex-direction: column;
-    padding-left: 0;
-  }
-`;
-
-const Content = styled.div`
-  flex: 1;
-  padding: 20px;
-  @media screen and (max-width: 768px) {
-    padding: 10px;
-  }
-`;
-
-const SubjectGrade = styled.div`
-  background-color: #f9f9f9;
-  border-radius: 5px;
-  padding: 20px;
-  margin-bottom: 20px;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-  @media screen and (max-width: 768px) {
-    padding: 15px;
-  }
-`;
-
-const SubjectName = styled.h3`
-  margin-bottom: 10px;
-  @media screen and (max-width: 768px) {
-    font-size: 1.2em;
-  }
-`;
-
-const GradeLabel = styled.span`
-  font-weight: bold;
-`;
-
-const PerformanceLevel = styled.span`
-  margin-left: 10px;
-  font-style: italic;
-`;
-
-const SidebarContainer = styled.div`
-  flex: 0 0 240px;
-  @media screen and (max-width: 768px) {
-    flex: 0 0 100%;
-  }
-`;
+import {
+  GradesContainer,
+  Content,
+  SubjectGrade,
+  SubjectName,
+  GradeLabel,
+  PerformanceLevel,
+  SidebarContainer,
+  Spinner,
+} from '../../styles/GradesStyles.js';
 
 const Grades = () => {
   const [grades, setGrades] = useState([]);
@@ -65,6 +23,7 @@ const Grades = () => {
   useEffect(() => {
     const fetchGrades = async () => {
       try {
+        console.log('Fetching grades for student_id:', studentId);
         const response = await axios.get(
           `http://localhost:5000/api/grades?student_id=${studentId}`,
           {
@@ -73,19 +32,27 @@ const Grades = () => {
             },
           }
         );
+        console.log('Response data:', response.data);
+
         if (Array.isArray(response.data)) {
           setGrades(response.data);
+          console.log('Grades set:', response.data);
         } else {
           setError('Unexpected response format.');
         }
       } catch (err) {
+        console.error('Error fetching grades:', err.message);
         setError(err.message);
       } finally {
         setLoading(false);
       }
     };
 
-    fetchGrades();
+    if (studentId && token) {
+      fetchGrades();
+    } else {
+      setError('Missing student ID or token.');
+    }
   }, [studentId, token]);
 
   return (
@@ -96,7 +63,7 @@ const Grades = () => {
       <Content>
         <h2>Grades</h2>
         {loading ? (
-          <p>Loading grades...</p>
+          <Spinner />
         ) : error ? (
           <p>Error loading grades: {error}</p>
         ) : grades.length > 0 ? (

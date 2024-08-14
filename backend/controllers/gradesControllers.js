@@ -24,36 +24,57 @@ export const createGrade = async (req, res) => {
   }
 };
 
-// Get All Grades
+
 export const getAllGrades = async (req, res) => {
   try {
-    const studentId = req.query.student_id; // Extracting student_id from query parameters
-    if (!studentId) {
-      return res.status(400).json({ error: 'Student ID is required' });
-    }
+    // Check if the request is from a parent
+    if (req.user.role === 'parent') {
+      // Find all grades for all students linked to the parent
+      const grades = await Grade.findAll({
+        where: {
+          student_id: req.user.studentIds, // Find grades for all linked students
+          school_id: req.user.school_id,
+        },
+      });
 
-    const grades = await Grade.findAll({ where: { student_id: studentId, school_id: req.school_id } });
-    res.json(grades);
+      // If no grades are found, return a 404 error
+      if (!grades || grades.length === 0) {
+        return res.status(404).json({ error: 'No grades found for the linked students.' });
+      }
+
+      res.json(grades);
+    } else {
+      // For other roles, return all grades in the school
+      const grades = await Grade.findAll({ where: { school_id: req.user.school_id } });
+      res.json(grades);
+    }
   } catch (error) {
     res.status(500).json({ error: 'Failed to retrieve grades', details: error.message });
   }
 };
 
-// Get Grade by ID
+
 export const getGradeById = async (req, res) => {
   const { id } = req.params;
 
   try {
-    const grade = await Grade.findOne({ where: { grade_id: id, school_id: req.school_id } });
-    if (grade) {
-      res.json(grade);
-    } else {
-      res.status(404).json({ error: 'Grade not found' });
+    const grade = await Grade.findOne({ where: { grade_id: id, school_id: req.user.school_id } });
+
+    if (!grade) {
+      return res.status(404).json({ error: 'Grade not found' });
     }
+
+    if (req.user.role === 'parent' && !req.user.studentIds.includes(grade.student_id)) {
+      return res.status(403).json({ error: 'Access denied. You are not linked to this student.' });
+    }
+
+    res.json(grade);
   } catch (error) {
-    res.status500().json({ error: 'Failed to retrieve grade', details: error.message });
+    res.status(500).json({ error: 'Failed to retrieve grade', details: error.message });
   }
 };
+
+
 
 // Update Grade
 export const updateGrade = async (req, res) => {

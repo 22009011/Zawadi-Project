@@ -31,14 +31,17 @@ export const createAttendanceRecord = async (req, res) => {
   }
 };
 
+//get all
 
-// Get All Attendance Records for a Student or Parent
 export const getAllAttendanceRecords = async (req, res) => {
   const { student_id } = req.query;
 
   try {
     const whereClause = { school_id: req.school_id };
-    if (student_id) {
+
+    if (req.user.role === 'parent') {
+      whereClause.student_id = student_id ? student_id : req.user.studentIds;
+    } else if (student_id) {
       whereClause.student_id = student_id;
     }
 
@@ -49,7 +52,7 @@ export const getAllAttendanceRecords = async (req, res) => {
   }
 };
 
-// Get Attendance Record by ID
+//get by id
 export const getAttendanceRecordById = async (req, res) => {
   const { id } = req.params;
 

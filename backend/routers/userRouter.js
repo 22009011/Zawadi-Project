@@ -24,4 +24,6 @@ router.get('/admin/profile', auth, getAdminProfile);
 router.get('/teacher/profile', auth, getTeacherProfile); // Add this
 router.get('/parent/profile', auth, getParentProfile);  // Add this
 
+
+
 export default router;
