@@ -61,6 +61,12 @@ import CalenderSection from './pages/Teachers/Calender.jsx';
 import ManualAssessments from './pages/Teachers/ManualAssessments.jsx';
 import AddSummativeAssessment from './pages/SuperAdminDashboard/AddSummativeAssessment.jsx';
 import AddFormativeAssessment from './pages/SuperAdminDashboard/AddFormativeAssessment.jsx';
+import Resources from './pages/SuperAdminDashboard/Resources/Resources.jsx';
+import SuperAssessments from './pages/SuperAdminDashboard/Resources/Assessments.jsx';
+import SuperNotes from './pages/SuperAdminDashboard/Resources/Notes.jsx';
+import SuperTimetable from './pages/SuperAdminDashboard/Resources/Timetable.jsx';
+import SuperLessonPlans from './pages/SuperAdminDashboard/Resources/LessonPlans.jsx';
+
 import Layout from './Layout';
 
 // Axios interceptor setup
@@ -134,7 +140,11 @@ const App = () => {
         <Route path="/super-admin/add-parents" element={<Layout><ParentForm/></Layout>} />
         <Route path="/super-admin/add-assessments/formative" element={<Layout><AddFormativeAssessment/></Layout>} />
         <Route path="/super-admin/add-assessments/summative" element={<Layout><AddSummativeAssessment/></Layout>} />
-
+        <Route path="/super-admin/resources" element={<Layout><Resources/></Layout>} />
+        <Route path="/super-admin/resources/assessments" element={<Layout><SuperAssessments/></Layout>} />
+        <Route path="/super-admin/resources/notes" element={<Layout><SuperNotes/></Layout>} />
+        <Route path="/super-admin/resources/timetable" element={<Layout><SuperTimetable/></Layout>} />
+        <Route path="/super-admin/resources/lesson-plans" element={<Layout><SuperLessonPlans/></Layout>} />
 
       </Routes>
     </Router>
