@@ -132,18 +132,16 @@ const LessonPlans = () => {
         </DownloadLessonPlansButton>
       </div>
       {showDownloadSection && (
-        <div style={{ textAlign: 'center', marginBottom: '20px' }}>
-          <GradeSection>
-            {['PP1', 'PP2', 'Grade 1', 'Grade 2', 'Grade 3', 'Grade 4', 'Grade 5', 'Grade 6'].map((grade, index) => (
-              <GradeItem key={index}>
-                <h3>{grade}</h3>
-                <a href={lessonPlanPDF} download>
-                  Download {grade} Lesson Plan
-                </a>
-              </GradeItem>
-            ))}
-          </GradeSection>
-        </div>
+        <GradeSection>
+          {['PP1', 'PP2', 'Grade 1', 'Grade 2', 'Grade 3', 'Grade 4', 'Grade 5', 'Grade 6'].map((grade, index) => (
+            <GradeItem key={index}>
+              <h3>{grade}</h3>
+              <a href={lessonPlanPDF} download>
+                Download {grade} Lesson Plan
+              </a>
+            </GradeItem>
+          ))}
+        </GradeSection>
       )}
       <LessonPlansContent>
         {showMyPlans && (

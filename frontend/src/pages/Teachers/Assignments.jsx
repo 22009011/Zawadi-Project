@@ -22,6 +22,12 @@ import {
   SeeAssignmentsButton,
   StudentAssignmentsButton,
   ButtonContainer,
+  DownloadButton,
+  GradeList,
+  GradeItem,
+  SubjectList,
+  SubjectItem,
+  NoteLink,
 } from '../../styles/AssignmentsStyles';
 import { useNavigate } from 'react-router-dom';
 
@@ -29,6 +35,8 @@ const AssignmentSection = () => {
   const [newAssignment, setNewAssignment] = useState({ title: '', description: '', grade: '', deadline: '', type: 'Essay', choices: [] });
   const [assignments, setAssignments] = useState([]);
   const [showAssignments, setShowAssignments] = useState(false);
+  const [showGrades, setShowGrades] = useState(false);
+  const [selectedGrade, setSelectedGrade] = useState(null);
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -77,20 +85,6 @@ const AssignmentSection = () => {
     setNewAssignment(assignment);
   };
 
-  const handleAddChoice = () => {
-    const newChoiceLabel = String.fromCharCode(65 + newAssignment.choices.length); // A, B, C, ...
-    setNewAssignment({
-      ...newAssignment,
-      choices: [...newAssignment.choices, { label: newChoiceLabel, text: '' }]
-    });
-  };
-
-  const handleChoiceTextChange = (index, text) => {
-    const updatedChoices = [...newAssignment.choices];
-    updatedChoices[index].text = text;
-    setNewAssignment({ ...newAssignment, choices: updatedChoices });
-  };
-
   const handleToggleAssignments = () => {
     setShowAssignments(!showAssignments);
     if (!showAssignments) {
@@ -100,6 +94,14 @@ const AssignmentSection = () => {
 
   const handleNavigateToStudentAssignments = () => {
     navigate('/teacher/student-assignments-submitted');
+  };
+
+  const handleToggleGrades = () => {
+    setShowGrades(!showGrades);
+  };
+
+  const handleGradeClick = (grade) => {
+    setSelectedGrade(grade);
   };
 
   return (
@@ -115,7 +117,29 @@ const AssignmentSection = () => {
             <StudentAssignmentsButton onClick={handleNavigateToStudentAssignments}>
               Students Assignments Submitted
             </StudentAssignmentsButton>
+            <DownloadButton onClick={handleToggleGrades}>
+              {showGrades ? 'Hide All Notes' : 'Download All Notes'}
+            </DownloadButton>
           </ButtonContainer>
+          {showGrades && (
+            <GradeList>
+              {['PP1', 'PP2', 'Grade 1', 'Grade 2', 'Grade 3', 'Grade 4', 'Grade 5', 'Grade 6'].map(grade => (
+                <GradeItem key={grade} onClick={() => handleGradeClick(grade)}>
+                  {grade}
+                </GradeItem>
+              ))}
+            </GradeList>
+          )}
+          {selectedGrade && (
+            <SubjectList>
+              {['Math', 'English', 'Kiswahili', 'Science'].map(subject => (
+                <SubjectItem key={subject}>
+                  {subject}
+                  <NoteLink href="/path/to/note.pdf" target="_blank">Download Notes</NoteLink>
+                </SubjectItem>
+              ))}
+            </SubjectList>
+          )}
           <AddAssignmentForm onSubmit={handleAddAssignment}>
             <AddAssignmentInput
               type="text"

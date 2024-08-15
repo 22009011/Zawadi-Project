@@ -15,6 +15,10 @@ import {
   Progress,
   SubmitButton,
   CurriculumContent,
+  TimetableButton,
+  TimetableContainer,
+  GradeBox,
+  PDFDownloadButton,
 } from '../../styles/ViewCurriculumManagementStyles.js';
 
 import { ToastContainer, toast } from 'react-toastify';
@@ -122,6 +126,7 @@ const ViewCurriculumManagement = () => {
   const [curriculums, setCurriculums] = useState([]);
   const [selectedGrade, setSelectedGrade] = useState(null);
   const [selectedSubject, setSelectedSubject] = useState(null);
+  const [timetableExpanded, setTimetableExpanded] = useState(false);
 
   useEffect(() => {
     const fetchCurriculums = async () => {
@@ -170,6 +175,21 @@ const ViewCurriculumManagement = () => {
           selectedSubject={selectedSubject}
           curriculums={curriculums}
         />
+      )}
+      <TimetableButton onClick={() => setTimetableExpanded(!timetableExpanded)}>
+        {timetableExpanded ? 'Hide Timetables' : 'Download Timetable'}
+      </TimetableButton>
+      {timetableExpanded && (
+        <TimetableContainer>
+          {['PP1', 'PP2', 'Grade 1', 'Grade 2', 'Grade 3', 'Grade 4', 'Grade 5', 'Grade 6'].map((grade, index) => (
+            <GradeBox key={index}>
+              <h4>{grade}</h4>
+              <PDFDownloadButton href="/path/to/timetable.pdf" download={`${grade}_timetable.pdf`}>
+                Download {grade} Timetable
+              </PDFDownloadButton>
+            </GradeBox>
+          ))}
+        </TimetableContainer>
       )}
     </Layout>
   );
