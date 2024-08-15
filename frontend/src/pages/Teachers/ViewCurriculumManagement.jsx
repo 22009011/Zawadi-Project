@@ -2,9 +2,6 @@ import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import {
   Layout,
-  Header,
-  Title,
-  Breadcrumb,
   Sidebar as StyledSidebar,
   CollapseButton,
   List,
@@ -16,15 +13,15 @@ import {
   ProgressBarContainer,
   ProgressBar,
   Progress,
+  SubmitButton,
+  CurriculumContent,
 } from '../../styles/ViewCurriculumManagementStyles.js';
+
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 
-const SidebarComponent = ({ grades, onSelectGrade, onSelectSubject }) => {
+const SidebarComponent = ({ grades, onSelectGrade, selectedGrade }) => {
   const [gradesExpanded, setGradesExpanded] = useState(true);
-  const [subjectsExpanded, setSubjectsExpanded] = useState(false);
-  const [selectedGrade, setSelectedGrade] = useState(null);
-  const [selectedSubject, setSelectedSubject] = useState(null);
 
   return (
     <StyledSidebar>
@@ -34,31 +31,23 @@ const SidebarComponent = ({ grades, onSelectGrade, onSelectSubject }) => {
       {gradesExpanded && (
         <List>
           {Object.keys(grades).map(grade => (
-            <ListItem
-              key={grade}
-              onClick={() => {
-                setSelectedGrade(grade);
-                setSubjectsExpanded(!subjectsExpanded);
-                onSelectGrade(grade);
-              }}
-            >
-              {grade}
-            </ListItem>
-          ))}
-        </List>
-      )}
-      {subjectsExpanded && selectedGrade && (
-        <List>
-          {grades[selectedGrade].map(subject => (
-            <ListItem
-              key={subject.subject}
-              onClick={() => {
-                setSelectedSubject(subject.subject);
-                onSelectSubject(subject.subject);
-              }}
-            >
-              {subject.subject}
-            </ListItem>
+            <div key={grade}>
+              <ListItem
+                onClick={() => onSelectGrade(grade)}
+                style={{ fontWeight: selectedGrade === grade ? 'bold' : 'normal' }}
+              >
+                Grade {grade}
+              </ListItem>
+              {selectedGrade === grade && (
+                <div style={{ marginLeft: '20px' }}>
+                  {grades[grade].map(subject => (
+                    <ListItem key={subject.subject} onClick={() => onSelectGrade(grade, subject.subject)}>
+                      {subject.subject}
+                    </ListItem>
+                  ))}
+                </div>
+              )}
+            </div>
           ))}
         </List>
       )}
@@ -72,35 +61,59 @@ const MainContentComponent = ({ selectedGrade, selectedSubject, curriculums }) =
   );
 
   const subtopics = filteredCurriculums.flatMap(curriculum => curriculum.subtopics || []);
-  const progress = 50; // Example progress value
+  const [progress, setProgress] = useState(50); // Example progress value
+
+  const handleRadioChange = (e, level) => {
+    let newProgress = progress;
+    if (level === 'subject') {
+      newProgress = 100;
+    } else if (level === 'topic') {
+      newProgress = 75;
+    } else if (level === 'subtopic') {
+      newProgress = 50;
+    }
+    setProgress(newProgress);
+  };
+
+  const handleSubmit = () => {
+    toast.success(`Progress for Grade ${selectedGrade}, Subject ${selectedSubject} submitted!`);
+  };
 
   return (
     <MainContent>
-      <h2>Subtopics</h2>
       {filteredCurriculums.length > 0 ? (
-        filteredCurriculums.map(curriculum => (
-          <div key={curriculum.id}>
-            <h3>{curriculum.lesson}</h3>
-            <p>{curriculum.timetable}</p>
-            <SubtopicsList>
-              {subtopics.map((subtopic, index) => (
-                <SubtopicItem key={index}>
-                  <RadioButton />
-                  {subtopic}
-                </SubtopicItem>
-              ))}
-            </SubtopicsList>
-          </div>
-        ))
+        <CurriculumContent>
+          <h3>{filteredCurriculums[0].lesson}</h3>
+          <p>{filteredCurriculums[0].timetable}</p>
+          <SubtopicsList>
+            <SubtopicItem>
+              <RadioButton
+                name="progress"
+                onChange={(e) => handleRadioChange(e, 'subject')}
+              />
+              Subject: {filteredCurriculums[0].subject}
+            </SubtopicItem>
+            {subtopics.map((subtopic, index) => (
+              <SubtopicItem key={index}>
+                <RadioButton
+                  name="progress"
+                  onChange={(e) => handleRadioChange(e, 'subtopic')}
+                />
+                {subtopic}
+              </SubtopicItem>
+            ))}
+          </SubtopicsList>
+          <ProgressBarContainer>
+            <h3>Progress</h3>
+            <ProgressBar>
+              <Progress width={progress} />
+            </ProgressBar>
+            <SubmitButton onClick={handleSubmit}>Submit Progress</SubmitButton>
+          </ProgressBarContainer>
+        </CurriculumContent>
       ) : (
         <p>No curriculum data available for the selected grade and subject.</p>
       )}
-      <ProgressBarContainer>
-        <h3>Progress</h3>
-        <ProgressBar>
-          <Progress width={progress} />
-        </ProgressBar>
-      </ProgressBarContainer>
     </MainContent>
   );
 };
@@ -136,6 +149,11 @@ const ViewCurriculumManagement = () => {
     return grades;
   };
 
+  const handleSelectGrade = (grade, subject = null) => {
+    setSelectedGrade(grade);
+    setSelectedSubject(subject);
+  };
+
   const grades = getCurriculumsByGrade();
 
   return (
@@ -143,14 +161,16 @@ const ViewCurriculumManagement = () => {
       <ToastContainer />
       <SidebarComponent
         grades={grades}
-        onSelectGrade={setSelectedGrade}
-        onSelectSubject={setSelectedSubject}
-      />
-      <MainContentComponent
+        onSelectGrade={handleSelectGrade}
         selectedGrade={selectedGrade}
-        selectedSubject={selectedSubject}
-        curriculums={curriculums}
       />
+      {selectedGrade && selectedSubject && (
+        <MainContentComponent
+          selectedGrade={selectedGrade}
+          selectedSubject={selectedSubject}
+          curriculums={curriculums}
+        />
+      )}
     </Layout>
   );
 };

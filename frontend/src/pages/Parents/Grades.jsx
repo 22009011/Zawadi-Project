@@ -10,6 +10,8 @@ import {
   PerformanceLevel,
   SidebarContainer,
   Spinner,
+  StudentSection,  // New styled component
+  StudentName,     // New styled component
 } from '../../styles/GradesStyles.js';
 
 const Grades = () => {
@@ -52,6 +54,16 @@ const Grades = () => {
     }
   }, [token]);
 
+  // Group grades by student
+  const groupedGrades = grades.reduce((acc, grade) => {
+    const studentName = grade.student_name || 'Unknown'; // Make sure student_name is part of grade object
+    if (!acc[studentName]) {
+      acc[studentName] = [];
+    }
+    acc[studentName].push(grade);
+    return acc;
+  }, {});
+
   return (
     <GradesContainer>
       <SidebarContainer>
@@ -63,17 +75,22 @@ const Grades = () => {
           <Spinner />
         ) : error ? (
           <p>Error loading grades: {error}</p>
-        ) : grades.length > 0 ? (
-          grades.map((grade) => (
-            <SubjectGrade key={grade.grade_id}>
-              <SubjectName>{grade.subject}</SubjectName>
-              <p>
-                <GradeLabel>Grade:</GradeLabel> {grade.grade}
-              </p>
-              <p>
-                <PerformanceLevel>{grade.performance_level}</PerformanceLevel>
-              </p>
-            </SubjectGrade>
+        ) : Object.keys(groupedGrades).length > 0 ? (
+          Object.keys(groupedGrades).map((studentName) => (
+            <StudentSection key={studentName}>
+              <StudentName>{studentName}</StudentName>
+              {groupedGrades[studentName].map((grade) => (
+                <SubjectGrade key={grade.grade_id}>
+                  <SubjectName>{grade.subject}</SubjectName>
+                  <p>
+                    <GradeLabel>Grade:</GradeLabel> {grade.grade}
+                  </p>
+                  <p>
+                    <PerformanceLevel>{grade.performance_level}</PerformanceLevel>
+                  </p>
+                </SubjectGrade>
+              ))}
+            </StudentSection>
           ))
         ) : (
           <p>No grades available.</p>

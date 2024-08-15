@@ -67,3 +67,14 @@ export const Spinner = styled.div`
     }
   }
 `;
+
+
+export const StudentSection = styled.div`
+  margin-bottom: 20px;
+`;
+
+export const StudentName = styled.h3`
+  margin-bottom: 10px;
+  font-size: 1.2em;
+  color: #333;
+`;

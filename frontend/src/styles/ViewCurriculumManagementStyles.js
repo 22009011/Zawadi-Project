@@ -5,25 +5,6 @@ export const Layout = styled.div`
   height: 100vh;
 `;
 
-export const Header = styled.div`
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  padding: 10px 20px;
-  background-color: #f8f8f8;
-  border-bottom: 1px solid #e0e0e0;
-`;
-
-export const Title = styled.h1`
-  font-size: 24px;
-  margin: 0;
-`;
-
-export const Breadcrumb = styled.div`
-  font-size: 14px;
-  color: #999;
-`;
-
 export const Sidebar = styled.div`
   width: 250px;
   background-color: #fff;
@@ -60,9 +41,18 @@ export const MainContent = styled.div`
   padding: 20px;
 `;
 
+export const CurriculumContent = styled.div`
+  margin-top: 20px;
+  padding-left: 20px;
+  background-color: #f9f9f9;
+  padding: 15px;
+  border-radius: 8px;
+`;
+
 export const SubtopicsList = styled.div`
   display: flex;
   flex-direction: column;
+  margin-bottom: 20px;
 `;
 
 export const SubtopicItem = styled.div`
@@ -90,4 +80,18 @@ export const Progress = styled.div`
   height: 100%;
   width: ${(props) => props.width}%;
   background-color: #007bff;
+`;
+
+export const SubmitButton = styled.button`
+  margin-top: 10px;
+  padding: 5px 10px;
+  background-color: #007bff;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+
+  &:hover {
+    background-color: #0056b3;
+  }
 `;
