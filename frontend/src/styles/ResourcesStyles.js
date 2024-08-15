@@ -83,3 +83,27 @@ export const SubmitButton = styled.button`
     background-color: #27ae60;
   }
 `;
+
+export const FileName = styled.p`
+  font-size: 14px;
+  color: #2c3e50;
+  margin-bottom: 10px;
+  background-color: #ecf0f1;
+  padding: 10px;
+  border-radius: 5px;
+`;
+
+export const ProgressContainer = styled.div`
+  width: 100%;
+  background-color: #f3f3f3;
+  border-radius: 5px;
+  margin: 10px 0;
+`;
+
+export const ProgressBar = styled.div`
+  height: 10px;
+  background-color: #4caf50;
+  border-radius: 5px;
+  transition: width 0.4s ease;
+`;
+

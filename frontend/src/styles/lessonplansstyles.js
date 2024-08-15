@@ -145,3 +145,52 @@ export const UpdateButton = styled.button`
     background-color: #1e8449;
   }
 `;
+
+
+export const DownloadLessonPlansButton = styled.button`
+  background-color: #007bff;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  padding: 10px 20px;
+  margin-left: 10px;
+  cursor: pointer;
+  font-size: 16px;
+  transition: background-color 0.3s ease;
+
+  &:hover {
+    background-color: #0056b3;
+  }
+`;
+
+
+export const GradeSection = styled.div`
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px;
+  justify-content: center;
+  margin-top: 20px;
+`;
+
+export const GradeItem = styled.div`
+  background-color: #ffffff;
+  border-radius: 10px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  padding: 20px;
+  width: 200px;
+  text-align: center;
+  h3 {
+    margin-bottom: 10px;
+    color: #34495e;
+    font-size: 1.2em;
+  }
+  a {
+    color: #007bff;
+    text-decoration: none;
+    font-size: 16px;
+    &:hover {
+      text-decoration: underline;
+    }
+  }
+`;
+

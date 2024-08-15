@@ -4,10 +4,13 @@ import {
   LessonForm, LessonInput, LessonTextarea, AddLessonButton,
   LessonPlansContent, LessonPlansHeader,
   LessonPlansList, ClassSelect, Actions, DeleteButton, UpdateButton,
-  ViewLessonPlansButton
+  ViewLessonPlansButton, DownloadLessonPlansButton, GradeSection, GradeItem
 } from '../../styles/lessonplansstyles.js';
 import { toast, ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+
+// Import the PDF file
+import lessonPlanPDF from '../../assets/lessonplan.pdf';
 
 const LessonPlans = () => {
   const [lessonPlans, setLessonPlans] = useState([]);
@@ -19,6 +22,7 @@ const LessonPlans = () => {
     class_id: ''
   });
   const [showMyPlans, setShowMyPlans] = useState(false);
+  const [showDownloadSection, setShowDownloadSection] = useState(false);
 
   const token = localStorage.getItem('token');
 
@@ -112,6 +116,10 @@ const LessonPlans = () => {
     }
   };
 
+  const handleDownloadSectionToggle = () => {
+    setShowDownloadSection(!showDownloadSection);
+  };
+
   return (
     <LessonPlansContainer>
       <LessonPlansHeader>Lesson Plans</LessonPlansHeader>
@@ -119,7 +127,24 @@ const LessonPlans = () => {
         <ViewLessonPlansButton onClick={handleViewMyLessonPlans}>
           {showMyPlans ? 'Hide My Lesson Plans' : 'View My Lesson Plans'}
         </ViewLessonPlansButton>
+        <DownloadLessonPlansButton onClick={handleDownloadSectionToggle}>
+          Download Lesson Plans
+        </DownloadLessonPlansButton>
       </div>
+      {showDownloadSection && (
+        <div style={{ textAlign: 'center', marginBottom: '20px' }}>
+          <GradeSection>
+            {['PP1', 'PP2', 'Grade 1', 'Grade 2', 'Grade 3', 'Grade 4', 'Grade 5', 'Grade 6'].map((grade, index) => (
+              <GradeItem key={index}>
+                <h3>{grade}</h3>
+                <a href={lessonPlanPDF} download>
+                  Download {grade} Lesson Plan
+                </a>
+              </GradeItem>
+            ))}
+          </GradeSection>
+        </div>
+      )}
       <LessonPlansContent>
         {showMyPlans && (
           <LessonPlansList>

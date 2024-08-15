@@ -30,7 +30,7 @@ import studentPerformanceRouter from './routers/studentPerformanceRouter.js';
 import contactRouter from './routers/contactRouter.js';
 import demoRouter from './routers/demoRouter.js';
 import assessments from './routers/assessments.js';
-
+// import lessonplanResourceRouter from './routers/lessonplanResourceRouter.js';
 
 dotenv.config(); 
 
@@ -72,6 +72,12 @@ app.get('/api/students-by-class', async (req, res) => {
     res.status(500).json({ error: 'Internal Server Error' });
   }
 });
+
+// // Static folder for file uploads
+// app.use('/uploads', express.static('uploads'));
+
+// // Routes
+// app.use('/api/lessonPlanResources', lessonplanResourceRouter);
 
 // Routers
 app.use('/api/users', userRouter);
