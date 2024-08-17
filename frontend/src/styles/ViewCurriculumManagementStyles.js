@@ -150,3 +150,43 @@ export const PDFDownloadButton = styled.a`
     background-color: #0056b3;
   }
 `;
+
+export const ProgressCircle = styled.div`
+  position: relative;
+  width: 100%;
+  height: 100%;
+
+  svg {
+    transform: rotate(-90deg);
+    width: 100%;
+    height: 100%;
+  }
+
+  circle {
+    fill: none;
+    stroke-width: 10;
+    stroke: #76c7c0;
+    stroke-linecap: round;
+    transform-origin: center;
+  }
+
+  circle:nth-child(1) {
+    stroke: #e0e0e0;
+  }
+
+  circle:nth-child(2) {
+    stroke: #76c7c0;
+    stroke-dasharray: 282.743;
+  }
+
+  p {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    font-size: 18px;
+    color: #333;
+  }
+`;
+
+

@@ -194,3 +194,32 @@ export const GradeItem = styled.div`
   }
 `;
 
+
+// Individual subject item
+export const SubjectItem = styled.div`
+  background: #fff;
+  border: 1px solid #ddd;
+  padding: 15px;
+  margin-bottom: 10px;
+  border-radius: 5px;
+`;
+
+// Subject title
+export const SubjectTitle = styled.h4`
+  margin: 0;
+`;
+
+// Subject link to download lesson plan
+export const SubjectLink = styled.a`
+  color: #2196F3;
+  text-decoration: none;
+
+  &:hover {
+    text-decoration: underline;
+  }
+`;
+
+// Subject list container
+export const SubjectList = styled.div`
+  margin-top: 20px;
+`;
