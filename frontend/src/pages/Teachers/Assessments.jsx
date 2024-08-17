@@ -108,17 +108,117 @@ const Assessments = () => {
       </DownloadButton>
       {showAllAssessments && (
         <ExpandableContainer>
-          {['PP1', 'PP2', 'Grade 1', 'Grade 2', 'Grade 3', 'Grade 4', 'Grade 5', 'Grade 6'].map(grade => (
-            <GradeContainer key={grade}>
-              <AssessmentTitle>{grade} Assessments</AssessmentTitle>
-              <AssessmentBox>
-                <AssessmentContent>Click below to download the assessment document for {grade}.</AssessmentContent>
-                <PDFDownloadButton href="/path/to/assessment.pdf" download={`${grade}_Assessment.pdf`}>
-                  Download {grade} Assessment PDF
-                </PDFDownloadButton>
-              </AssessmentBox>
-            </GradeContainer>
-          ))}
+          <GradeContainer>
+            <AssessmentTitle>PP1 Assessments</AssessmentTitle>
+            <AssessmentBox>
+              <AssessmentContent>Click below to download the assessment document for PP1.</AssessmentContent>
+              <PDFDownloadButton 
+                href="https://drive.google.com/uc?export=download&id=1ZCl0n1oCGqmb9BZvmZqwQOgIqXi4FN6o" 
+                download="PP1_Assessment.pdf"
+                rel="noopener noreferrer"
+              >
+                Download PP1 Assessment PDF
+              </PDFDownloadButton>
+            </AssessmentBox>
+          </GradeContainer>
+
+          <GradeContainer>
+            <AssessmentTitle>PP2 Assessments</AssessmentTitle>
+            <AssessmentBox>
+              <AssessmentContent>Click below to download the assessment document for PP2.</AssessmentContent>
+              <PDFDownloadButton 
+                href="https://drive.google.com/uc?export=download&id=1ZCl1n0oCGqmb9BZvmZqwQOgIqXi4FN6o" 
+                download="PP2_Assessment.pdf"
+                rel="noopener noreferrer"
+              >
+                Download PP2 Assessment PDF
+              </PDFDownloadButton>
+            </AssessmentBox>
+          </GradeContainer>
+
+          <GradeContainer>
+            <AssessmentTitle>Grade 1 Assessments</AssessmentTitle>
+            <AssessmentBox>
+              <AssessmentContent>Click below to download the assessment document for Grade 1.</AssessmentContent>
+              <PDFDownloadButton 
+                href="https://drive.google.com/uc?export=download&id=1ZCl2n0oCGqmb9BZvmZqwQOgIqXi4FN6o" 
+                download="Grade1_Assessment.pdf"
+                rel="noopener noreferrer"
+              >
+                Download Grade 1 Assessment PDF
+              </PDFDownloadButton>
+            </AssessmentBox>
+          </GradeContainer>
+
+          <GradeContainer>
+            <AssessmentTitle>Grade 2 Assessments</AssessmentTitle>
+            <AssessmentBox>
+              <AssessmentContent>Click below to download the assessment document for Grade 2.</AssessmentContent>
+              <PDFDownloadButton 
+                href="https://drive.google.com/uc?export=download&id=1ZCl3n0oCGqmb9BZvmZqwQOgIqXi4FN6o" 
+                download="Grade2_Assessment.pdf"
+                rel="noopener noreferrer"
+              >
+                Download Grade 2 Assessment PDF
+              </PDFDownloadButton>
+            </AssessmentBox>
+          </GradeContainer>
+
+          <GradeContainer>
+            <AssessmentTitle>Grade 3 Assessments</AssessmentTitle>
+            <AssessmentBox>
+              <AssessmentContent>Click below to download the assessment document for Grade 3.</AssessmentContent>
+              <PDFDownloadButton 
+                href="https://drive.google.com/uc?export=download&id=1ZCl4n0oCGqmb9BZvmZqwQOgIqXi4FN6o" 
+                download="Grade3_Assessment.pdf"
+                rel="noopener noreferrer"
+              >
+                Download Grade 3 Assessment PDF
+              </PDFDownloadButton>
+            </AssessmentBox>
+          </GradeContainer>
+
+          <GradeContainer>
+            <AssessmentTitle>Grade 4 Assessments</AssessmentTitle>
+            <AssessmentBox>
+              <AssessmentContent>Click below to download the assessment document for Grade 4.</AssessmentContent>
+              <PDFDownloadButton 
+                href="https://drive.google.com/uc?export=download&id=1ZCl5n0oCGqmb9BZvmZqwQOgIqXi4FN6o" 
+                download="Grade4_Assessment.pdf"
+                rel="noopener noreferrer"
+              >
+                Download Grade 4 Assessment PDF
+              </PDFDownloadButton>
+            </AssessmentBox>
+          </GradeContainer>
+
+          <GradeContainer>
+            <AssessmentTitle>Grade 5 Assessments</AssessmentTitle>
+            <AssessmentBox>
+              <AssessmentContent>Click below to download the assessment document for Grade 5.</AssessmentContent>
+              <PDFDownloadButton 
+                href="https://drive.google.com/uc?export=download&id=1ZCl0n1oCGqmb9BZvmZqwQOgIqXi4FN6o" 
+                download="Grade5_Assessment.pdf"
+                rel="noopener noreferrer"
+              >
+                Download Grade 5 Assessment PDF
+              </PDFDownloadButton>
+            </AssessmentBox>
+          </GradeContainer>
+
+          <GradeContainer>
+            <AssessmentTitle>Grade 6 Assessments</AssessmentTitle>
+            <AssessmentBox>
+              <AssessmentContent>Click below to download the assessment document for Grade 6.</AssessmentContent>
+              <PDFDownloadButton 
+                href="https://drive.google.com/uc?export=download&id=1ZCl0n1oCGqmb9BZvmZqwQOgIqXi4FN6o" 
+                download="Grade6_Assessment.pdf"
+                rel="noopener noreferrer"
+              >
+                Download Grade 6 Assessment PDF
+              </PDFDownloadButton>
+            </AssessmentBox>
+          </GradeContainer>
         </ExpandableContainer>
       )}
       {activeTab === 'summative' && (
@@ -138,7 +238,8 @@ const Assessments = () => {
               <FormGroup>
                 <Label htmlFor="classId">Class</Label>
                 <Select id="classId" name="classId" value={newAssessment.classId} onChange={handleChange} required>
-                  {classes.map(cls => (
+                  <option value="">Select Class</option>
+                  {classes.map((cls) => (
                     <option key={cls.id} value={cls.id}>{cls.name}</option>
                   ))}
                 </Select>
@@ -152,8 +253,8 @@ const Assessments = () => {
                 <Input type="date" id="date" name="date" value={newAssessment.date} onChange={handleChange} required />
               </FormGroup>
               <FormGroup>
-                <Label htmlFor="duration">Duration</Label>
-                <Input type="text" id="duration" name="duration" value={newAssessment.duration} onChange={handleChange} required />
+                <Label htmlFor="duration">Duration (in minutes)</Label>
+                <Input type="number" id="duration" name="duration" value={newAssessment.duration} onChange={handleChange} required />
               </FormGroup>
               <FormGroup>
                 <Label htmlFor="totalMarks">Total Marks</Label>
@@ -162,7 +263,8 @@ const Assessments = () => {
               <FormGroup>
                 <Label htmlFor="teacherId">Teacher</Label>
                 <Select id="teacherId" name="teacherId" value={newAssessment.teacherId} onChange={handleChange} required>
-                  {teachers.map(teacher => (
+                  <option value="">Select Teacher</option>
+                  {teachers.map((teacher) => (
                     <option key={teacher.id} value={teacher.id}>{teacher.name}</option>
                   ))}
                 </Select>
@@ -170,12 +272,13 @@ const Assessments = () => {
               <FormGroup>
                 <Label htmlFor="studentId">Student</Label>
                 <Select id="studentId" name="studentId" value={newAssessment.studentId} onChange={handleChange} required>
-                  {students.map(student => (
+                  <option value="">Select Student</option>
+                  {students.map((student) => (
                     <option key={student.id} value={student.id}>{student.name}</option>
                   ))}
                 </Select>
               </FormGroup>
-              <SubmitButton type="submit">Submit</SubmitButton>
+              <SubmitButton type="submit">Create Assessment</SubmitButton>
             </form>
           </FormContainer>
         </div>
@@ -183,7 +286,7 @@ const Assessments = () => {
       {activeTab === 'formative' && (
         <div>
           <h3>Formative Assessments Content</h3>
-          <p>Here teachers can view and send Formative assessments.</p>
+          <p>Here teachers can create, view, and assign Formative assessments.</p>
         </div>
       )}
     </AssessmentsContainer>

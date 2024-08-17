@@ -9,9 +9,6 @@ import {
 import { toast, ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 
-// Import the PDF file
-import lessonPlanPDF from '../../assets/lessonplan.pdf';
-
 const LessonPlans = () => {
   const [lessonPlans, setLessonPlans] = useState([]);
   const [myLessonPlans, setMyLessonPlans] = useState([]);
@@ -133,11 +130,20 @@ const LessonPlans = () => {
       </div>
       {showDownloadSection && (
         <GradeSection>
-          {['PP1', 'PP2', 'Grade 1', 'Grade 2', 'Grade 3', 'Grade 4', 'Grade 5', 'Grade 6'].map((grade, index) => (
+          {[
+            { grade: 'PP1', link: 'https://drive.google.com/uc?export=download&id=1ZCl0n1oCGqmb9BZvmZqwQOgIqXi4FN6o' },
+            { grade: 'PP2', link: 'https://drive.google.com/uc?export=download&id=1ZCl0n1oCGqmb9BZvmZqwQOgIqXi4FN6o' },
+            { grade: 'Grade 1', link: 'https://drive.google.com/uc?export=download&id=1ZCl0n1oCGqmb9BZvmZqwQOgIqXi4FN6o' },
+            { grade: 'Grade 2', link: 'https://drive.google.com/uc?export=download&id=1ZCl0n1oCGqmb9BZvmZqwQOgIqXi4FN6o' },
+            { grade: 'Grade 3', link: 'https://drive.google.com/uc?export=download&id=1ZCl0n1oCGqmb9BZvmZqwQOgIqXi4FN6o' },
+            { grade: 'Grade 4', link: 'https://drive.google.com/uc?export=download&id=1ZCl0n1oCGqmb9BZvmZqwQOgIqXi4FN6o' },
+            { grade: 'Grade 5', link: 'https://drive.google.com/uc?export=download&id=1ZCl0n1oCGqmb9BZvmZqwQOgIqXi4FN6o' },
+            { grade: 'Grade 6', link: 'https://drive.google.com/uc?export=download&id=1ZCl0n1oCGqmb9BZvmZqwQOgIqXi4FN6o' }
+          ].map((gradeInfo, index) => (
             <GradeItem key={index}>
-              <h3>{grade}</h3>
-              <a href={lessonPlanPDF} download>
-                Download {grade} Lesson Plan
+              <h3>{gradeInfo.grade}</h3>
+              <a href={gradeInfo.link} download>
+                Download {gradeInfo.grade} Lesson Plan
               </a>
             </GradeItem>
           ))}

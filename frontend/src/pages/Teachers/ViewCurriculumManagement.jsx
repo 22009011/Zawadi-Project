@@ -181,14 +181,86 @@ const ViewCurriculumManagement = () => {
       </TimetableButton>
       {timetableExpanded && (
         <TimetableContainer>
-          {['PP1', 'PP2', 'Grade 1', 'Grade 2', 'Grade 3', 'Grade 4', 'Grade 5', 'Grade 6'].map((grade, index) => (
-            <GradeBox key={index}>
-              <h4>{grade}</h4>
-              <PDFDownloadButton href="/path/to/timetable.pdf" download={`${grade}_timetable.pdf`}>
-                Download {grade} Timetable
-              </PDFDownloadButton>
-            </GradeBox>
-          ))}
+          <GradeBox>
+            <h4>PP1</h4>
+            <PDFDownloadButton 
+              href="https://drive.google.com/uc?export=download&id=1ZCl0n1oCGqmb9BZvmZqwQOgIqXi4FN6o" 
+              download="PP1_timetable.pdf"
+              rel="noopener noreferrer"
+            >
+              Download PP1 Timetable
+            </PDFDownloadButton>
+          </GradeBox>
+          <GradeBox>
+            <h4>PP2</h4>
+            <PDFDownloadButton 
+              href="https://drive.google.com/uc?export=download&id=1ZCl0n1oCGqmb9BZvmZqwQOgIqXi4FN6o" 
+              download="PP2_timetable.pdf"
+              rel="noopener noreferrer"
+            >
+              Download PP2 Timetable
+            </PDFDownloadButton>
+          </GradeBox>
+          <GradeBox>
+            <h4>Grade 1</h4>
+            <PDFDownloadButton 
+              href="https://drive.google.com/uc?export=download&id=1ZCl0n1oCGqmb9BZvmZqwQOgIqXi4FN6o" 
+              download="Grade1_timetable.pdf"
+              rel="noopener noreferrer"
+            >
+              Download Grade 1 Timetable
+            </PDFDownloadButton>
+          </GradeBox>
+          <GradeBox>
+            <h4>Grade 2</h4>
+            <PDFDownloadButton 
+              href="https://drive.google.com/uc?export=download&id=1ZCl0n1oCGqmb9BZvmZqwQOgIqXi4FN6o" 
+              download="Grade2_timetable.pdf"
+              rel="noopener noreferrer"
+            >
+              Download Grade 2 Timetable
+            </PDFDownloadButton>
+          </GradeBox>
+          <GradeBox>
+            <h4>Grade 3</h4>
+            <PDFDownloadButton 
+              href="https://drive.google.com/uc?export=download&id=1ZCl0n1oCGqmb9BZvmZqwQOgIqXi4FN6o" 
+              download="Grade3_timetable.pdf"
+              rel="noopener noreferrer"
+            >
+              Download Grade 3 Timetable
+            </PDFDownloadButton>
+          </GradeBox>
+          <GradeBox>
+            <h4>Grade 4</h4>
+            <PDFDownloadButton 
+              href="https://drive.google.com/uc?export=download&id=1ZCl0n1oCGqmb9BZvmZqwQOgIqXi4FN6o" 
+              download="Grade4_timetable.pdf"
+              rel="noopener noreferrer"
+            >
+              Download Grade 4 Timetable
+            </PDFDownloadButton>
+          </GradeBox>
+          <GradeBox>
+            <h4>Grade 5</h4>
+            <PDFDownloadButton 
+              href="https://drive.google.com/uc?export=download&id=1ZCl0n1oCGqmb9BZvmZqwQOgIqXi4FN6o" 
+              download="Grade5_timetable.pdf"
+              rel="noopener noreferrer"
+            >
+              Download Grade 5 Timetable
+            </PDFDownloadButton>
+          </GradeBox>
+          <GradeBox>
+            <h4>Grade 6</h4>
+            <PDFDownloadButton 
+              href="https://drive.google.com/uc?export=download&id=1ZCl0n1oCGqmb9BZvmZqwQOgIqXi4FN6o" 
+              download="Grade6_timetable.pdf"
+              rel="noopener noreferrer"
+            >
+              Download Grade 6 Timetable
+            </PDFDownloadButton>
+          </GradeBox>
         </TimetableContainer>
       )}
     </Layout>

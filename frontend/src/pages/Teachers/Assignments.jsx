@@ -104,6 +104,57 @@ const AssignmentSection = () => {
     setSelectedGrade(grade);
   };
 
+  const gradeSubjectLinks = {
+    'PP1': {
+      Math: 'https://drive.google.com/uc?export=download&id=1ZCl0n1oCGqmb9BZvmZqwQOgIqXi4FN6o',
+      English: 'https://drive.google.com/uc?export=download&id=1ZCl0n1oCGqmb9BZvmZqwQOgIqXi4FN6o',
+      Kiswahili: 'https://drive.google.com/uc?export=download&id=1ZCl0n1oCGqmb9BZvmZqwQOgIqXi4FN6o',
+      Science: 'https://drive.google.com/uc?export=download&id=1ZCl0n1oCGqmb9BZvmZqwQOgIqXi4FN6o',
+    },
+    'PP2': {
+      Math: 'https://drive.google.com/uc?export=download&id=1ZCl0n1oCGqmb9BZvmZqwQOgIqXi4FN6o',
+      English: 'https://drive.google.com/uc?export=download&id=1ZCl0n1oCGqmb9BZvmZqwQOgIqXi4FN6o',
+      Kiswahili: 'https://drive.google.com/uc?export=download&id=1ZCl0n1oCGqmb9BZvmZqwQOgIqXi4FN6o',
+      Science: 'https://drive.google.com/uc?export=download&id=1ZCl0n1oCGqmb9BZvmZqwQOgIqXi4FN6o',
+    },
+    'Grade 1': {
+      Math: 'https://drive.google.com/uc?export=download&id=1ZCl0n1oCGqmb9BZvmZqwQOgIqXi4FN6o',
+      English: 'https://drive.google.com/uc?export=download&id=1ZCl0n1oCGqmb9BZvmZqwQOgIqXi4FN6o',
+      Kiswahili: 'https://drive.google.com/uc?export=download&id=1ZCl0n1oCGqmb9BZvmZqwQOgIqXi4FN6o',
+      Science: 'https://drive.google.com/uc?export=download&id=1ZCl0n1oCGqmb9BZvmZqwQOgIqXi4FN6o',
+    },
+    'Grade 2': {
+      Math: 'https://drive.google.com/uc?export=download&id=1ZCl0n1oCGqmb9BZvmZqwQOgIqXi4FN6o',
+      English: 'https://drive.google.com/uc?export=download&id=1ZCl0n1oCGqmb9BZvmZqwQOgIqXi4FN6o',
+      Kiswahili: 'https://drive.google.com/uc?export=download&id=1ZCl0n1oCGqmb9BZvmZqwQOgIqXi4FN6o',
+      Science: 'https://drive.google.com/uc?export=download&id=1ZCl0n1oCGqmb9BZvmZqwQOgIqXi4FN6o',
+    },
+    'Grade 3': {
+      Math: 'https://drive.google.com/uc?export=download&id=1ZCl0n1oCGqmb9BZvmZqwQOgIqXi4FN6o',
+      English: 'https://drive.google.com/uc?export=download&id=1ZCl0n1oCGqmb9BZvmZqwQOgIqXi4FN6o',
+      Kiswahili: 'https://drive.google.com/uc?export=download&id=1ZCl0n1oCGqmb9BZvmZqwQOgIqXi4FN6o',
+      Science: 'https://drive.google.com/uc?export=download&id=1ZCl0n1oCGqmb9BZvmZqwQOgIqXi4FN6o',
+    },
+    'Grade 4': {
+      Math: 'https://drive.google.com/uc?export=download&id=1ZCl0n1oCGqmb9BZvmZqwQOgIqXi4FN6o',
+      English: 'https://drive.google.com/uc?export=download&id=1ZCl0n1oCGqmb9BZvmZqwQOgIqXi4FN6o',
+      Kiswahili: 'https://drive.google.com/uc?export=download&id=1ZCl0n1oCGqmb9BZvmZqwQOgIqXi4FN6o',
+      Science: 'https://drive.google.com/uc?export=download&id=1ZCl0n1oCGqmb9BZvmZqwQOgIqXi4FN6o',
+    },
+    'Grade 5': {
+      Math: 'https://drive.google.com/uc?export=download&id=1ZCl0n1oCGqmb9BZvmZqwQOgIqXi4FN6o',
+      English: 'https://drive.google.com/uc?export=download&id=1ZCl0n1oCGqmb9BZvmZqwQOgIqXi4FN6o',
+      Kiswahili: 'https://drive.google.com/uc?export=download&id=1ZCl0n1oCGqmb9BZvmZqwQOgIqXi4FN6o',
+      Science: 'https://drive.google.com/uc?export=download&id=1ZCl0n1oCGqmb9BZvmZqwQOgIqXi4FN6o',
+    },
+    'Grade 6': {
+      Math: 'https://drive.google.com/uc?export=download&id=1ZCl0n1oCGqmb9BZvmZqwQOgIqXi4FN6o',
+      English: 'https://drive.google.com/uc?export=download&id=1ZCl0n1oCGqmb9BZvmZqwQOgIqXi4FN6o',
+      Kiswahili: 'https://drive.google.com/uc?export=download&id=1ZCl0n1oCGqmb9BZvmZqwQOgIqXi4FN6o',
+      Science: 'https://drive.google.com/uc?export=download&id=1ZCl0n1oCGqmb9BZvmZqwQOgIqXi4FN6o',
+    },
+  };
+
   return (
     <AssignmentsContainer>
       <TeacherSidebar />
@@ -123,7 +174,7 @@ const AssignmentSection = () => {
           </ButtonContainer>
           {showGrades && (
             <GradeList>
-              {['PP1', 'PP2', 'Grade 1', 'Grade 2', 'Grade 3', 'Grade 4', 'Grade 5', 'Grade 6'].map(grade => (
+              {Object.keys(gradeSubjectLinks).map(grade => (
                 <GradeItem key={grade} onClick={() => handleGradeClick(grade)}>
                   {grade}
                 </GradeItem>
@@ -132,10 +183,10 @@ const AssignmentSection = () => {
           )}
           {selectedGrade && (
             <SubjectList>
-              {['Math', 'English', 'Kiswahili', 'Science'].map(subject => (
+              {Object.keys(gradeSubjectLinks[selectedGrade]).map(subject => (
                 <SubjectItem key={subject}>
                   {subject}
-                  <NoteLink href="/path/to/note.pdf" target="_blank">Download Notes</NoteLink>
+                  <NoteLink href={gradeSubjectLinks[selectedGrade][subject]} >Download Notes</NoteLink>
                 </SubjectItem>
               ))}
             </SubjectList>
@@ -154,13 +205,12 @@ const AssignmentSection = () => {
             />
             <AddAssignmentInput
               type="text"
-              placeholder="Enter assignment grade"
+              placeholder="Enter grade"
               value={newAssignment.grade}
               onChange={(e) => setNewAssignment({ ...newAssignment, grade: e.target.value })}
             />
             <AddAssignmentInput
               type="date"
-              placeholder="Enter assignment deadline"
               value={newAssignment.deadline}
               onChange={(e) => setNewAssignment({ ...newAssignment, deadline: e.target.value })}
             />
@@ -172,38 +222,39 @@ const AssignmentSection = () => {
               <option value="Multiple Choice">Multiple Choice</option>
             </AssignmentTypeSelect>
             {newAssignment.type === 'Multiple Choice' && (
-              <>
-                <AddChoiceButton type="button" onClick={handleAddChoice}>
-                  +add the choices
-                </AddChoiceButton>
+              <ChoiceInputContainer>
                 {newAssignment.choices.map((choice, index) => (
-                  <ChoiceInputContainer key={index}>
-                    <span>{choice.label}</span>
-                    <ChoiceInput
-                      type="text"
-                      value={choice.text}
-                      onChange={(e) => handleChoiceTextChange(index, e.target.value)}
-                    />
-                  </ChoiceInputContainer>
+                  <ChoiceInput
+                    key={index}
+                    type="text"
+                    placeholder={`Choice ${index + 1}`}
+                    value={choice}
+                    onChange={(e) => {
+                      const updatedChoices = [...newAssignment.choices];
+                      updatedChoices[index] = e.target.value;
+                      setNewAssignment({ ...newAssignment, choices: updatedChoices });
+                    }}
+                  />
                 ))}
-              </>
+                <AddChoiceButton onClick={() => setNewAssignment({ ...newAssignment, choices: [...newAssignment.choices, ''] })}>
+                  Add Choice
+                </AddChoiceButton>
+              </ChoiceInputContainer>
             )}
             <AddAssignmentButton type="submit">Add Assignment</AddAssignmentButton>
           </AddAssignmentForm>
           {showAssignments && (
             <AssignmentList>
-              {assignments && assignments.length > 0 ? assignments.map((assignment) => (
+              {assignments.map(assignment => (
                 <AssignmentItem key={assignment.id}>
-                  <strong>{assignment.title}: </strong>
-                  {assignment.description}, {assignment.grade}, {assignment.deadline}, {assignment.type}
-                  <FaEdit style={{ marginLeft: '10px', cursor: 'pointer', color: 'blue' }} onClick={() => handleEditAssignment(assignment)} />
-                  <FaTrash style={{ marginLeft: '10px', cursor: 'pointer', color: 'red' }} onClick={() => handleDeleteAssignment(assignment.id)} />
-                  <FaEye style={{ marginLeft: '10px', cursor: 'pointer', color: 'green' }} onClick={() => {/* View submissions */}} />
-                  <FaCheckCircle style={{ marginLeft: '10px', cursor: 'pointer', color: 'orange' }} onClick={() => {/* Mark and give feedback */}} />
+                  <h4>{assignment.title}</h4>
+                  <p>{assignment.description}</p>
+                  <p><strong>Grade:</strong> {assignment.grade}</p>
+                  <p><strong>Deadline:</strong> {new Date(assignment.deadline).toLocaleDateString()}</p>
+                  <button onClick={() => handleEditAssignment(assignment)}><FaEdit /></button>
+                  <button onClick={() => handleDeleteAssignment(assignment.id)}><FaTrash /></button>
                 </AssignmentItem>
-              )) : (
-                <p>No assignments available</p>
-              )}
+              ))}
             </AssignmentList>
           )}
         </AssignmentsContent>
