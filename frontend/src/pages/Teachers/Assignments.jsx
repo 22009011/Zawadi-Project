@@ -105,58 +105,36 @@ const AssignmentSection = () => {
   };
 
   const gradeSubjectLinks = {
-    'PP1': {
-      Math: 'https://drive.google.com/uc?export=download&id=1ZCl0n1oCGqmb9BZvmZqwQOgIqXi4FN6o',
-      English: 'https://drive.google.com/uc?export=download&id=1ZCl0n1oCGqmb9BZvmZqwQOgIqXi4FN6o',
-      Kiswahili: 'https://drive.google.com/uc?export=download&id=1ZCl0n1oCGqmb9BZvmZqwQOgIqXi4FN6o',
-      Science: 'https://drive.google.com/uc?export=download&id=1ZCl0n1oCGqmb9BZvmZqwQOgIqXi4FN6o',
-    },
-    'PP2': {
-      Math: 'https://drive.google.com/uc?export=download&id=1ZCl0n1oCGqmb9BZvmZqwQOgIqXi4FN6o',
-      English: 'https://drive.google.com/uc?export=download&id=1ZCl0n1oCGqmb9BZvmZqwQOgIqXi4FN6o',
-      Kiswahili: 'https://drive.google.com/uc?export=download&id=1ZCl0n1oCGqmb9BZvmZqwQOgIqXi4FN6o',
-      Science: 'https://drive.google.com/uc?export=download&id=1ZCl0n1oCGqmb9BZvmZqwQOgIqXi4FN6o',
-    },
+
     'Grade 1': {
-      Hygine: 'https://drive.google.com/file/d/1qPmiZf4PdgrUO6Sq8z1aeINweHud3Gzd/view?usp=sharing',
+      Hygiene: 'https://drive.google.com/uc?export=download&id=1qPmiZf4PdgrUO6Sq8z1aeINweHud3Gzd',
+
 
     },
-    'Grade 2': {
-      Math: 'https://drive.google.com/uc?export=download&id=1ZCl0n1oCGqmb9BZvmZqwQOgIqXi4FN6o',
-      English: 'https://drive.google.com/uc?export=download&id=1ZCl0n1oCGqmb9BZvmZqwQOgIqXi4FN6o',
-      Kiswahili: 'https://drive.google.com/uc?export=download&id=1ZCl0n1oCGqmb9BZvmZqwQOgIqXi4FN6o',
-      Science: 'https://drive.google.com/uc?export=download&id=1ZCl0n1oCGqmb9BZvmZqwQOgIqXi4FN6o',
-    },
-    'Grade 3': {
-      Math: 'https://drive.google.com/uc?export=download&id=1ZCl0n1oCGqmb9BZvmZqwQOgIqXi4FN6o',
-      English: 'https://drive.google.com/uc?export=download&id=1ZCl0n1oCGqmb9BZvmZqwQOgIqXi4FN6o',
-      Kiswahili: 'https://drive.google.com/uc?export=download&id=1ZCl0n1oCGqmb9BZvmZqwQOgIqXi4FN6o',
-      Science: 'https://drive.google.com/uc?export=download&id=1ZCl0n1oCGqmb9BZvmZqwQOgIqXi4FN6o',
-    },
     'Grade 4': {
-      SocialStudies: 'https://drive.google.com/file/d/1HG3w4ZSGjm50koPQafbB7nLKRteuicMc/view?usp=sharing',
-      Hygine: 'https://drive.google.com/file/d/1gwgynOKmkEfNkHtDpMV4aEcin3LNiqpV/view?usp=sharing',
-      Music: 'https://drive.google.com/file/d/1TnH3kE6ZrrAGOsdogiGSD8HzXmQUMa_6/view?usp=sharing',
-      CRE: 'https://drive.google.com/file/d/1vX-eQr8inAxlXz95pOVADkiIriQ7iqbA/view?usp=sharing',
-      ART: 'https://drive.google.com/file/d/1A0ItxAMnHfQ-XlVJKp2hercbNqkrexax/view?usp=sharing',
+      SocialStudies: 'https://drive.google.com/uc?export=download&id=1HG3w4ZSGjm50koPQafbB7nLKRteuicMc',
+      Hygiene: 'https://drive.google.com/uc?export=download&id=1gwgynOKmkEfNkHtDpMV4aEcin3LNiqpV',
+      Music: 'https://drive.google.com/uc?export=download&id=1TnH3kE6ZrrAGOsdogiGSD8HzXmQUMa_6',
+      CRE: 'https://drive.google.com/uc?export=download&id=1vX-eQr8inAxlXz95pOVADkiIriQ7iqbA',
+      ART: 'https://drive.google.com/uc?export=download&id=1A0ItxAMnHfQ-XlVJKp2hercbNqkrexax',      
     },
     'Grade 5': {
-      Social: 'https://drive.google.com/file/d/14fSwURr-bTOmqxv42vUe4fUaxkqg8iQz/view?usp=sharing',
-      Science: 'https://drive.google.com/file/d/1-I-4QjSg21NMase19qjVZeuzliQlN7Ug/view?usp=sharing',
-      PE: 'https://drive.google.com/file/d/1g1efhIGHLRFl9imeU96BEVMlDpfn0bBM/view?usp=sharing',
-      Music: 'https://drive.google.com/file/d/14RkTxKTXC4RN26LF_Gwkv2kKn0H0VFtY/view?usp=sharing',
-      HSCI: 'hhttps://drive.google.com/file/d/1eVCJB43F4GflQhdDC98264Dkuu7V5jXl/view?usp=sharing',
-      CRE: 'https://drive.google.com/file/d/1QcdVEDJpBPWHxaHbb3Moho7DDIdk3lgT/view?usp=sharing',
-      ART: 'https://drive.google.com/file/d/1cwUBDAcp0xxVyRbzLqCYLrhjgeYyXVG5/view?usp=sharing',
+      Social: 'https://drive.google.com/uc?export=download&id=14fSwURr-bTOmqxv42vUe4fUaxkqg8iQz',
+      Science: 'https://drive.google.com/uc?export=download&id=1-I-4QjSg21NMase19qjVZeuzliQlN7Ug',
+      PE: 'https://drive.google.com/uc?export=download&id=1g1efhIGHLRFl9imeU96BEVMlDpfn0bBM',
+      Music: 'https://drive.google.com/uc?export=download&id=14RkTxKTXC4RN26LF_Gwkv2kKn0H0VFtY',
+      HSCI: 'https://drive.google.com/uc?export=download&id=1eVCJB43F4GflQhdDC98264Dkuu7V5jXl',
+      CRE: 'https://drive.google.com/uc?export=download&id=1QcdVEDJpBPWHxaHbb3Moho7DDIdk3lgT',
+      ART: 'https://drive.google.com/uc?export=download&id=1cwUBDAcp0xxVyRbzLqCYLrhjgeYyXVG5',      
     },
     'Grade 6': {
-      ART: 'https://drive.google.com/file/d/19ncAMT-3XddZYx9Rxcwq0t3B3bbaHfIT/view?usp=sharing',
-      ART: 'https://drive.google.com/file/d/1mSckThi1A546gYpYUqgDHGA9sBIrNtUV/view?usp=sharing',
-      CRE: 'https://drive.google.com/file/d/1xgF37jdCfbVEfundTrntoIRTuOmtmehl/view?usp=sharing',
-      HSCI: 'https://drive.google.com/file/d/1WLzxlyFKS7I-oISisig5TSuxhs7kER-g/view?usp=sharing',
-      Music: 'https://drive.google.com/file/d/1AhFMKR2W5L6s4urogule5IghbM49vx6r/view?usp=sharing',
-      PE: 'https://drive.google.com/file/d/1vgFoMhCpYyHIXFtyGDYGwIHffrVQADCc/view?usp=sharing',
-      SocialStudies: 'https://drive.google.com/file/d/1Dozccxec3jrNR99vcmtra0HLrD1aBVVF/view?usp=sharing',
+      ART: 'https://drive.google.com/uc?export=download&id=19ncAMT-3XddZYx9Rxcwq0t3B3bbaHfIT',
+      ART: 'https://drive.google.com/uc?export=download&id=1mSckThi1A546gYpYUqgDHGA9sBIrNtUV',
+      CRE: 'https://drive.google.com/uc?export=download&id=1xgF37jdCfbVEfundTrntoIRTuOmtmehl',
+      HSCI: 'https://drive.google.com/uc?export=download&id=1WLzxlyFKS7I-oISisig5TSuxhs7kER-g',
+      Music: 'https://drive.google.com/uc?export=download&id=1AhFMKR2W5L6s4urogule5IghbM49vx6r',
+      PE: 'https://drive.google.com/uc?export=download&id=1vgFoMhCpYyHIXFtyGDYGwIHffrVQADCc',
+      SocialStudies: 'https://drive.google.com/uc?export=download&id=1Dozccxec3jrNR99vcmtra0HLrD1aBVVF',      
     },
   };
 

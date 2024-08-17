@@ -127,81 +127,82 @@ const LessonPlans = () => {
   const handleGradeSelection = (grade) => {
     setSelectedGrade(grade);
     setSubjects({
-      'PP 1': [
-        { subject: 'Psycomotor - term 3', link: 'https://drive.google.com/file/d/10iUs3ugnLyHAjZ3Ij89KC7wHPaJ87rX1/view?usp=sharing' }
-      ],
-      'PP 2': [
-        { subject: 'Mathematics Activities - term 3', link: 'https://drive.google.com/file/d/1wzvtYGdTNjD30b35t3azzL14_z3Gb6hG/view?usp=sharing' }
-      ],
+        'PP 1': [
+          { subject: 'Psycomotor - term 3', link: 'https://drive.google.com/uc?export=download&id=10iUs3ugnLyHAjZ3Ij89KC7wHPaJ87rX1' }
+        ],
+        'PP 2': [
+          { subject: 'Mathematics Activities - term 3', link: 'https://drive.google.com/uc?export=download&id=1wzvtYGdTNjD30b35t3azzL14_z3Gb6hG' }
+        ],
+
       'Grade 1': [
-        { subject: 'Mathematics Activities - term 1', link: 'https://drive.google.com/file/d/1R9vjr8Tbr4yvJdAsFd5fTP_Og9pa5WrD/view?usp=sharing' },
-        { subject: 'Mathematics Activities - term 2', link: 'https://drive.google.com/file/d/17_KiNl0PAMv_TFLqPhh9M-cN1KAMeTo4/view?usp=sharing' },
-        { subject: 'Mathematics Activities - term 3', link: 'https://drive.google.com/file/d/135URtvNJ2dfUidEWWjmLsX7Rxi-yt44P/view?usp=sharing' },
-        { subject: 'Kiswahili Vyakula Vya Kiasili - 1', link: 'https://drive.google.com/file/d/1dv8r6y9jxN-XL5LQRjuxh2827aaKDEPG/view?usp=sharing' },
-        { subject: 'Kiswahili Mwili Wangu - 2', link: 'https://drive.google.com/file/d/1PAnFkDh9UUxqjd4OGKRv0kMdi8MB2WnJ/view?usp=sharing' },
-        { subject: 'Kiswahili - Karibu Darasani', link: 'https://drive.google.com/file/d/1HUUvi7EWOxboWWesmZvqDvvY4p0GDSRY/view?usp=sharing' },
-        { subject: 'Environment Activities - Social Environment ', link: 'https://drive.google.com/file/d/1AJbDF5JhghmkJfLSCFnqpbKw18RnJtYj/view?usp=sharing' },
-        { subject: 'Environment Activities - Env and its resources', link: 'https://drive.google.com/file/d/10VN2Sl4GrApzr5VxVa7LS5SDHlg0MOKU/view?usp=sharing' },
-        { subject: 'Environment Activities - Care of the Env ', link: 'https://drive.google.com/file/d/1BXAI-7UNc2MqwgyqQ5Vyy48WujeKFueU/view?usp=sharing' },
-        { subject: 'Environmental All ', link: 'https://drive.google.com/file/d/1vBO57f0QmjV7niG0YMipYtZHaHx8J4Ie/view?usp=sharing' }
+        { subject: 'Mathematics Activities - term 1', link: 'https://drive.google.com/uc?export=download&id=1R9vjr8Tbr4yvJdAsFd5fTP_Og9pa5WrD' },
+        { subject: 'Mathematics Activities - term 2', link: 'https://drive.google.com/uc?export=download&id=17_KiNl0PAMv_TFLqPhh9M-cN1KAMeTo4' },
+        { subject: 'Mathematics Activities - term 3', link: 'https://drive.google.com/uc?export=download&id=135URtvNJ2dfUidEWWjmLsX7Rxi-yt44P' },
+        { subject: 'Kiswahili Vyakula Vya Kiasili - 1', link: 'https://drive.google.com/uc?export=download&id=1dv8r6y9jxN-XL5LQRjuxh2827aaKDEPG' },
+        { subject: 'Kiswahili Mwili Wangu - 2', link: 'https://drive.google.com/uc?export=download&id=1PAnFkDh9UUxqjd4OGKRv0kMdi8MB2WnJ' },
+        { subject: 'Kiswahili - Karibu Darasani', link: 'https://drive.google.com/uc?export=download&id=1HUUvi7EWOxboWWesmZvqDvvY4p0GDSRY' },
+        { subject: 'Environment Activities - Social Environment ', link: 'https://drive.google.com/uc?export=download&id=1AJbDF5JhghmkJfLSCFnqpbKw18RnJtYj' },
+        { subject: 'Environment Activities - Env and its resources', link: 'https://drive.google.com/uc?export=download&id=10VN2Sl4GrApzr5VxVa7LS5SDHlg0MOKU' },
+        { subject: 'Environment Activities - Care of the Env ', link: 'https://drive.google.com/uc?export=download&id=1BXAI-7UNc2MqwgyqQ5Vyy48WujeKFueU' },
+        { subject: 'Environmental All ', link: 'https://drive.google.com/uc?export=download&id=1vBO57f0QmjV7niG0YMipYtZHaHx8J4Ie' }        
       ],
       'Grade 2': [
-        { subject: 'Mathematics Activities - Term 1', link: 'https://drive.google.com/file/d/1w3XygN2MY0vTYekR8QA3HVCTVJPBemJ7/view?usp=sharing' },
-        { subject: 'Mathematics Activities - Term 2', link: 'https://drive.google.com/file/d/11LQkgdLF4n6JSHHPwvz6Ditw61gwFexN/view?usp=sharing' },
-        { subject: 'Mathematics Activities - Term 3', link: 'https://drive.google.com/file/d/11LQkgdLF4n6JSHHPwvz6Ditw61gwFexN/view?usp=sharing' },
-       
-        { subject: 'Art & Craft - Weaving Lesson', link: 'https://drive.google.com/file/d/1RzPP4d_Utzuv70RZOIsEVMvxtptjY_ji/view?usp=sharing' },
-        { subject: 'Art & Craft - Sculputer Lesson', link: 'https://drive.google.com/file/d/1bnjOKAF2OeGQD9Q7t6bZAIVJKnlaO09l/view?usp=sharing' },
-        { subject: 'Art & Craft - Paper Craft', link: 'https://drive.google.com/file/d/1khXPdretqBIQoIP0iFYHFoBRb_lTu_WJ/view?usp=sharing' },
-       
-        { subject: 'C.R.E - The Bible Lesson', link: 'https://drive.google.com/file/d/1Ala4Lml0xHVKuMfVaUEKta3PG__Sa4Yw/view?usp=sharing' },
-        { subject: 'C.R.E - Early life of Jesus Christ', link: 'https://drive.google.com/file/d/1P93ufiepQZbo6d92CAgcABBocLHXKiQy/view?usp=sharing' },
-        { subject: 'C.R.E - The Church', link: 'https://drive.google.com/file/d/1bN-wz5D4qZLS8kFPp4aUawsd8HVP1LvU/view?usp=sharing' },
-        { subject: 'C.R.E - Creation', link: 'https://drive.google.com/file/d/1Zsi0uwBqbklcVxdRx18RBJyogaZtIxB1/view?usp=sharing' },
-        { subject: 'C.R.E - Christian Values', link: 'https://drive.google.com/file/d/1f6p62r1AsLd-sjWJjT0KhrJ2wH5HAmxe/view?usp=sharing' },
-       
-        { subject: 'Movement Activities- Swimming Lesson', link: 'https://drive.google.com/file/d/1bN-wz5D4qZLS8kFPp4aUawsd8HVP1LvU/view?usp=sharing' },
-        { subject: 'Movement Activities - Gymnastics Lesson', link: 'https://drive.google.com/file/d/1w2KCNeJ611McIXucmZkGqv4wvy1hdZxa/view?usp=sharing' },
-        { subject: 'Movement Activities - Basic Motor', link: 'https://drive.google.com/file/d/1lRFWnCl4lB-d7ShOSTcV5jMD0-19q2QI/view?usp=sharing' },
-       
-        { subject: 'Hygiene & Nutrition - Safety Education', link: 'https://drive.google.com/file/d/1g6rYqHZk2JbSV50_1i1m35VuiO5m38ZC/view?usp=sharing' },
-        { subject: 'Hygiene & Nutrition - Personal Hygiene', link: 'https://drive.google.com/file/d/1Hd2uQ9O0jdNCfeK4OunDOcocjMkFOgi-/view?usp=sharing' },
-        { subject: 'Hygiene & Nutrition - Health Practises', link: 'https://drive.google.com/file/d/1p5sp9msSO0yrRcJA8GqdDy9n2ah_f2I_/view?usp=sharing' },
-        { subject: 'Hygiene & Nutrition - Foods Lesson', link: 'https://drive.google.com/file/d/1OeyRUJyb8DUP-gg25NyMchhQhMGvkend/view?usp=sharing' },
+        { subject: 'Mathematics Activities - Term 1', link: 'https://drive.google.com/uc?export=download&id=1w3XygN2MY0vTYekR8QA3HVCTVJPBemJ7' },
+        { subject: 'Mathematics Activities - Term 2', link: 'https://drive.google.com/uc?export=download&id=11LQkgdLF4n6JSHHPwvz6Ditw61gwFexN' },
+        { subject: 'Mathematics Activities - Term 3', link: 'https://drive.google.com/uc?export=download&id=11LQkgdLF4n6JSHHPwvz6Ditw61gwFexN' },
         
-        { subject: 'Environmental Activities - Safety Education', link: 'https://drive.google.com/file/d/1XI9DJiCh2-AV_kouqOOxyJKuXglj7kR1/view?usp=sharing' },
-        { subject: 'Environmental Activities - Env. & Its Activities', link: 'https://drive.google.com/file/d/1gbIGUXLgo3mkhh4XbRUQm3KJmtRx3iAf/view?usp=sharing' },       
-        { subject: 'Environmental Activities- Care for the Environment', link: 'https://drive.google.com/file/d/1jegH-Vi1MM5YlkTUoYnXwjEIeV_n3beB/view?usp=sharing' },
+        { subject: 'Art & Craft - Weaving Lesson', link: 'https://drive.google.com/uc?export=download&id=1RzPP4d_Utzuv70RZOIsEVMvxtptjY_ji' },
+        { subject: 'Art & Craft - Sculputer Lesson', link: 'https://drive.google.com/uc?export=download&id=1bnjOKAF2OeGQD9Q7t6bZAIVJKnlaO09l' },
+        { subject: 'Art & Craft - Paper Craft', link: 'https://drive.google.com/uc?export=download&id=1khXPdretqBIQoIP0iFYHFoBRb_lTu_WJ' },
+        
+        { subject: 'C.R.E - The Bible Lesson', link: 'https://drive.google.com/uc?export=download&id=1Ala4Lml0xHVKuMfVaUEKta3PG__Sa4Yw' },
+        { subject: 'C.R.E - Early life of Jesus Christ', link: 'https://drive.google.com/uc?export=download&id=1P93ufiepQZbo6d92CAgcABBocLHXKiQy' },
+        { subject: 'C.R.E - The Church', link: 'https://drive.google.com/uc?export=download&id=1bN-wz5D4qZLS8kFPp4aUawsd8HVP1LvU' },
+        { subject: 'C.R.E - Creation', link: 'https://drive.google.com/uc?export=download&id=1Zsi0uwBqbklcVxdRx18RBJyogaZtIxB1' },
+        { subject: 'C.R.E - Christian Values', link: 'https://drive.google.com/uc?export=download&id=1f6p62r1AsLd-sjWJjT0KhrJ2wH5HAmxe' },
+        
+        { subject: 'Movement Activities- Swimming Lesson', link: 'https://drive.google.com/uc?export=download&id=1bN-wz5D4qZLS8kFPp4aUawsd8HVP1LvU' },
+        { subject: 'Movement Activities - Gymnastics Lesson', link: 'https://drive.google.com/uc?export=download&id=1w2KCNeJ611McIXucmZkGqv4wvy1hdZxa' },
+        { subject: 'Movement Activities - Basic Motor', link: 'https://drive.google.com/uc?export=download&id=1lRFWnCl4lB-d7ShOSTcV5jMD0-19q2QI' },
+        
+ { subject: 'Hygiene & Nutrition - Safety Education', link: 'https://drive.google.com/uc?export=download&id=1g6rYqHZk2JbSV50_1i1m35VuiO5m38ZC' },
+{ subject: 'Hygiene & Nutrition - Personal Hygiene', link: 'https://drive.google.com/uc?export=download&id=1Hd2uQ9O0jdNCfeK4OunDOcocjMkFOgi-' },
+{ subject: 'Hygiene & Nutrition - Health Practises', link: 'https://drive.google.com/uc?export=download&id=1p5sp9msSO0yrRcJA8GqdDy9n2ah_f2I_' },
+{ subject: 'Hygiene & Nutrition - Foods Lesson', link: 'https://drive.google.com/uc?export=download&id=1OeyRUJyb8DUP-gg25NyMchhQhMGvkend' },
 
+{ subject: 'Environmental Activities - Safety Education', link: 'https://drive.google.com/uc?export=download&id=1XI9DJiCh2-AV_kouqOOxyJKuXglj7kR1' },
+{ subject: 'Environmental Activities - Env. & Its Activities', link: 'https://drive.google.com/uc?export=download&id=1gbIGUXLgo3mkhh4XbRUQm3KJmtRx3iAf' },       
+{ subject: 'Environmental Activities- Care for the Environment', link: 'https://drive.google.com/uc?export=download&id=1jegH-Vi1MM5YlkTUoYnXwjEIeV_n3beB' },
 
-        { subject: 'Music - Performing Lesson', link: 'https://drive.google.com/file/d/1Ktqa-3ZSqstKSx1VZL5sJ2Z3sA4uqBpE/view?usp=sharing' },    
-        { subject: 'Music - Listening & Responding', link: 'https://drive.google.com/file/d/1c8i6LxS7WDAwP-QjbqqWgK4pSS_dgHw6/view?usp=sharing' },
-        { subject: 'Music - Creating & Composing  Music', link: 'https://drive.google.com/file/d/15lFh0w7e8fnG4mwv45VtK7OKTduNG1il/view?usp=sharing' }
+{ subject: 'Music - Performing Lesson', link: 'https://drive.google.com/uc?export=download&id=1Ktqa-3ZSqstKSx1VZL5sJ2Z3sA4uqBpE' },    
+{ subject: 'Music - Listening & Responding', link: 'https://drive.google.com/uc?export=download&id=1c8i6LxS7WDAwP-QjbqqWgK4pSS_dgHw6' },
+{ subject: 'Music - Creating & Composing  Music', link: 'https://drive.google.com/uc?export=download&id=15lFh0w7e8fnG4mwv45VtK7OKTduNG1il' }
+
       ], 
       'Grade 3': [
-        { subject: 'C.R.E - Holy Bible', link: 'https://drive.google.com/file/d/1dMElhXzAaD8XW9Frkv2cmx4rpigxT_e9/view?usp=sharing' },
-        { subject: 'C.R.E - Early Life Of Jesus Christ', link: 'https://drive.google.com/file/d/1yE_AwCg-q9NItfF9FZWxGqtzXyQZ3prG/view?usp=sharing' },
-        { subject: 'C.R.E - The Church', link: 'https://drive.google.com/file/d/1xUGMG2gmAhOSsuyNh8J0D-CsH0H5Rfh9/view?usp=sharing' },
-        { subject: 'C.R.E - Creation Lesson', link: 'https://drive.google.com/file/d/1L7WdU3m0PtQ-ccRcr38kwHYGF_f5cFfO/view?usp=sharing' },
-        { subject: 'C.R.E - Christian Values', link: 'https://drive.google.com/file/d/1hKShDUYqT1h7rOgGE7ch0xPjbRj8HcxB/view?usp=sharing' },
-       
-        { subject: 'Kiswahili Activities - Sokoni ', link: 'https://drive.google.com/file/d/15-IJ5ciAvo2g6oSh9DW3twB0vE5QJmVl/view?usp=sharing' },
-        { subject: 'Kiswahili Activities - Shambani', link: 'https://drive.google.com/file/d/1AHs0Xwzs5dmwOsMH1tY3pZ1N_d-7ToqO/view?usp=sharing' },
-        { subject: 'Kiswahili Activities - Marejeleo', link: 'https://drive.google.com/file/d/1dxs67BY83ISN7E0POVeZOcJW4UCdfzrj/view?usp=sharing' },
-
-        { subject: 'Mathematics Activities - Term 1', link: 'hhttps://drive.google.com/file/d/1oC4v_bh7k8GLA7a1OfxoyFL_vx8TuxcR/view?usp=sharing' },
-        { subject: 'Mathematics Activities - Term 2', link: 'https://drive.google.com/file/d/1H8KeQmdYyOqKUKsh1w8zD30xXaxUw3ib/view?usp=sharing' },
-        { subject: 'Mathematics Activities - Term 3', link: 'https://drive.google.com/file/d/19UO-2lmoJRtiTeE6VsyHEiDEuJ8nNFaL/view?usp=sharing' },
-
-        { subject: 'Music Activities - Basic Motor Skills ', link: 'hhttps://drive.google.com/file/d/17WN5S5B7l2fo4AbpOB7zei0rVCxJYqgu/view?usp=sharingE' },
+        { subject: 'C.R.E - Holy Bible', link: 'https://drive.google.com/uc?export=download&id=1dMElhXzAaD8XW9Frkv2cmx4rpigxT_e9' },
+        { subject: 'C.R.E - Early Life Of Jesus Christ', link: 'https://drive.google.com/uc?export=download&id=1yE_AwCg-q9NItfF9FZWxGqtzXyQZ3prG' },
+        { subject: 'C.R.E - The Church', link: 'https://drive.google.com/uc?export=download&id=1xUGMG2gmAhOSsuyNh8J0D-CsH0H5Rfh9' },
+        { subject: 'C.R.E - Creation Lesson', link: 'https://drive.google.com/uc?export=download&id=1L7WdU3m0PtQ-ccRcr38kwHYGF_f5cFfO' },
+        { subject: 'C.R.E - Christian Values', link: 'https://drive.google.com/uc?export=download&id=1hKShDUYqT1h7rOgGE7ch0xPjbRj8HcxB' },
         
-        { subject: 'Movement Activities - Gymnastics Lesson', link: 'https://drive.google.com/file/d/136AFVWmXOIlca0zggsZIo9rCgeQiJr9M/view?usp=sharing' }
+        { subject: 'Kiswahili Activities - Sokoni ', link: 'https://drive.google.com/uc?export=download&id=15-IJ5ciAvo2g6oSh9DW3twB0vE5QJmVl' },
+        { subject: 'Kiswahili Activities - Shambani', link: 'https://drive.google.com/uc?export=download&id=1AHs0Xwzs5dmwOsMH1tY3pZ1N_d-7ToqO' },
+        { subject: 'Kiswahili Activities - Marejeleo', link: 'https://drive.google.com/uc?export=download&id=1dxs67BY83ISN7E0POVeZOcJW4UCdfzrj' },
+      
+        { subject: 'Mathematics Activities - Term 1', link: 'https://drive.google.com/uc?export=download&id=1oC4v_bh7k8GLA7a1OfxoyFL_vx8TuxcR' },
+        { subject: 'Mathematics Activities - Term 2', link: 'https://drive.google.com/uc?export=download&id=1H8KeQmdYyOqKUKsh1w8zD30xXaxUw3ib' },
+        { subject: 'Mathematics Activities - Term 3', link: 'https://drive.google.com/uc?export=download&id=19UO-2lmoJRtiTeE6VsyHEiDEuJ8nNFaL' },
+      
+        { subject: 'Music Activities - Basic Motor Skills ', link: 'https://drive.google.com/uc?export=download&id=17WN5S5B7l2fo4AbpOB7zei0rVCxJYqgu' },
+        
+        { subject: 'Movement Activities - Gymnastics Lesson', link: 'https://drive.google.com/uc?export=download&id=136AFVWmXOIlca0zggsZIo9rCgeQiJr9M' }
       ],
       'Grade 4': [
-        { subject: 'Lesson Plan Booklet', link: 'https://drive.google.com/file/d/14O3h4981QcmbqTN5lBRWdW8GtoDEmjIZ/view?usp=sharing' }
-      ],      
+        { subject: 'Lesson Plan Booklet', link: 'https://drive.google.com/uc?export=download&id=14O3h4981QcmbqTN5lBRWdW8GtoDEmjIZ' }
+      ],
       'Grade 5': [
-        { subject: 'Lesson Plan Booklet', link: 'https://drive.google.com/file/d/14O3h4981QcmbqTN5lBRWdW8GtoDEmjIZ/view?usp=sharing' }
+        { subject: 'Lesson Plan Booklet', link: 'https://drive.google.com/uc?export=download&id=14O3h4981QcmbqTN5lBRWdW8GtoDEmjIZ' }
       ],
 
     }[grade] || []);
