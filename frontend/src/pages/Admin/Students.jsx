@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from 'react';
-import Sidebar from './Sidebar';
 import axios from 'axios';
 import { toast, ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
@@ -127,8 +126,7 @@ const Students = () => {
 
   return (
     <StudentsContainer>
-      <Sidebar isOpen={sidebarOpen} toggleSidebar={() => setSidebarOpen(!sidebarOpen)} />
-      <Content sidebarOpen={sidebarOpen}>
+      <Content>
         <ToastContainer /> 
         <StudentsContent>
           <StudentsHeader>Students</StudentsHeader>

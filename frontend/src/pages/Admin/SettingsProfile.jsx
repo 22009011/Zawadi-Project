@@ -1,10 +1,8 @@
 import React, { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import Sidebar from './Sidebar';
 import { FaSignOutAlt } from 'react-icons/fa'; // Importing the logout icon
 import {
   ProfileContainer,
-  SidebarContainer,
   Content,
   ProfileHeader,
   ProfileDetails,
@@ -44,9 +42,6 @@ const SettingsProfile = () => {
 
   return (
     <ProfileContainer>
-      <SidebarContainer>
-
-      </SidebarContainer>
       <Content>
         <ProfileHeader>Profile Details</ProfileHeader>
         {error && <div style={{ color: 'red' }}>{error}</div>}

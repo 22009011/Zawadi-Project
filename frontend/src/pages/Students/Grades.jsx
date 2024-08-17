@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
-import Sidebar from './Sidebar';
 import {
   GradesContainer,
   Content,
@@ -66,9 +65,6 @@ const Grades = () => {
 
   return (
     <GradesContainer>
-      <SidebarContainer>
-        <Sidebar />
-      </SidebarContainer>
       <Content>
         <h2>Grades</h2>
         {loading ? (

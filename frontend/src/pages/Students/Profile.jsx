@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import Sidebar from './Sidebar';
 import { FaSignOutAlt } from 'react-icons/fa';
 import {
   ProfileContainer,
@@ -44,9 +43,6 @@ const ProfileSection = () => {
 
   return (
     <ProfileContainer>
-      <SidebarContainer>
-        <Sidebar />
-      </SidebarContainer>
       <Content>
         <ProfileHeader>Profile Details</ProfileHeader>
         {error && <div style={{ color: 'red' }}>{error}</div>}

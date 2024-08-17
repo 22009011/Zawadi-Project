@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
-import Sidebar from './Sidebar';
 import {
   AssignmentsContainer,
   SidebarContainer,
@@ -69,9 +68,6 @@ const StudentAssignments = () => {
 
   return (
     <AssignmentsContainer>
-      <SidebarContainer>
-        <Sidebar />
-      </SidebarContainer>
       <Content>
         <h1>Assignments</h1>
         {assignments.map((assignment) => (

@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from 'react';
 import styled from 'styled-components';
-import Sidebar from './Sidebar';
 import axios from 'axios';
 
 const FeedbackContainer = styled.div`
@@ -83,9 +82,6 @@ const Feedback = () => {
 
   return (
     <FeedbackContainer>
-      <SidebarContainer>
-        <Sidebar />
-      </SidebarContainer>
       <Content>
         <h2>Feedback</h2>
         {feedbacks.map((feedback) => (

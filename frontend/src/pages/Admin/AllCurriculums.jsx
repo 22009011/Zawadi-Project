@@ -4,7 +4,6 @@ import axios from 'axios';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import { FaEdit, FaTrash } from 'react-icons/fa';
-import Sidebar from './Sidebar';
 
 const Container = styled.div`
     padding: 20px;

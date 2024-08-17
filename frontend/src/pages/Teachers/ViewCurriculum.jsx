@@ -4,7 +4,6 @@ import axios from 'axios';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import { Link, useParams } from 'react-router-dom';
-import Sidebar from './Sidebar';
 
 const Container = styled.div`
   display: flex;
@@ -119,7 +118,6 @@ const ViewCurriculum = () => {
 
   return (
     <Container>
-      <Sidebar />
       <ToastContainer />
       <Header>
         <Title>View Curriculum</Title>

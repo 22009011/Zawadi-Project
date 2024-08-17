@@ -1,6 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
-import Sidebar from './Sidebar';
+
 
 // Styled components
 const LearningMaterialsContainer = styled.div`
@@ -89,9 +89,6 @@ const SidebarContainer = styled.div`
 const LearningMaterials = () => {
   return (
     <LearningMaterialsContainer>
-      <SidebarContainer>
-        <Sidebar />
-      </SidebarContainer>
       <Content>
         <h2>Learning Materials</h2>
         <SubjectSection>
