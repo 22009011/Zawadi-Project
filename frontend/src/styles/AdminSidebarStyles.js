@@ -10,13 +10,14 @@ export const SidebarContainer = styled.div`
   background-color: #ffffff;
   color: #000;
   overflow-y: auto;
-  padding-top: 60px;
+  padding-top: 5px;
   transition: width 0.3s ease;
   z-index: 100;
   border-right: 1px solid #e0e0e0;
 
   @media (max-width: 768px) {
     width: ${({ isOpen }) => (isOpen ? '200px' : '60px')};
+
   }
 
   @media (max-width: 480px) {

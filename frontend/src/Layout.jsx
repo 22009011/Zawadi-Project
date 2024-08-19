@@ -1,11 +1,28 @@
-// Layout.js
 import React from 'react';
 import { useLocation } from 'react-router-dom';
+import styled from 'styled-components';
 import AdminSidebar from './pages/Admin/Sidebar';
 import StudentSidebar from './pages/Students/Sidebar';
 import TeacherSidebar from './pages/Teachers/Sidebar';
 import ParentSidebar from './pages/Parents/Sidebar';
 import SuperAdminSidebar from './pages/SuperAdminDashboard/Sidebar';
+
+const LayoutContainer = styled.div`
+  display: flex;
+`;
+
+const Content = styled.div`
+  flex: 1;
+  margin-left: 80px; /* Default for small devices */
+
+  @media (min-width: 768px) {
+    margin-left: 100px; /* For tablets and above */
+  }
+
+  @media (min-width: 1024px) {
+    margin-left: 120px; /* For larger screens */
+  }
+`;
 
 const Layout = ({ children }) => {
   const location = useLocation();
@@ -30,12 +47,12 @@ const Layout = ({ children }) => {
   };
 
   return (
-    <div style={{ display: 'flex' }}>
+    <LayoutContainer>
       {renderSidebar()}
-      <div style={{ flex: 1, marginLeft: '250px' }}>
+      <Content>
         {children}
-      </div>
-    </div>
+      </Content>
+    </LayoutContainer>
   );
 };
 

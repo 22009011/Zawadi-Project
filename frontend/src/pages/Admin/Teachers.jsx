@@ -1,4 +1,3 @@
-// Teachers.js
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import {
@@ -19,10 +18,12 @@ const Teachers = () => {
   const [newTeacher, setNewTeacher] = useState({ name: '', email: '', subject: '', qualification: '', experience: '', performance: '' });
   const [teachers, setTeachers] = useState([]);
 
+  // Fetch teachers data when the component mounts
   useEffect(() => {
     fetchTeachers();
   }, []);
 
+  // Function to fetch teachers from the backend
   const fetchTeachers = async () => {
     try {
       const response = await axios.get('http://localhost:5000/api/teachers');
@@ -32,13 +33,14 @@ const Teachers = () => {
     }
   };
 
+  // Function to handle adding a new teacher
   const handleAddTeacher = async (e) => {
     e.preventDefault();
     if (newTeacher.name.trim() !== '' && newTeacher.email.trim() !== '' && newTeacher.subject.trim() !== '' && newTeacher.qualification.trim() !== '' && newTeacher.experience.trim() !== '' && newTeacher.performance.trim() !== '') {
       try {
         const response = await axios.post('http://localhost:5000/api/teachers', newTeacher);
         const createdTeacher = response.data.teacher;
-        setTeachers([...teachers, createdTeacher]);
+        setTeachers([...teachers, createdTeacher]); // Update the state to include the newly added teacher
         setNewTeacher({ name: '', email: '', subject: '', qualification: '', experience: '', performance: '' });
       } catch (error) {
         console.error('Error adding teacher:', error);
