@@ -128,7 +128,7 @@ const AssignmentSection = () => {
       ART: 'https://drive.google.com/uc?export=download&id=1cwUBDAcp0xxVyRbzLqCYLrhjgeYyXVG5',      
     },
     'Grade 6': {
-      ART: 'https://drive.google.com/uc?export=download&id=19ncAMT-3XddZYx9Rxcwq0t3B3bbaHfIT',
+      AGR: 'https://drive.google.com/uc?export=download&id=19ncAMT-3XddZYx9Rxcwq0t3B3bbaHfIT',
       ART: 'https://drive.google.com/uc?export=download&id=1mSckThi1A546gYpYUqgDHGA9sBIrNtUV',
       CRE: 'https://drive.google.com/uc?export=download&id=1xgF37jdCfbVEfundTrntoIRTuOmtmehl',
       HSCI: 'https://drive.google.com/uc?export=download&id=1WLzxlyFKS7I-oISisig5TSuxhs7kER-g',
