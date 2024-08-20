@@ -30,7 +30,7 @@ const GetInTouchSection = () => {
       const response = await axios.get('http://localhost:5000/api/get-in-touch');
       setContacts(response.data.contacts);
     } catch (error) {
-      toast.error('Error fetching contacts');
+      console.error('Error fetching contacts');
     }
   };
 

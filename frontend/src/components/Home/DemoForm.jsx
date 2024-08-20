@@ -31,7 +31,7 @@ const DemoForm = () => {
       const response = await axios.get('http://localhost:5000/api/request-demo');
       setDemos(response.data.demos);
     } catch (error) {
-      toast.error('Error fetching demos');
+      console.error('Error fetching demos');
     }
   };
 
