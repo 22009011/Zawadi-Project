@@ -75,9 +75,9 @@ const GetInTouchSection = () => {
         <ContactTitle>Contact Info</ContactTitle>
         <ContactDetails>
           <p>Nairobi, Kenya</p>
-          <p><FaPhone /> 020 8000 208</p>
-          <p><FaEnvelope /> hello@zawadi.org</p>
-          <p><FaGlobe /> https://zawadii.org</p>
+          <p><FaPhone /> 0794 203 261</p>
+          <p><FaEnvelope /> hello@zawadii.org</p>
+          <p><FaGlobe /> https://zawadii.tech</p>
         </ContactDetails>
       </ContactInfo>
       <ToastContainer />

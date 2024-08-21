@@ -47,9 +47,9 @@ const FooterIcon = styled.a`
 const Footer = () => {
   return (
     <FooterContainer>
-      <FooterText>About Zawadi.</FooterText>
+      <FooterText>About Zawadii.</FooterText>
       <FooterText>
-        A Kenyan-based EdTech startup Building the world's number 1 assessment tool for K-12 learning.
+        A Kenyan-based EdTech startup Building the world's best assessment tool for learning.
       </FooterText>
       
       <FooterLinks>
@@ -65,7 +65,7 @@ const Footer = () => {
 
       <FooterText>Nairobi, Kenya</FooterText>
       <FooterText>0794203261</FooterText>
-      <FooterText>hello@zawadi.org</FooterText>
+      <FooterText>hello@zawadii.org</FooterText>
 
       <FooterLinks>
         <FooterIcon href="#"><FaFacebook /></FooterIcon>
@@ -74,7 +74,7 @@ const Footer = () => {
         <FooterIcon href="#"><FaInstagram /></FooterIcon>
       </FooterLinks>
 
-      <FooterText>&copy; 2024 All rights reserved | Zawadi Inc</FooterText>
+      <FooterText>&copy; 2024 All rights reserved | Zawadii Inc</FooterText>
     </FooterContainer>
   );
 }

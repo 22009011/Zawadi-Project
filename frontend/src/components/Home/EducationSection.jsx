@@ -130,7 +130,7 @@ const EducationSection = () => {
       <TextContainer>
         <Title><strong>Every child matters</strong></Title>
         <Description>
-          Handling CBC grade books can be tiring and time-consuming, often only used at the end of the term. Our platform offers an easy and revolutionary way to manage CBC online. Teachers can fill out CBC assessments promptly, and parents receive weekly updates on their children's progress.
+         Getting the right assessments and also handling of CBC grade books can be tiring and time-consuming, often only used at the end of the term. Our platform offers an easy and revolutionary way to manage CBC online. Teachers can fill out CBC assessments promptly, and parents receive weekly updates on their children's progress.
         </Description>
       </TextContainer>
       <VideoContainer>

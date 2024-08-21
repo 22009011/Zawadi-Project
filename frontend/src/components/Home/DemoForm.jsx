@@ -65,7 +65,7 @@ const DemoForm = () => {
     <div>
       <FormContainer onSubmit={handleSubmit}>
         <Title>Request a Demo</Title>
-        <Subtitle>Interested in seeing Zawadi in action? Request a demo now!</Subtitle>
+        <Subtitle>Interested in seeing Zawadii in action? Request a demo now!</Subtitle>
         <Input name="name" type="text" placeholder="Name" value={formData.name} onChange={handleChange} />
         <Input name="email" type="email" placeholder="Email Address" value={formData.email} onChange={handleChange} />
         <Input name="phone" type="tel" placeholder="Phone" value={formData.phone} onChange={handleChange} />
