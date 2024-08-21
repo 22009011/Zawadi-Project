@@ -28,7 +28,7 @@ const Home = () => {
       <NavbarComponent />
       <HomeContainer>
         <SchoolInfo>
-          <Title><strong>Simplify CBC Management</strong></Title>
+          <Title><strong>Simplify CBC Management Using AI</strong></Title>
           <LoremTextContainer>
             <p>Handling CBC grade books can be tiring and time-consuming, often only used at the end of the term. Our platform offers an easy and revolutionary way to manage CBC online. Teachers can fill out CBC assessments promptly, and parents receive weekly updates on their children's progress.</p>
           </LoremTextContainer>
