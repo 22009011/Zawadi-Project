@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import styled from 'styled-components';
 import axios from 'axios';
 import { toast, ToastContainer } from 'react-toastify';
@@ -89,6 +89,9 @@ const Button = styled.button`
   }
 `;
 
+const STORAGE_KEY = 'schoolData';
+const EXPIRATION_TIME = 60 * 60 * 1000; // 1 hour
+
 const AddSchoolForm = () => {
   const [form, setForm] = useState({
     name: '',
@@ -98,6 +101,20 @@ const AddSchoolForm = () => {
     numberOfStudents: '',
     plan: 'free'
   });
+
+  // Load data from local storage if available and not expired
+  useEffect(() => {
+    const storedData = localStorage.getItem(STORAGE_KEY);
+    if (storedData) {
+      const parsedData = JSON.parse(storedData);
+      const now = new Date().getTime();
+      if (now - parsedData.timestamp < EXPIRATION_TIME) {
+        setForm(parsedData.data);
+      } else {
+        localStorage.removeItem(STORAGE_KEY);
+      }
+    }
+  }, []);
 
   const handleChange = (e) => {
     setForm({ ...form, [e.target.name]: e.target.value });
@@ -114,6 +131,14 @@ const AddSchoolForm = () => {
         number_of_students: form.numberOfStudents,
         plan: form.plan
       });
+
+      // Store data in local storage
+      const now = new Date().getTime();
+      localStorage.setItem(STORAGE_KEY, JSON.stringify({
+        data: form,
+        timestamp: now
+      }));
+
       toast.success('School added successfully!');
       setForm({
         name: '',

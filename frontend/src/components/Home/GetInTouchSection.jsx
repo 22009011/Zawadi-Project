@@ -22,13 +22,19 @@ const GetInTouchSection = () => {
   const [contacts, setContacts] = useState([]);
 
   useEffect(() => {
-    fetchContacts();
+    const storedContacts = localStorage.getItem('contacts');
+    if (storedContacts) {
+      setContacts(JSON.parse(storedContacts));
+    } else {
+      fetchContacts();
+    }
   }, []);
 
   const fetchContacts = async () => {
     try {
       const response = await axios.get('http://localhost:5000/api/get-in-touch');
       setContacts(response.data.contacts);
+      localStorage.setItem('contacts', JSON.stringify(response.data.contacts));
     } catch (error) {
       console.error('Error fetching contacts');
     }

@@ -61,6 +61,10 @@ const StudentSidebar = ({ onToggle = () => {} }) => {
   <StyledLink to="/student/grades" isOpen={isOpen} selected={location.pathname === '/student/grades'}>Grades</StyledLink>
 </SidebarNavItem>
 <SidebarNavItem>
+  <SidebarIcon selected={location.pathname === '/student/student-grades'} isOpen={isOpen}><FaClipboard /></SidebarIcon>
+  <StyledLink to="/student/student-grades" isOpen={isOpen} selected={location.pathname === '/student/student-grades'}>Student Marks</StyledLink>
+</SidebarNavItem>
+<SidebarNavItem>
   <SidebarIcon selected={location.pathname === '/student/learning-materials'} isOpen={isOpen}><FaBook /></SidebarIcon>
   <StyledLink to="/student/learning-materials" isOpen={isOpen} selected={location.pathname === '/student/learning-materials'}>Learning Materials</StyledLink>
 </SidebarNavItem>

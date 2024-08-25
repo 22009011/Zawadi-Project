@@ -30,6 +30,10 @@ import studentPerformanceRouter from './routers/studentPerformanceRouter.js';
 import contactRouter from './routers/contactRouter.js';
 import demoRouter from './routers/demoRouter.js';
 import assessments from './routers/assessments.js';
+import allassessmentRouter from './routers/allassessmentRouter.js';
+
+import Assessment from './models/allassessmentModel.js';
+import Rubric from './models/rubricModel.js';
 
 dotenv.config();
 
@@ -38,6 +42,11 @@ const PORT = process.env.PORT || config.port || 3000;  // Set PORT to use enviro
 
 app.use(express.json());
 app.use(cors());
+
+
+// Define associations
+Assessment.hasMany(Rubric, { foreignKey: 'assessment_id' });
+Rubric.belongsTo(Assessment, { foreignKey: 'assessment_id' });
 
 // Middleware to log requests
 app.use((req, res, next) => {
@@ -72,6 +81,8 @@ app.use('/api/studentPerformance', studentPerformanceRouter);
 app.use('/api/contact', contactRouter);
 app.use('/api/demo', demoRouter);
 app.use('/api/assessments', assessments);
+// Assessment routes
+app.use('/api/allassessments', allassessmentRouter);
 
 // Start the server
 app.listen(PORT, () => {

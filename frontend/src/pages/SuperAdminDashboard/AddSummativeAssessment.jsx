@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
@@ -14,8 +14,25 @@ import {
   ChoiceInput,
 } from '../../styles/SuperAssessments.js'; // Import the same styles
 
+const LOCAL_STORAGE_KEY = 'summativeAssessments';
+const DATA_EXPIRATION_TIME = 30 * 60 * 1000; // 30 minutes in milliseconds
+
 const AddSummativeAssessment = () => {
   const [newAssessment, setNewAssessment] = useState({ title: '', description: '', grade: '', deadline: '', type: 'Essay', choices: [] });
+
+  useEffect(() => {
+    const storedData = localStorage.getItem(LOCAL_STORAGE_KEY);
+    if (storedData) {
+      const { data, timestamp } = JSON.parse(storedData);
+      if (Date.now() - timestamp < DATA_EXPIRATION_TIME) {
+        // Use stored data if it's not expired
+        setNewAssessment(data);
+      } else {
+        // Data expired, clear local storage
+        localStorage.removeItem(LOCAL_STORAGE_KEY);
+      }
+    }
+  }, []);
 
   const handleAddAssessment = async (e) => {
     e.preventDefault();
@@ -24,6 +41,11 @@ const AddSummativeAssessment = () => {
         const response = await axios.post('http://localhost:5000/api/summative-assessments', newAssessment);
         toast.success('Summative assessment added successfully');
         // Optionally handle response or reset form
+
+        // Update local storage with new data
+        const storedData = localStorage.getItem(LOCAL_STORAGE_KEY);
+        const updatedData = { ...newAssessment, ...response.data };
+        localStorage.setItem(LOCAL_STORAGE_KEY, JSON.stringify({ data: updatedData, timestamp: Date.now() }));
       } catch (error) {
         console.error('Error adding summative assessment:', error);
         toast.error('Failed to add summative assessment');

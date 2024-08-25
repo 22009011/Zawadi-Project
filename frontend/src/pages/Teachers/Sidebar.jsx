@@ -140,6 +140,16 @@ const TeacherSidebar = ({ isOpen, toggleSidebar }) => {
                 Performance Analysis
               </StyledLink>
             </SubNavItem>
+            <SubNavItem>
+              <Link to="/teacher/enter-assessments-marks">
+                <SidebarIcon selected={location.pathname === '/teacher/enter-assessments-marks'}>
+                  <FaChartBar />
+                </SidebarIcon>
+              </Link>
+              <StyledLink to="/teacher/enter-assessments-marks" isOpen={isOpen} selected={location.pathname === '/teacher/enter-assessments-marks'}>
+                Enter Assessment Marks
+              </StyledLink>
+            </SubNavItem>
           </>
           )}
           <SidebarNavItem>

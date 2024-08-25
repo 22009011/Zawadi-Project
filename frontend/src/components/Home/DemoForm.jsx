@@ -23,13 +23,20 @@ const DemoForm = () => {
   });
 
   useEffect(() => {
-    fetchDemos();
+    // Check if demos are already stored in local storage
+    const storedDemos = localStorage.getItem('demos');
+    if (storedDemos) {
+      setDemos(JSON.parse(storedDemos));
+    } else {
+      fetchDemos();
+    }
   }, []);
 
   const fetchDemos = async () => {
     try {
       const response = await axios.get('http://localhost:5000/api/request-demo');
       setDemos(response.data.demos);
+      localStorage.setItem('demos', JSON.stringify(response.data.demos)); // Store demos in local storage
     } catch (error) {
       console.error('Error fetching demos');
     }
@@ -40,7 +47,7 @@ const DemoForm = () => {
     try {
       await axios.post('http://localhost:5000/api/request-demo', formData);
       toast.success('Demo request submitted successfully!');
-      fetchDemos(); // Refresh the list after submission
+      fetchDemos(); // Fetch and update local storage after submission
       setFormData({ name: '', email: '', phone: '', schoolName: '', message: '' }); // Reset form
     } catch (error) {
       toast.error('Error submitting demo request');
@@ -51,7 +58,7 @@ const DemoForm = () => {
     try {
       await axios.delete(`http://localhost:5000/api/request-demo/${id}`);
       toast.success('Demo request deleted successfully!');
-      fetchDemos(); // Refresh the list after deletion
+      fetchDemos(); // Fetch and update local storage after deletion
     } catch (error) {
       toast.error('Error deleting demo request');
     }

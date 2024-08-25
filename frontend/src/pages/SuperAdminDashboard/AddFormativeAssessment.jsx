@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
@@ -14,8 +14,34 @@ import {
   ChoiceInput,
 } from '../../styles/SuperAssessments.js'; // Import the same styles
 
+const LOCAL_STORAGE_KEY = 'summativeAssessments';
+const DATA_EXPIRATION_TIME = 30 * 60 * 1000; // 30 minutes
+
 const AddSummativeAssessment = () => {
   const [newAssessment, setNewAssessment] = useState({ title: '', description: '', grade: '', deadline: '', type: 'Essay', choices: [] });
+
+  useEffect(() => {
+    // Check if data exists in local storage and is still valid
+    const storedData = JSON.parse(localStorage.getItem(LOCAL_STORAGE_KEY));
+    if (storedData && (Date.now() - storedData.timestamp < DATA_EXPIRATION_TIME)) {
+      // Use the stored data
+      setNewAssessment(storedData.data);
+    } else {
+      // Fetch data from backend if not valid or not present
+      fetchAssessments();
+    }
+  }, []);
+
+  const fetchAssessments = async () => {
+    try {
+      const response = await axios.get('http://localhost:5000/api/summative-assessments');
+      // Store data in local storage with timestamp
+      localStorage.setItem(LOCAL_STORAGE_KEY, JSON.stringify({ data: response.data, timestamp: Date.now() }));
+      // Optionally handle response data here
+    } catch (error) {
+      console.error('Error fetching assessments:', error);
+    }
+  };
 
   const handleAddAssessment = async (e) => {
     e.preventDefault();
@@ -23,7 +49,8 @@ const AddSummativeAssessment = () => {
       try {
         const response = await axios.post('http://localhost:5000/api/summative-assessments', newAssessment);
         toast.success('Summative assessment added successfully');
-        // Optionally handle response or reset form
+        // Update local storage after adding assessment
+        fetchAssessments(); // Refresh data after adding
       } catch (error) {
         console.error('Error adding summative assessment:', error);
         toast.error('Failed to add summative assessment');

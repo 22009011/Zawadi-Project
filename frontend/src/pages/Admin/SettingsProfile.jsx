@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { FaSignOutAlt } from 'react-icons/fa'; // Importing the logout icon
+import { FaSignOutAlt } from 'react-icons/fa';
 import {
   ProfileContainer,
   Content,
@@ -10,34 +10,72 @@ import {
   ProfileInfo,
   EditButton,
   LogoutButton,
-} from '../../styles/SettingsProfileStyles'; // Import styled components from SettingsProfileStyles.js
+} from '../../styles/SettingsProfileStyles';
 
 const SettingsProfile = () => {
   const [adminInfo, setAdminInfo] = useState({});
   const [error, setError] = useState('');
   const navigate = useNavigate();
 
-  useEffect(() => {
+  // Function to fetch data from the API
+  const fetchProfileData = async () => {
     const token = localStorage.getItem('token');
-    
+
     if (!token) {
-      navigate('/admin/signin'); // Redirect if no token is found
+      navigate('/admin/signin');
+      return;
     }
 
-    fetch('http://localhost:5000/api/users/admin/profile', {
-      headers: {
-        Authorization: `Bearer ${token}`,
-      },
-    })
-    .then(response => response.json())
-    .then(data => setAdminInfo(data))
-    .catch(error => setError('Failed to fetch profile details'));
+    try {
+      const response = await fetch('http://localhost:5000/api/users/admin/profile', {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      });
+
+      if (!response.ok) throw new Error('Failed to fetch profile details');
+      
+      const data = await response.json();
+      setAdminInfo(data);
+
+      // Store data in local storage with timestamp
+      localStorage.setItem('adminInfo', JSON.stringify({
+        ...data,
+        timestamp: Date.now(),
+      }));
+    } catch (error) {
+      setError('Failed to fetch profile details');
+    }
+  };
+
+  // Function to check and use local storage data
+  const loadProfileData = () => {
+    const storedData = localStorage.getItem('adminInfo');
+    const token = localStorage.getItem('token');
+
+    if (storedData) {
+      const parsedData = JSON.parse(storedData);
+      const isDataStale = (Date.now() - parsedData.timestamp) > 10 * 60 * 1000; // 10 minutes expiration
+
+      if (!isDataStale) {
+        setAdminInfo(parsedData);
+        return;
+      }
+    }
+
+    // Fetch new data if no valid local storage data
+    fetchProfileData();
+  };
+
+  useEffect(() => {
+    loadProfileData();
   }, [navigate]);
 
   const handleLogout = () => {
-    localStorage.removeItem('token'); // Clear token from localStorage
-    localStorage.removeItem('role'); // Clear role from localStorage
-    navigate('/admin/signin'); // Redirect to sign-in page
+    localStorage.removeItem('token');
+    localStorage.removeItem('role');
+    localStorage.removeItem('adminInfo'); // Clear stored admin info
+    navigate('/admin/signin');
   };
 
   return (

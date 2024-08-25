@@ -75,6 +75,8 @@ const Icon = styled.div`
   }
 `;
 
+const DATA_EXPIRATION_TIME = 3600000; // 1 hour in milliseconds
+
 const AllSchoolsList = () => {
   const [schools, setSchools] = useState([]);
 
@@ -83,26 +85,36 @@ const AllSchoolsList = () => {
   }, []);
 
   const fetchSchools = async () => {
-    try {
-      const response = await axios.get('http://localhost:5000/api/schools');
-      setSchools(response.data);
-      toast.success('Schools loaded successfully!');
-    } catch (error) {
-      toast.error('Failed to fetch schools. Please try again.');
+    const storedData = localStorage.getItem('schools');
+    const timestamp = localStorage.getItem('schools_timestamp');
+
+    if (storedData && timestamp && (Date.now() - timestamp < DATA_EXPIRATION_TIME)) {
+      setSchools(JSON.parse(storedData));
+    } else {
+      try {
+        const response = await axios.get('http://localhost:5000/api/schools');
+        const data = response.data;
+        setSchools(data);
+        localStorage.setItem('schools', JSON.stringify(data));
+        localStorage.setItem('schools_timestamp', Date.now().toString());
+        toast.success('Schools loaded successfully!');
+      } catch (error) {
+        toast.error('Failed to fetch schools. Please try again.');
+      }
     }
   };
 
   const handleEdit = (id) => {
-    // Placeholder for navigation or modal for editing
     toast.info(`Edit school with ID ${id}`);
-    // Example of navigation
-    // history.push(`/edit/${id}`);
   };
 
   const handleDelete = async (id) => {
     try {
       await axios.delete(`http://localhost:5000/api/schools/${id}`);
-      setSchools(schools.filter(school => school.id !== id));
+      const updatedSchools = schools.filter(school => school.id !== id);
+      setSchools(updatedSchools);
+      localStorage.setItem('schools', JSON.stringify(updatedSchools));
+      localStorage.setItem('schools_timestamp', Date.now().toString());
       toast.success('School deleted successfully!');
     } catch (error) {
       toast.error('Failed to delete school. Please try again.');

@@ -1,74 +1,30 @@
 import React, { useEffect, useState } from 'react';
-import styled from 'styled-components';
 import axios from 'axios';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import { FaEdit, FaTrash } from 'react-icons/fa';
-
-const Container = styled.div`
-    padding: 20px;
-      /* Add padding on the right side */
-    padding-left: 100px;
-`;
-
-const CurriculumSection = styled.div`
-    margin-bottom: 20px;
-    padding: 20px;
-    border: 1px solid #ccc;
-    border-radius: 5px;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-    background-color: #f9f9f9;
-  
-`;
-
-const CurriculumContent = styled.div`
-    max-width: 80%;
-`;
-
-const LessonPlan = styled.div`
-    margin-top: 10px;
-    padding: 10px;
-    border: 1px solid #ccc;
-    border-radius: 5px;
-`;
-
-const Schedule = styled.div`
-    margin-top: 20px;
-    padding: 10px;
-    border: 1px solid #ccc;
-    border-radius: 5px;
-`;
-
-const IconGroup = styled.div`
-    display: flex;
-    gap: 10px;
-`;
-
-const IconButton = styled.button`
-    background: none;
-    border: none;
-    cursor: pointer;
-    font-size: 1.2em;
-    color: #007BFF;
-    &:hover {
-        color: #0056b3;
-    }
-`;
+import { Container, CurriculumSection, CurriculumContent, LessonPlan, Schedule, IconGroup, IconButton } 
+from '../../styles/AllCurriculums.js';
 
 const AllCurriculums = () => {
     const [curriculumEntries, setCurriculumEntries] = useState([]);
 
     useEffect(() => {
-        fetchCurriculumEntries();
+        // Check if data is already in localStorage
+        const storedCurriculums = localStorage.getItem('curriculumEntries');
+        if (storedCurriculums) {
+            setCurriculumEntries(JSON.parse(storedCurriculums));
+        } else {
+            // Fetch from backend if not in localStorage
+            fetchCurriculumEntries();
+        }
     }, []);
 
     const fetchCurriculumEntries = async () => {
         try {
             const response = await axios.get('http://localhost:5000/api/curriculum-entries');
             setCurriculumEntries(response.data);
+            localStorage.setItem('curriculumEntries', JSON.stringify(response.data));
             toast.success('Curriculum entries fetched successfully!');
         } catch (error) {
             toast.error('Error fetching curriculum entries.');
@@ -79,7 +35,9 @@ const AllCurriculums = () => {
     const deleteCurriculumEntry = async (id) => {
         try {
             await axios.delete(`http://localhost:5000/api/curriculum-entries/${id}`);
-            setCurriculumEntries(curriculumEntries.filter(entry => entry.id !== id));
+            const updatedEntries = curriculumEntries.filter(entry => entry.id !== id);
+            setCurriculumEntries(updatedEntries);
+            localStorage.setItem('curriculumEntries', JSON.stringify(updatedEntries));
             toast.success('Curriculum entry deleted successfully!');
         } catch (error) {
             toast.error('Error deleting curriculum entry.');
@@ -89,7 +47,6 @@ const AllCurriculums = () => {
 
     return (
         <Container>
-      
             <ToastContainer />
             <h2>All Curriculums</h2>
             {curriculumEntries.map((entry, index) => (

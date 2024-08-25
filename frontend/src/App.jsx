@@ -66,6 +66,9 @@ import SuperAssessments from './pages/SuperAdminDashboard/Resources/Assessments.
 import SuperNotes from './pages/SuperAdminDashboard/Resources/Notes.jsx';
 import SuperTimetable from './pages/SuperAdminDashboard/Resources/Timetable.jsx';
 import SuperLessonPlans from './pages/SuperAdminDashboard/Resources/LessonPlans.jsx';
+import StudentMarksPage from './pages/Students/StudentMarksPage.jsx';
+import EnterMarksPage from './pages/Teachers/EnterMarksPage.jsx';
+
 
 import Layout from './Layout';
 
@@ -108,6 +111,7 @@ const App = () => {
         <Route path="/student/learning-materials" element={<Layout><LearningMaterials /></Layout>} />
         <Route path="/student/attendance" element={<Layout><Attendance /></Layout>} />
         <Route path="/student/communication" element={<Layout><Communication /></Layout>} />
+        <Route path="/student/student-grades" element={<Layout><StudentMarksPage /></Layout>} />
 
         <Route path="/teacher/assignments" element={<Layout><AssignmentSection /></Layout>} />
         <Route path="/teacher/announcement" element={<Layout><CheckAnnouncementSection /></Layout>} />
@@ -127,6 +131,7 @@ const App = () => {
         <Route path="/teacher/student-assignments-submitted" element={<Layout><StudentAssignmentsPage /></Layout>} />
         <Route path="/teacher/calendar" element={<Layout><CalenderSection /></Layout>} />
         <Route path="/teacher/manual-assessments" element={<Layout><ManualAssessments /></Layout>} />
+        <Route path="/teacher/enter-assessments-marks" element={<Layout><EnterMarksPage /></Layout>} />
         
 
         <Route path="/super-admin/advanced-analytics" element={<Layout><AdvancedAnalytics /></Layout>} />

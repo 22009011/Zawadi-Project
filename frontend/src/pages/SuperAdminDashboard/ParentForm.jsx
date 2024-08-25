@@ -16,6 +16,13 @@ import {
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 
+const LOCAL_STORAGE_KEY = {
+  SCHOOLS: 'schools_data',
+  STUDENTS: 'students_data',
+};
+
+const DATA_EXPIRATION_TIME = 30 * 60 * 1000; // 30 minutes
+
 const ParentForm = () => {
   const [formData, setFormData] = useState({
     username: '',
@@ -32,27 +39,63 @@ const ParentForm = () => {
   // Function to get the token from local storage
   const getAuthToken = () => localStorage.getItem('token');
 
+  // Utility function to get data from local storage
+  const getFromLocalStorage = (key) => {
+    const data = localStorage.getItem(key);
+    if (data) {
+      const parsedData = JSON.parse(data);
+      const currentTime = new Date().getTime();
+      if (currentTime - parsedData.timestamp < DATA_EXPIRATION_TIME) {
+        return parsedData.data;
+      }
+    }
+    return null;
+  };
+
+  // Utility function to set data to local storage
+  const setToLocalStorage = (key, data) => {
+    const timestampedData = {
+      data,
+      timestamp: new Date().getTime(),
+    };
+    localStorage.setItem(key, JSON.stringify(timestampedData));
+  };
+
   useEffect(() => {
     const fetchSchools = async () => {
+      const cachedSchools = getFromLocalStorage(LOCAL_STORAGE_KEY.SCHOOLS);
+      if (cachedSchools) {
+        setSchools(cachedSchools);
+        return;
+      }
+
       try {
         const response = await axios.get('http://localhost:5000/api/schools');
         setSchools(response.data);
+        setToLocalStorage(LOCAL_STORAGE_KEY.SCHOOLS, response.data);
         toast.success('Schools fetched successfully!');
-      } catch (error) {  
+      } catch (error) {
         console.error('Error fetching schools:', error);
         toast.error('Failed to fetch schools.');
       }
     };
 
     const fetchStudents = async () => {
+      const cachedStudents = getFromLocalStorage(LOCAL_STORAGE_KEY.STUDENTS);
+      if (cachedStudents) {
+        setStudents(cachedStudents);
+        return;
+      }
+
       try {
-        const token = getAuthToken(); // Get the token from local storage
+        const token = getAuthToken();
         const response = await axios.get('http://localhost:5000/api/students', {
           headers: {
-            'Authorization': `Bearer ${token}` // Use the token here
-          }
+            'Authorization': `Bearer ${token}`,
+          },
         });
         setStudents(response.data);
+        setToLocalStorage(LOCAL_STORAGE_KEY.STUDENTS, response.data);
         toast.success('Students fetched successfully!');
       } catch (error) {
         console.error('Error fetching students:', error);
@@ -93,6 +136,9 @@ const ParentForm = () => {
       });
       setMessage(response.data.message);
       toast.success('Parent created successfully!');
+      // Optionally refresh data after successful POST
+      await fetchSchools();
+      await fetchStudents();
     } catch (error) {
       setMessage('Error: ' + (error.response?.data?.error || error.message));
       toast.error('Parent creation failed.');
