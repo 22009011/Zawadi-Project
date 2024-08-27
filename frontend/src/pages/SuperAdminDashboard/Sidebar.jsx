@@ -168,6 +168,12 @@ const SuperAdminSidebar = ({ onToggle }) => {
             <SidebarIcon selected={location.pathname === '/super-admin/integration-options'}><BsPeople /></SidebarIcon>
             <StyledLink to="/super-admin/integration-options" isOpen={isOpen} selected={location.pathname === '/super-admin/integration-options'}>Integration Options</StyledLink>
           </SidebarNavItem>
+
+         <SidebarNavItem>
+            <SidebarIcon selected={location.pathname === '/super-admin/add-school'}><BsPerson /></SidebarIcon>
+            <StyledLink to="/super-admin/add-school" isOpen={isOpen} selected={location.pathname === '/super-admin/add-school'}>Add School Form</StyledLink>
+          </SidebarNavItem>
+
           <SidebarNavItem>
             <SidebarIcon selected={location.pathname === '/super-admin/schools'}><BsPerson /></SidebarIcon>
             <StyledLink to="/super-admin/schools" isOpen={isOpen} selected={location.pathname === '/super-admin/schools'}>Schools</StyledLink>
