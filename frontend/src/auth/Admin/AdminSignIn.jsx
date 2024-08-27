@@ -15,11 +15,15 @@ const AdminSignIn = () => {
   const [password, setPassword] = useState('');
   const navigate = useNavigate();
 
+  const REACT_APP_API_URL = "https://zawadii.tech/api"; 
+
+
   const handleSignIn = async (e) => {
     e.preventDefault();
+    const apiUrl = process.env.REACT_APP_API_URL; // Use environment variable
 
     try {
-      const response = await axios.post('http://localhost:5000/api/users/login', { email, password });
+      const response = await axios.post(`${apiUrl}/users/login`, { email, password });
       if (response.status === 200) {
         // Store the token and role in localStorage
         localStorage.setItem('token', response.data.token);
