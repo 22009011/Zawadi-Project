@@ -68,6 +68,7 @@ import SuperTimetable from './pages/SuperAdminDashboard/Resources/Timetable.jsx'
 import SuperLessonPlans from './pages/SuperAdminDashboard/Resources/LessonPlans.jsx';
 import StudentMarksPage from './pages/Students/StudentMarksPage.jsx';
 import EnterMarksPage from './pages/Teachers/EnterMarksPage.jsx';
+import AdminForm from './pages/SuperAdminDashboard/AdminForm.jsx';
 
 
 import Layout from './Layout';
@@ -150,6 +151,7 @@ const App = () => {
         <Route path="/super-admin/resources/notes" element={<Layout><SuperNotes/></Layout>} />
         <Route path="/super-admin/resources/timetable" element={<Layout><SuperTimetable/></Layout>} />
         <Route path="/super-admin/resources/lesson-plans" element={<Layout><SuperLessonPlans/></Layout>} />
+        <Route path="/super-admin/add-admin" element={<Layout><AdminForm /></Layout>} />
 
       </Routes>
     </Router>

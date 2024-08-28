@@ -1,4 +1,3 @@
-// controllers/classController.js
 import Class from '../models/classModel.js';
 import School from '../models/schoolModel.js';
 
