@@ -39,7 +39,7 @@ const Assessment = sequelize.define('Assessment', {
     references: {
       model: Teacher,
       key: 'id',
-    },
+    }, 
   },
   schoolId: {
     type: DataTypes.INTEGER,
@@ -54,6 +54,6 @@ const Assessment = sequelize.define('Assessment', {
 Assessment.belongsTo(Class, { foreignKey: 'classId' });
 Assessment.belongsTo(Teacher, { foreignKey: 'teacherId' });
 Assessment.belongsTo(School, { foreignKey: 'schoolId' });
-Assessment.hasMany(Student, { foreignKey: 'assessmentId' });
+// Assessment.hasMany(Student, { foreignKey: 'assessmentId' });
 
 export default Assessment;

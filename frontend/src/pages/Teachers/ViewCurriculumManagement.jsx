@@ -131,7 +131,7 @@ const ViewCurriculumManagement = () => {
   useEffect(() => {
     const fetchCurriculums = async () => {
       try {
-        const response = await axios.get('http://localhost:5000/api/curriculum-entries');
+        const response = await axios.get('https://zawadi-project.onrender.com/api/curriculum-entries');
         setCurriculums(response.data);
         toast.success('Curriculums fetched successfully!');
       } catch (error) {

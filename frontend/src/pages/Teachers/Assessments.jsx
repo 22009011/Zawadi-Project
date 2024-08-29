@@ -44,15 +44,15 @@ const Assessments = () => {
 
   useEffect(() => {
     // Fetch data for classes, teachers, and students from the backend
-    axios.get('http://localhost:5000/api/classes')
+    axios.get('https://zawadi-project.onrender.com/api/classes')
       .then(response => setClasses(response.data))
       .catch(error => console.error('Error fetching classes:', error));
 
-    axios.get('http://localhost:5000/api/teachers')
+    axios.get('https://zawadi-project.onrender.com/api/teachers')
       .then(response => setTeachers(response.data))
       .catch(error => console.error('Error fetching teachers:', error));
 
-    axios.get('http://localhost:5000/api/students')
+    axios.get('https://zawadi-project.onrender.com/api/students')
       .then(response => setStudents(response.data))
       .catch(error => console.error('Error fetching students:', error));
   }, []);
@@ -72,7 +72,7 @@ const Assessments = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    axios.post('http://localhost:5000/api/assessment', newAssessment)
+    axios.post('https://zawadi-project.onrender.com/api/assessment', newAssessment)
       .then(response => {
         console.log('New Assessment created:', response.data);
         // Clear form after submission

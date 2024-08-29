@@ -127,7 +127,7 @@ const AddSchoolForm = () => {
     e.preventDefault();
     try {
       const apiUrl = process.env.REACT_APP_API_URL; // Use the environment variable
-      await axios.post(`${apiUrl}/api/schools`, {
+      await axios.post(`https://zawadi-project.onrender.com/api/schools`, {
         name: form.name,
         address: form.address,
         director: form.director,

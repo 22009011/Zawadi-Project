@@ -31,7 +31,7 @@ const StudentPerformanceReport = ({ section, token }) => {
     useEffect(() => {
         const fetchStudentReports = async () => {
             try {
-                const response = await fetch(`http://localhost:5000/api/performances?section=${section}`, {
+                const response = await fetch(`https://zawadi-project.onrender.com/api/performances?section=${section}`, {
                     headers: {
                         Authorization: `Bearer ${token}`,
                     },

@@ -32,7 +32,7 @@ const CurriculumForm = ({ fetchCurriculums, classes, teachers }) => {
 
     if (subject && topic && subTopics.length > 0 && teacherId && timetable && class_id) {
       try {
-        const response = await axios.post('http://localhost:5000/api/curriculum-entries', {
+        const response = await axios.post('https://zawadi-project.onrender.com/api/curriculum-entries', {
           section,
           grade,
           subject,

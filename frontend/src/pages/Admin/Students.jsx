@@ -42,7 +42,7 @@ const Students = () => {
 
   const fetchStudents = async () => {
     try {
-      const response = await axios.get('http://localhost:5000/api/students');
+      const response = await axios.get('https://zawadi-project.onrender.com/api/students');
       console.log('Fetched students:', response.data);
       setStudents(response.data);
     } catch (error) {
@@ -52,7 +52,7 @@ const Students = () => {
 
   const fetchClasses = async () => {
     try {
-      const response = await axios.get('http://localhost:5000/api/classes');
+      const response = await axios.get('https://zawadi-project.onrender.com/api/classes');
       console.log('Fetched classes:', response.data);
       setClasses(response.data);
     } catch (error) {
@@ -76,7 +76,7 @@ const Students = () => {
       class_id !== '' 
     ) {
       try {
-        const response = await axios.post('http://localhost:5000/api/students', newStudent, {
+        const response = await axios.post('https://zawadi-project.onrender.com/api/students', newStudent, {
           headers: {
             'Content-Type': 'application/json',
           },
@@ -104,7 +104,7 @@ const Students = () => {
 
   const handleDeleteStudent = async (id) => {
     try {
-      await axios.delete(`http://localhost:5000/api/students/${id}`);
+      await axios.delete(`https://zawadi-project.onrender.com/api/students/${id}`);
       setStudents(students.filter((student) => student.id !== id));
       toast.success('Student deleted successfully', { autoClose: 2000 });
     } catch (error) {
@@ -115,7 +115,7 @@ const Students = () => {
 
   const handleUpdateStudent = async (id, updatedStudent) => {
     try {
-      const response = await axios.put(`http://localhost:5000/api/students/${id}`, updatedStudent);
+      const response = await axios.put(`https://zawadi-project.onrender.com/api/students/${id}`, updatedStudent);
       setStudents(students.map((student) => (student.id === id ? response.data : student)));
       toast.success('Student updated successfully', { autoClose: 2000 });
     } catch (error) {

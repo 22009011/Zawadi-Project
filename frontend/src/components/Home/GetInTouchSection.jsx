@@ -32,7 +32,7 @@ const GetInTouchSection = () => {
 
   const fetchContacts = async () => {
     try {
-      const response = await axios.get('http://localhost:5000/api/get-in-touch');
+      const response = await axios.get('https://zawadi-project.onrender.com/api/get-in-touch');
       setContacts(response.data.contacts);
       localStorage.setItem('contacts', JSON.stringify(response.data.contacts));
     } catch (error) {
@@ -42,7 +42,7 @@ const GetInTouchSection = () => {
 
   const handleDelete = async (id) => {
     try {
-      await axios.delete(`http://localhost:5000/api/get-in-touch/${id}`);
+      await axios.delete(`https://zawadi-project.onrender.com/api/get-in-touch/${id}`);
       toast.success('Contact deleted successfully!');
       fetchContacts(); // Refresh the list after deletion
     } catch (error) {
@@ -56,7 +56,7 @@ const GetInTouchSection = () => {
     const contactData = Object.fromEntries(formData.entries());
 
     try {
-      await axios.post('http://localhost:5000/api/get-in-touch', contactData);
+      await axios.post('https://zawadi-project.onrender.com/api/get-in-touch', contactData);
       toast.success('Message sent successfully!');
       fetchContacts(); // Refresh the list after adding a new contact
     } catch (error) {

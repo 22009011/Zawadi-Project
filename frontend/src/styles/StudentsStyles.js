@@ -8,6 +8,10 @@ export const StudentsContainer = styled.div`
   @media (max-width: 768px) {
     flex-direction: column;
   }
+
+  @media (max-width: 480px) {
+    padding: 10px;
+  }
 `;
 
 export const Content = styled.div`
@@ -31,6 +35,10 @@ export const StudentsContent = styled.div`
   @media (max-width: 768px) {
     padding: 10px;
   }
+
+  @media (max-width: 480px) {
+    padding: 5px;
+  }
 `;
 
 export const StudentsHeader = styled.h2`
@@ -41,6 +49,11 @@ export const StudentsHeader = styled.h2`
     font-size: 20px;
     margin-bottom: 15px;
   }
+
+  @media (max-width: 480px) {
+    font-size: 18px;
+    margin-bottom: 10px;
+  }
 `;
 
 export const StudentList = styled.ul`
@@ -50,6 +63,10 @@ export const StudentList = styled.ul`
 
   @media (max-width: 768px) {
     padding: 0 5px;
+  }
+
+  @media (max-width: 480px) {
+    padding: 0;
   }
 `;
 
@@ -65,6 +82,11 @@ export const StudentItem = styled.li`
     padding: 8px;
     margin-bottom: 8px;
   }
+
+  @media (max-width: 480px) {
+    padding: 6px;
+    margin-bottom: 6px;
+  }
 `;
 
 export const StudentDetails = styled.p`
@@ -74,6 +96,10 @@ export const StudentDetails = styled.p`
 
   @media (max-width: 768px) {
     font-size: 14px;
+  }
+
+  @media (max-width: 480px) {
+    font-size: 12px;
   }
 `;
 
@@ -85,6 +111,11 @@ export const Actions = styled.div`
   @media (max-width: 768px) {
     flex-direction: column;
     gap: 10px;
+  }
+
+  @media (max-width: 480px) {
+    flex-direction: column;
+    gap: 8px;
   }
 `;
 
@@ -104,6 +135,11 @@ export const AddStudentInput = styled.input`
     padding: 6px;
     margin-bottom: 8px;
   }
+
+  @media (max-width: 480px) {
+    padding: 4px;
+    margin-bottom: 6px;
+  }
 `;
 
 export const AddStudentButton = styled.button`
@@ -121,6 +157,10 @@ export const AddStudentButton = styled.button`
   @media (max-width: 768px) {
     padding: 8px;
   }
+
+  @media (max-width: 480px) {
+    padding: 6px;
+  }
 `;
 
 export const Select = styled.select`
@@ -132,6 +172,11 @@ export const Select = styled.select`
   @media (max-width: 768px) {
     padding: 6px;
     margin-bottom: 8px;
+  }
+
+  @media (max-width: 480px) {
+    padding: 4px;
+    margin-bottom: 6px;
   }
 `;
 
@@ -150,6 +195,10 @@ export const DeleteButton = styled.button`
   @media (max-width: 768px) {
     padding: 5px 8px;
   }
+
+  @media (max-width: 480px) {
+    padding: 4px 6px;
+  }
 `;
 
 export const UpdateButton = styled.button`
@@ -166,6 +215,10 @@ export const UpdateButton = styled.button`
 
   @media (max-width: 768px) {
     padding: 5px 8px;
+  }
+
+  @media (max-width: 480px) {
+    padding: 4px 6px;
   }
 `;
 

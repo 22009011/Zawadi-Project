@@ -34,7 +34,7 @@ const DemoForm = () => {
 
   const fetchDemos = async () => {
     try {
-      const response = await axios.get('http://localhost:5000/api/request-demo');
+      const response = await axios.get('https://zawadi-project.onrender.com/api/request-demo');
       setDemos(response.data.demos);
       localStorage.setItem('demos', JSON.stringify(response.data.demos)); // Store demos in local storage
     } catch (error) {
@@ -45,7 +45,7 @@ const DemoForm = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      await axios.post('http://localhost:5000/api/request-demo', formData);
+      await axios.post('https://zawadi-project.onrender.com/api/request-demo', formData);
       toast.success('Demo request submitted successfully!');
       fetchDemos(); // Fetch and update local storage after submission
       setFormData({ name: '', email: '', phone: '', schoolName: '', message: '' }); // Reset form
@@ -56,7 +56,7 @@ const DemoForm = () => {
 
   const handleDelete = async (id) => {
     try {
-      await axios.delete(`http://localhost:5000/api/request-demo/${id}`);
+      await axios.delete(`https://zawadi-project.onrender.com/api/request-demo/${id}`);
       toast.success('Demo request deleted successfully!');
       fetchDemos(); // Fetch and update local storage after deletion
     } catch (error) {

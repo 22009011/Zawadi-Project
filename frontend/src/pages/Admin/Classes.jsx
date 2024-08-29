@@ -40,7 +40,7 @@ const Classes = ({ isSidebarExpanded }) => {
 
   const fetchClasses = async () => {
     try {
-      const response = await axios.get('http://localhost:5000/api/classes');
+      const response = await axios.get('https://zawadi-project.onrender.com/api/classes');
       if (response.data && Array.isArray(response.data)) {
         setClasses(response.data);
       } else {
@@ -55,7 +55,7 @@ const Classes = ({ isSidebarExpanded }) => {
     e.preventDefault();
     if (newClassName.trim() !== '') {
       try {
-        const response = await axios.post('http://localhost:5000/api/classes', {
+        const response = await axios.post('https://zawadi-project.onrender.com/api/classes', {
           grade: newClassName,
           category: newClassCategory,
         });
@@ -79,7 +79,7 @@ const Classes = ({ isSidebarExpanded }) => {
 
   const handleDeleteClass = async (id) => {
     try {
-      await axios.delete(`http://localhost:5000/api/classes/${id}`);
+      await axios.delete(`https://zawadi-project.onrender.com/api/classes/${id}`);
       setClasses((prevClasses) => prevClasses.filter((classItem) => classItem.id !== id));
       toast.success('Class deleted successfully');
     } catch (error) {
@@ -90,7 +90,7 @@ const Classes = ({ isSidebarExpanded }) => {
 
   const handleEditClass = async (id, updatedClass) => {
     try {
-      const response = await axios.put(`http://localhost:5000/api/classes/${id}`, updatedClass);
+      const response = await axios.put(`https://zawadi-project.onrender.com/api/classes/${id}`, updatedClass);
       setClasses((prevClasses) =>
         prevClasses.map((classItem) => (classItem.id === id ? response.data : classItem))
       );

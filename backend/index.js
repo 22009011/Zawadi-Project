@@ -153,6 +153,12 @@ import demoRouter from './routers/demoRouter.js';
 import assessments from './routers/assessments.js';
 // import lessonplanResourceRouter from './routers/lessonplanResourceRouter.js';
 
+import allassessmentRouter from './routers/allassessmentRouter.js';
+import Assessment from './models/allassessmentModel.js';
+import Rubric from './models/rubricModel.js';
+
+
+
 dotenv.config(); 
 
 const app = express();
@@ -200,6 +206,12 @@ app.get('/api/students-by-class', async (req, res) => {
 // // Routes
 // app.use('/api/lessonPlanResources', lessonplanResourceRouter);
 
+
+// Define associations
+Assessment.hasMany(Rubric, { foreignKey: 'assessment_id' });
+Rubric.belongsTo(Assessment, { foreignKey: 'assessment_id' });
+
+
 // Routers
 app.use('/api/users', userRouter);
 app.use('/api/timetables', timetableRouter);
@@ -229,6 +241,7 @@ app.use('/api/student-performance', studentPerformanceRouter);
 app.use('/api/get-in-touch', contactRouter);
 app.use('/api/request-demo', demoRouter);
 app.use('/api/summative-assessments', assessments);
+app.use('/api/allassessments', allassessmentRouter);
 
 // Sync database
 sequelize.sync()

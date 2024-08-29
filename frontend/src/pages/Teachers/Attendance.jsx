@@ -34,7 +34,7 @@ const CheckAttendanceSection = () => {
 
   const fetchClasses = async () => {
     try {
-      const response = await axios.get('http://localhost:5000/api/classes');
+      const response = await axios.get('https://zawadi-project.onrender.com/api/classes');
       setClasses(response.data);
     } catch (error) {
       console.error('Error fetching classes:', error);
@@ -43,7 +43,7 @@ const CheckAttendanceSection = () => {
 
   const fetchStudents = async (classId) => {
     try {
-      const response = await axios.get('http://localhost:5000/api/students-by-class', {
+      const response = await axios.get('https://zawadi-project.onrender.com/api/students-by-class', {
         params: { class_id: classId },
       });
       setStudents(response.data);
@@ -85,7 +85,7 @@ const CheckAttendanceSection = () => {
         attendance_date: selectedDate,
         status,
       }));
-      await axios.post('http://localhost:5000/api/attendance-records', { attendanceData: formattedData });
+      await axios.post('https://zawadi-project.onrender.com/api/attendance-records', { attendanceData: formattedData });
       alert('Attendance data submitted successfully.');
     } catch (error) {
       console.error('Error submitting attendance data:', error);

@@ -30,7 +30,7 @@ const Announcement = () => {
   const fetchAnnouncements = async () => {
     try {
       const token = localStorage.getItem('token'); // Retrieve token from localStorage
-      const response = await axios.get('http://localhost:5000/api/announcements', {
+      const response = await axios.get('https://zawadi-project.onrender.com/api/announcements', {
         headers: {
           Authorization: `Bearer ${token}`, // Pass token in the request headers
         },
@@ -45,7 +45,7 @@ const Announcement = () => {
     e.preventDefault();
     try {
       const token = localStorage.getItem('token'); // Retrieve token from localStorage
-      const response = await axios.post('http://localhost:5000/api/announcements', {
+      const response = await axios.post('https://zawadi-project.onrender.com/api/announcements', {
         announcement: announcement,
         section: selectedSection,
       }, {
@@ -65,7 +65,7 @@ const Announcement = () => {
   const handleDelete = async (id) => {
     try {
       const token = localStorage.getItem('token'); // Retrieve token from localStorage
-      await axios.delete(`http://localhost:5000/api/announcements/${id}`, {
+      await axios.delete(`https://zawadi-project.onrender.com/api/announcements/${id}`, {
         headers: {
           Authorization: `Bearer ${token}`, // Pass token in the request headers
         },

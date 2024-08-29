@@ -29,7 +29,7 @@ const AttendanceReport = ({ section, token }) => {
     const [error, setError] = useState('');
 
     useEffect(() => {
-        fetch(`http://localhost:5000/api/attendance-records?section=${section}`, {
+        fetch(`https://zawadi-project.onrender.com/api/attendance-records?section=${section}`, {
             headers: {
                 Authorization: `Bearer ${token}`,
             },

@@ -28,7 +28,7 @@ const LessonPlans = () => {
   useEffect(() => {
     const fetchLessonPlans = async () => {
       try {
-        const response = await fetch('http://localhost:5000/api/lesson-plans', {
+        const response = await fetch('https://zawadi-project.onrender.com/api/lesson-plans', {
           headers: {
             Authorization: `Bearer ${token}`
           }
@@ -42,7 +42,7 @@ const LessonPlans = () => {
 
     const fetchClasses = async () => {
       try {
-        const response = await fetch('http://localhost:5000/api/classes', {
+        const response = await fetch('https://zawadi-project.onrender.com/api/classes', {
           headers: {
             Authorization: `Bearer ${token}`
           }
@@ -66,7 +66,7 @@ const LessonPlans = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const response = await fetch('http://localhost:5000/api/lesson-plans', {
+      const response = await fetch('https://zawadi-project.onrender.com/api/lesson-plans', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -86,7 +86,7 @@ const LessonPlans = () => {
 
   const handleDelete = async (id) => {
     try {
-      await fetch(`http://localhost:5000/api/lesson-plans/${id}`, {
+      await fetch(`https://zawadi-project.onrender.com/api/lesson-plans/${id}`, {
         method: 'DELETE',
         headers: {
           Authorization: `Bearer ${token}`
@@ -102,7 +102,7 @@ const LessonPlans = () => {
 
   const handleViewMyLessonPlans = async () => {
     try {
-      const response = await fetch('http://localhost:5000/api/lesson-plans?creator=true', {
+      const response = await fetch('https://zawadi-project.onrender.com/api/lesson-plans?creator=true', {
         headers: {
           Authorization: `Bearer ${token}`
         }
@@ -291,17 +291,18 @@ const LessonPlans = () => {
           placeholder="Content"
           required
         />
-        <ClassSelect
-          name="class_id"
-          value={formData.class_id}
-          onChange={handleInputChange}
-          required
-        >
-          <option value="">Select a class</option>
-          {classes.map(cls => (
-            <option key={cls.id} value={cls.id}>{cls.name}</option>
-          ))}
-        </ClassSelect>
+          <ClassSelect
+            name="class_id"
+            value={formData.class_id}
+            onChange={handleInputChange}
+          >
+            <option value="">Select Class</option>
+            {classes.map((classItem) => (
+              <option key={classItem.id} value={classItem.id}>
+                {classItem.grade}
+              </option>
+            ))}
+          </ClassSelect>
         <AddLessonButton type="submit">Add Lesson Plan</AddLessonButton>
       </LessonForm>
       <ToastContainer />

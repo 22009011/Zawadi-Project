@@ -26,7 +26,7 @@ const Teachers = () => {
   // Function to fetch teachers from the backend
   const fetchTeachers = async () => {
     try {
-      const response = await axios.get('http://localhost:5000/api/teachers');
+      const response = await axios.get('https://zawadi-project.onrender.com/api/teachers');
       setTeachers(response.data.teachers || []);
     } catch (error) {
       console.error('Error fetching teachers:', error);
@@ -38,18 +38,20 @@ const Teachers = () => {
     e.preventDefault();
     if (newTeacher.name.trim() !== '' && newTeacher.email.trim() !== '' && newTeacher.subject.trim() !== '' && newTeacher.qualification.trim() !== '' && newTeacher.experience.trim() !== '' && newTeacher.performance.trim() !== '') {
       try {
-        const response = await axios.post('http://localhost:5000/api/teachers', newTeacher);
+        const response = await axios.post('https://zawadi-project.onrender.com/api/teachers', newTeacher);
         const createdTeacher = response.data.teacher;
         setTeachers([...teachers, createdTeacher]); // Update the state to include the newly added teacher
         setNewTeacher({ name: '', email: '', subject: '', qualification: '', experience: '', performance: '' });
+        toast.success('Teacher Added successfully!');
       } catch (error) {
         console.error('Error adding teacher:', error);
+        toast.error('Error adding Teacher');
       }
     }
   };
 
   return (
-    <TeachersContainer>  
+    <TeachersContainer>
       <Content>
         <TeachersContent>
           <TeachersHeader>Teachers</TeachersHeader>
@@ -103,17 +105,24 @@ const Teachers = () => {
                   <TeacherTh>Performance</TeacherTh>
                 </tr>
               </thead>
-              <tbody>
-                {teachers.map((teacher, index) => (
-                  <tr key={index}>
-                    <TeacherTd>{teacher.name}</TeacherTd>
-                    <TeacherTd>{teacher.subject}</TeacherTd>
-                    <TeacherTd>{teacher.qualification}</TeacherTd>
-                    <TeacherTd>{teacher.experience}</TeacherTd>
-                    <TeacherTd>{teacher.performance}</TeacherTd>
+              
+              {/* <tbody>
+                {teachers && teachers.length > 0 ? (
+                  teachers.map((teacher, index) => (
+                    <tr key={index}>
+                      <TeacherTd>{teacher.name}</TeacherTd>
+                      <TeacherTd>{teacher.subject}</TeacherTd>
+                      <TeacherTd>{teacher.qualification}</TeacherTd>
+                      <TeacherTd>{teacher.experience}</TeacherTd>
+                      <TeacherTd>{teacher.performance}</TeacherTd>
+                    </tr>
+                  ))
+                ) : (
+                  <tr>
+                    <TeacherTd colSpan="5">No teachers found</TeacherTd>
                   </tr>
-                ))}
-              </tbody>
+                )}
+              </tbody> */}
             </TeacherTable>
           </TeacherDetails>
         </TeachersContent>

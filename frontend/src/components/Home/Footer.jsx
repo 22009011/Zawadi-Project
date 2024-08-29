@@ -1,6 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
 import { FaFacebook, FaTwitter, FaLinkedin, FaInstagram } from 'react-icons/fa';
+import { useNavigate } from 'react-router-dom'; // Import useNavigate from React Router
 
 const FooterContainer = styled.footer`
   background-color:  #9370DB;
@@ -13,6 +14,7 @@ const FooterContainer = styled.footer`
 
 const FooterText = styled.p`
   font-size: 14px;
+  cursor: pointer; /* Add cursor pointer for clickable text */
 `;
 
 const FooterLinks = styled.div`
@@ -45,6 +47,13 @@ const FooterIcon = styled.a`
 `;
 
 const Footer = () => {
+  const navigate = useNavigate(); // Initialize navigate function
+
+  // Function to handle navigation when "Zawadii Inc" is clicked
+  const handleZawadiiClick = () => {
+    navigate('/login'); // Navigate to the login page
+  };
+
   return (
     <FooterContainer>
       <FooterText>About Zawadii.</FooterText>
@@ -74,7 +83,9 @@ const Footer = () => {
         <FooterIcon href="#"><FaInstagram /></FooterIcon>
       </FooterLinks>
 
-      <FooterText>&copy; 2024 All rights reserved | Zawadii Inc</FooterText>
+      <FooterText onClick={handleZawadiiClick}>
+        &copy; 2024 All rights reserved | Zawadii Inc
+      </FooterText>
     </FooterContainer>
   );
 }

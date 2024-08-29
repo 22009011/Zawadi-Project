@@ -21,7 +21,7 @@ const Announcement = () => {
 
   const fetchAnnouncements = async () => {
     try {
-      const response = await axios.get('http://localhost:5000/api/announcements');
+      const response = await axios.get('https://zawadi-project.onrender.com/api/announcements');
       setAnnouncements(response.data);
     } catch (error) {
       console.error('Error fetching announcements:', error);

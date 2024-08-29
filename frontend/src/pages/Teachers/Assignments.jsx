@@ -45,11 +45,11 @@ const AssignmentSection = () => {
 
   const fetchAssignments = async () => {
     try {
-      const response = await axios.get('http://localhost:5000/api/assignments');
+      const response = await axios.get('https://zawadi-project.onrender.com/api/assignments');
       setAssignments(response.data);
     } catch (error) {
       console.error('Error fetching assignments:', error);
-      toast.error('Failed to fetch assignments');
+      // toast.error('Failed to fetch assignments');
     }
   };
 
@@ -57,7 +57,7 @@ const AssignmentSection = () => {
     e.preventDefault();
     if (newAssignment.title && newAssignment.description && newAssignment.grade && newAssignment.deadline) {
       try {
-        const response = await axios.post('http://localhost:5000/api/assignments', newAssignment);
+        const response = await axios.post('https://zawadi-project.onrender.com/api/assignments', newAssignment);
         setAssignments([...assignments, response.data]);
         setNewAssignment({ title: '', description: '', grade: '', deadline: '', type: 'Essay', choices: [] });
         toast.success('Assignment added successfully');
@@ -72,7 +72,7 @@ const AssignmentSection = () => {
 
   const handleDeleteAssignment = async (id) => {
     try {
-      await axios.delete(`http://localhost:5000/api/assignments/${id}`);
+      await axios.delete(`https://zawadi-project.onrender.com/api/assignments/${id}`);
       setAssignments(assignments.filter(assignment => assignment.id !== id));
       toast.success('Assignment deleted successfully');
     } catch (error) {

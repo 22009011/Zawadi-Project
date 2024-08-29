@@ -27,7 +27,7 @@ const SettingsProfile = () => {
     }
 
     try {
-      const response = await fetch('http://localhost:5000/api/users/admin/profile', {
+      const response = await fetch('https://zawadi-project.onrender.com/api/users/admin/profile', {
         headers: {
           Authorization: `Bearer ${token}`,
         },

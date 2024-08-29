@@ -5,6 +5,10 @@ export const AttendanceContainer = styled.div`
   flex-direction: row;
   min-height: 100vh;
   background-color: #f0f2f5;
+
+  @media (max-width: 768px) {
+    flex-direction: column;
+  }
 `;
 
 export const Content = styled.div`
@@ -13,6 +17,11 @@ export const Content = styled.div`
   background-color: #ffffff;
   height: 100vh;
   overflow-y: auto;
+
+  @media (max-width: 768px) {
+    height: auto;
+    padding: 15px;
+  }
 `;
 
 export const AttendanceContent = styled.div`
@@ -23,6 +32,11 @@ export const AttendanceContent = styled.div`
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
   padding: 30px;
   border: 1px solid #e1e5e8;
+
+  @media (max-width: 768px) {
+    padding: 20px;
+    max-width: 100%;
+  }
 `;
 
 export const AttendanceHeader = styled.h2`
@@ -31,6 +45,10 @@ export const AttendanceHeader = styled.h2`
   text-align: center;
   font-size: 24px;
   font-weight: 600;
+
+  @media (max-width: 768px) {
+    font-size: 20px;
+  }
 `;
 
 export const AttendanceList = styled.div`
@@ -48,9 +66,15 @@ export const AttendanceItem = styled.div`
   background-color: #f9f9f9;
   border: 1px solid #e1e5e8;
   transition: background-color 0.3s ease;
-  
+
   &:hover {
     background-color: #f1f1f1;
+  }
+
+  @media (max-width: 768px) {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 10px;
   }
 `;
 
@@ -58,6 +82,10 @@ export const StudentName = styled.div`
   font-size: 18px;
   color: #333;
   flex: 1;
+
+  @media (max-width: 768px) {
+    font-size: 16px;
+  }
 `;
 
 export const StatusButton = styled.button`
@@ -76,7 +104,7 @@ export const StatusButton = styled.button`
       : '#e0e0e0'};
   color: ${(props) => (props.selected ? '#fff' : '#333')};
   transition: background-color 0.3s ease;
-  
+
   &:hover {
     background-color: ${(props) =>
       props.selected
@@ -84,6 +112,12 @@ export const StatusButton = styled.button`
           ? '#d32f2f' // Darker red for Absent
           : '#45a049' // Darker green for Present
         : '#c0c0c0'};
+  }
+
+  @media (max-width: 768px) {
+    margin: 5px 0;
+    font-size: 12px;
+    padding: 6px 12px;
   }
 `;
 
@@ -99,9 +133,14 @@ export const SubmitButton = styled.button`
   font-size: 18px;
   font-weight: 500;
   transition: background-color 0.3s ease;
-  
+
   &:hover {
     background-color: #45a049;
+  }
+
+  @media (max-width: 768px) {
+    padding: 10px 20px;
+    font-size: 16px;
   }
 `;
 
@@ -123,9 +162,15 @@ export const ClassSelector = styled.div`
     border: 1px solid #e1e5e8;
     border-radius: 5px;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-    
+
     option {
       color: #333;
+    }
+  }
+
+  @media (max-width: 768px) {
+    select {
+      font-size: 0.9em;
     }
   }
 `;
@@ -148,5 +193,11 @@ export const DateSelector = styled.div`
     border: 1px solid #e1e5e8;
     border-radius: 5px;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  }
+
+  @media (max-width: 768px) {
+    input {
+      font-size: 0.9em;
+    }
   }
 `;

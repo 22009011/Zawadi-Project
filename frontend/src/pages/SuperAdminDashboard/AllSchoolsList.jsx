@@ -92,7 +92,7 @@ const AllSchoolsList = () => {
       setSchools(JSON.parse(storedData));
     } else {
       try {
-        const response = await axios.get('http://localhost:5000/api/schools');
+        const response = await axios.get('https://zawadi-project.onrender.com/api/schools');
         const data = response.data;
         setSchools(data);
         localStorage.setItem('schools', JSON.stringify(data));
@@ -110,7 +110,7 @@ const AllSchoolsList = () => {
 
   const handleDelete = async (id) => {
     try {
-      await axios.delete(`http://localhost:5000/api/schools/${id}`);
+      await axios.delete(`https://zawadi-project.onrender.com/api/schools/${id}`);
       const updatedSchools = schools.filter(school => school.id !== id);
       setSchools(updatedSchools);
       localStorage.setItem('schools', JSON.stringify(updatedSchools));

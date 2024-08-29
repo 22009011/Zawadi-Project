@@ -110,9 +110,7 @@ export const LessonPlansList = styled.div`
   max-width: 800px;
 `;
 
-export const ClassSelect = styled(Select)`
-  margin-bottom: 20px;
-`;
+
 
 export const Actions = styled.div`
   display: flex;
@@ -222,4 +220,26 @@ export const SubjectLink = styled.a`
 // Subject list container
 export const SubjectList = styled.div`
   margin-top: 20px;
+`;
+
+export const ClassSelect = styled.select`
+  width: 100%;
+  padding: 10px;
+  margin-bottom: 20px;
+  border-radius: 5px;
+  border: 1px solid #ccc;
+  background-color: #f9f9f9;  /* Change to a visible background color */
+  color: #333;  /* Ensure the text is visible */
+  font-size: 16px;
+  cursor: pointer;
+
+  &:focus {
+    border-color: #007bff;
+    outline: none;
+  }
+
+  option {
+    background-color: #black;  /* Ensure the options have a visible background color */
+    color: #333;  /* Ensure the text is visible in options */
+  }
 `;

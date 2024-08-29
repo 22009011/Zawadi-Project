@@ -70,7 +70,7 @@ const ParentForm = () => {
       }
 
       try {
-        const response = await axios.get('http://localhost:5000/api/schools');
+        const response = await axios.get('https://zawadi-project.onrender.com/api/schools');
         setSchools(response.data);
         setToLocalStorage(LOCAL_STORAGE_KEY.SCHOOLS, response.data);
         toast.success('Schools fetched successfully!');
@@ -89,7 +89,7 @@ const ParentForm = () => {
 
       try {
         const token = getAuthToken();
-        const response = await axios.get('http://localhost:5000/api/students', {
+        const response = await axios.get('https://zawadi-project.onrender.com/api/students', {
           headers: {
             'Authorization': `Bearer ${token}`,
           },
@@ -130,7 +130,7 @@ const ParentForm = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const response = await axios.post('http://localhost:5000/api/users/create-parent', {
+      const response = await axios.post('https://zawadi-project.onrender.com/api/users/create-parent', {
         ...formData,
         children,
       });

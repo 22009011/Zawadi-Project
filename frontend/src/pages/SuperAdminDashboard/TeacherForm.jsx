@@ -38,7 +38,7 @@ const TeacherForm = () => {
       }
 
       try {
-        const response = await axios.get('http://localhost:5000/api/schools');
+        const response = await axios.get('https://zawadi-project.onrender.com/api/schools');
         setSchools(response.data);
         localStorage.setItem('schools', JSON.stringify(response.data));
         localStorage.setItem('schools_cache_timestamp', Date.now().toString());
@@ -57,7 +57,7 @@ const TeacherForm = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const response = await axios.post('http://localhost:5000/api/users/create-teacher', formData);
+      const response = await axios.post('https://zawadi-project.onrender.com/api/users/create-teacher', formData);
       setMessage(response.data.message);
       // Clear cached schools to ensure the new teacher is added to the latest list
       localStorage.removeItem('schools');

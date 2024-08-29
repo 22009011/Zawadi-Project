@@ -31,7 +31,7 @@ const AssessmentReport = ({ section, token }) => {
     useEffect(() => {
         const fetchAssessmentReports = async () => {
             try {
-                const response = await fetch(`http://localhost:5000/api/assessment-reports?section=${section}`, {
+                const response = await fetch(`https://zawadi-project.onrender.com/api/assessment-reports?section=${section}`, {
                     headers: {
                         Authorization: `Bearer ${token}`,
                     },

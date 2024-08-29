@@ -40,7 +40,7 @@ const Assessment = sequelize.define('Assessment', {
     },
   },
   rubric_level: {
-    type: DataTypes.ENUM('ME', 'EE', 'AE'),
+    type: DataTypes.ENUM('ME', 'EE', 'AE', 'BE'),
     allowNull: false,
   },
   rubric_comments: {

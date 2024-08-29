@@ -29,7 +29,7 @@ const CurriculumManagement = () => {
 
   const fetchCurriculums = async () => {
     try {
-      const response = await axios.get('http://localhost:5000/api/curriculum-entries');
+      const response = await axios.get('https://zawadi-project.onrender.com/api/curriculum-entries');
       setCurriculums(response.data);
     } catch (error) {
       console.error('Error fetching curriculums:', error);
@@ -38,7 +38,7 @@ const CurriculumManagement = () => {
 
   const fetchSubjects = async () => {
     try {
-      const response = await axios.get('http://localhost:5000/api/subjects');
+      const response = await axios.get('https://zawadi-project.onrender.com/api/subjects');
       setSubjects(response.data);
     } catch (error) {
       console.error('Error fetching subjects:', error);
@@ -47,7 +47,7 @@ const CurriculumManagement = () => {
 
   const fetchClasses = async () => {
     try {
-      const response = await axios.get('http://localhost:5000/api/classes');
+      const response = await axios.get('https://zawadi-project.onrender.com/api/classes');
       setClasses(response.data);
     } catch (error) {
       console.error('Error fetching classes:', error);
@@ -56,7 +56,7 @@ const CurriculumManagement = () => {
 
   const fetchTeachers = async () => {
     try {
-      const response = await axios.get('http://localhost:5000/api/teachers');
+      const response = await axios.get('https://zawadi-project.onrender.com/api/teachers');
       setTeachers(response.data);
     } catch (error) {
       console.error('Error fetching teachers:', error);
@@ -65,7 +65,7 @@ const CurriculumManagement = () => {
 
   const handleDeleteCurriculum = async (curriculumId) => {
     try {
-      await axios.delete(`http://localhost:5000/api/curriculum-entries/${curriculumId}`);
+      await axios.delete(`https://zawadi-project.onrender.com/api/curriculum-entries/${curriculumId}`);
       fetchCurriculums();
       toast.success('Curriculum deleted successfully', { autoClose: 2000 });
     } catch (error) {

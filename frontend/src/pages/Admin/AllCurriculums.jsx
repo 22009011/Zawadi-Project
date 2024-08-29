@@ -22,7 +22,7 @@ const AllCurriculums = () => {
 
     const fetchCurriculumEntries = async () => {
         try {
-            const response = await axios.get('http://localhost:5000/api/curriculum-entries');
+            const response = await axios.get('https://zawadi-project.onrender.com/api/curriculum-entries');
             setCurriculumEntries(response.data);
             localStorage.setItem('curriculumEntries', JSON.stringify(response.data));
             toast.success('Curriculum entries fetched successfully!');
@@ -34,7 +34,7 @@ const AllCurriculums = () => {
 
     const deleteCurriculumEntry = async (id) => {
         try {
-            await axios.delete(`http://localhost:5000/api/curriculum-entries/${id}`);
+            await axios.delete(`https://zawadi-project.onrender.com/api/curriculum-entries/${id}`);
             const updatedEntries = curriculumEntries.filter(entry => entry.id !== id);
             setCurriculumEntries(updatedEntries);
             localStorage.setItem('curriculumEntries', JSON.stringify(updatedEntries));

@@ -38,7 +38,7 @@ const TeacherProfileSection = () => {
       setTeacherInfo(storedTeacherInfo);
     } else {
       // Fetch data from the API if no cached data or data is expired
-      fetch('http://localhost:5000/api/users/teacher/profile', {
+      fetch('https://zawadi-project.onrender.com/api/users/teacher/profile', {
         headers: {
           Authorization: `Bearer ${token}`,
         },
