@@ -25,7 +25,7 @@ const Login = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const response = await axios.post('https://zawadi-project.onrender.com/api/users/login', { email, password });
+      const response = await axios.post('https://Zawadi-Project.onrender.com/api/users/login', { email, password });
       console.log(response.data);
 
       // Store the JWT token in local storage

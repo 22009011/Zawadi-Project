@@ -19,7 +19,7 @@ const ParentSignIn = () => {
     e.preventDefault();
 
     try {
-      const response = await axios.post('https://zawadi-project.onrender.com/api/users/login', { email, password });
+      const response = await axios.post('https://Zawadi-Project.onrender.com/api/users/login', { email, password });
       if (response.status === 200) {
         // Store the token and role in localStorage
         localStorage.setItem('token', response.data.token);

@@ -23,7 +23,7 @@ const Register = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const response = await axios.post('https://zawadi-project.onrender.com/api/users/register-super-admin', {
+      const response = await axios.post('https://Zawadi-Project.onrender.com/api/users/register-super-admin', {
         username,
         email,
         password,
