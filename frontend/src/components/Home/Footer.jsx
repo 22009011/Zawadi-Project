@@ -84,7 +84,7 @@ const Footer = () => {
       </FooterLinks>
 
       <FooterText onClick={handleZawadiiClick}>
-        &copy; 2024 All rights reserved | Zawadii Company
+        &copy; 2024 All rights reserved || Zawadii Company .
       </FooterText>
     </FooterContainer>
   );
