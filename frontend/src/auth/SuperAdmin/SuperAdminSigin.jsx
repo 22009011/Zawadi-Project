@@ -13,13 +13,16 @@ import {
   Button,
   StyledLink,
   Divider,
+  EyeIcon, // Import EyeIcon
 } from '../../styles/LoginStyles';
 
 import bg1 from '../../assets/bg1.png';
+import { FaEye, FaEyeSlash } from 'react-icons/fa'; // Import eye icons
 
 const Login = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+  const [showPassword, setShowPassword] = useState(false); // Toggle for password visibility
   const navigate = useNavigate();
 
   const handleSubmit = async (e) => {
@@ -48,7 +51,18 @@ const Login = () => {
 
   return (
     <Container>
-      <ToastContainer />
+      <ToastContainer
+        position="top-right"
+        autoClose={5000}
+        hideProgressBar={false}
+        newestOnTop={false}
+        closeOnClick
+        rtl={false}
+        pauseOnFocusLoss
+        draggable
+        pauseOnHover
+        style={{ fontSize: '14px' }} // Adjust size for small devices
+      />
       <LoginBox>
         <Logo src={bg1} alt="Your logo" />
         <Title>Login</Title>
@@ -60,13 +74,18 @@ const Login = () => {
             value={email}
             onChange={(e) => setEmail(e.target.value)}
           />
-          <Input
-            type="password"
-            placeholder="Password"
-            required
-            value={password}
-            onChange={(e) => setPassword(e.target.value)}
-          />
+          <div style={{ position: 'relative' }}>
+            <Input
+              type={showPassword ? 'text' : 'password'}
+              placeholder="Password"
+              required
+              value={password}
+              onChange={(e) => setPassword(e.target.value)}
+            />
+            <EyeIcon onClick={() => setShowPassword(!showPassword)}>
+              {showPassword ? <FaEyeSlash /> : <FaEye />}
+            </EyeIcon>
+          </div>
           <Button type="submit">Login</Button>
         </Form>
         <Divider>

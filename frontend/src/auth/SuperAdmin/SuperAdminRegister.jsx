@@ -11,17 +11,22 @@ import {
   Input,
   Button,
   StyledLink,
+  EyeIcon,
 } from '../../styles/RegisterStyles';
 
 import bg1 from '../../assets/bg1.png';
+import { FaEye, FaEyeSlash } from 'react-icons/fa'; // Import eye icons
 
 const Register = () => {
   const [username, setUsername] = useState('');
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+  const [showPassword, setShowPassword] = useState(false); // Toggle for password visibility
+  const [loading, setLoading] = useState(false);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    setLoading(true);
     try {
       const response = await axios.post('https://Zawadi-Project.onrender.com/api/users/register-super-admin', {
         username,
@@ -29,16 +34,29 @@ const Register = () => {
         password,
       });
       toast.success('Registered successfully!');
-      console.log(response.data); // Handle the response as needed
+      console.log(response.data);
     } catch (error) {
       toast.error('Failed to register. Please try again.');
       console.error(error.response.data);
-    } 
+    } finally {
+      setLoading(false);
+    }
   };
 
   return (
     <Container>
-      <ToastContainer />
+      <ToastContainer
+        position="top-right"
+        autoClose={5000}
+        hideProgressBar={false}
+        newestOnTop={false}
+        closeOnClick
+        rtl={false}
+        pauseOnFocusLoss
+        draggable
+        pauseOnHover
+        style={{ fontSize: '14px' }} // Adjust size for small devices
+      />
       <RegisterBox>
         <Logo src={bg1} alt="Your logo" />
         <Title>Register</Title>
@@ -57,14 +75,21 @@ const Register = () => {
             value={email}
             onChange={(e) => setEmail(e.target.value)}
           />
-          <Input
-            type="password"
-            placeholder="Password"
-            required
-            value={password}
-            onChange={(e) => setPassword(e.target.value)}
-          />
-          <Button type="submit">Register</Button>
+          <div style={{ position: 'relative' }}>
+            <Input
+              type={showPassword ? 'text' : 'password'}
+              placeholder="Password"
+              required
+              value={password}
+              onChange={(e) => setPassword(e.target.value)}
+            />
+            <EyeIcon onClick={() => setShowPassword(!showPassword)}>
+              {showPassword ? <FaEyeSlash /> : <FaEye />}
+            </EyeIcon>
+          </div>
+          <Button type="submit" loading={loading}>
+            {loading ? 'Registering...' : 'Register'}
+          </Button>
         </Form>
         <StyledLink to="/login">Already have an account? Login</StyledLink>
       </RegisterBox>

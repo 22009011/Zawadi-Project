@@ -155,6 +155,15 @@ const TeacherSidebar = ({ onToggle }) => {
             </StyledLink>
           </SidebarNavItem>
 
+            <SidebarNavItem>
+            <SidebarIcon selected={location.pathname === '/teacher/reporting-time'}>
+              <FaBookOpen />
+            </SidebarIcon>
+            <StyledLink to="/teacher/reporting-time" isOpen={isOpen} selected={location.pathname === '/teacher/reporting-time'}>
+              Teacher Reporting Time
+            </StyledLink>
+          </SidebarNavItem>
+
           <SidebarNavItem>
             <SidebarIcon selected={location.pathname === '/teacher/enter-assessments-marks'}>
               <MdOutlineAssessment />

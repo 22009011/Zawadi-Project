@@ -151,6 +151,7 @@ import studentPerformanceRouter from './routers/studentPerformanceRouter.js';
 import contactRouter from './routers/contactRouter.js';
 import demoRouter from './routers/demoRouter.js';
 import assessments from './routers/assessments.js';
+import reportingTimeRouter from './routers/reportingTimeRouter.js';
 // import lessonplanResourceRouter from './routers/lessonplanResourceRouter.js';
 
 import allassessmentRouter from './routers/allassessmentRouter.js';
@@ -242,6 +243,7 @@ app.use('/api/get-in-touch', contactRouter);
 app.use('/api/request-demo', demoRouter);
 app.use('/api/summative-assessments', assessments);
 app.use('/api/allassessments', allassessmentRouter);
+app.use('api/reporting-time', reportingTimeRouter);
 
 // Sync database
 sequelize.sync()

@@ -1,6 +1,6 @@
-// src/styles/LoginStyles.js
-import styled from 'styled-components';
+import styled, { css } from 'styled-components';
 import { Link } from 'react-router-dom';
+import { FaEye, FaEyeSlash } from 'react-icons/fa'; // Import eye icons
 
 export const Container = styled.div`
   display: flex;
@@ -41,6 +41,7 @@ export const Input = styled.input`
   border: 1px solid #ccc;
   border-radius: 5px;
   font-size: 1rem;
+  width: 100%; // Ensure full width
 `;
 
 export const Button = styled.button`
@@ -51,6 +52,10 @@ export const Button = styled.button`
   color: white;
   font-size: 1rem;
   cursor: pointer;
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
 
   &:hover {
     background-color: #0056b3;
@@ -72,3 +77,21 @@ export const Divider = styled.div`
   width: 100%;
   text-align: center;
 `;
+
+// Add styling for eye icon
+export const EyeIcon = styled.div`
+  position: absolute;
+  top: 50%;
+  right: 10px;
+  transform: translateY(-50%);
+  cursor: pointer;
+  color: #aaa;
+`;
+
+const spin = css`
+  @keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+  }
+`;
+

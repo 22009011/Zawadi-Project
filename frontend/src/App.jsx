@@ -69,6 +69,7 @@ import SuperLessonPlans from './pages/SuperAdminDashboard/Resources/LessonPlans.
 import StudentMarksPage from './pages/Students/StudentMarksPage.jsx';
 import EnterMarksPage from './pages/Teachers/EnterMarksPage.jsx';
 import AdminForm from './pages/SuperAdminDashboard/AdminForm.jsx';
+import ReportingTime from './pages/Teachers/ReportingTime.jsx';
 
 
 import Layout from './Layout';
@@ -133,6 +134,7 @@ const App = () => {
         <Route path="/teacher/calendar" element={<Layout><CalenderSection /></Layout>} />
         <Route path="/teacher/manual-assessments" element={<Layout><ManualAssessments /></Layout>} />
         <Route path="/teacher/enter-assessments-marks" element={<Layout><EnterMarksPage /></Layout>} />
+        <Route path="/teacher/reporting-time" element={<Layout><ReportingTime /></Layout>} />
         
 
         <Route path="/super-admin/advanced-analytics" element={<Layout><AdvancedAnalytics /></Layout>} />
