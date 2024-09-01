@@ -1,16 +1,18 @@
 import ReportingTime from '../models/reportingTimeModel.js';
+import School from '../models/schoolModel.js';
 
 export const createReport = async (req, res) => {
   try {
-    const { teacherName, arrivalTime, departureTime, session, status, teacherId, schoolId } = req.body;
+    const { teacherName, arrivalTime, departureTime, session, status } = req.body;
+
     const report = await ReportingTime.create({
       teacherName,
       arrivalTime,
       departureTime,
       session,
       status,
-      teacherId,
-      schoolId,
+      teacherId : req.teacher_id,
+      schoolId : req.school_id,
     });
     res.status(201).json(report);
   } catch (error) {
