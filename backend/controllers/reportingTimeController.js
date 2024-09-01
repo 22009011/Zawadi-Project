@@ -17,7 +17,7 @@ export const createReport = async (req, res) => {
     res.status(500).json({ error: error.message });
   }
 };
-
+ 
 export const getReports = async (req, res) => {
   try {
     const reports = await ReportingTime.findAll();

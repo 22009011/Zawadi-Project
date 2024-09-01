@@ -1,9 +1,12 @@
 import express from 'express';
-import { createReport, getReports } from '../controllers/reportingTimeController.js';
+import { createReport, getReports } from 
+'../controllers/reportingTimeController.js';
+import auth from '../middleware/auth.js';
 
 const router = express.Router();
 
-router.post('/', createReport);
-router.get('/', getReports);
+router.post('/',auth , createReport);
+router.get('/',auth , getReports);
 
 export default router;
+ 

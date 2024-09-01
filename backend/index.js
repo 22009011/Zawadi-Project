@@ -142,7 +142,7 @@ import curriculumManagementRouter from './routers/curriculumManagementRouter.js'
 import classRouter from './routers/classRouter.js';
 import attendanceRecordRouter from './routers/attendanceRecordRouter.js';
 import assignmentsRouter from './routers/assignmentsRouter.js';
-import assessmentReportRouter from './routers/assessmentReportRouter.js';
+import assessmentReportRouter from './routers/assessmentReportRouter.js'; 
 import announcementRouter from './routers/announcementRouter.js';
 import assessmentRouter from './routers/assessmentRouter.js';
 import config from './config.js';
@@ -243,7 +243,7 @@ app.use('/api/get-in-touch', contactRouter);
 app.use('/api/request-demo', demoRouter);
 app.use('/api/summative-assessments', assessments);
 app.use('/api/allassessments', allassessmentRouter);
-app.use('api/reporting-time', reportingTimeRouter);
+app.use('/api/reporting-time', reportingTimeRouter);
 
 // Sync database
 sequelize.sync()
