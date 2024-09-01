@@ -84,8 +84,8 @@ export const StudentItem = styled.li`
   }
 
   @media (max-width: 480px) {
-    padding: 6px;
-    margin-bottom: 6px;
+    padding: 8px;
+    margin-bottom: 8px;
   }
 `;
 
@@ -99,7 +99,7 @@ export const StudentDetails = styled.p`
   }
 
   @media (max-width: 480px) {
-    font-size: 12px;
+    font-size: 13px;
   }
 `;
 
@@ -115,7 +115,7 @@ export const Actions = styled.div`
 
   @media (max-width: 480px) {
     flex-direction: column;
-    gap: 8px;
+    gap: 10px;
   }
 `;
 
@@ -126,24 +126,27 @@ export const AddStudentForm = styled.form`
 `;
 
 export const AddStudentInput = styled.input`
-  padding: 8px;
-  margin-bottom: 10px;
+  padding: 10px;
+  margin-bottom: 12px;
+  font-size: 16px;
   border: 1px solid #ccc;
   border-radius: 4px;
 
   @media (max-width: 768px) {
-    padding: 6px;
-    margin-bottom: 8px;
+    padding: 8px;
+    font-size: 14px;
+    margin-bottom: 10px;
   }
 
   @media (max-width: 480px) {
-    padding: 4px;
-    margin-bottom: 6px;
+    padding: 10px;  /* Increased padding for small devices */
+    font-size: 15px; /* Slightly increased font size for small devices */
+    margin-bottom: 12px;
   }
 `;
 
 export const AddStudentButton = styled.button`
-  padding: 10px;
+  padding: 12px;
   background-color: #007bff;
   color: #fff;
   border: none;
@@ -155,33 +158,36 @@ export const AddStudentButton = styled.button`
   }
 
   @media (max-width: 768px) {
-    padding: 8px;
+    padding: 10px;
   }
 
   @media (max-width: 480px) {
-    padding: 6px;
+    padding: 12px;  /* Increased padding for small devices */
   }
 `;
 
 export const Select = styled.select`
-  padding: 8px;
-  margin-bottom: 10px;
+  padding: 10px;
+  margin-bottom: 12px;
+  font-size: 16px;
   border: 1px solid #ccc;
   border-radius: 4px;
 
   @media (max-width: 768px) {
-    padding: 6px;
-    margin-bottom: 8px;
+    padding: 8px;
+    font-size: 14px;
+    margin-bottom: 10px;
   }
 
   @media (max-width: 480px) {
-    padding: 4px;
-    margin-bottom: 6px;
+    padding: 10px;  /* Increased padding for small devices */
+    font-size: 15px; /* Slightly increased font size for small devices */
+    margin-bottom: 12px;
   }
 `;
 
 export const DeleteButton = styled.button`
-  padding: 6px 10px;
+  padding: 8px 12px;
   background-color: #dc3545;
   color: #fff;
   border: none;
@@ -193,16 +199,16 @@ export const DeleteButton = styled.button`
   }
 
   @media (max-width: 768px) {
-    padding: 5px 8px;
+    padding: 7px 10px;
   }
 
   @media (max-width: 480px) {
-    padding: 4px 6px;
+    padding: 9px 14px;  /* Increased padding for small devices */
   }
 `;
 
 export const UpdateButton = styled.button`
-  padding: 6px 10px;
+  padding: 8px 12px;
   background-color: #28a745;
   color: #fff;
   border: none;
@@ -214,14 +220,27 @@ export const UpdateButton = styled.button`
   }
 
   @media (max-width: 768px) {
-    padding: 5px 8px;
+    padding: 7px 10px;
   }
 
   @media (max-width: 480px) {
-    padding: 4px 6px;
+    padding: 9px 14px;  /* Increased padding for small devices */
   }
 `;
 
 export const IconWrapper = styled.span`
   margin-left: 5px;
+  display: inline-block;
+  vertical-align: middle;
+
+  @media (max-width: 768px) {
+    margin-left: 4px;
+  }
+
+  @media (max-width: 480px) {
+    margin-left: 6px; /* Slightly increased margin for better spacing */
+  }
 `;
+
+
+

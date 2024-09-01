@@ -1,5 +1,8 @@
 // src/styles/TeacherSignInStyles.js
-import styled from 'styled-components';
+import styled, { css } from 'styled-components';
+import { Link } from 'react-router-dom';
+import { FaEye, FaEyeSlash } from 'react-icons/fa';
+
 
 export const TeacherSignInContainer = styled.div`
   display: flex;
@@ -27,15 +30,53 @@ export const InputField = styled.input`
 `;
 
 export const SubmitButton = styled.button`
-  padding: 0.75rem;
+  background-color: #007bff;
+  color: #fff;
   border: none;
   border-radius: 5px;
-  background-color: #007bff;
-  color: white;
-  font-size: 1rem;
+  padding: 10px 20px;
+  font-size: 16px;
   cursor: pointer;
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
 
-  &:hover {
-    background-color: #0056b3;
+  ${({ loading }) =>
+    loading &&
+    css`
+      &:after {
+        content: '';
+        position: absolute;
+        border: 2px solid rgba(255, 255, 255, 0.3);
+        border-radius: 50%;
+        border-top: 2px solid #fff;
+        width: 20px;
+        height: 20px;
+        animation: spin 1s linear infinite;
+        ${spin};
+      }
+
+      &:disabled {
+        cursor: not-allowed;
+      }
+    `}
+`;
+
+
+// Add styling for eye icon
+export const EyeIcon = styled.div`
+  position: absolute;
+  top: 50%;
+  right: 10px;
+  transform: translateY(-50%);
+  cursor: pointer;
+  color: #aaa;
+`;
+
+const spin = css`
+  @keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
   }
 `;

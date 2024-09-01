@@ -332,17 +332,3 @@ export const Content = styled.div`
   padding: 20px;
 `;
 
-// /* In your AdminDashboard component */
-// <Content sidebarWidth={isOpen ? '250px' : '80px'}>
-//   {/* Content here */}
-// </Content>
-
-
-
-
-
-
-
-
-
-

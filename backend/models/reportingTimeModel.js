@@ -36,7 +36,7 @@ const ReportingTime = sequelize.define('ReportingTime', {
   },
   teacherId: {
     type: DataTypes.INTEGER,
-    allowNull: false,
+    allowNull: true,
     references: {
       model: Teacher,
       key: 'id', 

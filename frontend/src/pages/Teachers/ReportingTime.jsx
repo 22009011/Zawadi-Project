@@ -98,7 +98,7 @@ const ReportingTime = () => {
             type="time"
             value={departureTime}
             onChange={(e) => setDepartureTime(e.target.value)}
-            required
+            
           />
         </TimeContainer>
 

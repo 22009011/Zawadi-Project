@@ -4,19 +4,24 @@ import {
   FormContainer,
   InputField,
   SubmitButton,
+  EyeIcon
 } from '../../styles/AdminSignInStyles';
 import axios from 'axios';
 import { toast, ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import { useNavigate } from 'react-router-dom';
+import { FaEye, FaEyeSlash } from 'react-icons/fa';
 
 const AdminSignIn = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const navigate = useNavigate();
+  const [showPassword, setShowPassword] = useState(false);
+  const [loading, setLoading] = useState(false);
 
   const handleSignIn = async (e) => {
     e.preventDefault();
+    setLoading(true);
 
     try {
       const response = await axios.post('https://Zawadi-Project.onrender.com/api/users/login', { email, password });
@@ -35,12 +40,25 @@ const AdminSignIn = () => {
     } catch (error) {
       console.error('Error during sign-in:', error);
       toast.error('Failed to sign in. Please check your credentials.');
+    } finally {
+      setLoading(false);
     }
   };
 
   return (
     <AdminSignInContainer>
-      <ToastContainer />
+      <ToastContainer 
+      position="top-right"
+      autoClose={5000}
+      hideProgressBar={false}
+      newestOnTop={false}
+      closeOnClick
+      rtl={false}
+      pauseOnFocusLoss
+      draggable
+      pauseOnHover
+      style={{ fontSize: '14px' }}
+      />
       <h2>Admin Sign In</h2>
       <FormContainer>
         <InputField
@@ -50,14 +68,23 @@ const AdminSignIn = () => {
           onChange={(e) => setEmail(e.target.value)}
           required
         />
+        <div style ={{position: 'relative'}}> 
         <InputField
-          type="password"
-          placeholder="Password"
-          value={password}
-          onChange={(e) => setPassword(e.target.value)}
-          required
+            type={showPassword ? 'text' : 'password'}
+            placeholder="Password"
+            required 
+            value={password}
+            onChange={(e) => setPassword(e.target.value)}
+            
         />
-        <SubmitButton onClick={handleSignIn}>Sign In</SubmitButton>
+            <EyeIcon onClick={() => setShowPassword(!showPassword)}>
+              {showPassword ? <FaEyeSlash /> : <FaEye />}
+            </EyeIcon>
+
+            </div>
+        <SubmitButton onClick={handleSignIn}loading={loading}>
+        {loading ? 'Signing in ...' : 'Sign In'}
+          </SubmitButton>
       </FormContainer>
     </AdminSignInContainer>
   );

@@ -70,7 +70,7 @@ const Register = () => {
           />
           <Input
             type="email"
-            placeholder="Email address"
+            placeholder="Email address" 
             required
             value={email}
             onChange={(e) => setEmail(e.target.value)}
@@ -79,7 +79,7 @@ const Register = () => {
             <Input
               type={showPassword ? 'text' : 'password'}
               placeholder="Password"
-              required
+              required 
               value={password}
               onChange={(e) => setPassword(e.target.value)}
             />

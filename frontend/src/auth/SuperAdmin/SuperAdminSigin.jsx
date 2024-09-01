@@ -24,9 +24,11 @@ const Login = () => {
   const [password, setPassword] = useState('');
   const [showPassword, setShowPassword] = useState(false); // Toggle for password visibility
   const navigate = useNavigate();
+  const [loading, setLoading] = useState(false);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    setLoading(true);
     try {
       const response = await axios.post('https://Zawadi-Project.onrender.com/api/users/login', { email, password });
       console.log(response.data);
@@ -44,6 +46,8 @@ const Login = () => {
       console.error(error.response?.data || error.message);
       // Display error toast message
       toast.error('Failed to login. Please check your credentials.');
+    } finally {
+      setLoading(false);
     }
   };
 
@@ -86,7 +90,9 @@ const Login = () => {
               {showPassword ? <FaEyeSlash /> : <FaEye />}
             </EyeIcon>
           </div>
-          <Button type="submit">Login</Button>
+          <Button type="submit" loading={loading}>
+          {loading ? 'Logging...' : 'Login'}
+            </Button>
         </Form>
         <Divider>
           <StyledLink to="/register">Create an account</StyledLink>
