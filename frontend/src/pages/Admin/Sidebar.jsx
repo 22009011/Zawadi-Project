@@ -184,6 +184,15 @@ const AdminSidebar = ({ onToggle }) => {
               Add Teachers
             </StyledLink>
           </SidebarNavItem>
+          
+          <SidebarNavItem>
+            <SidebarIcon selected={location.pathname === '/admin/teachers-attendance'}>
+              <FaBookOpen />
+            </SidebarIcon>
+            <StyledLink to="/admin/teacher-attendance" isOpen={isOpen} selected={location.pathname === '/admin/teachers-attendance'}>
+              Teacher's Attendence Time
+            </StyledLink>
+          </SidebarNavItem>
 
           <SidebarNavItem>
             <SidebarIcon selected={location.pathname === '/admin/curriculum-management'}>

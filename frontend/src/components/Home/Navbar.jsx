@@ -25,10 +25,10 @@ const NavbarComponent = () => {
 
   return (
     <Navbar>
+      <Logo src={bg1} alt="Logo" />
       <ToggleButton onClick={handleToggleClick}>
         {showLinks ? '✖' : '☰'}
       </ToggleButton>
-      <Logo src={bg1} alt="Logo" />
       <NavigationLinks show={showLinks}>
         <NavLink href="#">Features</NavLink>
         <NavLink href="#">Pricing</NavLink>

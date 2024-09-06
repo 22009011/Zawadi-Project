@@ -40,10 +40,10 @@ export const Title = styled.h2`
 `;
 
 export const Button = styled(Link)`
-  background-color: #90EE90; /* Student: Light green color */
+  background-color: #90EE90; 
   color: white;
   border: none;
-  padding: 10px 20px;
+  padding: 20px 30px;
   margin-top: 10px;
   text-decoration: none;
   cursor: pointer;
@@ -51,11 +51,11 @@ export const Button = styled(Link)`
   transition: background-color 0.3s ease;
 
   &:hover {
-    background-color: #7CFC00; /* Darker shade of green on hover */
+    background-color: #7CFC00; 
   }
 
   @media screen and (max-width: 768px) {
-    padding: 8px 16px;
+    padding: 18px 24px;
     font-size: 14px;
   }
 `;

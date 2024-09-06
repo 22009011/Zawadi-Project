@@ -1,13 +1,14 @@
 // ChooseUser.js
 import React from 'react';
-import { ChooseUserContainer, UserSection, Title, Button } from '../styles/ChooseUserStyles'; // Import styles
+import { ChooseUserContainer, UserSection, Title, Button } 
+from '../styles/ChooseUserStyles'; // Import styles
 import { Link } from 'react-router-dom';
 
 const ChooseUser = () => {
   return (
     <ChooseUserContainer>
       <UserSection>
-        <Title>Admin</Title>
+        <Title>Admin(School Manager)</Title>
         <Button to="/admin-signIn">Login as Admin</Button>
       </UserSection>
       <UserSection>

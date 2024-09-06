@@ -1,5 +1,21 @@
 import styled from 'styled-components';
 
+
+export const ErrorMessage = styled.div`
+  color: red;
+  font-size: 0.875rem;
+  margin-top: 0.25rem;
+
+  @media (max-width: 768px) {
+    font-size: 0.8rem;
+  }
+
+  @media (max-width: 480px) {
+    font-size: 0.75rem;
+  }
+`;
+
+
 export const TeacherContainer = styled.div`
   padding: 20px;
   max-width: 800px;
@@ -83,20 +99,21 @@ export const AssessmentForm = styled.div`
 
   input, select, textarea {
     width: 100%;
-    padding: 10px;
+    padding: 12px;
     margin-bottom: 15px;
     border: 1px solid #ccc;
     border-radius: 5px;
-    font-size: 1rem;
+    font-size: 1.1rem;
   }
 
   textarea {
-    height: 100px;
+    height: 120px;
   }
 
   @media (max-width: 768px) {
     input, select, textarea {
-      padding: 8px;
+      padding: 10px;
+      font-size: 1rem;
     }
 
     label {
@@ -106,18 +123,67 @@ export const AssessmentForm = styled.div`
 
   @media (max-width: 480px) {
     input, select, textarea {
-      padding: 6px;
-      font-size: 0.9rem;
+      padding: 14px;
+      font-size: 1.2rem;
     }
 
     label {
       font-size: 0.8rem;
     }
+
+    textarea {
+      height: 140px;
+    }
   }
 `;
 
 export const RubricForm = styled.div`
-  margin-bottom: 15px;
+  margin-top: 20px;
+
+  label {
+    display: block;
+    margin-bottom: 5px;
+    font-size: 1rem;
+  }
+
+  input, select, textarea {
+    width: 100%;
+    padding: 12px;
+    margin-bottom: 15px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    font-size: 1.1rem;
+  }
+
+  textarea {
+    height: 120px;
+  }
+
+  @media (max-width: 768px) {
+    input, select, textarea {
+      padding: 10px;
+      font-size: 1rem;
+    }
+
+    label {
+      font-size: 0.9rem;
+    }
+  }
+
+  @media (max-width: 480px) {
+    input, select, textarea {
+      padding: 14px;
+      font-size: 1.2rem;
+    }
+
+    label {
+      font-size: 0.8rem;
+    }
+
+    textarea {
+      height: 140px;
+    }
+  }
 `;
 
 export const Button = styled.button`
@@ -126,8 +192,8 @@ export const Button = styled.button`
   color: white;
   border: none;
   border-radius: 5px;
-  cursor: pointer;
   font-size: 1rem;
+  cursor: pointer;
 
   &:hover {
     background-color: #45a049;
@@ -135,33 +201,54 @@ export const Button = styled.button`
 
   @media (max-width: 768px) {
     padding: 8px 16px;
+    font-size: 0.9rem;
   }
 
   @media (max-width: 480px) {
-    padding: 6px 12px;
-    font-size: 0.9rem;
+    padding: 12px 24px;
+    font-size: 1.1rem;
   }
+`;
+
+export const AddButton = styled.button`
+  padding: 8px 12px;
+  background-color: #2196F3;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  font-size: 0.9rem;
+  cursor: pointer;
+  margin-top: 10px;
+
+  &:hover {
+    background-color: #0b7dda;
+  }
+
+  @media (max-width: 768px) {
+    padding: 6px 10px;
+    font-size: 0.8rem;
+  }
+
+  @media (max-width: 480px) {
+    padding: 10px 16px;
+    font-size: 1rem;
+  }
+`;
+
+export const Spacer = styled.div`
+  height: 40px;
 `;
 
 export const AssessmentsTable = styled.table`
   width: 100%;
-  margin-bottom: 20px;
   border-collapse: collapse;
+  margin-top: 20px;
   font-size: 1rem;
 
   th, td {
     padding: 10px;
-    border: 1px solid #ddd;
+    border: 1px solid #ccc;
     text-align: left;
-  }
-
-  th {
-    background-color: #f4f4f4;
-  }
-
-  tbody tr:hover {
-    background-color: #f1f1f1;
-    cursor: pointer;
   }
 
   @media (max-width: 768px) {
@@ -179,17 +266,32 @@ export const AssessmentsTable = styled.table`
 `;
 
 export const StudentDetailsSection = styled.div`
+  margin-top: 20px;
   padding: 20px;
-  background-color: #f4f4f4;
-  margin-bottom: 20px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  background-color: #f9f9f9;
+
+  h3 {
+    margin-bottom: 15px;
+    font-size: 1.5rem;
+  }
 
   p {
-    margin: 5px 0;
+    margin-bottom: 10px;
     font-size: 1rem;
+
+    strong {
+      font-weight: bold;
+    }
   }
 
   @media (max-width: 768px) {
     padding: 15px;
+
+    h3 {
+      font-size: 1.3rem;
+    }
 
     p {
       font-size: 0.9rem;
@@ -197,7 +299,11 @@ export const StudentDetailsSection = styled.div`
   }
 
   @media (max-width: 480px) {
-    padding: 10px;
+    padding: 12px;
+
+    h3 {
+      font-size: 1.2rem;
+    }
 
     p {
       font-size: 0.8rem;
@@ -205,48 +311,3 @@ export const StudentDetailsSection = styled.div`
   }
 `;
 
-export const Spacer = styled.div`
-  margin: 30px 0;
-
-  @media (max-width: 480px) {
-    margin: 20px 0;
-  }
-`;
-
-export const AddButton = styled.button`
-  background-color: #4CAF50;
-  color: white;
-  padding: 10px 20px;
-  margin: 10px 0;
-  border: none;
-  border-radius: 5px;
-  cursor: pointer;
-  font-size: 1rem;
-
-  &:hover {
-    background-color: #45a049;
-  }
-
-  @media (max-width: 768px) {
-    padding: 8px 16px;
-  }
-
-  @media (max-width: 480px) {
-    padding: 6px 12px;
-    font-size: 0.9rem;
-  }
-`;
-
-export const ErrorMessage = styled.div`
-  color: red;
-  font-size: 0.875rem;
-  margin-top: 0.25rem;
-
-  @media (max-width: 768px) {
-    font-size: 0.8rem;
-  }
-
-  @media (max-width: 480px) {
-    font-size: 0.75rem;
-  }
-`;

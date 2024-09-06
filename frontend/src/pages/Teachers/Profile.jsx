@@ -69,9 +69,6 @@ const TeacherProfileSection = () => {
 
   return (
     <ProfileContainer>
-      <SidebarContainer>
-        <TeacherSidebar />
-      </SidebarContainer>
       <Content>
         <ProfileHeader>Profile Details</ProfileHeader>
         {error && <div style={{ color: 'red' }}>{error}</div>}

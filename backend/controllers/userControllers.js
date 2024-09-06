@@ -66,7 +66,9 @@ export const login = async (req, res) => {
       studentIds
     };
 
-    const token = jwt.sign(tokenPayload, jwtSecret, { expiresIn: '1h' });
+    //explains expiry of token
+
+    const token = jwt.sign(tokenPayload, jwtSecret, { expiresIn: '30d' });
 
     res.status(200).json({ message: 'Login successful', token, role: user.role });
   } catch (error) {

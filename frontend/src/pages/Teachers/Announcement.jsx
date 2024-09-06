@@ -31,7 +31,6 @@ const Announcement = () => {
   return (
     <AnnouncementContainer>
       <ToastContainer />
-      <TeacherSidebar />
       <Content>
         <Title>Announcement</Title>
         <h2>Announcements</h2>

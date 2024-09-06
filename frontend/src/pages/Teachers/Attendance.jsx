@@ -95,7 +95,6 @@ const CheckAttendanceSection = () => {
 
   return (
     <AttendanceContainer>
-      <TeacherSidebar />
       <Content>
         <AttendanceContent>
           <AttendanceHeader>Attendance</AttendanceHeader>

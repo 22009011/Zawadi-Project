@@ -47,7 +47,7 @@ const ReportingTime = () => {
     };
 
     try {
-      const response = await axios.post('https://zawadi-project.onrender.com/api/repoting-time', reportData);
+      const response = await axios.post('https://zawadi-project.onrender.com/api/reporting-time', reportData);
       toast.success('Report submitted successfully!');
       console.log('Report Submitted:', response.data);
     } catch (error) {
@@ -83,7 +83,7 @@ const ReportingTime = () => {
         </Select>
 
         <Label>Arrival Time</Label>
-        <TimeContainer>
+        <TimeContainer> 
           <Input
             type="time"
             value={arrivalTime}

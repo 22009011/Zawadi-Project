@@ -140,7 +140,7 @@ const AssignmentSection = () => {
 
   return (
     <AssignmentsContainer>
-      <TeacherSidebar />
+
       <Content>
         <AssignmentsContent>
           <AssignmentsHeader>Assignments</AssignmentsHeader>

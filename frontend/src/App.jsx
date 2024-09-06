@@ -70,6 +70,7 @@ import StudentMarksPage from './pages/Students/StudentMarksPage.jsx';
 import EnterMarksPage from './pages/Teachers/EnterMarksPage.jsx';
 import AdminForm from './pages/SuperAdminDashboard/AdminForm.jsx';
 import ReportingTime from './pages/Teachers/ReportingTime.jsx';
+import AdminViewReportingTime from './pages/Admin/AdminViewReportingTime.jsx';
 
 
 import Layout from './Layout';
@@ -95,6 +96,7 @@ const App = () => {
         <Route path="/parent/*" element={<ProtectedRoute roles={['parent']}><ParentDashboard /></ProtectedRoute>} />
         <Route path="/super-admin/*" element={<ProtectedRoute roles={['super-admin']}><SuperAdminDashboard /></ProtectedRoute>} />
 
+
         <Route path="/admin/classes" element={<Layout><Classes /></Layout>} />
         <Route path="/admin/teachers" element={<Layout><Teachers /></Layout>} />
         <Route path="/admin/students" element={<Layout><Students /></Layout>} />
@@ -105,6 +107,8 @@ const App = () => {
         <Route path="/admin/settings" element={<Layout><SettingsProfile /></Layout>} />
         <Route path="/admin/all-curriculums" element={<Layout><AllCurriculums /></Layout>} />
         <Route path="/admin/teachers-performance" element={<Layout><TeachersPerformanceDashboard /></Layout>} />
+        <Route path="/admin/teacher-attendance" element={<Layout><AdminViewReportingTime /></Layout>} />
+
 
         <Route path="/student/assignments" element={<Layout><StudentAssignments /></Layout>} />
         <Route path="/student/settings" element={<Layout><ProfileSection /></Layout>} />
@@ -114,6 +118,7 @@ const App = () => {
         <Route path="/student/attendance" element={<Layout><Attendance /></Layout>} />
         <Route path="/student/communication" element={<Layout><Communication /></Layout>} />
         <Route path="/student/student-grades" element={<Layout><StudentMarksPage /></Layout>} />
+
 
         <Route path="/teacher/assignments" element={<Layout><AssignmentSection /></Layout>} />
         <Route path="/teacher/announcement" element={<Layout><CheckAnnouncementSection /></Layout>} />

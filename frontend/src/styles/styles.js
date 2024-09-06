@@ -1,6 +1,8 @@
 import styled from 'styled-components';
 import { Link } from 'react-router-dom';
 
+//navigation
+
 export const Navbar = styled.nav`
   position: fixed;
   top: 0;
@@ -18,6 +20,7 @@ export const Navbar = styled.nav`
   @media screen and (max-width: 768px) {
     flex-direction: column;
     justify-content: space-between;
+
   }
 `;
 
@@ -71,12 +74,14 @@ export const ButtonsContainer = styled.div`
   display: flex;
   align-items: center;
   margin-right: 10px;
+  padding-right: 40px;
 
 
   @media screen and (max-width: 768px) {
     flex-direction: row;
     margin-top: 0;
-    margin-right: 350px;
+    margin-right: 300px;
+    padding-left: 7px;
   }
 `;
 
@@ -107,31 +112,17 @@ export const ToggleButton = styled.button`
 
   @media screen and (max-width: 768px) {
     display: block;
-    margin-left: 350px;
+    margin-top: 0;
+    margin-left: 290px;
+    padding-right: 7px;
+
   }
 `;
 
-export const GuestButton = styled.button`
-  color: #FFFFFF; /* White */
-  border: none;
-  padding: 10px 20px;
-  cursor: pointer;
-  font-size: 16px;
-  font-weight: bold;
-  border: 2px solid #FFA500; /* Orange */
-  border-radius: 5px;
-  background-color: transparent;
-  transition: background-color 0.3s ease;
 
-  &:hover {
-    background-color: #FFA500; /* Orange */
-  }
+//home
 
-  @media screen and (max-width: 768px) {
-    padding: 8px 16px;
-    font-size: 14px;
-  }
-`;
+
 
 export const HomeContainer = styled.div`
   display: flex;
@@ -218,3 +209,9 @@ export const AdminRegisterLink = styled(Link)`
     font-size: 10px;
   }
 `;
+
+
+
+
+
+
